@@ -1,0 +1,32 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<GlobalCodeCustomModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    var grid = new WebGrid(Model, ajaxUpdateContainerId: "PatientInstructionsGridContent", canPage: false);
+    <div id="PatientInstructionsGridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "GlobalCodeGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                        grid.Column("GlobalCodes.GlobalCodeName", "Name", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodes.GlobalCodeValue", "Code Value", canSort: true, style: "col3"),
+                                        grid.Column("GlobalCodes.Description", "Description", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue1", "Other Values", canSort: true, style: "col4"),
+                                        grid.Column(header: "Action", style: "col5", format: @<text>
+        <a href="javascript:void(0);" title="Edit Patient Instruction" onclick="EditPatientInstructions('@item.GlobalCodes.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" />
+        </a>
+        @*<a href="javascript:void(0);" title="Delete Patient Instruction" onclick="DeletePatientInstructions('@item.GlobalCodes.GlobalCodeID');" style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete Patient Instruction','',DeletePatientInstructions,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>                                                                                      
+        </text>)
+))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+

@@ -1,0 +1,147 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<SuppliesDotCom.Model.CustomModel.DashboardIndicatorDataCustomModel>
+
+@*<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+            <div id="gridContent">
+                @grid.GetHtml(htmlAttributes: new {id = "DashboardIndicatorGridDiv"}, tableStyle: "table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                        grid.Column("IndicatorStr", "Indicator"),
+                        grid.Column("BudgetType", "Budget Type"),
+                        grid.Column("DepartmentNumber", "Department Number"),
+                        grid.Column("SubCategory1Str", "SubCategory 1"),
+                        grid.Column("SubCategory2Str", "SubCategory 2"),
+                        grid.Column("StatisticData", "Statistic Data"),
+                        grid.Column("MonthStr", "Month"),
+                        grid.Column("Year", "Year"),
+                        grid.Column("FacilityNameStr", "Facility"),
+                        grid.Column(header: "Action", format: @<text>
+                                                                   <a href="#" onclick=" EditDashboardIndicatorData('@item.ID', 1) " style="float: left; margin-right: 7px; width: 15px;">
+                                                                       <img src="@Url.Content("~/images/edit.png")" /></a>
+                                                                   <a href="#" title="Delete" onclick=" return DeleteDashboardIndicatorData('@item.ID'); " style="float: left; width: 15px;">
+                                                                       <img src="@Url.Content("~/images/delete.png")" /></a>
+                                                               </text>)
+                        ))
+            </div>
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>*@
+
+@*<script>
+    $(function() {
+        if ($('#DashboardIndicatorGridDiv tr').length > 0) {
+            $('#DashboardIndicatorGridDiv').Scrollable();
+        }
+    });
+</script>*@
+
+<style>
+    .grid {
+        height: 300px;
+        width: 100%;
+    }
+
+    .grid-canvas {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .header-wrapper {
+        position: absolute;
+        top: 0;
+        width: auto;
+        z-index: 1;
+    }
+
+    .row-wrapper {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: auto;
+        padding-top: 34px;
+    }
+
+    th, td {
+        width: 125px;
+        min-width: 125px;
+        max-width: 125px;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+</style>
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="grid">
+                <div class="grid-canvas">
+                    <div class="header-wrapper">
+                        <table class="table-grid header" data-swhgajax="true" data-swhgcontainer="gridContent" data-swhgcallback="">
+                            <tbody>
+                                <tr class="gridHead">
+                                    <th scope="col"><a data-swhglnk="true" id="ankIndicatorStr" onclick="BindGridByOrder('IndicatorStr','DESC',this.id);" >Indicator</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankBudgetType" onclick="BindGridByOrder('BudgetType','DESC',this.id);" >Budget Type</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankDepartmentNumber" onclick="BindGridByOrder('DepartmentNumber','DESC',this.id);" >Department Number</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankSubCategory1" onclick="BindGridByOrder('SubCategory1','DESC',this.id);" >SubCategory 1</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankSubCategory2" onclick="BindGridByOrder('SubCategory2','DESC',this.id);" >SubCategory 2</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankStatisticData" onclick="BindGridByOrder('StatisticData','DESC',this.id);" >Statistic Data</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankMonthStr" onclick="BindGridByOrder('MonthStr','DESC',this.id);" >Month</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankYear" onclick="BindGridByOrder('Year','DESC',this.id);" >Year</a></th>
+                                    <th scope="col"><a data-swhglnk="true" id="ankFacilityNameStr" onclick="BindGridByOrder('FacilityNameStr','DESC',this.id);" >Facility</a></th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row-wrapper">
+                        <table class="table-grid rows" id="ManualDashboardGridDiv" data-swhgajax="true" data-swhgcontainer="gridContent" data-swhgcallback="">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="gridRow">
+                                        <td >@item.IndicatorStr</td>
+                                        <td >@item.BudgetType</td>
+                                        <td >@item.DepartmentNumber</td>
+                                        <td >@item.SubCategory1Str</td>
+                                        <td >@item.SubCategory2Str</td>
+                                        <td >@item.StatisticData</td>
+                                        <td >@item.MonthStr</td>
+                                        <td >@item.Year</td>
+                                        <td >@item.FacilityNameStr</td>
+                                        <td >
+                                            <a href="#" onclick="EditDashboardIndicatorData('@item.ID', 1)" style="float: left; margin-right: 7px; width: 15px;">
+                                                <img src="/images/edit.png"></a>
+                                            @*<a href="#" title="Delete" onclick="return DeleteDashboardIndicatorData('@item.ID')" style="float: left; width: 15px;">
+                                                <img src="/images/delete.png"></a>*@
+                                            
+                                            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.ID','Delete Dashboard IndicatorData','',DeleteDashboardIndicatorData,null); " style="float: left; width: 15px;">
+                                                <img src="@Url.Content("~/images/delete.png")" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>

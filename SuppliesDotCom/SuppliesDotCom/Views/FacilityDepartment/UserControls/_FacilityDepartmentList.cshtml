@@ -1,0 +1,58 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<FacilityDepartmentCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "FacilityDepartmentdiv", canPage: false);
+            <div id="FacilityDepartmentdiv">
+                @grid.GetHtml(htmlAttributes: new { id = "divFacilityDepartmentGrid" }, tableStyle: "table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                        grid.Column("ActivityName", header: "Activity Name", canSort: true),
+                        grid.Column("CreditAccount", header: "Revenue GL Account", canSort: true),
+                        grid.Column("DebitAccount", header: "A/R Master Account", canSort: true),
+                        grid.Column("ContraRevenueAccount", header: "Contra Revenue Account", canSort: true),
+                        grid.Column("WriteOffAccount", header: "Write Off Account", canSort: true),
+                        grid.Column(header: "Action", format: @<text>
+                                                                   <a href="javascript:void(0);" onclick="EditFacilityDepartment('@item.Id')" style="float: left; margin-right: 7px; width: 15px;">
+                                                                       <img src="@Url.Content("~/images/edit.png")" /></a>
+                                                                   @*<a href="javascript:;" title="Delete" onclick="return DeleteFacilityDepartment('@item.Id')" style="float: left; width: 15px;">
+                                                                       <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                
+                <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.Id','Delete Activity Accounts Setup','',DeleteFacilityDepartment,null); " style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" />
+                </a>
+                                                               </text>)
+                        ))
+            </div>
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>
+@*<script>
+    $(function() {
+        if ($('#divFacilityDepartmentGrid tr').length > 0) {
+            $('#divFacilityDepartmentGrid').Scrollable();
+        }
+    });
+</script>*@
+
+
+
+<script>
+
+    $(function () {
+        //if ($('#divFacilityDepartmentGrid tr').length > 6) {
+        //}
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+
+        SetGridSorting(SortFacilityDepartmentGrid, "#FacilityDepartmentdiv");
+
+
+    });
+
+</script>

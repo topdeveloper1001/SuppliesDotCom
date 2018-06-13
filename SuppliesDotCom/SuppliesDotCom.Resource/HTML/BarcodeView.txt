@@ -1,0 +1,12 @@
+﻿<div id="printMainDiv" class="barcoder" style="width: 150px;">
+    <span style="margin-bottom: 2px; font-size: 7px;">@PatientFullName</span>
+    <br />
+    <span style="margin-bottom: 2px; font-size: 7px;">2233 <span style="margin-left: 50px;">@BarCodeDate @PatientAge @Gender</span></span>
+
+    <div class="barCodeImg">
+        <img width="130" src="@ImageUrl" />
+        <span class="barcode_num" style="font-size: 7px; float: left; width: 100%;">@EncounterNumber</span>
+    </div>	
+    <span style="margin-bottom: 2px; font-size: 7px;">Col: @CurrentDateTime &nbsp; Site:  @CurrentSite &nbsp; User: @User</span><br />
+    <span style="margin-bottom: 2px; font-size: 7px;">@OrderType</span>
+</div>

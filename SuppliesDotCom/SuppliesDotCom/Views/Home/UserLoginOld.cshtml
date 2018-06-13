@@ -1,0 +1,348 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model BillingSystem.Model.Users
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="~/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/css/login.css">
+    <title>Login</title>
+    <script src="~/Scripts/jquery-1.7.2.js"></script>
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/Scripts/json2.js"></script>
+    <script src="~/Scripts/Main.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/jquery.maskedinput-1.2.2.js"></script>
+
+    @*<link rel="stylesheet" href="~/css/EhrReport.css">*@
+
+    <link rel="stylesheet" href="@Url.Content("~/Plugins/ValidationEngine/css/validationEngine.jquery.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/jquery.qtip.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Plugins/ValidationEngine/css/validationEngine.jquery.css")" type="text/css" />
+    <script src="~/Scripts/ClearForm.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="@Url.Content("~/Plugins/ValidationEngine/js/languages/jquery.validationEngine-en.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Plugins/ValidationEngine/js/jquery.validationEngine.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Scripts/ToastNotification/toastr.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.qtip.js")"></script>
+    <link href="@Url.Content("~/css/toastNotification/toastr.css")" rel="stylesheet" />
+    <link href="~/css/defaultTheme.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $("#linkResetPwd").attr("onclick", "ShowResetPopupWindowGlobal();");
+        });
+
+        function SendResetPasswordEmail() {
+            var isValid = $("#globaldivResetPwd").validationEngine({ returnIsValid: true });
+            if (isValid) {
+                var userEmail = $("#userEmail").val();
+                if (userEmail != "") {
+                    var jsonData = JSON.stringify({
+                        email: $("#userEmail").val()
+                    });
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '/Home/SendForgotPasswordLink',
+                        data: jsonData,
+                        async: false,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null && data.result == "1") {
+                                $("#divhidepopup1GlobalResetPwd").hide();
+                                $(".popup-coverbg").hide();
+                                ShowMessage("A link has been sent to your email with Validation Token Code, to reset your password.", "Success", "success", true);
+                            }
+                            else if (data != null && data.result == "-1") {
+                                ShowMessage("Email not found in our system. Please enter the valid Email!", "Alert", "warning", true);
+                            }
+                            else if (data != null && data.result == "-2") {
+                                ShowMessage("Something went wrong while sending Email. Please try again later!", "Alert", "warning", true);
+                            }
+                            else if (data != null && data.result == "-3") {
+                                ShowMessage("Something went wrong in the System. Please try again later!", "Alert", "warning", true);
+                            }
+                        },
+                        error: function (msg) {
+                        }
+                    });
+                }
+            }
+        }
+
+        function ShowResetPopupWindowGlobal() {
+            //$("#globaldivResetPwd").empty();
+            //$("#globaldivResetPwd").html(data);
+            $("#globaldivResetPwd").validationEngine();
+            $("#divhidepopup1GlobalResetPwd").show();
+            $("#userEmail").val('');
+            $(".popup-coverbg").show();
+        }
+
+        function ChangePassword() {
+
+            var flag = false;
+            if ($("#txtNewPassword").val() == "") {
+                flag = true;
+                $("#sptxtNewPassword").text("Please Enter New password");
+            }
+            else {
+                flag = false;
+                $("#sptxtNewPassword").text("");
+            }
+
+            if ($("#txtConfirm").val() == "") {
+                flag = true;
+                $("#sptxtConfirm").text("Please enter confirm password");
+            }
+            else {
+                flag = false;
+                $("#sptxtConfirm").text("");
+            }
+
+
+            if (flag == true) {
+                return false;
+            }
+            else {
+
+
+                if ($("#txtNewPassword").val() != $("#txtConfirm").val()) {
+                    $("#spErrorMsg1").text('Password and confirm password should match.');
+                    return false;
+                }
+
+
+                var model = {
+                    Password: $("#txtNewPassword").val()
+                };
+
+                var chek = false;
+                var title = "";
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Home/ChangePassword',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    beforeSend: function () { },
+                    success: function (data) {
+
+                        if (data) {
+                            alert('Password Changed Successfully.');
+                            window.location.href = "/Home/PatientLogin";
+                        }
+                        else {
+                            alert('failed');
+                        }
+
+                    },
+                    error: function (msg) {
+                    }
+                });
+
+
+            }
+        }
+
+        function ShowMessage(msg, title, shortCutFunction, showCloseButton) {
+            /// <summary>
+            /// Shows the message.
+            /// </summary>
+            /// <param name="msg">The MSG.</param>
+            /// <param name="title">The title.</param>
+            /// <param name="shortCutFunction">The short cut function.</param>
+            /// <param name="showCloseButton">The show close button.</param>
+            /// <returns></returns>
+            toastr.options = {
+                "closeButton": showCloseButton,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                //"preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "500",
+                "hideDuration": "2000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            $("#toastrOptions").text("Command: toastr["
+                            + shortCutFunction
+                            + "](\""
+                            + msg
+                            + (title ? "\", \"" + title : '')
+                            + "\")\n\ntoastr.options = "
+                            + JSON.stringify(toastr.options, null, 2)
+            );
+
+            var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+            $toastlast = $toast;
+        }
+    </script>
+</head>
+<body>
+    <div class="main-wrap loginWrapper">
+        <div class="pull-right">
+            <div class="loginContainer">
+                <div class="loginForm col-sm-12 col-md-12 col-lg-12">
+                    @using (Html.BeginForm("UserLogin", "Home", FormMethod.Post))
+                    {
+                        if (ViewBag.check == null || ViewBag.check == "Failed" || ViewBag.check == "CaptchaFailed" || ViewBag.check == "FailedAttemptsOver"
+                            || ViewBag.check.ToString().IndexOf("Offline") > 0 || ViewBag.check == "IsDeleted" || ViewBag.check == "Blocked" || ViewBag.check == "InActive")
+                        {
+                        <div>
+                            <div class="rowTable text-center loginLogo">
+                                <img src="@Url.Content("~/images/logo.png")">
+                            </div>
+                            <h1 class="loginTitle">
+                                @if (ViewBag.check == "Failed")
+                                {
+                                    <span id="spErrorMsg">Please enter correct username and password.</span>
+                                }
+                                @if (ViewBag.check == "Captcha")
+                                {
+                                    <span id="spErrorMsg2">Verification code does not matched.</span>
+                                }
+                                else if (ViewBag.check == "CaptchaFailed")
+                                {
+                                    <span id="spErrorMsg2">Verification code does not matched.</span>
+                                }
+                                else if (ViewBag.check == "FailedAttemptsOver")
+                                {
+                                    <span id="spErrorMsg2">User is Blocked. kindly login after 30 minutes.</span>
+                                }
+                                else if (ViewBag.check == "Blocked")
+                                {
+                                    <span id="spErrorMsg2">User is Blocked for 3 failed attempts.</span>
+                                }
+                                else if (ViewBag.check == "InActive")
+                                {
+                                    <span id="spErrorMsg2">User is inActive. Please contact to your administrator.</span>
+                                }
+                                else if (ViewBag.check != null)
+                                {
+@*<span id="spErrorMsg2">ViewBag.check</span>*@
+                                }
+                            </h1>
+                            <div class="form-group">
+                                @*<input type="text" class="form-control input-lg font12 emailInput" placeholder="User Name" />*@
+
+                                @Html.TextBoxFor(m => m.UserName, new { @maxlength = "25", @class = "form-control input-lg font12 emailInput", @placeholder = "User Name" })
+                                <span style="color: red;" id="spUserName"></span>@Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+                            <div class="form-group">
+                                @*<input type="password" class="form-control input-lg font12 passwordInput" placeholder="Password" />*@
+
+                                @Html.PasswordFor(m => m.Password, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput", @placeholder = "Password" })
+                                <span style="color: red;" id="spPassword"></span>
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <div class="rowTable">
+                                @Html.Captcha("Try another", "Enter the text you see above:", 4, "Required", true)
+                            </div>
+
+                            <div class="">@*btn-group*@
+                                @*<input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />*@
+
+                                <input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />
+
+
+                                <a href="@Url.Action("PatientLogin")" class="patPorLog">Patient Portal Login</a>
+                                <div id="linkResetPwd" class="forgotpassword">
+                                    <a href="#">Forgot Password?</a>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    }
+                    @*@if (ViewBag.check == "InActive")
+                    {*@
+                        @*<div>
+                            <div class="rowTable text-center">
+                                <img src="/images/logo.png">
+                            </div>
+                            <h1 class="loginTitle">Change Password:</h1>
+                            <span style="color: red;" id="spErrorMsg1"></span>
+                            <div class="form-group">*@
+                        
+                        
+                        
+                                @*<input type="text" class="form-control input-lg font12 emailInput" placeholder="User Name" />*@
+                        
+
+                                @*@Html.Password("txtNewPassword", null, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput" })
+
+                                <span style="color: red;" id="sptxtNewPassword"></span>
+                            </div>
+                            <div class="form-group">*@
+                        
+                        
+                                @*<input type="password" class="form-control input-lg font12 passwordInput" placeholder="Password" />*@
+
+                                @*@Html.Password("txtConfirm", null, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput" })
+                                <span style="color: red;" id="sptxtConfirm"></span>
+                            </div>
+                            <div class="rowTable">*@
+                        
+                        
+                                @*<img src="../images/captchaImg.png" alt="">*@
+
+                                @*@Html.Captcha("Try another", "Enter the text you see above:", 6, "Required", true)
+                            </div>
+
+                            <div class="btn-group">*@
+                                @*<input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />*@
+
+                                @*<input type="button" id="btnChangePassword" onclick="return ChangePassword();" class="blue-btn btn btn-default" value="Change Password" />
+                            </div>
+                        </div>*@
+                    @*}*@
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="provided">
+                <div class="rowTable">
+                    <span><strong>Provided by :</strong></span>
+                    <img src="../images/servicedotcom.png" alt="" />
+                </div>
+            </div>
+
+            <div id="userRoleDiv" style="display: none;">
+            </div>
+        </div>
+
+        @* Reset Password Div *@
+        <div id="divhidepopup1GlobalResetPwd" class="hidePopUpGlobalResetPwd" style="display: none;">
+            <div class="popup-coverbg"></div>
+            <div class="popup-frame ">
+                <div class="popup-main popup_small">
+                    <div class="popup-content">
+                        <div class="popup-close" onclick=" $.validationEngine.closePrompt('.formError', true); $('.hidePopUpGlobalResetPwd').hide(); ">X</div>
+                        <h3>Forgot Password?</h3>
+                        <div id="globaldivResetPwd">
+                            <div class="form-group">
+                                <label>Enter Email:</label>
+                                <input id="userEmail" maxlength="100" class="form-control validate[custom[email]]" />
+                            </div>
+                            <input id="btnSendEmail" class="btn btn-primary btn-sm" type="button" value="Send Email" onclick="SendResetPasswordEmail();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

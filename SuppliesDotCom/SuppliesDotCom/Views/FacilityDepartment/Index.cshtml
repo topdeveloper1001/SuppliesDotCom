@@ -1,0 +1,55 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model FacilityDepartmentView
+
+@{
+    ViewBag.Title = "FacilityDepartment View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFacilityDepartmentAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add Activity Accounts Setup
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFacilityDepartmentAddEdit" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">                        
+                        @{Html.RenderPartial("~/Views/FacilityDepartment/UserControls/_FacilityDepartmentAddEdit.cshtml", Model.CurrentFacilityDepartment);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <span class="inactive">
+            View In Active Record
+            <input id="chkShowInActive" type="checkbox" onchange="ShowInActiveRecords('#chkShowInActive');" />
+        </span>
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFacilityDepartmentList">
+            <h4 class="panel-title collapseTitle">
+                <span><img src="../images/list.png" /></span> Activity Accounts Setup List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFacilityDepartmentList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="FacilityDepartmentListDiv">
+                    @{Html.RenderPartial("~/Views/FacilityDepartment/UserControls/_FacilityDepartmentList.cshtml", Model.FacilityDepartmentList);}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/FacilityDepartment/FacilityDepartmentScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

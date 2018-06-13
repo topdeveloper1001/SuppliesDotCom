@@ -1,0 +1,108 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.CorporateView
+@{
+    ViewBag.Title = "Corporate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .blockPage {
+        border-radius: 5px;
+    }
+</style>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Corporate
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/Corporate/UserControls/_CorporateAddEdit.cshtml", Model.CurrentCorporate);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="~/images/list.png" />
+                </span>&nbsp;Corporate List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color copDiv" id="CorporateListDiv">
+                    @*@{Html.RenderPartial("~/Views/Corporate/UserControls/_CorporateList.cshtml", Model.CorporateList);}*@
+                    <table id="tbCorporate" class="display table table_scroll" cellspacing="0">
+                        <thead class="gridHead">
+                            <tr class="gridRow">
+                                <th scope="col">Name</th>
+                                <th scope="col">Corporate Number</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th class="center" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        @*<tbody>
+                            @foreach (var item in Model.CorporateList)
+                            {
+                                <tr>
+                                    <td>@item.CorporateName</td>
+                                    <td>@item.CorporateNumber</td>
+                                    <td>@item.StreetAddress</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.CorporateMainPhone</td>
+                                    <td>
+                                        <a href="javascript:void(0);" onclick="EditCorporate('@item.CorporateID') " style="float: left; margin-right: 7px; width: 15px;"><img src="~/images/edit.png" /></a>
+                                        @if (item.CorporateID != 6 && item.CorporateID != 12)
+                                        {
+                                            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.CorporateID','Delete Corporate','',DeleteCorporate,null); " style="float: left; width: 15px;">
+                                                <img src="@Url.Content("~/images/delete.png")" />
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>*@
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <!-- /.modal -->
+    <div id="question" class="warning_popup" style="display: none; cursor: default">
+        <input type="hidden" id="hidDeleteCorporate" />
+        <div class="modal-header">
+            <h5 class="modal-title">Are you sure you want to delete the Corporate?  </h5>
+        </div>
+        <div class="modal-body">
+            <h5>This will delete all the Facilities under corporate and other default data.</h5>
+        </div>
+        <div class="modal-footer">
+            <input type="button" id="yes" class="btn btn-sm btn-primary" value="Yes" />
+            <input type="button" id="no" class="btn btn-sm btn-default" value="No" />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Corporate/CorporateScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>
+
+@*<script>
+    $(document).ready(function () {
+        $("#tbCorporate").dataTable();
+    });
+</script>*@

@@ -1,0 +1,51 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model ProjectTargetsView
+
+@{
+    ViewBag.Title = "ProjectTargets View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseProjectTargetsAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add ProjectTargets
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseProjectTargetsAddEdit" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/ProjectTargets/UserControls/_ProjectTargetsAddEdit.cshtml", Model.CurrentProjectTargets);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseProjectTargetsList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="../images/list.png" /></span> ProjectTargets List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseProjectTargetsList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="ProjectTargetsListDiv">
+                    @{Html.RenderPartial("~/Views/ProjectTargets/UserControls/_ProjectTargetsList.cshtml", Model.ProjectTargetsList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/ProjectTargets/ProjectTargets.js?@Helpers.CurrentAssemblyTicks"></script>
+@*<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>*@

@@ -1,0 +1,195 @@
+﻿@using SuppliesDotCom.Common.Common
+@model SuppliesDotCom.Model.CustomModel.FacilityStructureCustomModel
+
+@{
+    ViewBag.Title = "FacilityStructure";
+}
+<style>
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="form" id="FacilityStructureFormDiv">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-2">
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Facility:</label>
+                    <select id="ddlFacility" class="validate[required]" onchange="BindFacilityStructureGridData();"></select>
+                    @Html.HiddenFor(m => m.FacilityId, new { @id = "hdFacilityId" })
+                    @Html.HiddenFor(m => m.FacilityStructureId)
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-2">
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Structure:</label>
+                    <select id="ddlFacilityStructure" class="validate[required]" onchange="BindParentData(); ClearFieldBoxes(); SetMaxSortOrder();"></select>
+                    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hdFacilityStructureId" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-2" id="divDefaultBedCharges" style="display: none;">
+                <div class="rowTable">
+                    <label>Default Bed Charges:</label>
+                    <label id="lblDefaultBedCharges"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12" id="divAddUpdateFacilityStructure" style="display: none;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-4" id="divParenttype" style="display: none;">
+                <div class="rowTable">
+                    <label id="lblParentName"><span class="mandatoryStar"></span>Parent:</label>
+                    <select id="ddlParentId" class="clearFieldddl"></select>
+                    @Html.HiddenFor(m => m.ParentId, new { @id = "hdParentId" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4" id="divBedType" style="display: none;">
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Bed Type:</label>
+                    <select id="ddlBedType" name="ddlBedType" class="validate[required] clearFieldddl" onchange="BedOverride();"></select>
+                    @Html.HiddenFor(m => m.BedTypeId, new { @id = "hdBedType" })
+                    @Html.HiddenFor(m => m.BedId, new { @id = "hdBedId" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="rowTable">
+                    <label id="lblCurrentName"><span class="mandatoryStar"></span>Name:</label>
+                    @Html.TextBoxFor(m => m.FacilityStructureName, new { @maxlength = "50", @id = "txtFacilityStructureName", @class = "validate[required] clearField" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="rowTable">
+                    <label id="lblCurrentDesc">Description:</label>
+                    @Html.TextAreaFor(m => m.Description, new { @maxlength = "50", @id = "txtDescription", @class = "clearField" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-4" id="divRevenue" style="display: none;">
+                <div class="rowTable">
+                    <label id="lblRevenueGLAccount">Revenue GL Account:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "20", @id = "txtRevenueGLAccount", @class = "clearField" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-4" id="divMasterAccount" style="display: none;">
+                <div class="rowTable">
+                    <label id="lblARMasterAccount">A/R Master Account:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "20", @id = "txtARMasterAccount", @class = "clearField" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="rowTable">
+                            <label>Sort Order:</label>
+                            @Html.TextBoxFor(m => m.SortOrder, new { @maxlength = "3", @id = "txtSortOrder", @class = "clearField validate[optional[integer]]" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="rowTable">
+                            <label>Is Active:</label>
+                            @Html.CheckBox("chkStatus", Model.FacilityStructureId == 0 || Model.IsActive)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-4 bedtypescreen" style="display: none;">
+                <div class="rowTable">
+                    <label>
+                        Can Override:
+                        @Html.CheckBox("chkCanOverRide", Model.CanOverRide)
+                        @Html.HiddenFor(m => m.ExternalValue2, new { @id = "hdServiceCodes" })
+                    </label>
+                </div>
+                <div class="rowTable" id="divOverRideWith" style="display: none; border: solid 1px #808080;">
+                    @*<h4 class="greenTitle" style="margin: 0;">Override with the below Service Codes: </h4>*@
+                    @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_BedOverrideServiceCodesList.cshtml", Model.ServiceCodesList);}
+                </div>
+            </div>
+            @*<div class="col-xs-12 col-sm-6 col-lg-4" id="divEquipmentMain" style="display: none">
+                    @Html.HiddenFor(m => m.EquipmentIds)
+                    <div class="rowTable" id="divEquipment" style="border: solid 1px #808080;">
+                        @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_EquipmentOverrideList.cshtml", Model.EquipmentList);}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-4" id="Appointmentpescreen" style="display: none">
+                    @Html.HiddenFor(m => m.ExternalValue4, new { @id = "hdAppointments" })
+                    <div class="rowTable" id="divAppointments" style="border: solid 1px #808080;">
+                        @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_AppointmentTypesOverrideList.cshtml", Model.AppointmentList);}
+                    </div>
+                </div>*@
+            <div class="col-xs-12 col-sm-6 col-lg-3 roomtypescreen" style="display: none;">
+                <div class="rowTable">
+                    <label>Non Chargeable Room:</label>
+                    @Html.CheckBox("chkNonChargeableRoom", Model.NonChargeableRoom == "Yes")
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="divDepartments" style="display: none;">
+        <div class="col-xs-12 col-sm-6 col-lg-12" id="divDeptOpeningDays">
+            <h2 class="form_heading" id="lblDeptOpeningDays">Opening Days In Week:</h2>
+            @Html.HiddenFor(m => m.DeptOpeningDays, new { @id = "hdDeptOpeningDays" })
+            <div class="table-responsive">
+                <table width="100%" class="table table-bordered table-striped" id="divOpeningDaysSection">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Week</th>
+                            <th>Opening Time</th>
+                            <th>Closing Time</th>
+                            <th>Turn Around Time</th>
+                            <th>Full Day Opening</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            var count = 9090;
+                            foreach (var t in Enum.GetValues(typeof(Day)))
+                            {
+                                count++;
+                                <tr>
+                                    <td id="divDaysSection" class="tdCheckboxes">
+                                        <input type="checkbox" name="chkDays" id='@count' onchange="ShowHideTimming(this.id);">
+                                    </td>
+                                    <td>@t</td>
+                                    <td class="divDaysSectionShow_@count">
+                                        <div id="divDeptOpeningTime_@count">
+                                            @Html.TextBoxFor(m => m.DeptOpeningTime, new { @maxlength = "20", @id = "txtDeptOpeningTime_" + @count, @class = "disbaledfield dtGeneralTimeOnly clearField removeValidation", @onchange = "BindTextBoxValidation(" + @count + ")", @disabled = "disabled" })
+                                        </div>
+                                    </td>
+                                    <td class="divDaysSectionShow_@count" id="divDeptClosingTime_@count">
+                                        @Html.TextBoxFor(m => m.DeptClosingTime, new { @maxlength = "20", @id = "txtDeptClosingTime_" + @count, @class = "disbaledfield dtGeneralTimeOnly clearField",@onchange = "BindTextBoxValidation(" + @count + ")", @disabled = "disabled" })
+                                    </td>
+                                    <td class="divDaysSectionShow_@count" id="divDeptTurnaroundTime_@count">
+                                        @Html.TextBoxFor(m => m.DeptTurnaroundTime, new { @maxlength = "20", @id = "txtDeptTurnaroundTime_" + @count, @class = "disbaledfield clearField validate[optional[integer]]", @disabled = "disabled" })
+                                    </td>
+                                    <td class="divFullDaysSectionShow_@count">
+                                        <input type="checkbox" id='chkFullDay_@count' onchange="SetFullDay(@count);" class="disbaledfield clearField" disabled="disabled" />
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+    <div class="clear"></div>
+    <div class="col-sm-12">
+        <div class="button-block" id="btnShowHide">
+            <input type="submit" id="btnSave" onclick="return SaveFacilityStructure();" class="btn btn-primary edit-btn marginrightBtn" value="Save" />
+            <input type="submit" id="btnSaveAndReturn" onclick="return SaveFacilityStructureRefresh(); " class="btn btn-primary edit-btn marginrightBtn" value="Save And Return" />
+            <button name="ClientCancel" class="btn btn-primary edit-btn marginrightBtn" type="button" onclick="return ClearFacilityStructureForm();">Cancel</button>
+        </div>
+    </div>
+</div>

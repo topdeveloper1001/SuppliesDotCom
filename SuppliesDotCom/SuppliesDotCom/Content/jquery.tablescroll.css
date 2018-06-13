@@ -1,0 +1,42 @@
+.tablescroll
+{ font: 12px normal Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; background-color:#fff; }
+
+.tablescroll td, 
+.tablescroll_wrapper,
+.tablescroll_head,
+.tablescroll_foot
+{ /*border:1px solid #ccc;*/ }
+
+.tablescroll td
+{ padding:0; 
+  border: solid 1px #e8eef4;
+}
+
+.tablescroll_wrapper
+{ border-left:0;
+  width:100% !important;
+  height:520px ;
+  overflow:auto !important;
+}
+
+.tablescroll_head
+{ font-size:12px; font-weight:bold; background-color:#8194aa; border-left:0; border-top:0; margin-bottom:0px; }
+
+.tablescroll thead td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody tr.first td
+{ border-top:0; }
+
+.tablescroll_foot
+{ font-weight:bold; background-color:#eee; border-left:0; border-top:0; margin-top:3px; }
+
+.tablescroll tfoot td
+{ border-right:0; border-bottom:0; }
+
+.table-grid {
+    width: 100% !important;
+}

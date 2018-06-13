@@ -1,0 +1,89 @@
+﻿
+@using SuppliesDotCom.Common.Common
+@using SuppliesDotCom.Model.CustomModel
+
+@model GlobalCodeCustomDModel
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    <div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Corporate:</label>
+                @Html.HiddenFor(m => m.CorporateId, new { @id = "hdCorporateId" })
+                <select id="ddlCorporate" class="validate[required]"></select>
+            </div>
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Facility:</label>
+                 @Html.HiddenFor(m => m.FacilityNumber, new { @id = "hdFacilityId" })
+                <select id="ddlFacility" class="validate[required]" ></select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Faculty:</label>
+                @Html.HiddenFor(m => m.FacultyId, new { @id = "hdFacultyId" })
+                <select id="ddlFaculty" class="validate[required]"></select>
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Select Department:</label>
+                @* @Html.HiddenFor(m => m.DeptId, new { @id = "hdDeptId" })
+                <select id="ddlDept" class="validate[required]"></select>*@
+                <div id="divDepartmentList" style="height: 200px; overflow: auto;"></div>
+            </div>
+        </div>
+        
+        <div class="clear"></div>
+        <div class="btn-group">
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return AddDeptTimming();" value="Add Timming" />               
+        </div>
+        <div id="divDeptTimming">
+         <div id="divDepartments" style="display: none;">
+        <div class="col-xs-12 col-sm-6 col-lg-12" id="divDeptOpeningDays">
+            <h2 class="form_heading" id="lblDeptOpeningDays">Opening Days In Week:</h2>
+            <div class="table-responsive">
+                <table width="100%" class="table table-bordered table-striped" id="divOpeningDaysSection">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Faculty</th>
+                            <th>Department</th>
+                            <th>Week Day</th>
+                            <th>Opening Time</th>
+                            <th>Closing Time</th>
+                            @*<th>Turn Around Time</th>*@
+                            @*<th>Full Day Opening</th>*@
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyOpeningDays">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        </div>
+            <div class="btn-group" id="divSaveButton" style="display: none;">
+                @if (Model.GlobalCodeID != 0)
+                {  
+                    <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return ValidateData();" value="Update" />               
+                }
+                else
+                {
+                    <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" value="Save" onclick="return ValidateData();" />                
+                }
+
+                <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearRoomEquipmentScheduling();">Cancel</button>
+            </div>
+        </div>
+
+
+</div>
+
+
+

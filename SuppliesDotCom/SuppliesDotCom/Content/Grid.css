@@ -1,0 +1,24 @@
+﻿
+
+
+
+
+.gridTable {margin: 0px;padding: 10px;border: 1px #c8c8c8 solid;border-collapse: collapse;min-width: 100% !important;background-color: #fff;color: #fff;font-size: 11px;}
+.gridHead th{font-weight: bold;background-color:#15878a;color: #fff;padding: 10px;text-align:left;}
+.gridHead a:link,.gridHead .gridHead a:active,.gridHead a:hover,.gridHead a:visited {color: #FFFFFF !important;text-decoration:none;}
+.gridHead a:hover {text-decoration:underline;}
+/*.gridTable tr.gridAltRow{background-color: #fff;}*/
+.gridTable tr:hover{background-color: #f6f70a;}
+.gridAltRow td{padding: 10px;margin: 5px; color: #333;}
+.gridRow td{padding: 10px;color: #333; width:100px;}
+.gridFooter td{padding: 10px; background-color: #c7d1d6;color: rgb(14, 13, 13);font-size: 15pt;text-align: center;}
+.gridFooter a{font-weight: bold;color: #0089cf; font-size: 20px}
+.colOperation{width:50px;text-align:center;}
+
+.gridTable thead tr th:first-child
+{
+    display:none; 
+} 
+@page {
+size: A4 landscape;
+}

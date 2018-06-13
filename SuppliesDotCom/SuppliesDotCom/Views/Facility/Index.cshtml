@@ -1,0 +1,55 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.FacilityView
+
+@{
+    ViewBag.Title = "Facility";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="divFacility" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colFacilityAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Facility
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="colFacilityAddEdit" class="panel-collapse collapse">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/Facility/UserControls/_FacilityAddEdit.cshtml", Model.CurrentFacility);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#colList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>Facility List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="colList" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                @*Scroller Class Add By Krishna on 23072015*@
+                <div class="base-color" id="facilityGrid">
+                    <div class="table-responsive">
+                        @{Html.RenderPartial("~/Views/Facility/UserControls/FacilityList.cshtml", Model.FacilityList);}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<script src="~/Scripts/Facility/Facility.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

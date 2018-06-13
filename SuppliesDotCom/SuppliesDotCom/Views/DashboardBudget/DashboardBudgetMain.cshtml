@@ -1,0 +1,65 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+
+@model DashboardBudgetView
+
+@{
+    ViewBag.Title = "DashboardBudget View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .home {
+        -webkit-box-shadow: 10px 10px 1px 0px;
+        margin: 4px 31px 62px 41px;
+        border: 6px solid #E6E6FA;
+        box-shadow: 10px 10px 1px 0px;
+        width: 150px;
+        height: 65px;
+        float: left;
+        text-align: center;
+        background-color: #5c7499;
+    }
+</style>
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardBudgetAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add Dashboard Budget
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardBudgetAddEdit" class="panel-collapse collapse">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">                        
+                        @{Html.RenderPartial("~/Views/DashboardBudget/UserControls/_DashboardBudgetAddEdit.cshtml", Model.CurrentDashboardBudget);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardBudgetList">
+            <h4 class="panel-title collapseTitle">
+                <span><img src="~/images/list.png" /></span>Dashboard Budget List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardBudgetList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="DashboardBudgetListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardBudget/UserControls/_DashboardBudgetList.cshtml", Model.DashboardBudgetList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+            
+<script src="~/Scripts/DashboardBudget/DashboardBudgetScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

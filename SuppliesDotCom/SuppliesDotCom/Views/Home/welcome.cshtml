@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="welcome_frame">
+    <div class="welcome_container">
+        <h3>Welcome to</h3>
+        <h2>Omnipresent Healthcare</h2>
+    </div>
+</div>
+@Html.Hidden("FirstTimeLogin", (bool)ViewBag.FirstTimeLogin, new { id = "hidFirstTimeLogin" })
+@Html.Hidden("Role", (string)ViewBag.Role, new { id = "hidRole" })
+@* User role selection pop up *@
+<div id="divhidepopup" style="display: none;">
+    <div class="popup-coverbg"></div>
+    <div class="popup-frame">
+        <div class="popup-main">
+            <div class="popup-content">
+                <div class="minHeight">
+                    <div id="UserRoleDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* User role selection pop up *@
+
+<div id="divChangepassword" style="display: none;">
+    <div class="popup-coverbg"></div>
+    <div class="popup-frame">
+        <div class="popup-main2">
+            <div class="popup-content2">
+                <div class="">
+                    <div id="UserChangePasswordDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Home/Welcome.js"></script>

@@ -1,0 +1,61 @@
+﻿@using SuppliesDotCom.Models
+@model BillingSystemParametersView
+
+@{
+    ViewBag.Title = "BillingSystemParameters View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .home {
+        -webkit-box-shadow: 10px 10px 1px 0px;
+        margin: 4px 31px 62px 41px;
+        border: 6px solid #E6E6FA;
+        box-shadow: 10px 10px 1px 0px;
+        width: 150px;
+        height: 65px;
+        float: left;
+        text-align: center;
+        background-color: #5c7499;
+    }
+</style>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseBillingSystemParametersAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add Billing System Parameters
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseBillingSystemParametersAddEdit" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/BillingSystemParameters/UserControls/_BillingSystemParametersAddEdit.cshtml", Model.CurrentBillingSystemParameters);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseBillingSystemParametersList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" /></span>Billing System Parameters List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseBillingSystemParametersList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="BillingSystemParametersListDiv">
+                    @{Html.RenderPartial("~/Views/BillingSystemParameters/UserControls/_BillingSystemParametersList.cshtml", Model.BillingSystemParametersList);}
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/BillingSystemParameters/BillingSystemParametersScript.js"></script>

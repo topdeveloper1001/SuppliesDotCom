@@ -1,0 +1,119 @@
+﻿@using SuppliesDotCom.Model
+@model Facility
+
+@{
+    ViewBag.Title = "Facility";
+    var btnSaveText = "Save";
+    if (Model != null && Model.FacilityId != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+
+<div class="form" id="facilityDiv">
+    @Html.HiddenFor(m => m.FacilityId)
+     @Html.HiddenFor(m => m.CorporateID)
+<div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Corporate:</label>
+            <select id="ddlCorporate" name="ddlCorporate" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility Number:</label>
+            @Html.TextBoxFor(m => m.FacilityNumber, new { @maxlength = "4", @class = "validate[required,custom[onlyNumberSp]]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility Name:</label>
+            @Html.TextBoxFor(m => m.FacilityName, new { @maxlength = "50", @class = "validate[required,custom[nameFormat]]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>E-Claim ID:</label>
+            @Html.TextBoxFor(m => m.FacilityLicenseNumber, new { @maxlength = "30", @class = "validate[required,custom[nameFormat]]" })
+        </div>            
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        @{Html.RenderPartial("~/Views/CommonUserControls/CascadingCountryView.cshtml", new SuppliesDotCom.Models.CommonDataView
+          {
+              CountryList = new List<Country>(),
+              StatesList = new List<State>(),
+              CityList = new List<City>(),
+              CountryId = Convert.ToInt32(Model.CountryID),
+              StateId = Convert.ToInt32(Model.FacilityState),
+              CityId = Convert.ToInt32(Model.FacilityCity),
+          });}
+        <div class="rowTable">
+            <label>Facility Zip Code:</label>
+            @Html.TextBoxFor(m => m.FacilityZipCode, new { @maxlength = "9", @class = "validate[optional[nameFormat]]"})
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+     
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility Street Address:</label>
+            @Html.TextAreaFor(m => m.FacilityStreetAddress, new { @maxlength = "40", @class = "validate[optional[addressFormat]]" })
+        </div>
+        <div class="rowTable">
+            <label>Facility Street Address2</label>
+            @Html.TextAreaFor(m => m.FacilityStreetAddress2, new { @maxlength = "40", @resize = "vertical", @class = "validate[optional[addressFormat]]"})
+        </div> 
+
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>License Expire Date:</label>
+            @Html.TextBoxFor(m => m.FacilityLicenseNumberExpire, "{0:MM/dd/yyyy}", new { @maxlength = "10", @class = "dtGreaterThanCurrent validate[required]", @onchange = "CheckValidDateNotLessThanTodayDate(this,'FacilityLicenseNumberExpire')" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility Time Zone:</label>
+            <select id="ddlFacilityTimeZone" class="validate[required]"></select>
+            @Html.HiddenFor(m => m.FacilityTimeZone)
+        </div>
+            
+        <div class="rowTable">
+            <label>Facility Regions:</label>
+            <select id="ddlFacilityRegions"></select>
+        </div>
+            
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Sender ID:</label>
+            @Html.TextBoxFor(m => m.SenderID, new { @maxlength = "10", @class = "validate[required,custom[onlyLetterNumber]]" })
+        </div>
+        
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility PO Box:</label>
+            @Html.TextBoxFor(m => m.FacilityPOBox, new { @maxlength = "15", @class = "validate[required,custom[nameFormat]]" })
+        </div>
+        <div class="rowTable">
+            <label>Facility Type:</label>
+            <select id="ddlFacilityType"></select>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="rowTable">
+            <label>License Type:</label>
+            @Html.TextBoxFor(m => m.FacilityTypeLicense, new { @maxlength = "20" , @class = "validate[optional[nameFormat]]"})
+        </div>
+        <div class="rowTable">
+            <label>Total License Bed:</label>
+            @Html.TextBoxFor(m => m.FacilityTotalLicenseBed, new { @maxlength = "4", @class = "validate[optional[onlyNumberSp]]" })
+        </div>
+        <div class="rowTable">
+            <label>Total Staffed Bed:</label>
+            @Html.TextBoxFor(m => m.FacilityTotalStaffedBed, new { @maxlength = "4", @class = "validate[optional[onlyNumberSp]]" })
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <input type="button" id="btnSaveFacility" class="blue-btn btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick="SaveFacility();" />
+        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="ClearFacilityForm();" type="button">Cancel</button>
+    </div>
+</div>
+    </div>

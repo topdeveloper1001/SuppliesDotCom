@@ -1,0 +1,61 @@
+﻿@using Kendo.Mvc.UI
+@*@model IEnumerable<SuppliesDotCom.Model.Tabs>*@
+@model IEnumerable<SuppliesDotCom.Model.CustomModel.TabsCustomModel>
+<div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-align-justify"></span>&nbsp;Tab List
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                             @(Html.Kendo().Grid(Model)
+    .Name("gridContent11")
+    .HtmlAttributes(new { style = "height: 460px" })
+    .Columns(columns =>
+    {
+
+        columns.Bound(p => p.TabId).Title("Tab Id");
+        columns.Bound(p => p.ParentTabId).Title("Parent Tab");
+        columns.Bound(p => p.ScreenID).Title("Screen");
+        columns.Bound(p => p.TabName).Title("Tab Name");
+        columns.Command(command =>
+               {
+                   command.Custom("Edit").Click("EditTab");
+                   command.Custom("Delete").Click("DeleteTab");
+               }).Title("Actions");
+    })
+    .Groupable()
+    .Scrollable()
+    .Sortable()
+    .Filterable(filterable => filterable
+        .Extra(false)
+        .Operators(operators => operators
+            .ForString(str => str.Clear()
+                .StartsWith("Starts with")
+                .IsEqualTo("Is equal to")
+                .IsNotEqualTo("Is not equal to")
+            ))
+        )
+   .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .ServerOperation(false)
+     )
+ .Resizable(resize => resize.Columns(true))
+       )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

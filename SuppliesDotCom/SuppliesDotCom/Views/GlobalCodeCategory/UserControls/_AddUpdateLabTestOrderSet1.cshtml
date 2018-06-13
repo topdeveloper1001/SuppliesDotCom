@@ -1,0 +1,40 @@
+﻿@model SuppliesDotCom.Model.GlobalCodeCategory
+
+@{
+    var btnGccSave = "Save";
+    if (Model.GlobalCodeCategoryID > 0)
+    {
+        btnGccSave = "Update";
+    }
+}
+
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="">
+    <div class="form patientTable" id="validate">
+        @Html.HiddenFor(m => m.GlobalCodeCategoryID, new { @id = "hfGlobalCodeCategoryID" })
+        <div class="col-sm-6">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Order Set Code Number:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeCategoryValue, new { @ID = "txtGlobalCodeCategoryValue", @maxlength = "20", @class = "validate[required,custom[onlyNumberSp]]" })
+            </div>
+            </div>
+        <div class="col-sm-6">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Description:</label>
+                @Html.TextAreaFor(m => m.GlobalCodeCategoryName, new { @ID = "txtGlobalCodeCategoryName", @maxlength = "1000", @class = "validate[required]", @Style = "height:48px; line-height: 20px; overflow-y:scroll;" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn-group">
+    <input type="submit" id="BtnLabTestOrderSetSave" class="blue-btn btn btn-primary edit-btn marginBtn" value="@btnGccSave" onclick="return CheckDuplicateLabTestOrderSet();" />
+    <button name="ClientCancel" id="BtnLabTestOrderSetCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearLabTestOrderSet();">Cancel</button>
+</div>
+
+
+

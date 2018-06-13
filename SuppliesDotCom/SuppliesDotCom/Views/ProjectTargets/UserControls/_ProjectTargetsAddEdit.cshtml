@@ -1,0 +1,62 @@
+﻿@using SuppliesDotCom.Model
+@model ProjectTargets
+
+<style>
+    .btn-group {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+
+@{
+    var btnPTargetsSaveText = "Save";
+    if (Model != null && Model.Id != 0)
+    {
+        btnPTargetsSaveText = "Update";
+    }
+}
+<div class="form" id="ProjectTargetsFormDiv">
+    @Html.HiddenFor(m => m.Id, new { @id = "hfProjectTargetId" })
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Project Number:</label>
+            <select id="ddlProjectNumber1" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Date:</label>
+            @Html.TextBoxFor(m => m.ProjectDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtProjectDate", @class = "large pull-left" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Percentage Targeted Completion %:</label>
+            <select id="ddlPrTargetedValue1" class="validate[required] projectsValue"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label>Is Active:</label>
+                @Html.CheckBoxFor(m => m.IsActive, new { @id = "ProjectTargetIsActive" })
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="rowTable">
+                <label class="col-lg-12">&nbsp;</label>
+                <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnPTargetsSaveText" onclick="return SaveProjectTargets();" />
+                <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearProjectTargetsForm();">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>

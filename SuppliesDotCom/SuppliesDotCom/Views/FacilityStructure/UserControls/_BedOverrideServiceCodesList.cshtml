@@ -1,0 +1,90 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<SuppliesDotCom.Model.ServiceCode>
+
+<style type="text/css">
+    #TreeView .k-group li {
+        width: 45%;
+        float: left;
+    }
+
+    div.k-treeview {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+
+
+<h4 class="greenTitle" style="margin: 0;">Override with the below Service Codes</h4>
+<div id="checkBox_BedTypes" class="overrideservice_codelist">
+    @if (Model != null && Model.Any())
+    {
+        <ul id="ulRoles">
+            @{
+                var list = Model.Where(m => m.CanOverRide == 1).ToList();
+            }
+
+            @foreach (var item in list)
+            {
+                <li>
+                    <input type="checkbox" id="@item.ServiceCodeValue" value="@item.ServiceCodeValue" name="@item.ServiceCodeDescription" />&nbsp;@item.ServiceCodeValue &nbsp;@item.ServiceCodeDescription
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <span>No Records Found</span>
+    }
+</div>
+
+
+
+@*@(Html.Kendo().TreeView()
+              .Name("treeview")
+                      .Checkboxes(checkboxes => checkboxes
+                        .Name("checkedFiles")
+                        .CheckChildren(true)
+                    )
+              .HtmlAttributes(new { })
+                      .HighlightPath(true)
+              .Items(menu =>
+                     {
+                         var list = Model;
+                         foreach (var item in (IEnumerable<SuppliesDotCom.Model.ServiceCode>)list.Where(m => m.CanOverRide == 1))
+                         {
+                             var builder = menu.Add().Text(item.ServiceCodeValue + " " + item.ServiceCodeDescription).HasChildren(false).Id(item.ServiceCodeValue.ToString())
+                                 .Expanded(false);
+                         }
+                     })
+      )
+@Html.Kendo().DeferredScripts()
+<script type="text/javascript">
+    function checkedNodeIds(nodes, checkedNodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].checked) {
+                checkedNodes.push(nodes[i].id);
+            }
+            if (nodes[i].hasChildren) {
+                checkedNodeIds(nodes[i].children.view(), checkedNodes);
+            }
+        }
+    }
+
+    // show checked node IDs on datasource change
+    function onCheck() {
+        var checkedNodes = [],
+            treeView = $("#treeview").data("kendoTreeView"),
+            message;
+
+        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+        if (checkedNodes.length > 0) {
+            message = "IDs of checked nodes: " + checkedNodes.join(",");
+        } else {
+            message = "No nodes checked.";
+        }
+
+        $("#result").html(message);
+    }
+
+</script>*@

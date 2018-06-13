@@ -1,0 +1,157 @@
+﻿@model List<SuppliesDotCom.Model.CustomModel.DashboardChargesCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Any())
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+            <div id="gridContent">
+                @grid.GetHtml(htmlAttributes: new { id = "OPRevenueChargesgrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridRow", columns: grid.Columns(
+                        grid.Column("BudgetDescription", "Outpatient Revenue Per Encounter", canSort: false, style: "col1"),
+                       grid.Column("M1", "January", canSort: false, style: "col2", format: @<text>@if (item.M1 != null)
+                                                                                                  {
+                                                                                                      if (item.M1 == Convert.ToDecimal(0.00))
+                                                                                                      {
+                                                                                                           <span>-</span>
+                                                                                                      }
+                                                                                                      else
+                                                                                                      {
+                                                                                                           @item.M1.ToString("#")
+                                                                                                      }
+                                                                                                  }</text>),
+                        grid.Column("M2", "February", canSort: false, style: "col3", format: @<text>@if (item.M2 != null)
+                                                                                                    {
+                                                                                                        if (item.M2 == Convert.ToDecimal(0.00))
+                                                                                                        {
+                                                                                                            <span>-</span>
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            @item.M2.ToString("#")
+                                                                                                        }
+                                                                                                    }</text>),
+                        grid.Column("M3", "March", canSort: false, style: "col4", format: @<text>@if (item.M3 != null)
+                                                                                                 {
+                                                                                                     if (item.M3 == Convert.ToDecimal(0.00))
+                                                                                                     {
+                                                                                                         <span>-</span>
+                                                                                                     }
+                                                                                                     else
+                                                                                                     {
+                                                                                                         @item.M3.ToString("#")
+                                                                                                     }
+                                                                                                 }</text>),
+                        grid.Column("M4", "April", canSort: false, style: "col5", format: @<text>@if (item.M4 != null)
+                                                                                                 {
+                                                                                                     if (item.M4 == Convert.ToDecimal(0.00))
+                                                                                                     {
+                                                                                                         <span>-</span>
+                                                                                                     }
+                                                                                                     else
+                                                                                                     {
+                                                                                                         @item.M4.ToString("#")
+                                                                                                     }
+                                                                                                 }</text>),
+                        grid.Column("M5", "May", canSort: false, style: "col6", format: @<text>@if (item.M5 != null)
+                                                                                               {
+                                                                                                   if (item.M5 == Convert.ToDecimal(0.00))
+                                                                                                   {
+                                                                                                       <span>-</span>
+                                                                                                   }
+                                                                                                   else
+                                                                                                   {
+                                                                                                       @item.M5.ToString("#")
+                                                                                                   }
+                                                                                               }</text>),
+                        grid.Column("M6", "June", canSort: false, style: "col7", format: @<text>@if (item.M6 != null)
+                                                                                                {
+                                                                                                    if (item.M6 == Convert.ToDecimal(0.00))
+                                                                                                    {
+                                                                                                        <span>-</span>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        @item.M6.ToString("#")
+                                                                                                    }
+                                                                                                }</text>),
+                        grid.Column("M7", "July", canSort: false, style: "col8", format: @<text>@if (item.M7 != null)
+                                                                                                {
+                                                                                                    if (item.M7 == Convert.ToDecimal(0.00))
+                                                                                                    {
+                                                                                                        <span>-</span>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        @item.M7.ToString("#")
+                                                                                                    }
+                                                                                                }</text>),
+                        grid.Column("M8", "August", canSort: false, style: "col9", format: @<text>@if (item.M8 != null)
+                                                                                                  {
+                                                                                                      if (item.M8 == Convert.ToDecimal(0.00))
+                                                                                                      {
+                                                                                                          <span>-</span>
+                                                                                                      }
+                                                                                                      else
+                                                                                                      {
+                                                                                                          @item.M8.ToString("#")
+                                                                                                      }
+                                                                                                  }</text>),
+                        grid.Column("M9", "September", canSort: false, style: "col10", format: @<text>@if (item.M9 != null)
+                                                                                                      {
+                                                                                                          if (item.M9 == Convert.ToDecimal(0.00))
+                                                                                                          {
+                                                                                                              <span>-</span>
+                                                                                                          }
+                                                                                                          else
+                                                                                                          {
+                                                                                                              @item.M9.ToString("#")
+                                                                                                          }
+                                                                                                      }</text>),
+                        grid.Column("M10", "October", canSort: false, style: "col11", format: @<text>@if (item.M10 != null)
+                                                                                                     {
+                                                                                                         if (item.M10 == Convert.ToDecimal(0.00))
+                                                                                                         {
+                                                                                                             <span>-</span>
+                                                                                                         }
+                                                                                                         else
+                                                                                                         {
+                                                                                                             @item.M10.ToString("#")
+                                                                                                         }
+                                                                                                     }</text>),
+                        grid.Column("M11", "November", canSort: false, style: "col12", format: @<text>@if (item.M11 != null)
+                                                                                                      {
+                                                                                                          if (item.M11 == Convert.ToDecimal(0.00))
+                                                                                                          {
+                                                                                                              <span>-</span>
+                                                                                                          }
+                                                                                                          else
+                                                                                                          {
+                                                                                                              @item.M11.ToString("#")
+                                                                                                          }
+                                                                                                      }</text>),
+                        grid.Column("M12", "December", canSort: false, style: "col13", format: @<text>@if (item.M12 != null)
+                                                                                                      {
+                                                                                                          if (item.M12 == Convert.ToDecimal(0.00))
+                                                                                                          {
+                                                                                                              <span>-</span>
+                                                                                                          }
+                                                                                                          else
+                                                                                                          {
+                                                                                                              @item.M12.ToString("#")
+                                                                                                          }
+                                                                                                      }</text>)
+                        ))
+            </div>
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>
+<script>
+    $(function() {
+        RowColumnColorGrid("OPRevenueChargesgrid");
+    });
+</script>

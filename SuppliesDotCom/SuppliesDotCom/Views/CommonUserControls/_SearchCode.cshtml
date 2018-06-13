@@ -1,0 +1,29 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+
+@model SearchView
+<script src="~/Scripts/Common/Search.js?@Helpers.CurrentAssemblyTicks"></script>
+
+    <div class="rowTable">
+        <label id="lblDiagnosisType">Enter Keyword(s):</label>
+        @Html.TextBoxFor(m => m.SearchText, new { @id = "SearchCodeOrDesc", @maxlength = "25", @style = "float:left;", @placeholder = "" + Model.PlaceholderText + "" })
+        
+        
+        <div style="float: left;">
+            <input type="submit" class="btn btn-primary edit-btn marginBtn" onclick="SearchCodes('#SearchCodeOrDesc','@Model.SearchType', '@Model.SearchResultListId');" value="Search" />
+        </div>
+
+        @*@(Html.Kendo().AutoComplete()
+          .Name(Model.FieldName)
+          .DataTextField("Menu_Title")
+          .Placeholder(Model.PlaceholderText)
+          .Filter("contains")
+          .MinLength(3)
+          .Events(e => e.Select(Model.SelectEvent))
+          .HtmlAttributes(new { id = "ServiceCode", style = "width:100%", maxlength = "6" })
+          .DataSource(source => source.Read(read => read.Action(Model.DefaultAction, Model.DefaultController)
+              .Data("OnSelection"))
+              .ServerFiltering(true))
+    )*@
+    </div>
+

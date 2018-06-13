@@ -1,0 +1,29 @@
+﻿@model List<SuppliesDotCom.Model.GlobalCodeCategory>
+@if (Model != null && Model.Count > 0)
+{
+    var grid = new WebGrid(Model, ajaxUpdateContainerId: "LabtestOrderSetGridContent", canPage: false);
+    <div id="LabtestOrderSetGridContent">
+        @grid.GetHtml("table table-grid", "gridHead", "gridFooter", "gridRow", "gridAltRow", columns: grid.Columns(
+                    //grid.Column("GlobalCodeCategoryID", "ID"),
+                    grid.Column("GlobalCodeCategoryValue", "Code"),
+                    grid.Column("GlobalCodeCategoryName", "Description"),
+                    //grid.Column("IsActive", "Active"),
+                    grid.Column(header: "Action", style:"colAlignCenter", format: @<text>
+        <a href="javascript:void(0);" title="View Lab Test Order Codes" onclick="ViewLabOrderCodes('@item.GlobalCodeCategoryValue');" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/view_small.png")" /></a>
+        <a href="javascript:void(0);" onclick="EditLabTestOrderSet('@item.GlobalCodeCategoryID');" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" /></a>
+        @*<a href="javascript:void(0);" title="Delete" onclick="DeleteLabTestOrderSet('@item.GlobalCodeCategoryID');" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" /></a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodeCategoryID','Delete Lab Test Order Set','',DeleteLabTestOrderSet,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>                                                                      
+                                                                                   
+        </text>)))
+    </div>
+}
+else
+{
+
+    <h2>No Record found</h2>
+}

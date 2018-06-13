@@ -1,0 +1,47 @@
+﻿@model SuppliesDotCom.Models.RoleSelectionView
+
+<script src="~/Scripts/RoleSelection/RoleSelection.js"></script>
+
+<div class="panel panel-default collapsecss ourcollapse bordertable">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion">
+        <h4 class="panel-title collapseTitle">
+            <span class="glyphicon glyphicon-info-sign"></span>&nbsp; Available Roles
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseROleSelection" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color" id="physicianGrid">
+                @if (Model != null)
+                {
+                    if (Model.RoleSelectionCustomModel.Any())
+                    {
+                        var grid = new WebGrid(Model.RoleSelectionCustomModel, ajaxUpdateContainerId: "gridContent", canPage: true, rowsPerPage: 20);
+                        @grid.GetHtml(htmlAttributes: new {id = "FilterGrid"}, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                            columns: grid.Columns(
+                                grid.Column("FacilityName", "Facility Name", canSort: false, style: "col1"),
+                                grid.Column("RoleName", "Role Name", canSort: false, style: "col2"),
+                                grid.Column(header: "Select Role", style: "col3", format: @<text>
+                                                                                               <a href="javascript:void(0);" onclick=" selectRole('@item.RoleId', '@item.FacilityId', '@item.CorporateId', '@item.RoleName', '@item.FacilityName') " style="float: left; margin-right: 7px; width: 15px;" title="Assign Role">Select
+                                                                                               </a>
+                                                                                           </text>)
+                                ))
+                        ;
+                    }
+                    else
+                    {
+                        <h2>No Record found</h2>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>

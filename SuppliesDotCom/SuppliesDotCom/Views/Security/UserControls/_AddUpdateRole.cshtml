@@ -1,0 +1,63 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model
+
+@model Role
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+
+<div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="base-color">
+            <div class="form" id="validate">
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label>Corporate :</label>
+                        <select id="ddlCorporates" class="validate[required]"></select>
+                        @Html.HiddenFor(m => m.CorporateId, new { @id = "hdCorporateId" })
+                        @*@Html.TextBoxFor(m => m.RoleName, new { @ID = "txtRoleName", @maxlength = "20", @class = "validate[required]" })*@
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <input type="hidden" value="@Model.RoleID" id="hfRoleID" />
+                        <input type="hidden" value="@Helpers.GetLoggedInUserId()" id="hfLoggedInUserID" />
+                        <label>Role :</label>
+                        @Html.TextBoxFor(m => m.RoleName, new { @ID = "txtRoleName", @maxlength = "20", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label>IsActive : @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" }) </label>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="btn-group">
+                    @*"return checkDuplicateUser(@Model.UserID);" document.location.href = $('#Url').attr('href');*@
+                    @if (Model.RoleID != 0)
+                    {  <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" id="buttonUpdate" onclick="return CheckDuplicateRole();" value="Update" /> 
+
+                    }
+                    else
+                    {
+                        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return CheckDuplicateRole();" />  
+                    }
+                    <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+                    <a id="Url" href="@Html.AttributeEncode(Url.Action("Role", "Security"))" style="display:none;"></a>
+                    <br />
+                    <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+                    @if (TempData["Message"] != null)
+                    {
+                        <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

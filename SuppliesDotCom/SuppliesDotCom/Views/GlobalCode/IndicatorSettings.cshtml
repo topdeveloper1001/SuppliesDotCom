@@ -1,0 +1,137 @@
+﻿@model SuppliesDotCom.Model.GlobalCodes
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .table {
+        margin-bottom: 0px !important;
+    }
+
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Global Code
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form patientTable" id="globalCodeForm">
+                            @Html.HiddenFor(m => m.GlobalCodeID)
+                            @Html.HiddenFor(m => m.GlobalCodeValue)
+                            @Html.HiddenFor(m => m.GlobalCodeCategoryValue)
+                            @Html.HiddenFor(m => m.ExternalValue1)
+                            <div>
+                                <div class="col-sm-4">
+                                    <div class="rowTable">
+                                        <label class="control-label"><span class="mandatoryStar"></span>Corporate:</label>
+                                        <select id="ddlCorporate" class="validate[required]"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="rowTable">
+                                        <label class="control-label" title="Set the Expiry Days of the Validation Token for the Manual Dashboard Data Upload Tool"><span class="mandatoryStar"></span>Set Token Expiry Days:</label>
+                                        @Html.TextBoxFor(m => m.GlobalCodeName, new { @class = "validate[custom[integer]]", @maxlength = "3" })
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="btn-group">
+                                    <button name="BtnSave" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="SaveGlobalCode();" type="button">Update Settings</button>
+                                    <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearAll();">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    $(function () {
+        BindCorporates("#ddlCorporate", $("#ExternalValue1").val());
+        $("#globalCodeForm").validationEngine();
+
+        $("#ddlCorporate").change(function () {
+            var value = $(this).val();
+            if (value > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: '/GlobalCode/GetIndicatorSettings',
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ corporateId: value }),
+                    success: function (data) {
+                        $("#GlobalCodeID").val(data.GlobalCodeID);
+                        $("#GlobalCodeValue").val(data.GlobalCodeValue);
+                        $("#GlobalCodeCategoryValue").val(data.GlobalCodeCategoryValue);
+                        $("#GlobalCodeName").val(data.GlobalCodeName);
+                    },
+                    error: function (msg) {
+                    }
+                });
+            } else {
+                $('#globalCodeForm').clearForm(true);
+                $.validationEngine.closePrompt(".formError", true);
+            }
+        });
+    });
+
+    function SaveGlobalCode() {
+        var isValid = jQuery("#globalCodeForm").validationEngine({ returnIsValid: true });
+        if (!isValid) {
+            return false;
+        }
+
+        var globalCodeId = $("#GlobalCodeID").val();
+        var globalCodeCategory = $("#GlobalCodeCategoryValue").val();
+        var globalCodeName = $("#GlobalCodeName").val();
+        var globalCodeValue = $("#GlobalCodeValue").val();
+        var description = $("#GlobalCodeName").val();
+        var sortOrder = $("#GlobalCodeValue").val();
+        var corporateId = $("#ddlCorporate").val();
+
+        var jsonData = JSON.stringify({
+            GlobalCodeID: globalCodeId,
+            GlobalCodeCategoryValue: globalCodeCategory,
+            GlobalCodeName: globalCodeName,
+            SortOrder: sortOrder,
+            Description: description,
+            FacilityNumber: 0,
+            GlobalCodeValue: globalCodeValue,
+            IsActive: true,
+            IsDeleted: false,
+            ExternalValue1: corporateId
+        });
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/GlobalCode/AddUpdateGlobalCode",
+            data: jsonData,
+            dataType: "json",
+            beforeSend: function () { },
+            success: function (data) {
+                var msg = "Dashboard Indicator Settings updated successfully";
+                ShowMessage(msg, "Success", "success", true);
+            },
+            error: function (msg) {
+
+            }
+        });
+        return false;
+    }
+</script>

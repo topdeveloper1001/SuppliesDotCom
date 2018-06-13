@@ -1,0 +1,44 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<DashboardTargetsCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent");
+            <div id="gridContent">
+                @grid.GetHtml("table table_scroll", "gridHead", "gridFooter", "gridRow", "gridAltRow", columns: grid.Columns(
+                                grid.Column("RoleName", "Role"),
+                                grid.Column("Target", "Target"),
+                                grid.Column("TargetDescription", "Target Description"),
+                                grid.Column("UOMstr", "Unit Of Measure"),
+                                grid.Column("TimmingIncrementStr", "Timing Increment"),
+                                grid.Column("IsActive", "Is Active"), grid.Column(header: "Action", format: @<text>
+                <a href="javascript:void(0);" onclick="EditDashboardTargets('@item.TargetId')" style="float: left; margin-right: 7px; width: 15px;">
+                    <img src="@Url.Content("~/images/edit.png")" /></a>
+         @*<a href="javascript:void(0);" title="Delete" onclick="return DeleteDashboardTargets('@item.TargetId');" style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                
+                <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.TargetId','Delete Dashboard Targets','',DeleteDashboardTargets,null); " style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" />
+                </a>
+                                                                                                             </text>)
+                                ))
+            </div>            
+        }
+        else
+        {
+
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortDashboardTargetGrid, "#gridContent");
+
+    });
+</script>
+

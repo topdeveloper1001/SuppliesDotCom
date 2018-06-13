@@ -1,0 +1,45 @@
+﻿@model SuppliesDotCom.Models.GlobalCodeCategoryMasterView
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="base-color">
+    <div class="form patientTable" id="validate">
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <input type="hidden" value="@Model.CurrentGlobalCodeGlobalCodeCategory.GlobalCodeCategoryID" id="hfGlobalCodeCategoryID" />
+                <label class="control-label">Facilty Name :</label>
+                @Html.DropDownListFor(m => m.CurrentGlobalCodeGlobalCodeCategory.FacilityNumber, new SelectList(Model.LstFacility, "FacilityNumber", "FacilityName"), "--Select One--", new { id = "ddlFacility", @class = "validate[required]" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Global Code Category Value :</label>
+                @Html.TextBoxFor(m => m.CurrentGlobalCodeGlobalCodeCategory.GlobalCodeCategoryValue, new { @ID = "GlobalCodeCategoryValue", @maxlength = "20", @class = "validate[required,custom[onlyNumberSp]]" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Global Code Category Name :</label>
+                @Html.TextBoxFor(m => m.CurrentGlobalCodeGlobalCodeCategory.GlobalCodeCategoryName, new { @ID = "GlobalCodeCategoryName", @maxlength = "50", @class = "validate[required]" })
+            </div>
+            <div class="form-group">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.CurrentGlobalCodeGlobalCodeCategory.IsActive, new { @id = "chkActive" })</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn-group">
+    @*"return checkDuplicateUser(@Model.UserID);" document.location.href = $('#Url').attr('href');*@
+    @if (Model.CurrentGlobalCodeGlobalCodeCategory.GlobalCodeCategoryID != 0)
+    {  <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return CheckDuplicateGlobalCodeCategory();" value="Update" />               
+    }
+    else
+    {
+        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return CheckDuplicateGlobalCodeCategory();" />                
+    }
+    <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+    <br />
+    <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+</div>
+
+
+

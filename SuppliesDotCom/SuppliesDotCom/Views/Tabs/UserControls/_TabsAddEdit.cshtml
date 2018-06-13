@@ -1,0 +1,74 @@
+﻿@model SuppliesDotCom.Model.Tabs
+
+@{
+    ViewBag.Title = "Tabs";
+}
+<style>
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="form" id="TabsFormDiv">
+    @Html.HiddenFor(m => m.TabId)
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Tab Name:</label>
+            @Html.TextBoxFor(m => m.TabName, new { @maxlength = "50", @id = "txtTabName", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label>Controller Name:</label>
+            @Html.TextBoxFor(m => m.Controller, new { @maxlength = "50", @id = "txtController" })
+        </div>
+        <div class="rowTable">
+            <label>Parent Tab (If Applicable):</label>
+            <select title="Select Parent Tab" id="ddlParentTabs" onchange="OnChangeParentTab('#ddlParentTabs');"></select>
+            @Html.HiddenFor(m => m.ParentTabId, new { @maxlength = "40", @id = "hdParentId" })
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+        <div class="rowTable">
+            <label>Default Action:</label>
+            @Html.TextBoxFor(m => m.Action, new { @maxlength = "50", @id = "txtAction" })
+        </div>
+        <div class="rowTable">
+            <label>Route Values:</label>
+            @Html.TextBoxFor(m => m.RouteValues, new { @maxlength = "100", @id = "txtRouteValues" })
+        </div>
+        <div class="rowTable">
+            <label>Tab Order:</label>
+            @Html.TextBoxFor(m => m.TabOrder, new { @maxlength = "3", @id = "txtTabOrder", @class = "validate[optional[integer]]" })
+        </div>
+
+    </div>
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+
+        <div class="rowTable">
+            <label>Tab ImageUrl:</label>
+            @Html.TextBoxFor(m => m.TabImageUrl, new { @maxlength = "50", @id = "txtTabImageUrl" })
+        </div>
+        <div class="form-group" style="margin-top: 35px;">
+            <label class="control-label">
+                Is Active: @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkIsActive" })
+            </label>
+            @*<label class="control-label">
+                    Is Visible: @Html.CheckBoxFor(m => m.IsVisible, new { @id = "chkIsVisible" })
+                </label>*@
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="btn-group">
+        <div style="float: left;">
+            @{
+                var btnSave = "Save";
+                if (Model != null && Model.TabId != 0)
+                {
+                    btnSave = "Update";
+                }
+            }
+            <input type="submit" id="btnSaveTab" class="btn btn-primary edit-btn marginBtn" value="@btnSave" onclick="return SaveTabs();" />
+            <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearMenuTabForm();">Cancel</button>
+        </div>
+    </div>
+</div>

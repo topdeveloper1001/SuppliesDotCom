@@ -1,0 +1,222 @@
+﻿@using SuppliesDotCom.Common
+@using Kendo.Mvc.UI
+@using System.Web.Optimization
+@model SuppliesDotCom.Models.GlobalCodeView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var addViewTitle = string.Format("Add {0}", Model.GlobalCategoryName);
+    var listViewTitle = string.Format("{0} List", Model.GlobalCategoryName);
+    var externalValue1 = "External Value 1";
+    var externalValue2 = "External Value 2";
+    var externalValue3 = "External Value 3";
+    var externalValue4 = "External Value 4";
+    var externalValue5 = "External Value 5";
+    var nameText = "Name";
+    var codeValueText = "Code Value";
+    var descriptionText = "Description";
+    if (Model.ExternalValueLabelsList != null && Model.ExternalValueLabelsList.Count > 0)
+    {
+        nameText = Model.ExternalValueLabelsList[0].Trim();
+        codeValueText = Model.ExternalValueLabelsList[1].Trim();
+        descriptionText = Model.ExternalValueLabelsList[2].Trim();
+        externalValue1 = Model.ExternalValueLabelsList[3];
+        externalValue2 = Model.ExternalValueLabelsList[4];
+        externalValue3 = Model.ExternalValueLabelsList[5];
+        externalValue4 = Model.ExternalValueLabelsList[6];
+        externalValue5 = Model.ExternalValueLabelsList[7];
+    }
+    ViewBag.Title = addViewTitle + " View";
+
+    var btnSaveText = "Save";
+    if (Model.CurrentGlobalCode.GlobalCodeID != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+
+<style>
+    .btn-group {
+        margin-left: 25px;
+        margin-top: 20px;
+    }
+</style>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+<div class="white-bg">
+    @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeCategoryValue, new { @id = "hdGlobalCodeCategoryValue" })
+    @Html.HiddenFor(m => m.GlobalCategoryName, new { @id = "hdGlobalCodeCategoryName" })
+    @Html.HiddenFor(m => m.WithCategoryDropdown, new { @id = "hdWithCategoryDropdown" })
+    @Html.HiddenFor(m => m.WithExternalValues, new { @id = "hdWithExternalValues" })
+    @Html.HiddenFor(m => m.GlobalCodeCategoryParentValue, new { @id = "hdGlobalCodeCategoryParentValue" })
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp; @addViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        @if (Model.CurrentGlobalCode != null)
+                        {
+                            <div class="form patientTable" id="globalCodeForm">
+                                @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+                                <div>
+                                    <div class="col-sm-3" id="divCategoryDropdown" style="display: none;">
+                                        <div class="rowTable">
+                                            <label class="control-label">
+                                                <span class="mandatoryStar"></span>
+                                                Search Order Set Code / Description 
+                                            </label>
+                                            @(Html.Kendo().AutoComplete()
+                            .Name("txtGlobalCodeCategoryName")
+                            .DataTextField("Name")
+                            .Placeholder("Search Code Value / Description...")
+                            .Filter("contains")
+                            .MinLength(3)
+                            .Events(e => e.Select("OnGCodeCategorySelection"))
+                            .HtmlAttributes(new
+                            {
+                                id = "txtGlobalCodeCategoryName",
+                                onfocus = "ajaxStartActive = false;",
+                                onblur = "ajaxStartActive = true;",
+                                style = "width:100%",
+                                maxlength = "250",
+                            })
+                            .DataSource(source => source.Read(read => read.Action("SearchGlobalCodeCategories", "GlobalCode")
+                                .Data("SelectGCodeCategory"))
+                                .ServerFiltering(true))
+                            )
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="rowTable">
+                                            <label class="control-label">
+                                                <span class="mandatoryStar"></span>@nameText:
+                                            </label>
+                                            @Html.TextBoxFor(m => m.CurrentGlobalCode.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = "250", @class = "validate[required]" })
+                                        </div>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(codeValueText))
+                                    {
+                                        <div class="col-sm-2">
+                                            <div class="rowTable">
+                                                <label class="control-label"><span class="mandatoryStar"></span>@codeValueText:</label>
+                                                @Html.TextBoxFor(m => m.CurrentGlobalCode.GlobalCodeValue, new { @ID = "txtGlobalCodeValue", @maxlength = "10", @class = "validate[required]" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeValue, new { @ID = "hfGlobalCodeValue" })
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(descriptionText))
+                                    {
+                                        <div class="col-sm-3">
+                                            <div class="rowTable">
+                                                <label class="control-label">@descriptionText:</label>
+                                                @Html.TextAreaFor(m => m.CurrentGlobalCode.Description, new { @ID = "txtDescription", @maxlength = "240", @style = "height:60px; overflow-y:scroll;" })
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="margin15" id="divExternalValues" style="overflow: hidden;">
+                                        <div class="col-sm-2">
+                                            <div class="rowTable">
+                                                <label class="control-label minHeightLabel">@externalValue1:</label>
+                                                @Html.TextBoxFor(m => m.CurrentGlobalCode.ExternalValue1, new { @ID = "txtExternalValue1", @maxlength = "240" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="rowTable">
+                                                <label class="control-label minHeightLabel">@externalValue2:</label>
+                                                @Html.TextBoxFor(m => m.CurrentGlobalCode.ExternalValue2, new { @ID = "txtExternalValue2", @maxlength = "240" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="rowTable">
+                                                <label class="control-label minHeightLabel">@externalValue3:</label>
+                                                @Html.TextBoxFor(m => m.CurrentGlobalCode.ExternalValue3, new { @ID = "txtExternalValue3", @maxlength = "240" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="rowTable">
+                                                <label class="control-label minHeightLabel">@externalValue4:</label>
+                                                @Html.TextBoxFor(m => m.CurrentGlobalCode.ExternalValue4, new { @ID = "txtExternalValue4", @maxlength = "240" })
+                                            </div>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(externalValue5))
+                                        {
+                                            <div class="col-sm-2">
+                                                <div class="rowTable">
+                                                    <label class="control-label minHeightLabel">@externalValue5:</label>
+                                                    @Html.TextBoxFor(m => m.CurrentGlobalCode.ExternalValue5, new { @ID = "txtExternalValue5", @maxlength = "240" })
+                                                </div>
+                                            </div>
+                                        }
+@*<div class="col-sm-3">
+                                            <div class="rowTable">
+                                                <label class="control-label">@externalValue6:</label>
+                                                @{
+                                    var value = !string.IsNullOrEmpty(Model.CurrentGlobalCode.ExternalValue6) && bool.Parse(Model.CurrentGlobalCode.ExternalValue6);
+                                                }
+
+                                                @Html.CheckBoxFor(m => value, new { id = "chkExternalValue6" })
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="btn-group">
+
+                                        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGenericCodeExists();" value="@btnSaveText" />
+                                        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearGenericForm('@Model.CurrentGlobalCode.GlobalCodeCategoryValue');">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+@*@{Html.RenderPartial("~/Views/GlobalCode/UserControls/_GenericExternalAddEdit.cshtml", Model.CurrentGlobalCode);}*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseGlobalCodesList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>@listViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseGlobalCodesList" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color" id="GlobalCodesList">
+                    <div class="table-responsive">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_GenericExternalListView.cshtml", Model);}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="inactive">View In active records
+            <input id="chkShowInActive" type="checkbox" onchange="ShowInActiveRecordsInExternalView('#chkShowInActive');" />
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+<script src="~/Scripts/GlobalCode/GenericExternalCode.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

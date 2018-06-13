@@ -1,0 +1,102 @@
+﻿@using SuppliesDotCom.Model
+@using Tabs = SuppliesDotCom.Model.Tabs
+@using SuppliesDotCom.Common.Common
+
+@{
+    var list = new List<Tabs>();
+    if (Session[SessionNames.SessionClass.ToString()] != null)
+    {
+        var objSession = Session[SessionNames.SessionClass.ToString()] as SessionClass;
+        if (objSession != null)
+        {
+            list = objSession.MenuSessionList != null ? objSession.MenuSessionList.ToList(): new List<Tabs>();
+        }
+    }
+}
+        <ul class="menu">  
+    
+@foreach (var mp in list.Where(p => p.ParentTabId == 0))
+{
+    var parentClass = "";
+    var parentUrl = "#";
+    var routes = "";
+    if (mp.RouteValues != null)
+    {
+        routes = "?" + mp.RouteValues;
+    }
+    if (mp.Controller != null && mp.Action != null)
+    {
+        parentClass = "text_bold";
+        parentUrl = "/" + mp.Controller + "/" + mp.Action + routes;
+    }
+<li id="li@(mp.TabId)" ><a href="@parentUrl" class="@parentClass">@mp.TabName</a> 
+        @if (list.Count(p => p.ParentTabId == mp.TabId) > 0)
+        {
+            @:<ul>
+        }  
+        
+        @RenderMenuItem(list,mp)
+       
+        @if (list.Count(p => p.ParentTabId == mp.TabId) > 0)
+        {
+            @:</ul>
+        }
+       
+ </li>
+}
+</ul>
+
+
+@helper RenderMenuItem(List<Tabs> menuList,Tabs mi)
+{
+    foreach (var cp in menuList.Where(p => p.ParentTabId == mi.TabId))
+    {
+        var objSession1 = Session[SessionNames.SessionClass.ToString()] as SessionClass;
+        var cls = "";
+        var acls = "";
+        var pcls = "";
+        var url = "#";
+        var routes = "";
+        if (objSession1 != null && cp.TabId == Convert.ToInt32(objSession1.NavTabId))
+        {
+            cls = "page-selected";
+        }
+        if (objSession1 != null && cp.TabId == Convert.ToInt32(objSession1.NavParentTabId))
+        {
+            pcls = "selected_menu";
+        }
+        if (cp.RouteValues != null)
+        {
+            routes = "?" + cp.RouteValues;
+        }
+        if (cp.Controller != null && cp.Action != null)
+        {
+            acls = "text_bold";
+            url = "/" + cp.Controller + "/" + cp.Action + routes;
+        }
+        @:<li id="li@(cp.TabId)" data-attr="pi@(cp.ParentTabId)" class="@cls @pcls">
+        @*<a href="@Url.Action(cp.Action,cp.Controller)" target="@cp.TabImageUrl" class="@acls" onclick="CheckLastEvent(@cp.TabId,@cp.ParentTabId);">@cp.TabName</a>*@
+        if (url != "#")
+        {
+            <a href="@url" target="@cp.TabImageUrl" class="@acls" onclick="CheckLastEvent(@cp.TabId, @cp.ParentTabId); ">@cp.TabName</a>
+        }
+        else
+        {
+             <a href="@url" class="@acls">@cp.TabName</a>
+        }
+        if (menuList.Count(p => p.ParentTabId == cp.TabId) > 0)
+        {
+           @:<ul>  
+        }
+        
+        @RenderMenuItem(menuList,cp)
+        if (menuList.Count(p => p.ParentTabId == cp.TabId) > 0)
+      {
+          @:</ul>
+      }
+      else
+      {
+          @:</li>
+      }
+    }
+}

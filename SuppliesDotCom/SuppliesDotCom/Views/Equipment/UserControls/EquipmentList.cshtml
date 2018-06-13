@@ -1,0 +1,105 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model.CustomModel
+
+@*@model List<EquipmentCustomModel>*@
+@model List<EquipmentCustomModel>
+@*<style>
+    .table_scroll tbody tr:hover {
+        background-color: yellow;
+    }
+</style>*@
+
+
+@if (Model != null)
+{
+    if (Model.Count > 0)
+    {
+        var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+        <div id="gridContent">
+            @grid.GetHtml("table table_scroll", "gridHead", "gridFooter", "gridRow", "gridAltRow", columns: grid.Columns(
+                                grid.Column("EquipmentName", " 	Equipment Name"),
+                                grid.Column("FacilityName", "Facility"),
+                                grid.Column("EquipmentModel", "Model"),
+                                //grid.Column("EquipmentTypeName", "Equipment Type"),
+                                grid.Column("EquipmentSerialNumber", "Serial Number"),
+                                 grid.Column("IsEquipmentFixed", "Equipment Mobile"),
+                                 grid.Column("Department", "Base Location"),
+                                 grid.Column("TurnAroundTime", "Turnaround Time (In Mins)"),
+                                 grid.Column("AssignedRoom", "Room Assigned"),
+                                grid.Column("RoomDepartment", "Room's Department"),
+                                @*grid.Column("EquipmentDisabledDate", "Disabled On", canSort: true, format: @<text>@if (item.EquipmentDisabledDate != null)
+                                    { @item.EquipmentDisabledDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                    }</text> ),*@
+            
+                grid.Column(header: "Action", format: @<text>
+                                                           
+            
+ @if (!item.IsDeleted)
+{
+<a href="#" onclick="EditEquipment('@item.EquipmentMasterId')" style="float: left; margin-right: 7px; width: 15px;"><img src="@Url.Content("~/images/edit.png")" /></a>
+
+ 
+
+                                                           if (Helpers.GetLoggedInUserIsAdmin() && !item.EquipmentDisabled)
+                                                           {
+                                                               <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.EquipmentMasterId','Delete Equipment','',DeleteEquipment,null); " style="float: left; width: 15px;">
+                                                                   <img src="@Url.Content("~/images/delete.png")" />
+                                                               </a>
+                                                           }
+                                                         
+                                                           if (item.EquipmentDisabled)
+                                                           {
+                                                               <a href="#" title="Back In Service Equipment " onclick="return DeactivateActivateEquipment('@item.EquipmentMasterId',true,this); " style="float: left; width: 19px;"><img src="@Url.Content("~/images/active.png")" /></a>
+                                                           }
+                                                           else
+                                                           {
+                                                               <a href="#" title="Deactivate Equipment " onclick="return DeactivateActivateEquipment('@item.EquipmentMasterId', false,this); " style="float: left; width: 19px;"><img src="@Url.Content("~/images/deactive.png")" /></a>
+                                                           }
+ 
+ }
+
+                                                           
+                                                          
+                                                       </text>)
+                                       ))<h6>* Click on any column heading to sort</h6>
+
+        </div>
+    }
+    else
+    {
+
+        <h2>No Record found</h2>
+    }
+}
+
+
+<script>
+    
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortEquipmentGrid, "#gridContent");
+       $("#EquipmentGrid tbody tr").click(function () {
+            $(this).siblings().removeClass('rowColor2');
+            $(this).removeClass('gridAltRow');
+            $(this).addClass('rowColor2');
+        });
+    });
+    
+</script>
+
+        @*<script type="text/javascript">
+                function DateTimeFilter(control) {
+                    $(control).kendoDateTimePicker({
+                        format: "MM/dd/yyyy"
+                    });
+                }
+            </script>*@
+
+@*<script>
+    $(function () {  });
+    function TEsTDeleted(e) {
+
+        //$(e).parent().parent().remove();
+        $(e).closest('tr').remove();
+    }
+</script>*@

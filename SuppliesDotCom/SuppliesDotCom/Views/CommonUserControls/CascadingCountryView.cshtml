@@ -1,0 +1,19 @@
+﻿@model  SuppliesDotCom.Models.CommonDataView
+<script src="~/Scripts/Common/CascadingDataBinding.js"></script>
+<div class="rowTable">
+    <label class="control-label"><span class="mandatoryStar"></span>Country :</label>
+    @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.CountryList, "CountryID", "CountryName"), "--Select One--", new { id = "ddlCountries", @class = "validate[required]" })
+    @Html.HiddenFor(m => m.CountryId, new { @id = "hdCountry", @class = "emptyddl" })
+</div>
+<div class="rowTable">
+    <label class="control-label"><span class="mandatoryStar"></span>State :</label>
+    @Html.DropDownListFor(m => m.StateId, new SelectList(Model.StatesList, "Value", "Text"), "--Select One--", new { id = "ddlStates", @class = "validate[required]" })
+    @Html.HiddenFor(m => m.StateId, new { @id = "hdState", @class = "emptyddl" })
+</div>
+<div class="rowTable">
+    <label class="control-label"><span class="mandatoryStar"></span>City :</label>
+    @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.CityList, "Value", "Text"), "--Select One--", new { id = "ddlCities", @class = "validate[required]" })
+    @Html.HiddenFor(m => m.CityId, new { @id = "hdCity", @class = "emptyddl" })
+</div>
+
+

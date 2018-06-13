@@ -1,0 +1,107 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.FacilityStructureView
+
+@{
+    ViewBag.Title = "FacilityStructure";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .width20 {
+        width: 20px !important;
+    }
+
+    .width50 {
+        width: 60px !important;
+    }
+
+    .width100 {
+        width: 100px !important;
+    }
+</style>
+
+<input type="hidden" value="@Helpers.GetSysAdminCorporateID()" id="hdCorporateId" />
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#FacilityStructureDiv">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Assign Appointment Types to Rooms
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <input id="hidUpdateFlag" type="hidden" value="0" />
+        <div id="FacilityStructureDiv" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="form" id="FacilityStructureFormDiv">
+                            <div class="col-xs-2">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="rowTable">
+                                            <label><span class="mandatoryStar"></span>Facility:</label>
+                                            <select id="ddlFacility" class="validate[required]"></select>
+                                            @Html.HiddenFor(m => m.CurrentFacilityStructure.FacilityId)
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="rowTable">
+                                            <label>Department:</label>
+                                            <label id="lblDepartment" class="text_bold"></label>
+                                        </div>
+                                        <div class="rowTable">
+                                            <label><span class="mandatoryStar"></span>Room:</label>
+                                            <select id="ddlRooms" class="validate[required]"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.HiddenFor(m => m.CurrentFacilityStructure.ExternalValue4)
+                                <div class="list_block" id="divAppointments">
+                                    @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_AppointmentTypesOverrideList.cshtml", Model.CurrentFacilityStructure.AppointmentList);}
+                                </div>
+                            </div>
+                            @*<div class="col-sm-10">
+                                <div class="list_block" id="divAppointmentSearch">
+                                    <input type="text" id="txtAppSearch" title="Search by Appointment Types" placeholder="Search by Appointment Types" />
+                                    <button name="btnSearch" id="btnSearch" class="btn btn-primary edit-btn" type="button">Search</button>
+                                </div>
+                            </div>*@
+                            <br />
+                            <div class="clear"></div>
+                            <div class="col-sm-12">
+                                <div class="button-block">
+                                    <input type="submit" id="btnSave" class="btn btn-primary edit-btn" value="Save" onclick="SaveRoomWithEquipment();" />
+                                    <button name="ClientCancel" class="btn btn-primary edit-btn" type="button" onclick="return ClearAppointmentRoomsAssForm();">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#FacilityStructureListingDiv">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="~/images/list.png" />
+                </span>&nbsp;Appointment-Rooms Assignments List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="FacilityStructureListingDiv" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="FacilityStructureListDiv">
+                    @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_AssignedAppointmentsList.cshtml", Model.FacilityStructureList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/FacilityStructure/AppointmentRoomsAssignment.js?@DateTime.Now.Ticks"></script>

@@ -1,0 +1,125 @@
+﻿@using Kendo.Mvc.UI
+@using Kendo.Mvc.UI.Fluent
+@using SuppliesDotCom.Model.CustomModel
+
+@model IEnumerable<FacilityStructureCustomModel>
+
+<style type="text/css">
+    #TreeView .k-group li {
+        width: 45%;
+        float: left;
+    }
+
+    div.k-treeview {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+@functions{
+
+
+    private void AddChildrenBeds(TreeViewItemBuilder builder, FacilityStructureCustomModel item, IEnumerable<FacilityStructureCustomModel>
+              items, int globalCodeId)
+    {
+        var children = items.Where(m => m.ParentId == item.FacilityStructureId && m.GlobalCodeID == globalCodeId);
+        builder.Items(menuItems =>
+        {
+            foreach (var child in children)
+            {
+                var menuItem = menuItems.Add().ImageUrl("~/images/bed.png").Text(child.FacilityStructureName + "-" + child.GlobalCodeIdValue + ", Can Override:" + child.CanOverRide).HasChildren(true).Id(child.FacilityStructureId.ToString())
+                    .Expanded(false);
+                AddChildrenBeds(menuItem, child, items, globalCodeId);
+            }
+        });
+    }
+
+
+    private void AddChildrenRooms(TreeViewItemBuilder builder, FacilityStructureCustomModel item, IEnumerable<FacilityStructureCustomModel>
+            items, int globalCodeId)
+    {
+        var children = items.Where(m => m.ParentId == item.FacilityStructureId && m.GlobalCodeID == globalCodeId);
+        builder.Items(menuItems =>
+        {
+            foreach (var child in children)
+            {
+                var menuItem = menuItems.Add().ImageUrl("~/images/room.png").Text(child.FacilityStructureName + "-" + child.GlobalCodeIdValue + ", Non-Chargeable: " + child.NonChargeableRoom).HasChildren(true).Id(child.FacilityStructureId.ToString())
+                    .Expanded(true);
+                AddChildrenBeds(menuItem, child, items, Convert.ToInt32(SuppliesDotCom.Common.Common.BaseFacilityStucture.Bed));
+                AddChildrenRooms(menuItem, child, items, globalCodeId);
+            }
+        });
+    }
+
+    private void AddChildrenDepartment(TreeViewItemBuilder builder, FacilityStructureCustomModel item, IEnumerable<FacilityStructureCustomModel>
+        items, int globalCodeId)
+    {
+        var children = items.Where(m => m.ParentId == item.FacilityStructureId && m.GlobalCodeID == globalCodeId);
+        builder.Items(menuItems =>
+        {
+            foreach (var child in children)
+            {
+                var menuItem = menuItems.Add().ImageUrl("~/images/department.png").Text(child.FacilityStructureName + "-" + child.GlobalCodeIdValue + ", GLAccount:" + child.ExternalValue1 + ", A/R Account:" + child.ExternalValue2).HasChildren(true).Id(child.FacilityStructureId.ToString())
+                    .Expanded(true);
+                AddChildrenRooms(menuItem, child, items, Convert.ToInt32(SuppliesDotCom.Common.Common.BaseFacilityStucture.Rooms));
+                AddChildrenDepartment(menuItem, child, items, globalCodeId);
+            }
+        });
+    }
+
+}
+@(Html.Kendo().TreeView()
+              .Name("treeview1")
+              .HtmlAttributes(new { })
+                      .HighlightPath(true)
+                      .Items(menu =>
+                      {
+                          var list = Model;
+                          foreach (var item in list.Where(m => m.GlobalCodeID == Convert.ToInt32(SuppliesDotCom.Common.Common.BaseFacilityStucture.Floor)))
+                          {
+                              var builder = menu.Add().ImageUrl("~/images/floor.png").Text(item.FacilityStructureName + "-" + item.GlobalCodeIdValue).HasChildren(true).Id(item.FacilityStructureId.ToString())
+                                  .Expanded(true);
+                              AddChildrenDepartment(builder, item, list, Convert.ToInt32(SuppliesDotCom.Common.Common.BaseFacilityStucture.Department));
+                          }
+                      })
+      )
+@Html.Kendo().DeferredScripts()
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function onSelect(e) {
+            return false;
+        }
+        function onChange(e) {
+            return false;
+        }
+    });
+    function checkedNodeIds(nodes, checkedNodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].checked) {
+                checkedNodes.push(nodes[i].id);
+            }
+
+            if (nodes[i].hasChildren) {
+                checkedNodeIds(nodes[i].children.view(), checkedNodes);
+            }
+        }
+    }
+
+    // show checked node IDs on datasource change
+    function onCheck() {
+        var checkedNodes = [],
+            treeView = $("#treeview1").data("kendoTreeView"),
+            message;
+
+        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+        if (checkedNodes.length > 0) {
+            message = "IDs of checked nodes: " + checkedNodes.join(",");
+        } else {
+            message = "No nodes checked.";
+        }
+
+        $("#result").html(message);
+    }
+
+</script>

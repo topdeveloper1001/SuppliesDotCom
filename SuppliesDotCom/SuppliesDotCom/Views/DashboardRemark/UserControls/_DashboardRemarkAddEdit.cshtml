@@ -1,0 +1,53 @@
+﻿@model SuppliesDotCom.Model.DashboardRemark
+
+@{
+    string btnSaveText = "Save";
+    if (Model.Id != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<div class="form" id="DashboardRemarkFormDiv">
+    <div class="col-sm-5">
+        <div class="rowTable">
+            @Html.HiddenFor(m => m.Id, new { @id = "hfId" })
+            <label><span class="mandatoryStar"></span>Dashboard Type:</label>
+            <select id="ddlDashboardType" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Dashboard Section:</label>
+            <select id="ddlDashboardSection" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Facility:</label>
+            <select id="ddlFacility" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Remarks:</label>
+            @Html.TextAreaFor(m => m.Remarks, new { @maxlength = "500", @id = "txtRemarks", @style = "height: 120px", @class = "validate[required]" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Month:</label>
+            <select id="ddlMonth" class="validate[required]"></select>
+        </div>
+        @* <div class="rowTable">
+            <label>CreatedBy:</label>
+            @Html.TextBoxFor(m => m.CreatedBy, new {@maxlength = "10", @id = "txtCreatedBy"})
+        </div>
+        <div class="rowTable">
+            <label>CreatedDate:</label>
+            @Html.TextBoxFor(m => m.CreatedDate, "{0:MM/dd/yyyy}", new {@maxlength = "10", @id = "dtCreatedDate"})
+        </div>*@
+        <div class="clear"></div>
+        <div class="btn-group">
+            <div style="float: left;">
+                <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick=" return SaveDashboardRemark(); " />
+                <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick=" return ClearDashboardRemarkForm(); ">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

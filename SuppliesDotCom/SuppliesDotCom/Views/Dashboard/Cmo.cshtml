@@ -1,0 +1,450 @@
+﻿@using SuppliesDotCom.Models
+@model ActiveEncounterCustomView
+
+@{
+    ViewBag.Title = "Cmo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function DateTimeFilter(control) {
+        $(control).kendoDateTimePicker({
+            format: "MM/dd/yyyy"
+        });
+    }
+</script>
+<style>
+    .table-grid {
+        width: 100% !important;
+    }
+</style>
+
+<div id="divFacility" class="white-bg">
+    <h2 class="page_heading">CMO / Quality - Active Dashboard</h2>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseInPatientActiveEncounterList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Inpatient List:
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseInPatientActiveEncounterList" class="panel-collapse collapse in">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive" id="InPatientActiveEncounterList">
+                            @* InPatient Encounters *@
+                            @if (Model.ActiveInPatientEncounterList != null && Model.ActiveInPatientEncounterList.Any())
+                            {
+                                var grid = new WebGrid(Model.ActiveInPatientEncounterList, ajaxUpdateContainerId: "gridContent", canPage: false);
+
+                                <div id="ActiveInPatientEncounterListContent">
+                                    @grid.GetHtml(htmlAttributes: new { id = "ActiveInPatientEncounterGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow",
+                                        columns: grid.Columns(
+                                            grid.Column(header: "Is VIP", canSort: true, style: "col1", format: @<text>
+                                            @if (!string.IsNullOrEmpty(item.PatientIsVIP))
+                                            {
+                                                <span style="float: left;">
+                                                    <img style="height: 20px; width: 20px" src="@Url.Content("~/images/vip2.png")" />
+                                                </span>
+                                            } </text>),
+                                            grid.Column("PersonFirstName", "First Name", canSort: true, style: "col2"),
+                                            grid.Column("PersonLastName", "Last Name", canSort: true, style: "col3"),
+                                            grid.Column("PersonBirthDate", "Birth Date", canSort: true, style: "col4", format: @<text>@if (item.PersonBirthDate != null)
+                                            {
+                                                @item.PersonBirthDate.ToString("dd/MM/yyyy")
+                                            }</text>),
+                                            grid.Column("EncounterNumber", "Encounter Number", canSort: true, style: "col5"),
+                                            grid.Column("EncounterStartTime", "Encounter Start", canSort: true, style: "col7", format: @<text>
+                                                @if (item.EncounterStartTime != null)
+                                                {
+                                                    @item.EncounterStartTime.ToString("dd/MM/yyyy HH:mm:ss")
+                                                }
+                                            </text>),
+                                            grid.Column("BedAssigned", "Bed Assigned", canSort: false, style: "col8"),
+                                            grid.Column("BedServiceCode", "Bed ServiceCode", canSort: false, style: "col6"),
+                                            grid.Column("ALOS", "Actual Length of Stay", canSort: false, style: "col6"),
+                                            grid.Column("ELOS", "Expected Length of Stay", canSort: false, style: "col11", format: @<text>
+                                                <span>@item.ELOS</span>
+                                            </text>),
+                                            grid.Column(header: "Primary Diagnosis", canSort: true, style: "colPrimaryDiagnosis", format: @<text>
+
+                                        <span>@item.PrimaryDiagnosis</span>
+
+                                            </text>),
+                                            grid.Column(header: "Action", style: "col9", format: @<text>
+                                        <div class="iconsAction">
+                                            @if (Model.DiagnosisViewAccessible)
+                                            {
+                                                if (item.IsDRGExist)
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Diagnosis Done">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_green.png")" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Primary Diagnosis / DRG not done.">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_red.png")" />
+                                                    </a>
+                                                }
+                                            }
+                                            @if (item.LabResultStatus != null)
+                                            {
+                                                if (item.LabResultStatus == "Good")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                        <img src="~/images/labs.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "Caution")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Caution Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsyellow.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "BAD")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="BAD Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsred.png" />
+                                                    </a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                    <img src="~/images/labs.png" />
+                                                </a>
+                                            }
+                                            @if (item.MedicationStatus != null && item.MedicationStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medications Orders Done" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacygreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medications Orders Pending" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacyred.png" />
+                                                </a>
+                                            }
+                                            @if (item.VitalStatus != null && item.VitalStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Good Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitalsgreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Bad Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitals.png" />
+                                                </a>
+                                            }
+                                            @if (item.NurseTaskStatus != null && item.NurseTaskStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title="No Nurse Tasks Pending" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasks.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title="Pending Nurse Tasks" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasksred.png" />
+                                                </a>
+                                            }
+                                        </div>
+                                            </text>)))
+                                </div>
+                            }
+                            else
+                            {
+                                <h2>No Record found</h2>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOutPatientActiveEncounterList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Out Patient List:
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOutPatientActiveEncounterList" class="panel-collapse collapse in">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                            @* Out Patient Encounters *@
+                            @if (Model.ActiveOutPatientEncounterList != null)
+                            {
+                                if (Model.ActiveOutPatientEncounterList.Any())
+                                {
+                                    var grid = new WebGrid(Model.ActiveOutPatientEncounterList, ajaxUpdateContainerId: "gridContent", canPage: false);
+                                    @grid.GetHtml(htmlAttributes: new { id = "ActiveOutPatientEncounterGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                          grid.Column(header: "Is VIP", canSort: true, style: "col1", format: @<text>
+                                            @if (!string.IsNullOrEmpty(item.PatientIsVIP))
+                                            {
+                                                <span style="float: left;">
+                                                    <img style="height: 20px; width: 20px" src="@Url.Content("~/images/vip2.png")" />
+                                                </span>
+                                            } </text>),
+                                            grid.Column("PersonFirstName", "First Name", canSort: true, style: "col2"),
+                                            grid.Column("PersonLastName", "Last Name", canSort: true, style: "col3"),
+                                            grid.Column("PersonBirthDate", "Birth Date", canSort: true, style: "col4", format: @<text>@if (item.PersonBirthDate != null)
+                                            {
+                                                @item.PersonBirthDate.ToString("dd/MM/yyyy")
+                                            }</text>),
+                                            grid.Column("EncounterNumber", "Encounter Number", canSort: true, style: "col5"),
+                                            grid.Column("EncounterStartTime", "Encounter Start", canSort: true, style: "col7", format: @<text>@item.EncounterStartTime.ToString("dd/MM/yyyy HH:mm:ss")</text>),
+                                            grid.Column(header: "Action", style: "col8", format: @<text>
+                                        <div class="iconsAction">
+                                            @if (Model.DiagnosisViewAccessible)
+                                            {
+                                                if (item.DiagnosisStatus == "False")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Diagnosis Done">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_green.png")" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Primary Diagnosis / DRG not done.">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_red.png")" />
+                                                    </a>
+                                                }
+                                            }
+                                            @if (item.LabResultStatus != null)
+                                            {
+                                                if (item.LabResultStatus == "Good")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                        <img src="~/images/labs.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "Caution")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Caution Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsyellow.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "BAD")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="BAD Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsred.png" />
+                                                    </a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                    <img src="~/images/labs.png" />
+                                                </a>
+                                            }
+                                            @if (item.MedicationStatus != null && item.MedicationStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medication Orders Done" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacygreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medication Orders Pending" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacyred.png" />
+                                                </a>
+                                            }
+                                            @if (item.VitalStatus != null && item.VitalStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Good Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitalsgreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Bad Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitals.png" />
+                                                </a>
+                                            }
+                                            @if (item.NurseTaskStatus != null && item.NurseTaskStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title="No Nurse Tasks Pending" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasks.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title="Pending Nurse Tasks" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasksred.png" />
+                                                </a>
+                                            }
+                                        </div>
+                                            </text>)
+                                                                                                                                                                                                                                                                                                                            ))
+                                }
+                                else
+                                {
+                                    <h2>No Record found</h2>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEmerPatientEncounterList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Emergency List:
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEmerPatientEncounterList" class="panel-collapse collapse in">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                            @* ER Patient Encounters *@
+                            @if (Model.ActiveEmergencyEncounterList != null)
+                            {
+                                if (Model.ActiveEmergencyEncounterList.Any())
+                                {
+                                    var grid = new WebGrid(Model.ActiveEmergencyEncounterList, ajaxUpdateContainerId: "gridContent", canPage: false);
+                                    @grid.GetHtml(htmlAttributes: new { id = "ActiveOutPatientEncounterGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                            grid.Column(header: "Is VIP", canSort: true, style: "col1", format: @<text>
+                                            @if (!string.IsNullOrEmpty(item.PatientIsVIP))
+                                            {
+                                                <span style="float: left;">
+                                                    <img style="height: 20px; width: 20px" src="@Url.Content("~/images/vip2.png")" />
+                                                </span>
+                                            } </text>),
+                                            grid.Column("PersonFirstName", "First Name", canSort: true, style: "col2"),
+                                            grid.Column("PersonLastName", "Last Name", canSort: true, style: "col3"),
+                                            grid.Column("PersonBirthDate", "Birth Date", canSort: true, style: "col4", format: @<text>@if (item.PersonBirthDate != null)
+                                            {
+                                                @item.PersonBirthDate.ToString("dd/MM/yyyy")
+                                            }</text>),
+                                            grid.Column("EncounterNumber", "Encounter Number", canSort: true, style: "col5"),
+                                            grid.Column("EncounterStartTime", "Encounter Start", canSort: true, style: "col7", format: @<text>@item.EncounterStartTime.ToString("dd/MM/yyyy HH:mm:ss")</text>),
+                                            grid.Column(header: "Action", style: "col8", format: @<text>
+                                        <div class="iconsAction">
+                                            @if (Model.DiagnosisViewAccessible)
+                                            {
+                                                if (item.DiagnosisStatus == "False")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Diagnosis Done">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_green.png")" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 12 })" title="Primary Diagnosis / DRG not done.">
+                                                        <img src="@Url.Content("~/images/diagnose-icon_red.png")" />
+                                                    </a>
+                                                }
+                                            }
+                                            @if (item.LabResultStatus != null)
+                                            {
+                                                if (item.LabResultStatus == "Good")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                        <img src="~/images/labs.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "Caution")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Caution Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsyellow.png" />
+                                                    </a>
+                                                }
+                                                else if (item.LabResultStatus == "BAD")
+                                                {
+                                                    <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="BAD Lab Results" id="labsLink1">
+                                                        <img src="~/images/labsred.png" />
+                                                    </a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 6 })" title="Good Lab Results" id="labsLink1">
+                                                    <img src="~/images/labs.png" />
+                                                </a>
+                                            }
+                                            @if (item.MedicationStatus != null && item.MedicationStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medications Orders Done" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacygreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 9 })" title="Medications Orders Pending" id="PharmacyLink1">
+                                                    <img src="~/images/pharmacyred.png" />
+                                                </a>
+                                            }
+                                            @if (item.VitalStatus != null && item.VitalStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Good Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitalsgreen.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 5 })" title="Bad Vitals" id="VitalsLink1">
+                                                    <img src="~/images/vitals.png" />
+                                                </a>
+                                            }
+                                            @if (item.NurseTaskStatus != null && item.NurseTaskStatus != "True")
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title=" no nurse tasks pending" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasks.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PatientSummary", "Summary", new { pId = item.PatientID, sTab = 11 })" title="pending nurse tasks" id="NurseTasksLink1">
+                                                    <img src="~/images/nurse_tasksred.png" />
+                                                </a>
+                                            }
+                                        </div>
+                                            </text>)))
+                                }
+                                else
+                                {
+                                    <h2>No Record found</h2>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <script src="~/Scripts/ActiveEncounter/ActiveEncounter.js"></script>
+</div>

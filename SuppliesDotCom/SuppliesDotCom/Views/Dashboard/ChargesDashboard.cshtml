@@ -1,0 +1,146 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.ChargesDashboardView
+@{
+    ViewBag.Title = "Charges Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string style = "display:block;";
+}
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>&nbsp; Selection
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseReporting" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form" style="min-height: 90px;">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Corporate:</label>
+                                <select id="ddlCorporate"></select>
+                                <input type="hidden" id="hdCorporateId" value="@Helpers.GetSysAdminCorporateID()" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Facility:</label>
+                                <select id="ddlFacilityFilter"></select>
+                                <input type="hidden" id="hdCurrentFacilityId" value="@Helpers.GetDefaultFacilityId()" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Year:</label>
+                                <select id="ddlYear"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSTATISTICS">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Charges - Statistics Section
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseSTATISTICS" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color" id="divChargesStats">
+                    @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ChargesStats.cshtml", Model); }
+                </div>
+            </div>
+        </div>
+        <span class="inactive">
+            @Html.ActionLink(" ", "ExportToExcel",
+                new
+                {
+                    dashBoardType = "Charges",
+                },
+                new
+                {
+                    @class = "excelexportIcon",
+                    @title = "Export as Excel",
+                    @id = "btnExportExcel"
+                })
+        </span>
+    </div>
+
+    <div id="divRegProductivityDashboardView">
+        <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts1">
+                <h4 class="panel-title collapseTitle">
+                    <span>
+                        <img src="@Url.Content("~/images/list.png")">
+                    </span>
+                    Charges - Graph Section
+                    <a class="btn btn-default btn-sm pull-right collapse-btn">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseRegistrationProductivityCharts1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form">
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="myDashboardGrossRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="myDashboardGrossRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divAncilliaryRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divAncilliaryRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divOPRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divOPRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divERRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divERRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-4" id="divIPChargesPerPatientDay" style="float: left;">
+                                </div>
+                                <div class="col-sm-4" id="divOPChargesPerEncounter" style="float: left;">
+                                </div>
+                                <div class="col-sm-4" id="divERChargesPerEncounter" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script src="~/Scripts/Dashboard/ChargesDashboardScript.js?@Helpers.CurrentAssemblyTicks"></script>

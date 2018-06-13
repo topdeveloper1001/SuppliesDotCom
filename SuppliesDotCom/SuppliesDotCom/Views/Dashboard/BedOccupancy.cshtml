@@ -1,0 +1,222 @@
+﻿@using System.Web.Optimization
+@using SuppliesDotCom.Common
+
+@model SuppliesDotCom.Models.DashboardView
+@{
+    ViewBag.Title = "BedOccupancy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var style = "display:block;";
+}
+<script type="text/javascript">
+    function DateTimeFilter(control) {
+        $(control).kendoDateTimePicker({
+            format: "MM/dd/yyyy"
+        });
+    }
+</script>
+<div id="divFacility" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>&nbsp; Selection
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseReporting" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form" style="min-height: 90px;">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Corporate:</label>
+                                <select id="ddlCorporate" onchange="BindFacilityDropdownFilterInBedOccupancy($('#ddlCorporate').val())"></select>
+                                <input type="hidden" id="hfCorporateId" value="@Helpers.GetSysAdminCorporateID()" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Facility:</label>
+                                <select id="ddlFacilityFilter"></select>
+                                <input type="hidden" id="hfFacilityId" value="@Helpers.GetDefaultFacilityId()" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>&nbsp;</label>
+                                <input type="submit" id="btnRebindGraphs" class="btn btn-primary edit-btn marginBtn" value="Submit" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts">
+                <h4 class="panel-title collapseTitle">
+                    <span>
+                        <img src="~/images/list.png">
+                    </span>
+                    Graphs
+                    <a class="btn btn-default btn-sm pull-right collapse-btn">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseEncounterCharts" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form">
+                            <div class="table-responsive">
+                                @if (Model.CurrentBedOccupency != null)
+                                {
+                                    <div class="col-xs-12 col-sm-10 col-md-4 col-lg-4 tableBedOccupy">
+                                        <div class="rowTable">
+                                            <div class="col-xs-6 col-sm-6 row">
+                                                <label><strong id="lblTotalBeds">Total Beds (@Model.CurrentBedOccupency.TotalBeds)</strong></label>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6">
+                                                <label><strong>Current</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="rowTable">
+                                            <div class="col-xs-6 col-sm-6 row">
+                                                <label>Beds Occupied</label>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6" id="lblOccupiedBeds">
+                                                @Model.CurrentBedOccupency.OccupiedBeds
+                                            </div>
+                                        </div>
+                                        <div class="rowTable">
+                                            <div class="col-xs-6 col-sm-6 row">
+                                                <label>Beds Available</label>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6" id="lblVacantBeds">
+                                                @Model.CurrentBedOccupency.VacantBeds
+                                            </div>
+                                        </div>
+                                        <div class="rowTable">
+                                            <div class="col-xs-6 col-sm-6 row">
+                                                <label>Occupany %</label>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6" id="lblOccupancyRate">
+                                                @Model.CurrentBedOccupency.OccupiedRate.ToString("P")
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="bedOccupyBorder" id="BedOccupancyChart">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.BedOccupencyList.Any())
+        {
+            <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseBedOccupancy">
+                    <h4 class="panel-title collapseTitle">
+                        <span>
+                            <img src="@Url.Content("~/images/list.png")">
+                        </span>
+                        Occupancy
+                        <a class="btn btn-default btn-sm pull-right collapse-btn">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseBedOccupancy" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="base-color">
+                            <div class="bed-occupancy bedNotification">
+                                <ul class="bed-occupancyUL">
+                                    <li>
+                                        <span class="free-bed"></span>
+                                        <label>Available</label>
+                                    </li>
+                                    <li>
+                                        <span class="expected-bed"></span>
+                                        <label>Occupied</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form bed-occupancy" id="DivBedOccupancyStruc">
+                                @*@foreach (var bedVal in Model.BedOccupencyList.Distinct())
+                                    {
+                                        <h3>@bedVal.ParentFloorName (@bedVal.ParentDepartmentName)</h3>
+                                        <hr />
+                                        <ul class="bed-occupancyUL">
+                                            @foreach (var item in bedVal.Collection)
+                                            {
+                                                <li>
+                                                    @if (item.IsOccupied)
+                                                    {
+                                                        <span class="expected-bed"></span>
+                                                        <label>
+                                                            @item.Bed
+                                                        </label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="free-bed"></span>
+                                                        <label>
+                                                            @item.Bed
+                                                        </label>
+                                                    }
+                                                </li>
+                                            }
+                                        </ul>
+                                    }*@
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_TotalBedsList.cshtml", Model.BedOccupencyList); }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clear"></div>
+        @Scripts.Render("~/bundles/kendo")
+        @Styles.Render("~/Content/kendo/css")
+        @Styles.Render("~/Content/bootstrap/css")
+        <script>
+            $(function () {
+                BedOccupancyPieGraph($("#hfFacilityId").val(), $("#hfCorporateId").val());
+            });
+
+            function BedOccupancyPieGraph(fId, cId) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Dashboard/GetBedOccupancyChartDataCollection',
+                    async: true,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    //data: JSON.stringify({ facilityId: $("#hfFacilityId").val(), corporateId: $("#hfCorporateId").val() }),
+                    data: JSON.stringify({ facilityId: fId, corporateId: cId }),
+                    success: function (data) {
+                        if (data != null) {
+                            var dataArray = new Array();
+                            for (var i = 0; i < data.Data.length; i++) {
+                                dataArray.push({ name: data.Data[i].BedStatus, y: data.Data[i].Beds });
+                            }
+                            ShowOnePieChartWithColors('BedOccupancyChart', dataArray, "Bed Occupancy");
+                        }
+                    },
+                    error: function () {
+                    }
+                });
+            }
+        </script>
+    </div>
+</div>
+<script src="~/Scripts/Dashboard/BedOccupancyScript.js?@DateTime.Now.Ticks"></script>
+
+

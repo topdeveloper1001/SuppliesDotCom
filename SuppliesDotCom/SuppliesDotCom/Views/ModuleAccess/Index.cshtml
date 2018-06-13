@@ -1,0 +1,88 @@
+﻿@using System.Web.Optimization
+@model SuppliesDotCom.Models.ModuleAccessView
+
+@{
+    ViewBag.Title = "Module Assignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ModuleAccess/ModuleAccessScript.js"></script>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Module Assignment
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form" id="ModuleAccessFormDiv">
+                        <div class="col-sm-4">
+                            <div class="rowTable">
+                                <label><span class="mandatoryStar"></span>Select Corporate:</label>
+                                <select id="ddlCorporate" name="ddlCorporate" class="validate[required]" onchange="BindFacilityByCoporate();"></select>
+                                <input type="hidden" value="0" id="hdCorporateID" />
+                                @*@Html.HiddenFor(m => m.CorporateID, new { @id = "hdCorporateID" })*@
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="rowTable">
+                                <label>Select Facility:</label>
+                                <select id="ddlFacility" name="ddlFacility" onchange="GetParentModuleAccesByCorporateIdFacilityId();"></select>
+                                <input type="hidden" value="0" id="hdFacilityID" />
+                            </div>
+                        </div>
+                    </div>
+                    @*</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default collapsecss ourcollapse bordertable">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <h4 class="panel-title collapseTitle">
+                                        <span><img src="../images/list.png" /></span>&nbsp;Module List
+                                        <a class="btn btn-default btn-sm pull-right collapse-btn">
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse in tableImg">
+                                    <div class="panel-body">
+                                        <div class="base-color" id="ModuleAccessListDiv">
+                                            <div class="panel panel-primary">*@
+                    <div>
+                        <div class="col-sm-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Select Modules:
+                            </h1>
+                                    </div>
+                                    <div id="checkBox_ModuleAccess">
+                                        @{Html.RenderPartial("~/Views/ModuleAccess/UserControls/_ModuleAccessTabView.cshtml", Model.TabList);}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="button-block">
+                                        <input type="submit" class="blue-btn btn btn-primary edit-btn marginrightBtn" onclick="return SaveModuleAccess();" value="Save" />
+                                        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginrightBtn" type="button" onclick="ClearModuleAccessAll();">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

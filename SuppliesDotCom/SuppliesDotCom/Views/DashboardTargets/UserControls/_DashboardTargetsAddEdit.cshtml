@@ -1,0 +1,82 @@
+﻿@using SuppliesDotCom.Model
+@model DashboardTargets
+
+<style>
+    .btn-group {
+        margin-left: 5px;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+
+@{
+    var btnSaveText = "Save";
+    if (Model != null && Model.TargetId != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<div class="form" id="DashboardTargetsFormDiv">
+    @Html.HiddenFor(m => m.TargetId, new { @id = "hdTargetId" })
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Corporate:</label>
+            <select id="ddlCorporate" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility:</label>
+            <select id="ddlFacility" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Role:</label>
+            <select id="ddlRoles" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Target:</label>
+            @Html.TextBoxFor(m => m.Target, new { @maxlength = "8", @id = "txtTarget", @class = "validate[required,custom[integer]]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Target Description:</label>
+            @Html.TextAreaFor(m => m.TargetDescription, new { @maxlength = "60", @id = "txtTargetDescription", @class = "validate[required]" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Unit Of Measure:</label>
+            <select id="ddlUnitOfMeasure"></select>
+            @*@Html.TextBoxFor(m => m.UnitOfMeasure, new { @maxlength = "8", @id = "txtUnitOfMeasure", @class = "validate[optional[integer]]" })*@
+        </div>
+        <div class="rowTable">
+            <label>Timing Increment:</label>
+            <select id="ddlTimingIncrement"></select>
+            @*@Html.TextBoxFor(m => m.TimingIncrement, new { @maxlength = "8", @id = "txtTimingIncrement", @class = "validate[optional[integer]]" })*@
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>IsActive:</label>
+            @* ReSharper disable once PossibleNullReferenceException *@
+            @{
+                var isActive = Model.IsActive != null && (bool)Model.IsActive;
+            }
+            @Html.CheckBoxFor(m => isActive, new { @maxlength = "10", @id = "chkIsActive" })
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <div style="float: left;">
+            <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick="return SaveDashboardTargets();" />
+            <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearDashboardTargetsForm();">Cancel</button>
+        </div>
+    </div>
+</div>

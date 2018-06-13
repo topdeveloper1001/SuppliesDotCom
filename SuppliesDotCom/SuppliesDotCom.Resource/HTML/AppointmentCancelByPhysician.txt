@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Your Appoinment Status</title>
+<style>
+body{font-family:Arial; font-size:12px;}
+.examination {
+	border-collapse:collapse;
+	border:1px solid #fff;
+}
+.examination td {
+	border:1px solid #fff;
+	padding:6px;
+}
+.btn{border:1px solid #236798; 
+background:#236798; 
+border-radius:3px; 
+margin-right:10px; 
+color:#fff; 
+text-decoration:none; 
+float:left; 
+font-size:12px;
+padding:5px; 
+width:50px; 
+height:25px; 
+line-hight:25px;
+ text-align:center; 
+ font-weight:bold; 
+ font-family:Arial; 
+ background: -webkit-linear-gradient(#317CB3, #236798 ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#317CB3, #236798 ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#317CB3, #236798 ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#317CB3, #236798 ); /* Standard syntax */}
+</style>
+</head>
+
+<body>
+<table style="border:1px solid #eee; border-top:5px solid #339; font-family:Arial, Helvetica, sans-serif; font-size:12px;" cellspacing="0" cellpadding="0">
+	<tr>
+    	<td style="padding:15px 15px 0;">Hi {patient},</td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px;"></td>
+    </tr>
+    <tr>
+    	<td height="20">This is just to inform you that due to physician unavailability at that time</td>
+    </tr>
+	<tr>
+	  	<td height="20">Your Appointment has been cancel</td>
+	</tr>
+	<tr>
+    	<td height="20">Plaese Scheduled again</td>
+    </tr>
+		<tr>
+		<td><table width="100%" cellpadding="0" cellspacing="0" border="0">
+	</td>
+    </tr>
+	
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px 10px;">  </td>
+    </tr>
+   
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px;">Regards,<br> Omnihealth Care</td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td bgcolor="#eeeeee" align="center" style="padding:10px 0;">
+		<img src="{imagesUrl}/images/logo.png" alt="" width="150"></td>
+    </tr>
+</table>
+</body>
+</html>

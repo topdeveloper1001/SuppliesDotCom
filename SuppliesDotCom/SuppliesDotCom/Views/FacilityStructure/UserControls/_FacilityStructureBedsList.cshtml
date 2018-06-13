@@ -1,0 +1,55 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model IEnumerable<FacilityStructureCustomModel>
+<div id="FacilityStructureListDiv" class="table-responsive">
+    @if (Model != null)
+    {
+        var grid = new WebGrid(Model, ajaxUpdateContainerId: "FacilityStructureGridContent22", canPage: false);
+        <div id="FacilityStructureGridContent22">
+            @grid.GetHtml(htmlAttributes: new { id = "FacilityStructureGridDiv" }, tableStyle: "table-grid table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter",
+                rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                    grid.Column("FacilityName", "Facility Name"),
+                     //grid.Column("FacilityStrucutureTypeName", "Type"),
+                       grid.Column("GlobalCodeIdValue", "Type"),
+                     
+                     grid.Column("FacilityStructureName", "Name"),
+                     grid.Column("BedType", "Bed Type"),
+                    grid.Column("Description", "Description"),
+                    grid.Column("ParentIdValue", "Parent Room", canSort: true, style: "col5"),
+            //grid.Column("ParentIdValue", "Parent Department", style: "col5"),
+            //grid.Column("ParentIdValue", "Parent Floor", canSort: true, style: "col5"),
+                    grid.Column("SortOrder", "Sort Order", canSort: true, style: "colAlignCenter"),
+                    grid.Column("CanOverRideValue", "Can - Override", canSort: true, style: "colAlignCenter"),
+                    grid.Column("BedCharge", "Default Bed Charge", canSort: true, style: "col7"),
+                    grid.Column(header: "Action", style: "col12", format: @<text>
+                        <a href="javascript:void(0);" title="Edit Facility" onclick="EditFacilityStructure('@item.FacilityStructureId') " style="float: left; margin-right: 7px; width: 14px;">
+                            <img src="@Url.Content("~/images/edit.png")" />
+                        </a>
+                                                                               &nbsp;
+                                                                               @*<a href="javascript:void(0);" title="Delete Facility" onclick="DeleteFacilityStructure('@item.FacilityStructureId', '@item.BedId'); " style="float: left; width: 13px;">
+                            <img src="@Url.Content("~/images/delete.png")" />
+                        </a>*@
+            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopupWithTwoId('@item.FacilityStructureId','@item.BedId','Delete Facility','',DeleteFacilityStructure,null); " style="float: left; width: 13px;">
+                <img src="@Url.Content("~/images/delete.png")" />
+            </a>
+                    </text>)))
+            <h6>* Click on any column heading to sort</h6>
+        </div>
+    }
+    else
+    {
+        <h2>No Record found</h2>
+    }
+</div>
+<div class="clear"></div>
+
+<script>
+    //$(function() {
+    //    if ($('#FacilityStructureGridDiv tr').length > 0) {
+    //        $('#FacilityStructureGridDiv').Scrollable();
+    //    }
+    //});
+    $(document).ready(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortFacilityStructureGrid, "#FacilityStructureGridContent22");
+    });
+</script>

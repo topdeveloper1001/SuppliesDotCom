@@ -1,0 +1,277 @@
+/*
+ * jquery sDashboard (2.0)
+ * Copyright 2012, Model N, Inc
+ * Distributed under MIT license.
+ * https://github.com/ModelN/sDashboard
+ */
+
+/*dashboard css*/
+.sDashboard {
+	list-style-type: none;
+	margin: 0;
+	
+	padding-top: 10px;
+	width: 100%;
+	height: auto;
+	/*font-family : Helvetica Neue, Helvetica, Arial, sans-serif;*/
+	font-size : 11px;
+    column-gap: 15px;
+    column-width: 350px;
+    -moz-column-gap: 15px;
+    -moz-column-width: 350px;
+    -webkit-column-gap: 15px;
+    -webkit-column-width: 350px;
+	/*overflow: auto;*/
+}
+
+    .sDashboard li {
+        margin: 3px 0 15px;
+        padding: 1px;
+        display: inline-block;
+       /* min-width: 33%;*/
+        width: 100%;
+        height: auto;
+    }
+
+    
+
+/* Large desktop */
+/*@media (min-width: 1400px) {
+    .sDashboard li { width: 24.3%;}
+}*/
+
+/* Portrait tablet to landscape and desktop */
+/*@media (min-width: 768px) and (max-width: 979px) {
+	.sDashboard li {width: 47.5%;}
+}*/
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+    .sDashboard li {width: 49.4%;}
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+   .sDashboard{padding-left:0;} 
+    .sDashboard li {width: 99.5%;}
+}
+
+/*dashboard widget css*/
+.sDashboardWidget {
+	/*margin: 0 1em 1em 0;*/
+	border: 1px solid #B7CFE5;
+	background-color: #fff;
+    padding: 1px;
+	-webkit-transition: border-color 0.3s;
+	-moz-transition: border-color 0.3s;
+	transition: border-color 0.3s;
+   /* box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2); */
+}
+.sDashboardWidget:hover {
+	border: 1px solid #99b8d4;
+	-webkit-transition: border-color 0.3s;
+	-moz-transition: border-color 0.3s;
+	transition: border-color 0.3s;
+}
+
+/*dashboard widget header css*/
+.sDashboardWidgetHeader {
+	/* margin: 0.3em; */
+	padding: 8px 0.2em 6px 1em;
+	cursor: move;
+	border: 0;
+	/* border-bottom: 1px solid #CBCBCB; */
+	color: #000;
+    background: none repeat scroll 0 0 #E4F0FB;
+	font-weight: bold;
+}
+
+.sDashboardWidget:hover .sDashboardWidgetHeader{
+	background: none repeat scroll 0 0 #dde9f5;
+}
+
+/*dashboard widget content css*/
+.sDashboardWidgetContent {
+
+
+   margin: 0.3em;
+  /*min-height: 240px;*/
+    overflow: auto;
+    padding: 0.4em;
+    width: auto;
+}
+	/*margin: 0.3em;
+	padding: 0.4em;
+	min-height: 180px;
+	overflow-x: auto;
+	overflow-y: auto;
+    min-width:*/
+
+
+.sDashboardWidgetContentMaximized {
+	margin: 0.3em;
+	padding: 0.4em;
+	height: 90%!important;
+}
+
+/*for centering trick see  : http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
+.sDashboardWidgetContainerMaximized {
+	z-index: 9999;
+	position: fixed;
+	width: 800px!important;
+	height: 450px!important;
+	left: 50%;
+	top: 50%;
+	margin-top: -225px;
+	margin-left: -400px;
+}
+
+
+
+/*dashboard table widget css*/
+.sDashboardTableView {
+	width: 100%;
+	height: 60%;
+	overflow: auto;
+}
+
+
+.sDashboardTableView tbody tr:nth-child(odd)		{ background-color:#F5F5F5; }
+.sDashboardTableView tbody tr:nth-child(even)		{ background-color:#FFFFFF; }
+
+.sDashboardTableView tbody tr:nth-child(odd):hover,
+.sDashboardTableView tbody tr:nth-child(even):hover
+{
+	background-color: #FCEFA1;
+	cursor: pointer;
+}
+
+
+.dataTables_length, 
+.dataTables_info{
+	float:left;
+}
+
+.dataTables_filter,
+.dataTables_paginate{
+	float:right;
+}
+
+
+/*dashboard chart view css*/
+.sDashboardChart {
+	/*	width: 200px;
+	 height: 180px;*/
+	width: 100%;
+	height: 95%;
+	/*	cursor: pointer;*/
+}
+
+.sDashboardChartClickable {
+	cursor: pointer;
+}
+.sDashboardChartSelectable {
+	width: 100%;
+	height: 95%;
+	cursor: crosshair;
+}
+
+/*jquery sortable placeholder styles */
+.ui-sortable-placeholder {
+	border: 1px dotted black;
+	visibility: visible !important;
+	height: 225px !important;
+	width: 375px !important;
+}
+.ui-sortable-placeholder * {
+	visibility: hidden;
+}
+
+li.ui-sortable-placeholder {
+	background-color: #FCEFA1;
+}
+
+/*icons*/
+.sDashboard-icon {
+	margin: 0 5px 0 5px;
+	float: right;
+	background: url('icon-sprite.PNG') no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.sDashboard-icon:hover {
+	cursor: pointer;
+}
+
+.sDashboard-icon.sDashboard-circle-plus-icon {
+	background-position: -2px -3px;
+}
+.sDashboard-icon.sDashboard-circle-minus-icon {
+	background-position: -2px -29px;
+}
+.sDashboard-icon.sDashboard-circle-remove-icon {
+	background-position: -2px -55px;
+}
+
+.sDashboard-icon.sDashboard-plus-icon {
+	background-position: -3px -83px;
+}
+.sDashboard-icon.sDashboard-minus-icon {
+	background-position: -2px -109px;
+}
+.sDashboard-icon.sDashboard-remove-icon {
+	background-position: -3px -135px;
+}
+
+
+.sDashboard-icon.sDashboard-trash-icon {
+	background-position: -4px -159px;
+}
+.sDashboard-icon.sDashboard-refresh-icon {
+	background-position: -3px -186px;
+}
+.sDashboard-icon.sDashboard-maximize-icon {
+	background-position: -2px -212px;
+}
+
+.sDashboard-icon.sDashboard-minimize-icon {
+	background-position: -2px -236px;
+}
+
+   .sDashboard-icon.sDashboard-circle-setting-icon
+   {
+      background-position: -3px -238px;
+   }
+
+/*clear fix*/
+
+.sDashboard-clearfix:before, .sDashboard-clearfix:after {
+	content: "";
+	display: table;
+}
+.sDashboard-clearfix:after {
+	clear: both;
+}
+.sDashboard-clearfix {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+/*overlay*/
+
+.sDashboard-overlay {
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	width: 100%;
+	z-index: 9998;/*z-index one less than window maximized css*/
+}
+/*.sDashboard-overlay {
+ width: 100%;
+ height: 100%;
+ background: rgba(0, 0, 0, 0.1);
+ background-size: 100% 100%;
+ position: fixed;
+ }*/

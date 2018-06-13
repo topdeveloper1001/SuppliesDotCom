@@ -1,0 +1,79 @@
+﻿@model SuppliesDotCom.Models.RoleView
+@using MvcCheckBoxList.Model
+<style>
+    .btn-group {
+        margin-top: 15px;
+    }
+    input[type="radio"], input[type="checkbox"] {
+        margin: 0 5px 0 0;
+    }
+</style>
+<div class="panel panel-default collapsecss ourcollapse bordertable">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+        <h4 class="panel-title collapseTitle">
+            <span class="glyphicon glyphicon-align-justify"></span>&nbsp;Screen Permissions
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+        </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form" id="validatePermission">
+                    <div class="col-sm-3">
+                        <div class="rowTable">
+                            <label>Select Role:</label>
+                            @Html.DropDownListFor(m => m.CurrentRole.RoleID, new SelectList(Model.RolesList, "RoleID", "RoleName"), "--Select One--", new { id = "ddlRoles", @class = "validate[required]", @onchange = "return GetPermissionByRoleID(this);" })
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">
+                               @* <input id="CheckAll" type="checkbox" onclick="toggleChecked(this.checked)">Select All*@
+                            </h1>
+                        </div>
+
+                        <div class="panel-body">
+                            <div id="checkBox_Screens_ScreenName">
+                                @if (Model.screenView.AvailableScreens.Count > 0)
+                                {
+                                    <ul class="list-inline">
+                                        @foreach (var item in Model.screenView.AvailableScreens)
+                                        {        
+                                            <li style="margin: 5px; float: left; width: 260px;">
+                                                <input type="checkbox" id="@item.ScreenId" value="@item.ScreenId" name="@item.ScreenTitle" />&nbsp;@item.ScreenTitle</li>        
+                                        }
+                                    </ul>
+
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                         
+                            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return AddPermission();" value="Save" />
+                            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+
+
+
+                            <br />
+                            <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+                            @if (TempData["Message"] != null)
+                            {
+                                <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+                            }
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

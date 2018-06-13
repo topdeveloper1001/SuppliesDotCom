@@ -1,0 +1,61 @@
+﻿@model SuppliesDotCom.Model.DashboardTransactionCounter
+
+<style>
+    .btn-group {
+        margin-bottom: 20px;
+        margin-left: 15px;
+    }
+
+    .clear { clear: both; }
+
+    select { margin-bottom: 10px; }
+</style>
+<div class="form" id="DashboardTransactionCounterFormDiv">
+    @*// BBCOLUMNSHERE*@
+    <input type="hidden" id="hdDashbordCounterId"/>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Statistic Description:</label>
+            <select id="ddlStatisticDescription" class="validate[required] emptyddl"></select>
+            @Html.HiddenFor(m => m.StatisticDescription, new {@id = "hdStatisticDescription"})
+        </div>
+        <div class="rowTable">
+            @if (Model.IsActive == null)
+            {
+                Model.IsActive = true;
+            }
+            <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive.Value, new {@id = "chkActive"})</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Activity Day:</label>
+            @Html.TextBoxFor(m => m.ActivityDay, "{0:MM/dd/yyyy}", new {@maxlength = "10", @id = "dtActivityDay", @class = "dtGeneral emptytxt validate[required]"})
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Activity Total:</label>
+            @Html.TextBoxFor(m => m.ActivityTotal, new {@maxlength = "10", @id = "txtActivityTotal", @class = "emptytxt validate[required]"})
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Department Number:</label>
+            @Html.TextBoxFor(m => m.DepartmentNumber, new {@maxlength = "10", @id = "txtDepartmentNumber", @class = "emptytxt validate[required]"})
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+            
+        @if (Model.CounterId != 0)
+        {
+            <input type="submit" class="btn btn-primary edit-btn marginBtn" value="Update" onclick=" return SaveDashboardTransactionCounter('@Model.CounterId'); " />
+        }
+        else
+        {
+            <input type="submit" onclick=" return SaveDashboardTransactionCounter('0'); " class="btn btn-primary edit-btn marginBtn" value="Save" />
+        }
+        <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick=" return ClearAll(); ">Cancel</button>
+    </div> 
+</div>

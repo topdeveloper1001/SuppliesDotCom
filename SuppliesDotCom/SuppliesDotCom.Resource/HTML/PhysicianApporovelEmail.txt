@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Your Appoinment Status</title>
+<style>
+body{font-family:Arial; font-size:12px;}
+.examination {
+	border-collapse:collapse;
+	border:1px solid #fff;
+}
+.examination td {
+	border:1px solid #fff;
+	padding:6px;
+}
+.btn{border:1px solid #3e8f3e; 
+background:#236798; 
+border-radius:3px; 
+margin-right:10px; 
+color:#000; 
+text-decoration:none; 
+float:left; 
+font-size:12px;
+padding:5px; 
+width:50px; 
+height:25px; 
+line-hight:25px;
+ text-align:center; 
+ font-weight:bold; 
+ font-family:Arial; 
+ background:linear-gradient(to bottom, #5cb85c 0px, #419641 100%);}
+ 
+.btn_cancel{border:1px solid #b92c28; 
+background:#236798; 
+border-radius:3px; 
+margin-right:10px; 
+color:#fff; 
+text-decoration:none; 
+float:left; 
+font-size:12px;
+padding:5px; 
+width:50px; 
+height:25px; 
+line-hight:25px;
+ text-align:center; 
+ font-weight:bold; 
+ font-family:Arial; 
+ background:linear-gradient(to bottom, #d9534f 0px, #c12e2a 100%);}
+</style>
+</head>
+
+<body>
+<table style="border:1px solid #eee; border-top:5px solid #339; font-family:Arial, Helvetica, sans-serif; font-size:12px;" cellspacing="0" cellpadding="0">
+	<tr>
+    	<td style="padding:15px 15px 0;">Hi {physician},</td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px;">You have appointment with <strong>{patient}</strong> at given time.</td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+	<tr>
+	<td><table width="100%" cellpadding="0" cellspacing="0" border="0">
+	{procedures}
+	</table>
+	</td>
+    </tr>
+	<tr>
+	<td><table bgcolor="#e1e1e1" class="examination" width="100%" cellpadding="0" cellspacing="0" border="0">
+                           </tr>
+			  </td>
+			  </table>
+			  </tr>
+	<tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px 10px;">Please confirm your appointment by clicking on the link:</td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px;">
+			<table width="120">
+				<tr>
+					<td bgcolor="#419641" width="60"><a class="btn" href="{confirmurl}">Confirm</a></td>
+					<td bgcolor="#c12e2a" width="60"><a class="btn_cancel" href="{Cancel}">Cancel</a></td>
+				</tr>
+			</table>
+		  </td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td style="padding:0 15px;">Regards,<br> Omnihealth Care</td>
+    </tr>
+    <tr>
+    	<td height="20"></td>
+    </tr>
+    <tr>
+    	<td bgcolor="#eeeeee" align="center" style="padding:10px 0;">
+		<img src="{imagesUrl}/images/logo.png" alt="" width="150"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿@using SuppliesDotCom.Model
+@using SuppliesDotCom.Common
+
+@model GlobalCodes
+
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+<div class="form patientTable" id="SubCategoryDiv">
+    <div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <input type="hidden" value="@Model.GlobalCodeID" id="hfGlobalCodeID" />
+            <input type="hidden" value="@Model.GlobalCodeValue" id="hfGlobalCodeValue" />
+            <input type="hidden" value="@Helpers.GetDefaultFacilityId()" id="hfFacilityId" />
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Name: </label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtOrderTypeSubCategoryName", @maxlength = "50", @class = "validate[required]" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Order Type Category :</label>
+                @Html.HiddenFor(m => m.GlobalCodeCategoryValue, new { @id = "hdOrderTypeCategoryId" })
+                <select id="ddlOrderTypeCategories" class="validate[required]"></select>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable">
+                <label class="control-label">Code-Type: </label>
+                @Html.HiddenFor(m => m.ExternalValue1, new { @id = "hdCodeType" })
+                <select id="ddlCodeType" class="validate[required]"></select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="rowTable">
+                <label class="control-label">Range:</label>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin: 5px 0;">
+                    @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtRangeFrom", @style = "", @maxlength = "6", @class = "validate[optional[integer]]" })
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin: 5px 0;">
+
+                    @Html.TextBoxFor(m => m.ExternalValue3, new { @ID = "txtRangeTo", @style = "", @maxlength = "6", @class = "validate[optional[integer]]" })
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+
+            <div class="rowTable">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        @if (Model.GlobalCodeID != 0)
+        {  <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return CheckDuplicateRecord();" value="Update" />
+        }
+        else
+        {
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return CheckDuplicateRecord();" />
+        }
+        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+    </div>
+</div>
+
+
+

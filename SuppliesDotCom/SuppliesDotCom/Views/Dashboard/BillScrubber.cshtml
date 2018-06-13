@@ -1,0 +1,581 @@
+﻿@using System.Web.Optimization
+@using Kendo.Mvc.UI
+
+
+@model SuppliesDotCom.Models.BillScrubberDashboardView
+@{
+    ViewBag.Title = "Bill Scrubber Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    const string style = "display:block;";
+}
+
+<style>
+        #gauge-container {
+            background: transparent url(@Url.Content("~/Content/dataviz/gauge/gauge-container_250x250.png")) no-repeat 50% 0;
+            width: 250px;
+            height: 250px;
+            text-align: center;
+            margin: auto;
+            padding-top: 27px;
+            float: center;
+        }
+
+        #gauge {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 0;
+            border-color: transparent;
+        }
+
+        #gauge svg {
+            left: 0 !important;
+        }
+    </style>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+<div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSTATISTICS">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Patient Volumes - STATISTICS
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseSTATISTICS" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div>
+                        <div class="table-responsive" style="font-size: smaller !important;">
+                            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimsAcceptancePercentageFirstSubmission); }
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <hr />
+                </div>
+                <div class="form">
+                    <div>
+                        <div class="table-responsive" style="font-size: smaller !important;">
+                            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.NumberofTotalClaimsPaidonRemittance); }
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <hr />
+                </div>
+                <div class="form">
+                    <div>
+                        <div class="table-responsive" style="font-size: smaller !important;">
+                            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.NumberofTotalClaimsDeniedonRemittance); }
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <hr />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="divRegProductivityDashboardView">
+        <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts1">
+                <h4 class="panel-title collapseTitle">
+                    <span>
+                        <img src="@Url.Content("~/images/list.png")">
+                    </span>
+                    Claims - Graph Section
+                    <a class="btn btn-default btn-sm pull-right collapse-btn">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseRegistrationProductivityCharts1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form">
+                            <div class="col-sm-12 white-bg">
+                                @*<div class="box col-sm-12">
+                                    <h4>Advanced Export options</h4>
+                                    <div class="box-col">
+                                        <button class='export-pdf k-button'>Export as PDF</button>
+                                    </div>
+                                    <div class="box-col">
+                                        <button class='export-img k-button'>Export as Image</button>
+                                    </div>
+                                    <div class="box-col">
+                                        <button class='export-svg k-button'>Export as SVG</button>
+                                    </div>
+                                </div>*@
+                                <div class="col-sm-12" id="gauge-container">
+                                    @* @(Html.Kendo().Tooltip()
+                                    .For("#gauge-container")
+                                    .Filter("a")
+                                    .Position(TooltipPosition.Top)
+                                    .Width(120)
+                                          )*@
+
+                                    @(Html.Kendo().RadialGauge()
+                                          .Name("gauge")
+                                          .Pointer(pointer => pointer.Value(Model.ClaimsValue))
+                                          .Scale(scale => scale
+                                              .MinorUnit(5)
+                                              .StartAngle(-60)
+                                              .EndAngle(240)
+                                              .Max(100)
+                                              .Labels(labels => labels
+                                                  .Position(GaugeRadialScaleLabelsPosition.Outside)
+                                              )
+                                              .Ranges(ranges =>
+                                              {
+                                                  ranges.Add().From(0).To(80).Color("#FF0000");
+                                                  ranges.Add().From(81).To(90).Color("#F7FE2E");
+                                                  ranges.Add().From(90).To(100).Color("#40FF00");
+                                              })
+                                          ))
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <script>
+            $(function () {
+                RowColumnColorGrid("NumberofTotalClaimsPaidonRemittancegrid");
+                RowColumnColorGrid("NumberofTotalClaimsDeniedonRemittancegrid");
+                RowColumnColorGrid("ClaimsAcceptancePercentageFirstSubmissiongrid");
+                //ClaimsAcceptancePercentageFirstSubmissionChart();
+            });
+
+            function ClaimsAcceptancePercentageFirstSubmissionChart() {
+                $.ajax({
+                    type: "POST",
+                    url: '/Dashboard/GetChargesDashboardData',
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ budgetFor: '38' }),
+                    success: function (data) {
+                        if (data != null) {
+                            ShowClaimsAcceptancePercentageFirstSubmissionDashboard(data);
+                        }
+                    },
+                    error: function (msg) {
+                    }
+                });
+            }
+
+            function ShowClaimsAcceptancePercentageFirstSubmissionDashboard(dashboardData) {
+                var roomChargesDataYearly = new Array();
+                var monthsArray = new Array();
+                var d = new Date();
+                for (var j = 0; j < 1; j++) {
+                    monthsArray = new Array();
+                    var currentMonth = d.getMonth() + 1;
+                    switch (currentMonth) {
+                        case 1:
+                            monthsArray.push(dashboardData[j].M1);
+                            break;
+                        case 2:
+                            monthsArray.push(dashboardData[j].M2);
+                            break;
+                        case 3:
+                            monthsArray.push(dashboardData[j].M3);
+                            break;
+                        case 4:
+                            monthsArray.push(dashboardData[j].M4);
+                            break;
+                        case 5:
+                            monthsArray.push(dashboardData[j].M5);
+                            break;
+                        case 6:
+                            monthsArray.push(dashboardData[j].M6);
+                            break;
+                        case 7:
+                            monthsArray.push(dashboardData[j].M7);
+                            break;
+                        case 8:
+                            monthsArray.push(dashboardData[j].M8);
+                            break;
+                        case 9:
+                            monthsArray.push(dashboardData[j].M9);
+                            break;
+                        case 10:
+                            monthsArray.push(dashboardData[j].M10);
+                            break;
+                        case 11:
+                            monthsArray.push(dashboardData[j].M11);
+                            break;
+                        case 12:
+                            monthsArray.push(dashboardData[j].M12);
+                            break;
+                        default:
+                    }
+                    roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+                }
+                ShowSolidGaugeChart('myDashboardADCYearly', roomChargesDataYearly, '');
+            }
+
+        </script>
+    </div>
+    <div class="clear"></div>
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts2">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Acceptance/Denial Rate First Submission
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseEncounterCharts2" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div id="DenialRateFirstSubmission">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts1">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Denials by Denial Code
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseEncounterCharts1" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div id="DenailsByDenailCode">
+                            </div>
+                        </div>
+                        @*<div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div id="DenailsByDenailCode1">
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Denials Chart 
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseEncounterCharts" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div class="bedOccupyBorder" id="DenialsGraph">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    $(function () {
+        //BindAllChartsInBillScrubberView();
+        //BindChartDenialsByDenialCodeView();
+        //BindDenialsByFirstSubmission();
+        BindBillScrubberCharts();
+    });
+    //$(document).bind("kendo:skinChange", BindAllChartsInBillScrubberView);
+</script>
+
+<script>
+    function BindBillScrubberCharts() {
+
+        //Acceptance / Denial Rate First Submission
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetDenialsForFirstSubmmision3D',
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: null,
+            success: function (data) {
+                if (data != null) {
+                    //var categories = new Array();
+                    var dataArray = new Array();
+                    var chartData = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        //categories.push(data[i].Descrip);
+                        dataArray.push({ name: data[i].Descrip, y: data[i].Value });
+                    }
+                    //chartData.push({ 'name': 'Value', 'data': dataArray });
+                    ShowOnePieChart('DenialRateFirstSubmission', dataArray, "Acceptance / Denial Rate First Submission");
+                }
+            },
+            error: function (msg) {
+            }
+        });
+
+
+        //Denials By DenialCode View
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetDenialsCodedByPhysicians3D',
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: null,
+            success: function (data) {
+                if (data != null) {
+                    var dataArray = new Array();
+                    var categories = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        categories.push(data[i].Physician);
+                        dataArray.push(data[i].DenialsCoded);
+                    }
+                    ShowOneBarChart('DenialsGraph', 'Physicians', dataArray, "column", "Denials by Physicians", "Top 5 Physicians", categories);
+                }
+            },
+            error: function (msg) {
+            }
+        });
+
+        //Total Outpatient Visits Year wise
+        $.post("/Dashboard/GetDenialsbyDenialCode3D", "displayType=3", function (data) {
+            if (data != null) {
+                var dataArray = new Array();
+
+                for (var i = 0; i < data.length; i++) {
+                    dataArray.push({ name: data[i].PayXADenialCode, y: data[i].DenialCount });
+                }
+                ShowOnePieChart('DenailsByDenailCode', dataArray, "Denials by Denial Code");
+            }
+        });
+    }
+</script>
+<script>
+    $(".export-pdf").click(function () {
+        var gauge = $("#gauge").getKendoRadialGauge();
+        gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chart.pdf",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            });
+        });
+    });
+
+    $(".export-img").click(function () {
+        var gauge = $("#gauge").getKendoRadialGauge();
+        gauge.exportImage().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chart.png",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            });
+        });
+    });
+
+    $(".export-svg").click(function () {
+        var gauge = $("#gauge").getKendoRadialGauge();
+        gauge.exportSVG().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chart.svg",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            });
+        });
+    });
+</script>
+@*<script>
+    function BindDenialsByFirstSubmission() {
+        var dataSource1 = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetDenialsForFirstSubmmision", "Dashboard")',
+                    dataType: "json",
+                    data: {
+                        displayType: 3
+                    }
+                }
+            },
+            schema: {
+                data: "Data",
+            },
+        });
+
+        $("#DenialRateFirstSubmission").kendoChart({
+            dataSource: dataSource1,
+            title: {
+                text: "Acceptance/Denial Rate First Submission",
+                Value: "#= dataItem.Total #"
+            },
+            legend: {
+                visible: true,
+                position: "Right"
+            },
+            seriesDefaults: {
+                type: "pie",
+                labels: {
+                    visible: true,
+                    background: "transparent",
+                    position: "outsideEnd",
+                    template: "#= dataItem.Descrip # - #= dataItem.Value # \n #= kendo.format('{0:P}', percentage) #"
+                },
+                minorGridLines: {
+                    visible: true
+                }
+            },
+            //theme: "blueOpal",
+            series: [
+                {
+                    field: "Value",
+                    categoryField: "Descrip",
+                    padding: 2
+                }
+            ],
+            tooltip: {
+                visible: true,
+                template: "#= dataItem.Descrip # - #= dataItem.Value #"
+            }
+        });
+    };
+
+    function BindChartDenialsByDenialCodeView() {
+        var dataSource1 = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetDenialsbyDenialCode", "Dashboard")',
+                    dataType: "json",
+                    data: {
+                        displayType: 3
+                    }
+                }
+            },
+            schema: {
+                data: "Data",
+            },
+        });
+
+            $("#DenailsByDenailCode").kendoChart({
+                dataSource: dataSource1,
+                title: {
+                    text: "Denials by Denial Code",
+                    Value: "#= dataItem.PayXADenialCode #"
+                },
+                legend: {
+                    visible: true,
+                    position: "Right"
+                },
+                seriesDefaults: {
+                    type: "pie",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        position: "outsideEnd",
+                        template: "#= dataItem.PayXADenialCode # - #= dataItem.DenialCount # \n #= kendo.format('{0:P}', percentage) #"
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                series: [{
+                    field: "DenialCount",
+                    categoryField: "PayXADenialCode",
+                    padding: 2
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= dataItem.PayXADenialCode # - #= dataItem.DenialCount #"
+                }
+            });
+        };
+
+        function BindAllChartsInBillScrubberView() {
+            CreateTotalOutPatientVisitsYearWise();
+        };
+
+        function CreateTotalOutPatientVisitsYearWise() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: '@Url.Action("GetDenialsCodedByPhysicians", "Dashboard")',
+                        dataType: "json",
+                        data: {
+                            displayType: 0
+                        }
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total"
+                },
+            });
+
+            $("#DenialsGraph").kendoChart({
+                dataSource: dataSource,
+                title: {
+                    text: "Denials by Physicians (Top 5 Physicians)",
+                },
+                legend: {
+                    visible: true,
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "bar",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        position: "outsideEnd",
+                        template: "#= series.name #: #= value #"
+
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                theme: "metro",
+                series: [
+                    {
+                        name: "Denials",
+                        field: "DenialsCoded",
+                        categoryField: "Physician"
+                    }
+                ],
+                tooltip: {
+                    visible: true,
+                    //template: "#= dataItem.Current # - #= dataItem.Previous ) #"
+                }
+            });
+        }
+</script>*@

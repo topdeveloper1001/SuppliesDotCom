@@ -1,0 +1,78 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Model.GlobalCodes
+
+@{
+    const string viewText = "Security Parameters";
+    ViewBag.Title = viewText;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var addViewTitle = string.Format("Add {0}", viewText);
+}
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp; @addViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <form id="form1" name="form1">
+                            @Html.HiddenFor(m => m.GlobalCodeCategoryValue)
+                            @Html.HiddenFor(m => m.GlobalCodeID)
+                            @Html.HiddenFor(m => m.IsDeleted)
+                            @Html.HiddenFor(m => m.FacilityNumber)
+                            @Html.HiddenFor(m => m.GlobalCodeValue)
+                            <div class="form patientTable" id="globalCodeForm">
+                                <div>
+                                    <div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label class="control-label"><span class="mandatoryStar"></span>Facility:</label>
+                                            <select id="ddlFacility" class="validate[required]"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label class="control-label"><span class="mandatoryStar"></span>Auto Sign-Off Minutes:</label>
+                                            @Html.TextBoxFor(m => m.GlobalCodeName, new { @maxlength = "5", @class = "validate[required,custom[integer]]" })
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label class="control-label"><span class="mandatoryStar"></span>Order:</label>
+                                            @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "5", @class = "validate[required,custom[integer]]" })
+                                        </div>
+                                    </div>*@
+                                    <div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive)</label>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="btn-group">
+                                        @{
+                                            var btnSaveText = "Save";
+                                            if (Model != null && Model.GlobalCodeID > 0)
+                                            {
+                                                btnSaveText = "Update";
+                                            }
+                                        }
+                                        <input type="submit" id="btnSave"  class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return SaveSecurityParameters();" value="@btnSaveText" />
+                                        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearGenericForm();">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/GlobalCode/SecurityParameters.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

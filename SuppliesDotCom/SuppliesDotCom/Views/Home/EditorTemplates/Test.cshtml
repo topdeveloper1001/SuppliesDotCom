@@ -1,0 +1,27 @@
+﻿
+<div>
+    <label>Hello</label>
+    @*<button onclick="@Url.Action("UserLogin","Home")" id="btn1">Test 1</button>*@
+    <button onclick="TestClick(this);" id="btn1">Test 1</button>
+    <button onclick="TestClick(this);" id="btn2">Test 2</button>
+</div>
+<script>
+    function TestClick(btn) {
+        if ($(btn).text() != '') {
+            $.ajax({
+                type: "POST",
+                url: '/Home/Save',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ value: $(btn).text() }),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (msg) {
+                    alert(msg);
+                }
+            });
+        }
+    }
+</script>

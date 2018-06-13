@@ -1,0 +1,33 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+
+@model List<BedOccupancyFloorDashboard>
+
+@foreach (var bedVal in Model)
+{
+    <h3>@bedVal.ParentFloorName (@bedVal.ParentDepartmentName)</h3>
+    <hr />
+    <ul class="bed-occupancyUL">
+        @foreach (var item in bedVal.Collection)
+        {
+            <li>
+                @if (item.IsOccupied)
+                {
+                    <span class="expected-bed"></span>
+                    <label>
+                        @item.Bed
+                    </label>
+                }
+                else
+                {
+                    <span class="free-bed"></span>
+                    <label>
+                        @item.Bed
+                    </label>
+                }
+            </li>
+        }
+    </ul>
+}
+
+
+

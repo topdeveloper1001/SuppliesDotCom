@@ -1,0 +1,25 @@
+﻿@using System.Web.Optimization
+@using SuppliesDotCom.Model
+@using Kendo.Mvc.UI
+@model IEnumerable<FacilityStructure>
+
+<style type="text/css">
+    #TreeView .k-group li {
+        float: left;
+        width: 45%;
+    }
+    
+</style>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+@(Html.Kendo().TreeView().Name("treeviewFacilityDepartment").Checkboxes(checkboxes => checkboxes.Name("checkedFiles").CheckChildren(true)).HtmlAttributes(new { }).HighlightPath(true).Items(menu =>
+      {
+          var list = Model;
+          foreach (var item in list)
+          {
+              menu.Add().Text(item.FacilityStructureName).HasChildren(false).Id(item.FacilityStructureId.ToString()).Checked(false).Expanded(false);
+          }
+      })
+      )
+@Html.Kendo().DeferredScripts()

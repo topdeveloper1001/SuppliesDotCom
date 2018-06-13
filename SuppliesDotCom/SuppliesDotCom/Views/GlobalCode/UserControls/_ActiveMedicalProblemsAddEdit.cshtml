@@ -1,0 +1,55 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    @Html.HiddenFor(m => m.GlobalCodeValue, new { @id = "hfGlobalCodeValue" })
+    <div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label">Active Medical Problem:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = "250", @class = "validate[required]" })
+            </div>
+            @*<div class="rowTable">
+                <label class="control-label">Correction Code Number:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeValue, new { @ID = "txtGlobalCodeValue", @maxlength = "10", @class = "validate[optional[onlyNumberSp]]" })
+            </div>*@
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label">Description:</label>
+                @Html.TextBoxFor(m => m.Description, new { @ID = "txtDescription", @maxlength = "20", @class = "validate[required]" })
+            </div>
+            
+        </div>
+<div class="col-sm-4">
+<div class="rowTable">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+            </div>
+</div>
+
+        <div class="clear"></div>
+
+        <div class="btn-group">
+            @{
+                var btnSaveText = "Save";
+                if (Model.GlobalCodeID != 0)
+                {
+                    btnSaveText = "Update";
+                }
+            }
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGlobalCodeNameAlreadyExist();" value="@btnSaveText" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearActiveMedicalProblemForm();">Cancel</button>
+        </div>
+    </div>
+
+
+</div>
+
+

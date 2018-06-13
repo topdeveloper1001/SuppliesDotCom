@@ -1,0 +1,56 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model GlobalCodeView
+
+@{
+    ViewBag.Title = "Facility";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="divFacility" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseAllergyMasterAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Allergy
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseAllergyMasterAddEdit" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_AllergyMasterAddEdit.cshtml", Model.CurrentGlobalCode);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseAllergyMasterListDiv">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>Allergies List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseAllergyMasterListDiv" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color scroller" id="AllergyMasterListDiv">
+                    <div class="table-responsive">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_AllergyMasterListView.cshtml", Model.CodesList);}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<script src="~/Scripts/GlobalCode/AllergyMaster.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

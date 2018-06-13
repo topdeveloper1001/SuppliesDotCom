@@ -1,0 +1,32 @@
+﻿@using SuppliesDotCom.Model
+@model List<SuppliesDotCom.Model.CustomModel.GlobalCodeModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    var grid = new WebGrid(Model, ajaxUpdateContainerId: "LabTestOrderSetGridContent", canPage: false);
+    <div id="LabTestOrderSetGridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "LabTestOrderSetGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                        grid.Column("GlobalCodeCategoryValue", "Order Set", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodeValue", "Code", canSort: true, style: "col2"),
+                                        grid.Column("Description", "Description", canSort: true, style: "col4"),
+                                        grid.Column(header: "Action", style: "col5", format: @<text>
+        <a href="javascript:void(0);" title="Edit" onclick="EditRecordInLabTestCode('@item.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" />
+        </a>
+        @*<a href="javascript:void(0);" title="Delete" onclick="DeleteRecordInLabTestCode('@item.GlobalCodeID');" style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>*@
+                                                                                              
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodeID','Delete Lab Test Order Set','',DeleteRecordInLabTestCode,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>                                                                                      
+        </text>)
+))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+

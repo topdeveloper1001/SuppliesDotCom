@@ -1,0 +1,56 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.ParametersView
+
+@{
+    ViewBag.Title = "Parameters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Parameters
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        
+                        @{Html.RenderPartial("~/Views/Parameters/UserControls/_ParametersAddEdit.cshtml", Model.CurrentParameters);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span><img src="../images/list.png" /></span>&nbsp;Parameters List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="ParametersListDiv">
+
+                    @{Html.RenderPartial("~/Views/Parameters/UserControls/_ParametersList.cshtml", Model.ParametersList);}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+            
+<script src="~/Scripts/Parameters/ParametersScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

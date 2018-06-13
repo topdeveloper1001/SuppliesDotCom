@@ -1,0 +1,330 @@
+﻿@model SuppliesDotCom.Models.BillingDashboardView
+@{
+    ViewBag.Title = "Billing Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string style = "display:block;";
+}
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>&nbsp; Selection
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseReporting" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form" style="min-height: 90px;">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="rowTable">
+                                <label>Select Facility:</label>
+                                <select id="ddlFacility"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSTATISTICS">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Billing - Statistics Section
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseSTATISTICS" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedNumber); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedDollorAmount); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive" id="OPGrossCharges">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedInpatientNumber); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedDollorInpatientAmount); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedOutpatientNumber); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedDollorOutpatientAmount); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedERpatientNumber); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedEROutpatientAmount); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive" >
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedAvgDollorAmount); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedAvgDollorAmountInPatinet); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedAvgDollorAmountOPPatinet); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                        <div>
+                            <div class="table-responsive">
+                                @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ClaimSubmmitedAvgDollorAmountERPatinet); }
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="divRegProductivityDashboardView">
+        <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts1">
+                <h4 class="panel-title collapseTitle">
+                    <span>
+                        <img src="@Url.Content("~/images/list.png")">
+                    </span>
+                    Billing - Graph Section
+                    <a class="btn btn-default btn-sm pull-right collapse-btn">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseRegistrationProductivityCharts1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form">
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="myDashboardGrossRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="myDashboardGrossRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divAncilliaryRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divAncilliaryRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divOPRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divOPRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-6" id="divERRoomChargesMonthly" style="float: left;">
+                                </div>
+                                <div class="col-sm-6" id="divERRoomChargesYearly" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="col-sm-12 white-bg">
+                                <div class="col-sm-4" id="divIPChargesPerPatientDay" style="float: left;">
+                                </div>
+                                <div class="col-sm-4" id="divOPChargesPerEncounter" style="float: left;">
+                                </div>
+                                <div class="col-sm-4" id="divERChargesPerEncounter" style="float: left;">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <script>
+            $(function() {
+                RowColumnColorGrid("TotalClaimSubmittedgrid");
+                RowColumnColorGrid("TotalClaimSubmittedDollargrid");
+                RowColumnColorGrid("TotalClaimSubmittedIPgrid");
+                RowColumnColorGrid("TotalClaimSubmittedIPDollargrid");
+                RowColumnColorGrid("TotalClaimSubmittedOPgrid");
+                RowColumnColorGrid("TotalClaimSubmittedOPDollargrid");
+                RowColumnColorGrid("TotalClaimSubmittedERgrid");
+                RowColumnColorGrid("TotalClaimSubmittedERDollargrid");
+                RowColumnColorGrid("TotalClaimSubmittedAvggrid");
+                RowColumnColorGrid("TotalClaimSubmittedAvgIPgrid");
+                RowColumnColorGrid("TotalClaimSubmittedAvgOPgrid");
+                RowColumnColorGrid("TotalClaimSubmittedAvgERgrid");
+
+                TotalPatinetClaimChart();
+                TotalPatinetClaimDollarChart();
+            });
+
+            function TotalPatinetClaimChart() {
+                $.ajax({
+                    type: "POST",
+                    url: '/Dashboard/GetChargesDashboardData',
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ budgetFor: '24' }),
+                    success: function(data) {
+                        if (data != null) {
+                            ShowTotalPatinetClaimChart(data);
+                        }
+                    },
+                    error: function(msg) {
+                    }
+                });
+            }
+
+            function TotalPatinetClaimDollarChart() {
+                $.ajax({
+                    type: "POST",
+                    url: '/Dashboard/GetChargesDashboardData',
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ budgetFor: '25' }),
+                    success: function(data) {
+                        if (data != null) {
+                            ShowTotalPatinetClaimDollarChart(data);
+                        }
+                    },
+                    error: function(msg) {
+                    }
+                });
+            }
+
+            function ShowTotalPatinetClaimChart(dashboardData) {
+                var roomChargesDataMonthly = new Array();
+                var roomChargesDataYearly = new Array();
+                var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var monthsArray = new Array();
+                for (var i = 0; i < 2; i++) {
+                    monthsArray = new Array();
+                    monthsArray.push(dashboardData[i].M1);
+                    monthsArray.push(dashboardData[i].M2);
+                    monthsArray.push(dashboardData[i].M3);
+                    monthsArray.push(dashboardData[i].M4);
+                    monthsArray.push(dashboardData[i].M5);
+                    monthsArray.push(dashboardData[i].M6);
+                    monthsArray.push(dashboardData[i].M7);
+                    monthsArray.push(dashboardData[i].M8);
+                    monthsArray.push(dashboardData[i].M9);
+                    monthsArray.push(dashboardData[i].M10);
+                    monthsArray.push(dashboardData[i].M11);
+                    monthsArray.push(dashboardData[i].M12);
+                    roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+                }
+
+                for (var j = 6; j < 11; j++) {
+                    if (j == 7 || j == 8 || j == 9 || j == 10) {
+                        monthsArray = new Array();
+                        monthsArray.push(dashboardData[j].M1);
+                        roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+                    }
+                }
+                ShowTwoBarsChart('myDashboardGrossRoomChargesMonthly', roomChargesDataMonthly, "column", "Total Patient Claims", "Month wise", categories);
+                ShowFourBarsChartWithLabelsOnBars('myDashboardGrossRoomChargesYearly', roomChargesDataYearly, "column", "Total Patient Claims", "Year To Date", '');
+            }
+
+            function ShowTotalPatinetClaimDollarChart(dashboardData) {
+                var roomChargesDataMonthly = new Array();
+                var roomChargesDataYearly = new Array();
+                var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+                var monthsArray = new Array();
+                for (var i = 0; i < 2; i++) {
+                    monthsArray = new Array();
+                    monthsArray.push(dashboardData[i].M1);
+                    monthsArray.push(dashboardData[i].M2);
+                    monthsArray.push(dashboardData[i].M3);
+                    monthsArray.push(dashboardData[i].M4);
+                    monthsArray.push(dashboardData[i].M5);
+                    monthsArray.push(dashboardData[i].M6);
+                    monthsArray.push(dashboardData[i].M7);
+                    monthsArray.push(dashboardData[i].M8);
+                    monthsArray.push(dashboardData[i].M9);
+                    monthsArray.push(dashboardData[i].M10);
+                    monthsArray.push(dashboardData[i].M11);
+                    monthsArray.push(dashboardData[i].M12);
+                    roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+                }
+
+                for (var j = 6; j < 11; j++) {
+                    if (j == 7 || j == 8 || j == 9 || j == 10) {
+                        monthsArray = new Array();
+                        monthsArray.push(dashboardData[j].M1);
+                        roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+                    }
+                }
+                ShowTwoBarsChart('divAncilliaryRoomChargesMonthly', roomChargesDataMonthly, "column", "Total Dollar Patient Claims", "Month wise", categories);
+                ShowFourBarsChartWithLabelsOnBars('divAncilliaryRoomChargesYearly', roomChargesDataYearly, "column", "Total Dollar Patient Claims", "Year To Date", '');
+            }
+        </script>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        BindFacilities("#ddlFacility","");
+    });
+</script>

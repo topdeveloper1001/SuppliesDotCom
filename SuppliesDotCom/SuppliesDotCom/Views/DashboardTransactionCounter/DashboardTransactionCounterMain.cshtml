@@ -1,0 +1,65 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model DashboardTransactionCounterView
+
+@{
+    ViewBag.Title = "DashboardTransactionCounter View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .home {
+        -webkit-box-shadow: 10px 10px 1px 0px;
+        margin: 4px 31px 62px 41px;
+        border: 6px solid #E6E6FA;
+        box-shadow: 10px 10px 1px 0px;
+        width: 150px;
+        height: 65px;
+        float: left;
+        text-align: center;
+        background-color: #5c7499;
+    }
+</style>
+
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardTransactionCounterAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add Dashboard Transaction Counter
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardTransactionCounterAddEdit" class="panel-collapse collapse">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    <div class="form">                        
+                        @{Html.RenderPartial("~/Views/DashboardTransactionCounter/UserControls/_DashboardTransactionCounterAddEdit.cshtml", Model.CurrentDashboardTransactionCounter);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardTransactionCounterList">
+            <h4 class="panel-title collapseTitle">
+                <span><img src="../images/list.png" /></span> Dashboard Transaction Counter List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardTransactionCounterList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="DashboardTransactionCounterListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardTransactionCounter/UserControls/_DashboardTransactionCounterList.cshtml", Model.DashboardTransactionCounterList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+            
+<script src="~/Scripts/DashboardTransactionCounter/DashboardTransactionCounterScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

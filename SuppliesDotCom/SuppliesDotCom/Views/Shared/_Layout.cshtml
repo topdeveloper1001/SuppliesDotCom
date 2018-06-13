@@ -1,0 +1,618 @@
+﻿@using System
+@using System.Reflection
+@using System.Web.Optimization
+@using SuppliesDotCom.Common
+@using SuppliesDotCom.Common.Common
+@using SuppliesDotCom.Model
+
+@{
+
+    var ts = Helpers.CurrentAssemblyTicks; //Used to prevent JS/CSS caching
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>OmniPresent HIS</title>
+    <link rel="stylesheet" type="text/css" href="~/css/reset.css">
+    <script src="~/Scripts/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="~/css/jquery-ui.css">
+    <script src="~/Scripts/GlobalCode/common.js"></script>
+    <script src="~/Scripts/Common/CommonMessages.en-US.js"></script>
+    <link rel="stylesheet" href="@Url.Content("~/css/jquery.qtip.css")" type="text/css" />
+
+    <script src="~/js/jquery-1.10.2.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/Scripts/json2.js"></script>
+    <script src="~/Scripts/Main.js"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Plugins/ValidationEngine/css/validationEngine.jquery.css")" type="text/css" />
+    <script src="~/Scripts/ClearForm.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <script src="~/Scripts/jquery.maskedinput-1.2.2.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="~/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/css/OmniCustom.css?@DateTime.Now.Ticks">
+    <link rel="stylesheet" href="~/css/font-awesome.css">
+
+    <script src="@Url.Content("~/Plugins/ValidationEngine/js/languages/jquery.validationEngine-en.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Plugins/ValidationEngine/js/jquery.validationEngine.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Scripts/ToastNotification/toastr.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.qtip.js")"></script>
+    <script src="~/Scripts/jLinq-2.2.1.js"></script>
+    <script src="~/Scripts/Common/Common.js?@ts"></script>
+    <link href="@Url.Content("~/css/toastNotification/toastr.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/select2.min.js")"></script>
+    <link href="~/css/defaultTheme.css" rel="stylesheet" />
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+    <script src="~/js/signature_pad.js"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <link href="@Url.Content("~/css/DataTable/jquery.dataTables.min.css")" rel="stylesheet" />
+    <script src="~/Scripts/Common/customDatatable.js?@Helpers.CurrentAssemblyTicks"></script>
+</head>
+<body style="display: grid;grid-template-rows: 1fr auto;">
+    <div class="main-wrap">
+        <div class="header">
+            <div class="logo pull-left">
+                <a href="@Url.Action(ActionResults.Welcome, ControllerNames.home)">
+                    <img src="/images/logo.png" alt="Home">
+                </a>
+            </div>
+
+            <div class="header-right pull-right">
+                @{Html.RenderPartial("~/Views/LoginHeader/UserControls/_loginHeader.cshtml");}
+                <select id="ddlLanguage" name="ddlLanguage" class="validate[required] marginTop5 pull-right">
+                    <option value="1" selected="selected">English </option>
+                    <option value="2">Arabic </option>
+                </select>
+                @{Html.RenderPartial("~/Views/Shared/_FacilityTimer.cshtml");}
+
+                @Html.Hidden("GlobalPatientId")
+                @Html.Hidden("GlobalEncounterId")
+                @Html.Hidden("GlobalFormTypeId")
+                @{
+                    var scheduleAccess = true;
+                    var ehrAccess = true;
+                    var acEncounterAccess = true;
+                    var authAccess = true;
+                    //var isSearchViewAccessible = true;
+                    var isBillHeaderViewAccess = true;
+                    var session = Session[SessionNames.SessionClass.ToString()] as SessionClass;
+                    var userEmailAddress = session != null && !string.IsNullOrEmpty(session.UserEmail) ? session.UserEmail : string.Empty;
+                    var Username = session != null && !string.IsNullOrEmpty(session.UserName) ? session.UserName : string.Empty;
+
+                    if (session != null)
+                    {
+                        ehrAccess = session.IsEhrAccessible;
+                        acEncounterAccess = session.IsActiveEncountersAccessible;
+                        authAccess = session.IsAuthorizationAccessible;
+                        //isSearchViewAccessible = session.IsPatientSearchAccessible;
+                        isBillHeaderViewAccess = session.IsBillHeaderViewAccessible;
+                        scheduleAccess = session.SchedularAccessible;
+                    }
+                }
+                <div class="quick-links pull-right" id="superPowersDiv">
+                    @if (acEncounterAccess)
+                    {
+                        <a href="@Url.Action("ActiveEncounter", "ActiveEncounter")" id="activeEncountersLink">
+                            <img src="~/images/active_encounters.png" title="Active Encounters" />
+                        </a>
+                    }
+
+                    @if (authAccess)
+                    {
+                        <a href="#" id="authorizationLink">
+                            <img src="~/images/Authorization_green.png" title="Authorization" />
+                        </a>
+                    }
+
+                    @if (isBillHeaderViewAccess)
+                    {
+                        <a href="#" id="billHeaderLink">
+                            <img src="~/images/show_bill.png" title="Detail Bill" />
+                        </a>
+                    }
+
+                    @if (ehrAccess)
+                    {
+                        <a href="#" id="labsLink">
+                            <img src="~/images/labs.png" title="Labs" />
+                        </a>
+                        <a href="#" id="radiologyLink">
+                            <img src="~/images/radiology.png" title="Radiology" />
+                        </a>
+                        <a href="#" id="PharmacyLink">
+                            <img src="~/images/pharmacy.png" title="Pharmacy" />
+                        </a>
+                        <a href="#" id="VitalsLink">
+                            <img src="~/images/vitals.png" title="Vitals" />
+                        </a>
+                        <a href="#" id="emrLink">
+                            <img src="~/images/view_EHR.png" title="EMR" />
+                        </a>
+                        <a href="#" id="DiagnosisLink">
+                            <img src="~/images/diagnose-icon.png" title="Diagnosis View" />
+                        </a>
+                        <a href="#" id="NurseTasksLink">
+                            <img src="~/images/nurse_tasks.png" title="Nurse Tasks" />
+                        </a>
+                        <a href="#" id="PhysicianTasksLink">
+                            <img src="~/images/physician_tasks.png" title="Physician Tasks" />
+                        </a>
+                        <a href="#" id="PhysicianEmLink">
+                            <img src="~/images/physician_em.png" title="Physician E & M" />
+                        </a>
+                    }
+
+                    @if (scheduleAccess)
+                    {
+                        <a href="#" id="ScheduleLink">
+                            <img src="~/images/schedule.png" title="Schedule" />
+                        </a>
+                    }
+                </div>
+
+                @*/*
+                    * By: Amit Jain
+                    * On: 17 August, 2015
+                    * Purpose: to be used later.
+                    */*@
+                @*<div class="search-container pull-right"><span><strong>Search</strong></span><input type="text" /><input type="submit" value="Go" class="btn" /></div>*@
+            </div>
+            <!--header-right end-->
+        </div>
+        <!--header end-->
+        <!--nav end-->
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid navbg">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse nospacing" id="bs-example-navbar-collapse-1">
+                    <link rel="stylesheet" href="@Url.Content("~/Content/jqsimplemenu.css")" type="text/css" />
+                    <script src="@Url.Content("~/Scripts/jqsimplemenu.js")"></script>
+                    @RenderPage("~/Views/Shared/_MenuJquery.cshtml")
+                    @*@Scripts.Render("~/bundles/kendo")
+                        @Styles.Render("~/Content/kendo/css")
+                        @Styles.Render("~/Content/bootstrap/css")
+                        @RenderPage("~/Views/Shared/_Menu.cshtml")*@
+
+                    @* Authorization Div Pop up *@
+                    <div id="divhidepopup1Global" class="hidePopUpGlobal" style="display: none;">
+                        <div class="popup-coverbg"></div>
+                        <div class="popup-frame">
+                            <div class="popup-main" style="margin: 50px auto">
+                                <div class="popup-content" style="min-height: 500px;">
+                                    <div class="popup-close" onclick=" $('.hidePopUpGlobal').hide(); ">X</div>
+                                    <div class="minHeight" style="min-height: 500px">
+                                        <div id="globalAuthorizationdiv"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Reset Password Div *@
+                    <div id="divhidepopup1GlobalResetPwd" class="hidePopUpGlobalResetPwd" style="display: none;">
+                        <div class="popup-coverbg"></div>
+                        <div class="popup-frame ">
+                            <div class="popup-main popup_small">
+                                <div class="popup-content">
+                                    <div class="popup-close" onclick=" $.validationEngine.closePrompt('.formError', true); $('.hidePopUpGlobalResetPwd').hide(); ">X</div>
+                                    <h3>Change Password</h3>
+                                    <div id="globaldivResetPwd">
+                                        <div class="form-group">
+                                            <label>Username:</label>
+                                            <label>@Username</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Enter Email:</label>
+                                            <input id="userEmail" maxlength="100" type="text" value="@userEmailAddress" class="form-control validate[custom[email]]" />
+                                        </div>
+                                        <input id="btnSendEmail" class="btn btn-primary btn-sm" type="button" value="Send Email" onclick="SendResetPasswordEmail();" />
+                                        <input type="hidden" id="hfUserEmailAddress" value="@userEmailAddress" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Evaluation and Management (E&M) Form*@
+                    <div id="divEvaluation" style="display: none;">
+                        <div class="popup-coverbg"></div>
+                        <div class="popup-frame">
+                            <div class="popup-main" style="margin: 15px auto">
+                                <div class="popup-content" style="min-height: 500px;">
+                                    <div class="popup-close" onclick="$('#divEvaluation').hide(); $.validationEngine.closePrompt('.formError', true); ">X</div>
+                                    <div>
+                                        <div id="EvaluationDiv"></div>
+                                    </div>
+                                    <input type="button" name="Signature" value="Signature" class="btn btn-sm btn-primary" id="btnSignature" onclick="OpenSignatureInENM();" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="divSignatureInENM" class="signature_popup" style="display: none;">
+                        <div class="popup-coverbg"></div>
+                        <div class="popup-frame">
+                            <div class="popup-main">
+                                <div class="popup-content">
+                                    <div class="popup-close" onclick="$('#divSignatureInENM').hide(); $.validationEngine.closePrompt('.formError', true); ">X</div>
+                                    <div class="signature_popup">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body" id="signature-pad1">
+                                                <div>
+                                                    <canvas data-action="canvas1" style="width: 100%; height: 20%;"></canvas>
+                                                </div>
+                                                <div>
+                                                    <div class="alert alert-info">Sign above</div>
+                                                    <button data-action="clear1" class="btn btn-info">Clear</button>
+                                                    <button data-action="saved" class="btn btn-success">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        @RenderBody()
+
+        <div style="margin: 20px; display: none;" id="LoginWindow">
+        </div>
+        @* Session Popup*@
+        <div class="modal fade" id="divSessionPoup" role="dialog">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog modal-sm warning_popup small_width_popup vertical-align-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                            <h4 class="modal-title" id="h5title">Session</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Session is Over, Please log in again!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" id="btnSessionTimeOut" class="btn btn-sm btn-primary" value="OK" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divConfirmBox" class="warning_popup" style="display: none; cursor: default">
+            @Html.Hidden("hfGlobalConfirmId")
+            @Html.Hidden("hfGlobalConfirmFirstId")
+            @Html.Hidden("hfGlobalConfirmedSecondId")
+            @Html.Hidden("hfGlobalConfirmedThridId")
+            @Html.Hidden("hfGlobalConfirmedFourthId")
+            @Html.Hidden("hfGlobalConfirmedFifthId")
+            @Html.Hidden("hfGlobalConfirmedSixthId")
+            @Html.Hidden("hfGlobalConfirmedSeventhId")
+
+
+            <input type="hidden" id="hidNotesId" />
+            <div class="modal-header">
+                <h5 id="h5Globaltitle" class="modal-title"></h5>
+            </div>
+            <div class="modal-body">
+                <h5 id="h5GlobalMessage">Do you want to delete the selected record? </h5>
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnGlobalConfirm" class="btn btn-sm btn-primary" value="Yes" />
+                <input type="button" id="btnGlobalCancel" class="btn btn-sm btn-default" value="No" />
+            </div>
+        </div>
+
+        <!--white-bg end-->
+    </div>
+    <!--main-wrap end-->
+    <div class="clear"></div>
+    <div class="footer" style="grid-row-start: 2; grid-row-end: 3;">
+        <div class="copyrights">
+            &copy; @DateTime.Now.Year, All rights reserved
+        </div>
+        <input id="hfParentId" type="hidden" value="0" /><!--/hfParentId is used to store parent id  -->
+        <input type="hidden" id="imagePath" />
+    </div>
+    @*@Scripts.Render("~/bundles/HighCharts")*@
+    <script src="~/Scripts/HighCharts/highcharts.js?@ts"></script>
+    <script src="~/Scripts/HighCharts/highcharts-3d.js?@ts"></script>
+    <script src="~/Scripts/HighCharts/exporting.js?@ts"></script>
+    <script src="~/Scripts/Common/HighCharts.js?@ts"></script>
+    @*<script src="~/Scripts/Dashboard/Scripts/Highcharts-3.0.1/js/themes/gray-light.js"></script>
+            <script src="~/Scripts/HighCharts/hightcharts-more.js"></script>
+        <script src="~/Scripts/HighCharts/solid-gauge.js"></script>*@
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+
+            $("#linkResetPwd").attr("onclick", "ShowResetPopupWindowGlobal();");
+
+            function CheckIfEncountersOpens1(patientId, url) {
+                $.post("/Home/CheckIfEncountersOpens", { Id: patientId }, function (data) {
+                    if (data)
+                        alert('There is already opened encounter with this patient');
+                    else
+                        window.location.href = url;
+                });
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '/Home/GetSelectedLanguage',
+                async: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: null,
+                success: function (data) {
+                    $("#ddlLanguage").val(data);
+                },
+                error: function (msg) {
+                }
+            });
+
+            $("#ddlLanguage").change(function () {
+                var selectedLanguage = $("#ddlLanguage").val();
+                if (selectedLanguage != '' || selectedLanguage != '0') {
+                    if (selectedLanguage == "1")
+                        selectedLanguage = "en-US";
+                    else
+                        selectedLanguage = "ar-SA";
+                    $.post("/Home/SetLanguageFronFrontPage", "language=" + selectedLanguage, function (data) {
+                        if (data) {
+                            location.reload(true);
+                        }
+                    });
+                }
+            });
+            $('.edit-link').click(function () {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Home/_Login',
+                    data: "",
+                    dataType: "json",
+                    beforeSend: function () { },
+                    success: function (data) {
+                    },
+                    error: function (msg) {
+                        var result = $(msg.responseText).find('#logindiv');
+                        $("#LoginWindow").html("");
+                        $("#LoginWindow").html(result);
+                    }
+                });
+
+                $("#LoginWindow").dialog({
+                    modal: true,
+                    title: 'Login',
+                    resizable: false,
+                    width: '520px'
+                });
+            });
+            BindLinkUrlsForSuperPowers();
+            $('.menu').jqsimplemenu(500);
+
+            $("#globaldivResetPwd").validationEngine();
+        });
+
+        function ShowAuthorizationPopupWindowGlobal() {
+            var patientId = $("#GlobalPatientId").val();
+            if (patientId != '' && patientId > 0) {
+                $.get("/PatientInfo/GetActiveEncounterId", { PatientID: patientId }, function (data) {
+                    if (data) {
+                        if (data == 0) {
+                            ShowMessage("There is no encounter for current patient.", "Warning", "warning", true);
+                        } else {
+                            $("#globalAuthorizationdiv").empty();
+                            $("#globalAuthorizationdiv").html(data);
+                            $(".hidePopUpGlobal").show();
+                        }
+                    }
+                });
+            }
+        }
+
+        function ShowResetPopupWindowGlobal() {
+            //$("#globaldivResetPwd").empty();
+            //$("#globaldivResetPwd").html(data);
+            $(".popup-coverbg").show();
+            $("#divhidepopup1GlobalResetPwd").show();
+        }
+        function SendResetPasswordEmail() {
+            var isValid = $("#globaldivResetPwd").validationEngine({ returnIsValid: true });
+            if (isValid) {
+                var userEmail = $("#userEmail").val();
+                var loggedInUserEmail = $("#hfUserEmailAddress").val();
+                if (userEmail != "") {
+                    if (userEmail != loggedInUserEmail) {
+                        ShowMessage("Please enter logged in user's email address", "Warning", "warning", true);
+                    }
+                    else {
+                        var jsonData = JSON.stringify({
+                            email: $("#userEmail").val()
+                        });
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: '/Home/SendResetPasswordLink',
+                            data: jsonData,
+                            async: false,
+                            dataType: "json",
+                            success: function (data) {
+                                $("#divhidepopup1GlobalResetPwd").hide();
+                                $(".popup-coverbg").hide();
+                                ShowMessage("A link has been sent to your email with Validation Token Code, to reset your password.", "Success", "success", true);
+                            },
+                            error: function (msg) {
+                            }
+                        });
+                    }
+                } else {
+                    ShowMessage("Please enter email address", "Warning", "warning", true);
+                }
+            }
+        }
+
+        function CheckLastEvent(tabId, parentTabId) {
+            var jsonData = JSON.stringify({
+                TabId: tabId,
+                ParentTabId: parentTabId
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                //url: '/Home/SetTabSession?tabId=' + tabId + '&parentTabId=' + parentTabId,
+                url: '/Home/SetTabSession',
+                data: jsonData,
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    $("#li" + tabId).addClass("page-selected");
+                },
+                error: function (msg) {
+                }
+            });
+        }
+    </script>
+    @*   @Scripts.Render("~/bundles/kendo")
+        @Styles.Render("~/Content/kendo/css")*@
+
+
+
+    @*  Owner:Vinoth
+        On: 18092014
+        Purpose: Add new Scripts / Styles
+    *@
+
+    @* Additions start here *@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    @* Additions end here *@
+    @* Owner: Amit Jain
+        On: 15122014
+        Purpose: Add New Scripts and Styles for Jquery Calender with time
+    *@
+
+    @Scripts.Render("~/bundles/jqCalender")
+    @Styles.Render("~/Content/cssCalender")
+    @*@Scripts.Render("~/bundles/HighCharts")*@
+    @*  @Styles.Render("~/Content/bootstrap/css")*@
+
+    <script src="@Url.Content("~/Scripts/Jquery-DateFormat.js")"></script>
+    <script src="~/Scripts/jquery.fixedheadertable.min.js"></script>
+
+    <div class="loader_event" id="loader_event" style="display: none;">
+        <div class="loader_body">
+            <p id="pLoadingText">Loading...</p>
+            <img src="~/images/ajax-loader-bar.gif" />
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            var wrapper1 = document.getElementById("signature-pad1"),
+                clearButton1 = wrapper1.querySelector("[data-action=clear1]"),
+                savedButton = wrapper1.querySelector("[data-action=saved]"),
+                canvas1 = wrapper1.querySelector("[data-action=canvas1]"),
+                signaturePad1;
+
+            function resizeCanvas() {
+                var ratio = window.devicePixelRatio || 1;
+                //alert(canvas1.width);
+                //alert(canvas1.height);
+                canvas1.width = "405" //canvas.offsetWidth * ratio;
+                canvas1.height = "200" //canvas.offsetHeight * ratio;
+
+                //alert(canvas1.width);
+                //alert(canvas1.height);
+                canvas1.getContext("2d").scale(ratio, ratio);
+            }
+
+            window.onresize = resizeCanvas;
+            resizeCanvas();
+
+            signaturePad1 = new SignaturePad(canvas1);
+
+            clearButton1.addEventListener("click", function (event) {
+                signaturePad1.clear();
+            });
+
+            savedButton.addEventListener("click", function (event) {
+                if (signaturePad1.isEmpty()) {
+                    alert("Please provide signature first.");
+                } else {
+                    SavedImage(signaturePad1.toDataURL());
+                }
+            });
+
+        });
+
+        //var uri = 'api/signatures';
+        function SavedImage(dataURL) {
+            var x = Math.floor((Math.random() * 20000) + 1);
+            dataURL = dataURL.replace('data:image/png;base64,', '');
+            var data = JSON.stringify(
+                {
+                    Value: dataURL,
+                    EnmFileName: "EnmForm" + x,
+                    PatientId: $("#hdPatientId").val(),
+                    EncounterId: $("#hdCurrentEncounterId").val(),
+                    EnmFormText: "EnmForm",
+                    //PageNumber: page
+                });
+
+            $.ajax({
+                type: "POST",
+                url: "/Summary/SaveSignatureInENM",
+                processData: false,
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    $("#divSignatureInENM").hide();
+                    $("#imagesource").attr('src', msg);
+                    $("#imagePath").val(msg);
+                },
+                error: onWebServiceFailed
+            });
+        }
+
+
+        function onWebServiceFailed(result, status, error) {
+            var errormsg = eval("(" + result.responseText + ")");
+            alert(errormsg.Message);
+        }
+
+        $(document).ajaxComplete(function () {
+
+        });
+        $(document).ajaxError(function (e, xhr, settings) {
+            if (xhr.status === 401) {
+                if (location.pathname.toLowerCase().indexOf("account") === -1) {
+                    //location.reload(true);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

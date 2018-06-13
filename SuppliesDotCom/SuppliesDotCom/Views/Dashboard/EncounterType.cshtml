@@ -1,0 +1,237 @@
+﻿@using SuppliesDotCom.Common.Common
+
+@model SuppliesDotCom.Models.DashboardView
+@{
+    ViewBag.Title = "EncounterType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var defaultOutpatientEncountersController = "Index";
+    var style = "display:block;";   
+}
+<script type="text/javascript">
+    function DateTimeFilter(control) {
+        $(control).kendoDateTimePicker({
+            format: "MM/dd/yyyy"
+        });
+    }
+</script>
+<div id="divFacility" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Graphs
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEncounterCharts" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                            <div id="EncounterTypeChart" style="float: left;">
+                            </div>
+                            <div id="EncounterTypeChartYear" style="float: left; padding: 0 2px 0 0; border-left: 1px solid #dddddd;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    
+    <script>
+        $(function () {
+            //createEncounterChart();
+            //createEncounterChartYear();
+            BindEncounterCharts();
+        });
+
+
+        function BindEncounterCharts() {
+            $.post("/Dashboard/GetEncounterTypeChartData", "displayType=M", function (data) {
+                if (data) {
+                    var categories = new Array();
+                    var dataArray = new Array();
+                    var budgetArray = new Array();
+                    var currentArray = new Array();
+                    var previousArray = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        categories.push(data[i].TypeName);
+                        budgetArray.push(data[i].Budget);
+                        currentArray.push(data[i].Current);
+                        previousArray.push(data[i].Previous);
+                    }
+                    dataArray.push({ 'name': 'Budget', 'data': budgetArray });
+                    dataArray.push({ 'name': 'Current', 'data': currentArray });
+                    dataArray.push({ 'name': 'Previous', 'data': previousArray });
+                    ShowThreeBarsChart('EncounterTypeChart', dataArray, "column", "Encounter Type", "Monthly", categories, 'Total Count');
+                }
+            });
+
+            $.post("/Dashboard/GetEncounterTypeChartData", "displayType=Y", function (data) {
+                if (data) {
+                    var categories = new Array();
+                    var dataArray = new Array();
+                    var budgetArray = new Array();
+                    var currentArray = new Array();
+                    var previousArray = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        categories.push(data[i].TypeName);
+                        budgetArray.push(data[i].Budget);
+                        currentArray.push(data[i].Current);
+                        previousArray.push(data[i].Previous);
+                    }
+                    dataArray.push({ 'name': 'Budget', 'data': budgetArray });
+                    dataArray.push({ 'name': 'Current', 'data': currentArray });
+                    dataArray.push({ 'name': 'Previous', 'data': previousArray });
+                    ShowThreeBarsChart('EncounterTypeChartYear', dataArray, "column", "Encounter Type", "Yearly", categories, 'Total Count');
+                }
+            });
+        }
+    </script>
+
+    @*<script>
+        function createEncounterChart() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: '@Url.Action("GetEncounterTypeChart", "Dashboard")',
+                        dataType: "json",
+                        data: {
+                            displayType: "M",
+                            FromDate: null,
+                            ToDate: null,
+                        }
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total"
+                },
+            });
+
+            $("#EncounterTypeChart").kendoChart({
+                dataSource: dataSource,
+                title: {
+                    text: "Encounter Type Month",
+                },
+                legend: {
+                    visible: true,
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "bar",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        position: "outsideEnd",
+                        template: "#= series.name #: #= value #"
+
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                theme: "blueOpal",
+                series: [{
+                    name: "Budget",
+                    field: "Budget",
+                    categoryField: "TypeName",
+                    padding: 2
+                },
+                {
+                    name: "Current",
+                    field: "Current",
+                    categoryField: "TypeName",
+                    padding: 2
+                },
+                {
+                    name: "Previous",
+                    field: "Previous",
+                    categoryField: "TypeName",
+                    padding: 2
+                }],
+                tooltip: {
+                    visible: true,
+                    //template: "#= dataItem.Current # - #= dataItem.Previous ) #"
+                }
+            });
+        }
+
+        function createEncounterChartYear() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: '@Url.Action("GetEncounterTypeChart", "Dashboard")',
+                        dataType: "json",
+                        data: {
+                            displayType: "Y",
+                            FromDate: null,
+                            ToDate: null,
+                        }
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total"
+                },
+            });
+
+            $("#EncounterTypeChartYear").kendoChart({
+                dataSource: dataSource,
+                title: {
+                    text: "Encounter Type Year",
+                },
+                legend: {
+                    visible: true,
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "bar",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        position: "outsideEnd",
+                        template: "#= series.name #: #= value #"
+
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                theme: "blueOpal",
+                series: [
+                    {
+                        name: "Budget",
+                        field: "Budget",
+                        categoryField: "TypeName",
+                        padding: 2
+                    },
+                    {
+                        name: "Current",
+                        field: "Current",
+                        categoryField: "TypeName",
+                        padding: 2
+                    },
+                    {
+                        name: "Previous",
+                        field: "Previous",
+                        categoryField: "TypeName",
+                        padding: 2
+                    },
+                ],
+                tooltip: {
+                    visible: true,
+                    //template: "#= dataItem.Current # - #= dataItem.Previous ) #"
+                }
+            });
+        }
+    </script>*@
+</div>
+

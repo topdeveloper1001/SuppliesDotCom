@@ -1,0 +1,64 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.EquipmentView
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="divEquipment" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Equipment
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                         @{Html.RenderPartial("~/Views/Equipment/UserControls/_EquipmentAddEdit.cshtml", Model.CurrentEquipment);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>Equipment List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color" >
+                    <div class="table-responsive" id="EquipmentGrid">
+                        @{Html.RenderPartial("~/Views/Equipment/UserControls/EquipmentList.cshtml", Model.EquipmentList);}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="inactive">
+                <span class="inactive_fields">
+            View Deleted Equipment
+            <input id="chkShowDeleted" type="checkbox" onchange="ShowDeletedEquipment();" />
+        </span>
+        <span class="inactive_fields">
+            View Disabled Equipment
+            <input id="chkShowInActive" type="checkbox" onchange="ShowInActiveRecordsEquipment('#chkShowInActive');" />
+        </span>
+                </span>
+    </div>
+</div>
+<div class="clear"></div>
+
+<script src="~/Scripts/Equipment/Equipment.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

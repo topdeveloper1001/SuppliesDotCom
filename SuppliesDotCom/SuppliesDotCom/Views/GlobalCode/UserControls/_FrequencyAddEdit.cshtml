@@ -1,0 +1,89 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID)
+    <div>
+        <div class="col-sm-4">
+            @Html.HiddenFor(m => m.GlobalCodeValue)
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Frequency Name:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = "250", @class = "validate[required]" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Number of Times:</label>
+                @Html.TextBoxFor(m => m.ExternalValue6, new { @ID = "txtExternalValue6", @maxlength = "1", @class = "validate[custom[integer]]", @onkeyup = "checkTimeLimit()" })
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Frequency Description:</label>
+                @Html.TextAreaFor(m => m.GlobalCodeName, new { @ID = "txtDescription", @maxlength = "1000", @class = "validate[required]", @rows = "5" })
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4" id="timeOne">
+                <div class="rowTable">
+                    <label class="control-label">Time1:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue1, new { @ID = "txtExternalValue1", @maxlength = "20", @class = "dtGeneralTimeOnly" })
+                </div>
+            </div>
+            <div class="col-sm-4" id="timeTwo">
+                <div class="rowTable">
+                    <label class="control-label">Time2:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtExternalValue2", @maxlength = "20", @class = "dtGeneralTimeOnly" })
+                </div>
+            </div>
+            <div class="col-sm-4" id="timeThree">
+                <div class="rowTable">
+                    <label class="control-label">Time3:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue3, new { @ID = "txtExternalValue3", @maxlength = "20", @class = "dtGeneralTimeOnly" })
+                </div>
+            </div>
+            <div class="col-sm-4" id="timeFour">
+                <div class="rowTable">
+                    <label class="control-label">Time4:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue4, new { @ID = "txtExternalValue4", @maxlength = "20", @class = "dtGeneralTimeOnly" })
+                </div>
+            </div>
+            <div class="col-sm-4" id="timeFive">
+                <div class="rowTable">
+                    <label class="control-label">Time5:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue5, new { @ID = "txtExternalValue5", @maxlength = "20", @class = "dtGeneralTimeOnly" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="rowTable">
+                    <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="clear"></div>
+
+        <div class="btn-group">
+            @if (Model.GlobalCodeID != 0)
+            {
+                <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGlobalCodeNameAlreadyExist();" value="Update" />
+            }
+            else
+            {
+                <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" value="Save" onclick="return CheckIfGlobalCodeNameAlreadyExist();" />
+            }
+
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFrequencyForm();">Cancel</button>
+        </div>
+    </div>
+
+
+</div>

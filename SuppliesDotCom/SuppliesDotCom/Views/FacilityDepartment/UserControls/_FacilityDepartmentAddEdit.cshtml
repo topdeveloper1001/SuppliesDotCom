@@ -1,0 +1,101 @@
+﻿@model SuppliesDotCom.Model.FacilityDepartment
+
+<style>
+    .btn-group {
+        margin-bottom: 20px;
+        margin-left:0;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+
+@{
+    string btnSaveText = "Save";
+    if (Model.Id != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<div class="form" id="FacilityDepartmentFormDiv">
+    <div class="col-sm-3">
+        <div class="rowTable">
+            @Html.HiddenFor(m => m.Id, new { @id = "hdid" })
+            <label><span class="mandatoryStar"></span>Activity Type:</label>
+            @*@Html.TextBoxFor(m => m.ActivityId, new {@maxlength = "10", @id = "txtActivityId"})*@
+            <select id="ddlActivityType" class="validate[required]"></select>
+            @Html.HiddenFor(m => m.ActivityId, new { @id = "hdActivityid" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Activity Name:</label>
+            @Html.TextBoxFor(m => m.ActivityName, new { @maxlength = "50", @id = "txtActivityName", @class = "validate[required]", @disabled="disabled" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Revenue GL Account:</label>
+            <select id="ddlCreditAccount" class="validate[required]"></select>
+            @Html.HiddenFor(m => m.CreditAccount, new { @id = "hdCreditAccount" })
+            @*@Html.TextBoxFor(m => m.CreditAccount, new {@maxlength = "50", @id = "txtCreditAccount", @class = "validate[required]"})*@
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>A/R Master Account:</label>
+            <select id="ddlDebitAccount" class="validate[required]"></select>
+            @Html.HiddenFor(m => m.DebitAccount, new { @id = "hdDebitAccount" })
+            @*@Html.TextBoxFor(m => m.DebitAccount, new {@maxlength = "50", @id = "txtDebitAccount", @class = "validate[required]"})*@
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Contra Revenue Account:</label>
+            @Html.TextBoxFor(m => m.ContraRevenueAccount, new { @maxlength = "50", @id = "txtContraRevenueAccount" })
+        </div>
+        <div class="rowTable">
+            <label>Write Off Account:</label>
+            @Html.TextBoxFor(m => m.WriteOffAccount, new { @maxlength = "50", @id = "txtWriteOffAccount" })
+        </div>
+        @*<div class="rowTable">
+            <label>Cost Center Account:</label>
+            @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "50" })
+        </div>
+        <div class="rowTable">
+            <label>ExternalValue2:</label>
+            @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "50", @id = "txtExternalValue2" })
+        </div>*@
+      
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Cost Center Account:</label>
+            @Html.TextBoxFor(m => m.ExternalValue3, new { @maxlength = "50", @id = "txtExternalValue3" })
+        </div>
+        <div class="rowTable">
+            <label>Is Active:</label>
+            @*@Html.TextBoxFor(m => m.IsActive, new {@maxlength = "10", @id = "txtIsActive"})*@
+            @Html.CheckBox("chkStatus", Model.Id == 0 || Model.IsActive)
+        </div>
+        <div class="rowTable">&nbsp;</div>
+    </div>
+    @*<div class="col-sm-3">
+        <div class="rowTable">
+            <label>ExternalValue4:</label>
+            @Html.TextBoxFor(m => m.ExternalValue4, new {@maxlength = "50", @id = "txtExternalValue4"})
+        </div>
+        <div class="rowTable">
+            <label>ExternalValue5:</label>
+            @Html.TextBoxFor(m => m.ExternalValue5, new {@maxlength = "50", @id = "txtExternalValue5"})
+        </div>
+    </div>*@
+    <div class="col-sm-4">
+        <div class="btn-group">
+                <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick=" return SaveFacilityDepartment(); " />
+                <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn " type="button" onclick=" return ClearFacilityDepartmentForm(); ">Cancel</button>
+            
+        </div>
+    </div>
+</div>

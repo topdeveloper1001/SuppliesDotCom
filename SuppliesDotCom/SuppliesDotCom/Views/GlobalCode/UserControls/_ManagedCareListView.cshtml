@@ -1,0 +1,35 @@
+﻿@model SuppliesDotCom.Models.GlobalCodeView
+
+@if (Model != null && Model.CodesList != null && Model.CodesList.Count > 0)
+{
+    var grid = new WebGrid(Model.CodesList, ajaxUpdateContainerId: "GenericCodeGridContent", canPage: false);
+    <div id="GenericCodeGridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "GlobalCodeGrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                        grid.Column("GlobalCodes.GlobalCodeValue", "Code Value", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodes.GlobalCodeName", "Name", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodes.ExternalValue1", "", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue2", "", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue3", "", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue4", "", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue5", "", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue6", "Carveouts Applicable", canSort: true, style: "col4"),
+                                        grid.Column(header: "Action", style: "col5", format: @<text>
+        <a href="javascript:void(0);" title="Edit" onclick="EditRecordInGeneric('@item.GlobalCodes.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" />
+        </a>
+                            @*<a href="javascript:void(0);" title="Delete" onclick="DeleteRecordInGeneric('@item.GlobalCodes.GlobalCodeID');" style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete','',DeleteRecordInGeneric,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>
+        </text>)
+))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+

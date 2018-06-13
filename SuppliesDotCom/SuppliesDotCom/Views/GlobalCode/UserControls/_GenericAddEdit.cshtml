@@ -1,0 +1,58 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    <div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>@Model.ExternalValue5:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = @Model.ExternalValue1, @class = "validate[required]" })
+            </div>
+            @if (Model != null && !string.IsNullOrEmpty(Model.ExternalValue6) && Convert.ToInt32(Model.ExternalValue6) == 1)
+            {
+                <div class="rowTable">
+                    <label class="control-label"><span class="mandatoryStar"></span>Code Value:</label>
+                    @Html.TextBoxFor(m => m.GlobalCodeValue, new { @ID = "txtGlobalCodeValue", @maxlength = "10", @class = "validate[required]" })
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.GlobalCodeValue, new { @id = "hfGlobalCodeValue" })
+            }
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Description:</label>
+                @Html.TextBoxFor(m => m.Description, new { @ID = "txtDescription", @maxlength = "240", @class = "validate[required]" })
+            </div>
+            
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="btn-group">
+            @{
+                var btnSaveText = "Save";
+                if (Model.GlobalCodeID != 0)
+                {
+                    btnSaveText = "Update";
+                }
+            }
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGenericCodeExists();" value="@btnSaveText" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearGenericForm('@Model.GlobalCodeCategoryValue');">Cancel</button>
+        </div>
+    </div>
+</div>
+
+

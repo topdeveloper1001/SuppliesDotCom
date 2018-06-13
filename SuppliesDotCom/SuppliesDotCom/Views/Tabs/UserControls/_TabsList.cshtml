@@ -1,0 +1,91 @@
+﻿@using SuppliesDotCom.Common
+@model List<SuppliesDotCom.Model.CustomModel.TabsCustomModel>
+
+<script type="text/javascript">
+    $(function () {
+        var columns = [{
+            "aTargets": [6],
+            "mData": null,
+            "mRender": function (data, type, full) {
+                 @{
+                    <text>
+                            return '<a style="float:left; margin-right: 7px; width:15px;" href="javascript:void(0);" onclick="EditTabs(' + data[6] + ');"><img src="/images/edit.png"></a>' +
+                                    '<a href="javascript:void(0);" title="Delete Tab" onclick=\'return OpenConfirmPopup(' + data[6] + ',\"Delete Tab\",\"\",DeleteTabs,null)\' style="float: left; width: 15px;">' +
+                                    '<img src="@Url.Content("~/images/delete.png")" />' +
+                                    '</a>';
+                    </text>
+                  }
+            }
+        }];
+        $('#dtTabs').dataTable({
+            sAjaxSource: "/Tabs/GetTListJson",
+            //"scrollY": "100px",
+            "scrollCollapse": true,
+            bProcessing: true,
+            paging: false,
+            aoColumnDefs: columns
+        });
+    });
+</script>
+@*<script src="~/Scripts/DataTables/jquery.dataTables.js?@Helpers.CurrentAssemblyTicks"></script>
+<link href="~/css/DataTable/jquery.dataTables.min.css" rel="stylesheet" />*@
+
+<div class="table table-striped">
+    <table id="dtTabs" class="display table table_scroll" cellspacing="0">
+        <thead class="gridHead">
+            <tr class="gridRow">
+                <th scope="col">Name</th>
+                <th scope="col">Tabs Level</th>
+                <th scope="col">Controller</th>
+                <th scope="col">Action</th>
+                <th scope="col">Route Values</th>
+                <th scope="col">Parent Tab</th>
+                <th class="center" scope="col">Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+@*@if (Model != null && Model.Count > 0)
+    {
+        var grid = new WebGrid(Model, ajaxUpdateContainerId: "MenuTabdsGridContent", canPage: false);
+        <div id="MenuTabdsGridContent">
+             @grid.GetHtml(htmlAttributes: new { id = "MenuTabsGrid" },
+                            tableStyle: "table table_scroll",
+                            headerStyle: "gridHead",
+                            footerStyle: "gridFooter",
+                            rowStyle: "gridRow",
+                            alternatingRowStyle: "gridRow",
+                            columns: grid.Columns(
+                                    grid.Column("CurrentTab.TabName", "Name"),
+                                      grid.Column("CurrentTab.TabHierarchy", "Tabs Level"),
+                                    grid.Column("CurrentTab.Controller", "Controller"),
+                                    grid.Column("CurrentTab.Action", "Action"),
+                                    grid.Column("CurrentTab.RouteValues", "Route Values"),
+                                    grid.Column("ParentTabName", "Parent Tab"),
+                                    grid.Column(header: "Actions", format: @<text>
+                                        <a href="#" onclick="EditTabs('@item.CurrentTab.TabId')" style="float: left; margin-right: 7px; width: 15px;">
+                                            <img src="@Url.Content("~/images/edit.png")" />
+                                        </a>
+                                                                                &nbsp;
+             <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.CurrentTab.TabId','Delete Tab','',DeleteTabs,null); " style="float: left; width: 15px;">
+                <img src="@Url.Content("~/images/delete.png")" />
+            </a>
+                                    </text>)
+                                      ))
+        </div>
+
+    }
+    else
+    {
+
+        <h2>No Record found</h2>
+    }
+    <script>
+        $(function() {
+            if ($('#MenuTabsGrid tr').length > 0) {
+                $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+            }
+            SetGridSorting(SortTabsListGrid, "#MenuTabdsGridContent");
+
+        });
+    </script>*@

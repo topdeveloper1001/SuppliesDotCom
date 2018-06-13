@@ -1,0 +1,536 @@
+﻿@using SuppliesDotCom.Common
+@model DTO.Registration
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Registration.js"></script>
+
+
+<script type="text/javascript">
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#pfimg')
+                    .attr('src', e.target.result)
+                ;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        var Savedata = '@TempData["Message"]';
+        var PId = '@TempData["PatientId"]';
+        if (Savedata == 'Patient Registered Successfully') {
+            alert(Savedata);
+            window.location.href = "/Home/EditPatient?Id=" + PId;
+        }
+        else if (Savedata == 'Patient detail updated successfully') {
+            alert(Savedata);
+            // window.location.href = "/Home/PatientLogin";
+        }
+
+        $('#Married').click(function () {
+            $("#MarriedOrNot").val("Married");
+        });
+
+        $('#un-married').click(function () {
+            $("#MarriedOrNot").val("Un-married");
+        });
+
+        $('#male').click(function () {
+            $("#MaleOrFemale").val("Male");
+        });
+
+        $('#female').click(function () {
+            $("#MaleOrFemale").val("Female");
+        });
+
+    });
+
+</script>
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="white-bg">
+        <h1 class="title">
+            Patient Information
+            <div class="pull-right">
+                @if (Model.PatientID != 0)
+                {
+                    <a class="blue-btn" onclick="CheckIfEncountersOpens('@Model.PatientID','/Admin/AdmitPatient?Id=@Model.PatientID&RequestFrom=EditPatient');">Admit Patient</a>
+                    <a class="blue-btn" onclick="CheckIfEncountersOpens('@Model.PatientID','/Admin/OutPatient?Id=@Model.PatientID&RequestFrom=EditPatient')">Start Outpatient Encounter</a>
+
+
+                    <a class="blue-btn" href="/Home/Authorization?Id=@Model.PatientID&RequestFrom=EditPatient">Get Authorization</a>
+                    <a class="blue-btn" onclick="CheckForInpatientEncounter('@Model.PatientID','/Admin/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient');">Discharge Patient</a>
+                    <a class="blue-btn" onclick="CheckForOutPatientEncounter('@Model.PatientID','/Admin/EndEncounter?Id=@Model.PatientID&RequestFrom=EditPatient')">End Encounter</a>
+                    @*<a class="blue-btn" href="/Admin/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient">Discharge Patient</a>
+                        <a class="blue-btn" href="/Admin/EndEncounter?Id=@Model.PatientID&RequestFrom=EditPatient">End Encounter</a>*@
+                    @*<a class="blue-btn" href="/Home/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient">Discharge Patient</a>*@
+                    @*<a class="blue-btn" href="/Home/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient&End=true">End Encounter</a>*@
+
+                }
+            </div>
+        </h1>
+        <div class="form">
+            <table class="table">
+
+                <tr>
+                    <td style="width: 33%;"></td>
+                    <td style="width: 15%;"></td>
+                    <td style="width: 12%;"></td>
+                    <td style="width: 22%;"></td>
+                    <td style="width: 15%;"></td>
+                    <td style="width: 2%;"></td>
+                    <td rowspan="13" class="v-top">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    @if (@Model.PersonPhotoPath != null && @Model.PersonPhotoPath != "")
+                                    {
+                                        <img id="pfimg" src="~/Files/PersonPhoto/@Model.PersonPhotoPath" class="user-img" style="float:left;height: 272px;width: 220px;" />
+                                    }
+                                    else
+                                    {
+                                        <img id="pfimg" src="~/images/Noimage.jpg" class="user-img" style="float: left; height: 272px; width: 220px;" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="min-width: 90px;">Profile Photo:</td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.PersonPhoto, new { @onchange = "checkpersonfile(this)", @type = "file", @id = "PersonPhoto" })
+                                    <br />
+                                    <span id="spPersonPhoto" style="color: red;"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>First Name :</td>
+                    <td>@Html.TextBoxFor(m => m.PersonFirstName, new { @maxlength = "25" }) </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonFirstName)</td>
+                    <td>Last Name :</td>
+                    <td>@Html.TextBoxFor(m => m.PersonLastName, new { @maxlength = "25" })  </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.PersonLastName)
+                        @Html.HiddenFor(m => m.PatientID, new { id = "PatientID" })
+
+                        @Html.HiddenFor(m => m.MaleOrFemale, new { id = "MaleOrFemale" })
+                        @Html.HiddenFor(m => m.MarriedOrNot, new { id = "MarriedOrNot" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Second Name :</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonSecondName, new { @maxlength = "20" })
+                    </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonSecondName)</td>
+
+                    <td>Is VIP:</td>
+                    <td colspan="2">
+                        <div style="width: 100%;cursor:pointer" title="For VIP Patient, please check the checkbox.">
+                            <div style="width: 10%; margin-top: 12px; float: left;">
+                                @if (@Model.PersonVIP != null && @Model.PersonVIP != "")
+                                {
+                                    @Html.CheckBoxFor(m => m.IsVIP, new { id = "IsVIP", @checked = "checked", @style = "cursor: pointer;" })
+                                }
+                                else
+                                {
+                                    @Html.CheckBoxFor(m => m.IsVIP, new { id = "IsVIP", @style = "cursor: pointer;" })
+                                }
+
+                            </div>
+                            <div style="width: 80%; float: left;">
+                                @if (@Model.PersonVIP != null && @Model.PersonVIP != "")
+                                {
+                                    @Html.TextAreaFor(m => m.PersonVIP, new { @maxlength = "40", @style = "visibility:visible;width:186px;" })
+                                }
+                                else
+                                {
+                                    @Html.TextAreaFor(m => m.PersonVIP, new { @maxlength = "40", @style = "visibility:hidden;width:186px;" })
+                                }
+                                <div><span style="color: red;" id="spVIP"></span></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ResourceKeyValues.GetKeyValue("socialsecuritynumber"):
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonEmiratesIDNumber, new { @maxlength = "18", @onchange = "ValidateEmirateId('PersonEmiratesIDNumber')", @class = "EmiratesMask" })
+                        <br>
+                        e.g: 111-1111-1111111-1
+                    </td>
+
+                    <td>
+                        <span id="spPersonEmiratesIDNumber" style="color: red;"></span>
+                        @Html.ValidationMessageFor(m => m.PersonEmiratesIDNumber)
+                    </td>
+                    <td>National ID Expiration :</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonEmiratesIDExpiration, "{0:MM/dd/yyyy}", new { @maxlength = "10" })
+                    </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonEmiratesIDExpiration)</td>
+
+                </tr>
+                <tr>
+                    <td>Birth Date :</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonBirthDate, "{0:dd/MM/yyyy}", new { @onchange = "CalculateAge(this)", @maxlength = "10" })
+                        <span id="lblError" style="color: red;"></span>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.PersonBirthDate)
+
+
+                    </td>
+                    <td>Age :</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonAge, new { @readonly = "true", @maxlength = "2" })
+                        <span id="lblAgeerror" style="color: red;"></span>
+                    </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonAge)</td>
+                </tr>
+                <tr>
+                    <td>Marital Status :</td>
+                    <td>
+                        <div class="radio">
+
+                            @Html.RadioButtonFor(model => model.IsMarried, "true", new { id = "Married" }) @Html.Label("married", "Married")   @Html.RadioButtonFor(model => model.IsMarried, "false", new { id = "un-married" })  @Html.Label("un-married", "Un-Married")
+                            @Html.ValidationMessageFor(m => m.IsMarried)
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>Sex :</td>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.Sex, "true", new { id = "male" })   @Html.Label("male", "Male")  @Html.RadioButtonFor(model => model.Sex, "false", new { id = "female" }) @Html.Label("female", "Female")
+
+                        </div>
+                    </td>
+
+                    <td>@Html.ValidationMessageFor(model => model.Sex)</td>
+                </tr>
+                <tr>
+                    <td>Insurance Company :</td>
+                    <td>
+
+                        @Html.DropDownListFor(m => m.PersonInsuranceCompany, new SelectList(Model.LstInsuranceCmp, "CompanyID", "InsuranceCompanyName"), "--Select One--", new { id = "PersonInsuranceCompany" })
+                    </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonInsuranceCompany)</td>
+                    <td>Medical Record No. :</td>
+                    <td>@Html.TextBoxFor(m => m.PersonMedicalRecordNumber, new { @maxlength = "20" })</td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonMedicalRecordNumber)</td>
+
+                </tr>
+                <tr>
+                    <td>Passport Number :</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PersonPassportNumber, new { @onchange = "checkDuplicatePassportNumber('PersonPassportNumber');", @maxlength = "15" })
+                    </td>
+
+                    <td><span id="spPersonPassportNumber" style="color: red;"></span>@Html.ValidationMessageFor(m => m.PersonPassportNumber)</td>
+
+                    <td>Patient Financial Number :</td>
+                    <td>
+
+                        @Html.TextBoxFor(m => m.PersonFinancialNumber, new { @maxlength = "20" })
+
+                    </td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonFinancialNumber)</td>
+                </tr>
+                <tr>
+                    <td>Master Patient Index Number :</td>
+                    <td>@Html.TextBoxFor(m => m.PersonMasterPatientNumber, new { @maxlength = "20" })</td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonMasterPatientNumber)</td>
+                    <td>Nationality :</td>
+                    <td>@Html.DropDownListFor(m => m.PersonNationality, new SelectList(Model.LstCountry, "CountryID", "CountryName"), "--Select One--", new { id = "PersonNationality" })</td>
+                    <td>@Html.ValidationMessageFor(m => m.PersonNationality)</td>
+
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        Passport pdf:
+                    </td>
+                    <td colspan="2">
+                        @if (@Model.PassportScan != null && @Model.PassportScan != "")
+                        {
+                            <a href="~/Files/PassportPdf/@Model.PassportScan" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+                        @Html.TextBoxFor(m => m.PersonPassportScan, new { @onchange = "checkfile('PersonPassportScan')", @type = "file", @id = "PersonPassportScan" })
+                        <br />
+                        <span id="spPersonPassportScan" style="color: red;"></span>
+                    </td>
+                    <td>
+                        Emirates Pdf:
+                    </td>
+                    <td colspan="2">
+                        @if (@Model.EmiratesIDScan != null && @Model.EmiratesIDScan != "")
+                        {
+                            <a href="~/Files/EmiratePdf/@Model.EmiratesIDScan" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+                        @Html.TextBoxFor(m => m.PersonEmiratesIDScan, new { @onchange = "checkfile('PersonEmiratesIDScan')", @type = "file", @id = "PersonEmiratesIDScan" })
+                        <br />
+                        <span id="spPersonEmiratesIDScan" style="color: red;"></span>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @*<td>Insurance Card Pdf:
+                        </td>
+                        <td colspan="2">
+                            @if (@Model.InsuranceCardScan != null && @Model.EmiratesIDScan != "")
+                            {
+                                <a href="~/Files/InsuranceCardPdf/@Model.InsuranceCardScan" target="_blank">
+                                    <img src="~/images/pdf-icon.png" width="50" /></a>
+                            }
+                            else
+                            {
+                            }
+                            @Html.TextBoxFor(m => m.PersonInsuranceCardScan, new { @onchange = "checkfile('PersonInsuranceCardScan')", @type = "file", @id = "PersonInsuranceCardScan" })
+                            <br />
+                            <span id="spPersonInsuranceCardScan" style="color: red;"></span>
+                        </td>*@
+
+                    <td>
+                        Marriage Card pdf:
+                    </td>
+                    <td colspan="2">
+                        @if (@Model.MarriageCertificate != null && @Model.EmiratesIDScan != "")
+                        {
+                            <a href="~/Files/MarriageCardPdf/@Model.MarriageCertificate" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+                        @Html.TextBoxFor(m => m.PersonMarriageCertificate, new { @onchange = "checkfile('PersonMarriageCertificate')", @type = "file", @id = "PersonMarriageCertificate" })
+                        <br />
+                        <span id="spPersonMarriageCertificate" style="color: red;"></span>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <td>Facility :</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.PhysicianPrimaryFacility, new SelectList(Model.LstFacility, "FacilityId", "FacilityNumber"), "--Select One--", new { id = "PhysicianPrimaryFacility1", @style = "width: 177px", onchange = "GetFacilityName(this)" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.PhysicianPrimaryFacility)
+                    </td>
+                    <td>Facility Name :</td>
+                    <td>
+                        <label id="FacilityName1">@Model.FacilityName</label>
+                    </td>
+                    <td></td>
+                </tr>
+
+
+
+            </table>
+        </div>
+        <!--form end-->
+
+        <div class="clear"></div>
+
+        <!--form end-->
+
+
+
+    </div>
+    <!--white-bg end-->
+
+
+    if (Model.PatientID != 0)
+    {
+        if (Model.EncounterModel != null)
+        {
+            if (Model.EncounterModel.LstEncounter != null)
+            {
+                if (Model.EncounterModel.LstEncounter.Count > 0)
+                {
+                    <div id="encounter">
+                        @Html.Partial("_Encounter", Model.EncounterModel)
+                    </div>
+                }
+            }
+        }
+        if (Model.AuthorizationModel != null)
+        {
+            if (Model.AuthorizationModel.LstAuthorization != null)
+            {
+                if (Model.AuthorizationModel.LstAuthorization.Count > 0)
+                {
+
+                    <div id="authorizationdiv">
+                        @Html.Partial("_Authorization", Model.AuthorizationModel)
+                    </div>
+                }
+            }
+        }
+    }
+
+
+    <div class="white-bg">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Address & Contacts</a></li>
+                <li><a href="#tabs-2">Insurances </a></li>
+                <li><a href="#tabs-3">Guarantors</a></li>
+                <li><a href="#tabs-4">Secondary Contacts</a></li>
+                <li><a href="#tabs-5">Coverage Summary</a></li>
+            </ul>
+            <div id="tabs-1">
+                @Html.Partial("_Addresses", Model)
+            </div>
+            <div id="tabs-2">
+                @Html.Partial("_Insurance", Model)
+            </div>
+            <div id="tabs-3">
+                @Html.Partial("_GuarantorTab", Model)
+            </div>
+            <div id="tabs-4">
+                @Html.Partial("_SecondaryContact", Model)
+            </div>
+            <div id="tabs-5">
+                @Html.Partial("_CoverageSummaryTab", Model)
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <div id="overlay" class="web_dialog_overlay">
+        </div>
+        <img id="loading" src="~/images/gif-load (2).GIF" alt="Updating ..." style="display: none; position: fixed; left: 48%; top: 20%;" />
+        @if (@Model.PatientID != 0 && @Model.PatientID != null)
+        {
+            <input type="submit" onclick="return CheckRegistrationControlsForUpdate();" class="blue-btn" value="Update" />
+            <input type="submit" class="blue-btn" value="Cancel" />
+        }
+        else
+        {
+            <input type="submit" onclick="return CheckRegistrationControls();" class="blue-btn" value="Save" />
+            <input type="submit" class="blue-btn" value="Cancel" />
+        }
+
+        <br />
+        <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+        @if (TempData["Message"] != null)
+        {
+            <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+        }
+
+    </div>
+
+    <link href="~/Content/JqueryCalendar.css" rel="stylesheet" />
+    <script src="~/Scripts/jqueryCalendar.js"></script>
+    <link href="~/Content/JqueryStyle.css" rel="stylesheet" />
+
+
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var married = '@Model.MarriedOrNot';
+        var sex = '@Model.MaleOrFemale';
+        if (married == "Married") {
+            $('#Married').attr("checked", "checked");
+        }
+        else {
+            $('#Married').removeAttr("checked");
+            $('#un-married').attr("checked", "checked");
+        }
+        if (sex == "Male") {
+            $('#Male').attr("checked", "checked");
+        }
+        else {
+            $('#male').removeAttr("checked");
+            $('#female').attr("checked", "checked");
+        }
+
+    });
+
+    if ('@Model.PatientID' != "") {
+
+    }
+    else {
+        $("#PersonEmiratesIDExpiration").val("");
+        $("#PersonBirthDate").val("");
+        $("#PersonAge").val("");
+        $("#PersonEmiratesIDNumber").val("");
+        $("#PersonPassportNumber").val("");
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    function GetFacilityName(Dropdown) {
+
+        var DropdownName = Dropdown.id;
+        var lastChar = DropdownName.substr(DropdownName.length - 1);
+        var selectedsasaValue = $(Dropdown).val();
+        if (selectedsasaValue != "") {
+            var url = '/Admin/GetFacilityName';
+            $.ajax({
+                type: "POST",
+                url: url,
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    PhysicianId: selectedsasaValue
+                }),
+                success: function (data) {
+                    $("#FacilityName" + lastChar).html(data);
+                },
+                error: function (msg) {
+
+                }
+            });
+        }
+        else {
+            $("#FacilityName" + lastChar).html("");
+        }
+
+
+    }
+
+
+
+</script>

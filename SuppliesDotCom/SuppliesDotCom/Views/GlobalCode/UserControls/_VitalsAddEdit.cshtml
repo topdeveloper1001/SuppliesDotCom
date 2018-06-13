@@ -1,0 +1,66 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 0;
+    }
+</style>
+
+@{
+    var btnSave = "Save";
+    if (Model.GlobalCodeID > 0)
+    {
+        btnSave = "Update";
+    }
+}
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    @Html.HiddenFor(m => m.ExternalValue3, new { @id = "hfExternalValue3" })
+    <div>
+        <div class="col-sm-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Vital:</label>
+                <select id="ddlGlobalCodeName" class="validate[required]" onchange="OnChangeVital('#ddlGlobalCodeName');"></select>
+            </div>
+            <div class="rowTable">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+            </div>
+            <div class="" id="divUnitOfMeasure" style="display: none;">
+                <label>
+                    Unit Of Measure:
+                </label>
+                <label id="lblUnitOfMeasure"></label>
+                @*<label>
+                        <label id="lblUnitOfMeasure1"></label>
+                        <input type="radio" id="rdUnitOfMeasure1" class="rdUnitOfMeasure" onchange="ToggleRadioButtons('#rdUnitOfMeasure1','.rdUnitOfMeasure'); GetSelectedUnitOfMeasure();" checked="checked" />
+                    </label>
+                    <label>
+                        <label id="lblUnitOfMeasure2"></label>
+                        <input type="radio" id="rdUnitOfMeasure2" class="rdUnitOfMeasure" onchange="ToggleRadioButtons('#rdUnitOfMeasure2','.rdUnitOfMeasure'); GetSelectedUnitOfMeasure();" />
+                    </label>*@
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Minimum Limit:</label>
+                @Html.TextBoxFor(m => m.ExternalValue1, new { @ID = "txtExternalValue1", @maxlength = "6", @class = "validate[required,custom[number]]", @value = "0" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Maximum Limit:</label>
+                @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtExternalValue2", @maxlength = "6", @class = "validate[required,custom[number]]", @value = "0" })
+            </div>
+        </div>
+     
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfVitalAlreadyExists();" value="@btnSave" />
+        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearVitalForm();">Cancel</button>
+    </div>
+</div>

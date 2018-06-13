@@ -1,0 +1,436 @@
+﻿@using SuppliesDotCom.Common
+@model DTO.Registration
+@{
+    ViewBag.Title = "ViewDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Registration.js"></script>
+<script type="text/javascript">
+
+
+</script>
+@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="white-bg">
+        <div style="width:100%;">
+            <div style="width:100%;float:left;">
+                <h1 class="title">
+                    Patient Information
+                    <div class="pull-right">
+                        @if (Model.PatientID != 0)
+                        {
+                            <a class="blue-btn" onclick="CheckIfEncountersOpens('@Model.PatientID','/Admin/AdmitPatient?Id=@Model.PatientID&RequestFrom=EditPatient');">Admit Patient</a>
+                            <a class="blue-btn" onclick="CheckIfEncountersOpens('@Model.PatientID','/Admin/OutPatient?Id=@Model.PatientID&RequestFrom=EditPatient')">Start Outpatient Encounter</a>
+                            <a class="blue-btn" href="/Home/Authorization?Id=@Model.PatientID&RequestFrom=EditPatient">Get Authorization</a>
+                            <a class="blue-btn" onclick="CheckForInpatientEncounter('@Model.PatientID','/Admin/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient');">Discharge Patient</a>
+                            <a class="blue-btn" onclick="CheckForOutPatientEncounter('@Model.PatientID','/Admin/EndEncounter?Id=@Model.PatientID&RequestFrom=EditPatient')">End Encounter</a>
+                            @*<a class="blue-btn" href="/Admin/DischargePatient?Id=@Model.PatientID&RequestFrom=EditPatient">Discharge Patient</a>
+                                <a class="blue-btn" href="/Admin/EndEncounter?Id=@Model.PatientID&RequestFrom=EditPatient">End Encounter</a>*@
+                        }
+                    </div>
+
+                </h1>
+            </div>
+
+        </div>
+
+        <div class="form">
+            <table class="table" style="float: left;">
+
+                <tr>
+                    <td style="width: 17%;"></td>
+                    <td style="width: 20%;"></td>
+                    <td style="width: 17%;"></td>
+                    <td style="width: 20%;"></td>
+                    <td rowspan="12" class="v-top">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    @if (@Model.PersonPhotoPath != null && @Model.PersonPhotoPath != "")
+                                    {
+                                        <img id="pfimg" src="~/Files/PersonPhoto/@Model.PersonPhotoPath" class="user-img" style="float:left;   height: 272px;width: 220px;" />
+                                    }
+                                    else
+                                    {
+                                        <img id="pfimg" src="~/images/Noimage.jpg" class="user-img" style="float: left;  height: 272px;width: 220px;" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr><td><label style="font-weight: bold;">  </label></td></tr>
+                        </table>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td><label style="font-weight: bold;"> First Name :</label></td>
+                    <td> @Model.PersonFirstName</td>
+
+                    <td><label style="font-weight: bold;"> Last Name :</label> </td>
+                    <td>
+                        @Model.PersonLastName
+
+                        @Html.HiddenFor(m => m.PatientID, new { id = "PatientID" })
+
+                        @Html.HiddenFor(m => m.MaleOrFemale, new { id = "MaleOrFemale" })
+                        @Html.HiddenFor(m => m.MarriedOrNot, new { id = "MarriedOrNot" })
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label style="font-weight: bold;">Second Name : </label> </td>
+                    <td>
+                        @Model.PersonSecondName
+                    </td>
+
+                    <td>
+                        @if (@Model.PersonVIP != null && @Model.PersonVIP != "")
+                        {
+                            <text><label style="font-weight: bold;"> Is VIP:</label>   </text>
+                        }
+                    </td>
+                    <td>
+                        <div style="width:100%;">
+                            <div style="width:10%;float:left;">
+                                @if (@Model.PersonVIP != null && @Model.PersonVIP != "")
+                                {
+                                    @Html.CheckBoxFor(m => m.IsVIP, new { id = "IsVIP", @checked = "checked" })
+                                }
+                                else
+                                {
+
+                                }
+
+                            </div>
+                            <div style="width:80%;float:left;">
+                                @if (@Model.PersonVIP != null && @Model.PersonVIP != "")
+                                {
+                                    @Model.PersonVIP
+                                }
+                                else
+                                {
+
+                                }
+                                <div><span style="color:red;" id="spVIP"></span></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label style="font-weight: bold;">@ResourceKeyValues.GetKeyValue("socialsecuritynumber"):</label>
+
+                    </td>
+                    <td>@Model.PersonEmiratesIDNumber </td>
+
+
+                    <td><label style="font-weight: bold;"> National ID Expiration :</label> </td>
+                    <td>
+                        @String.Format("{0:d}", @Model.PersonEmiratesIDExpiration.Value.ToShortDateString())
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <td><label style="font-weight: bold;">Birth Date : </label> </td>
+                    <td>
+                        @Model.PersonBirthDate
+                        <span id="lblError" style="color:red;"></span>
+                    </td>
+
+                    <td><label style="font-weight: bold;">Age : </label> </td>
+                    <td>
+                        @Model.PersonAge
+                        <span id="lblAgeerror" style="color:red;"></span>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td><label style="font-weight: bold;">Marital Status : </label> </td>
+                    <td>
+                        <div class="radio">
+
+                            @Html.RadioButtonFor(model => model.IsMarried, "true", new { id = "Married" }) @Html.Label("married", "Married")   @Html.RadioButtonFor(model => model.IsMarried, "false", new { id = "un-married" })  @Html.Label("un-married", "Un-Married")
+
+                        </div>
+                    </td>
+
+                    <td><label style="font-weight: bold;"> Sex :</label> </td>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.Sex, "true", new { id = "male" })   @Html.Label("male", "Male")  @Html.RadioButtonFor(model => model.Sex, "false", new { id = "female" }) @Html.Label("female", "Female")
+
+                        </div>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <td> <label style="font-weight: bold;">Insurance Company : </label></td>
+                    <td>
+
+                        @Model.ViewInsuranceCompanyName
+                    </td>
+
+                    <td><label style="font-weight: bold;"> Medical Record No. : </label></td>
+                    <td>  @Model.PersonMedicalRecordNumber</td>
+
+
+
+                </tr>
+
+
+                <tr>
+                    <td><label style="font-weight: bold;">Patient Financial Number : </label> </td>
+                    <td>
+                        @Model.PersonFinancialNumber
+
+
+                    </td>
+
+                    <td><label style="font-weight: bold;">Passport Number : </label></td>
+                    <td>
+                        @Model.PersonPassportNumber
+
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td><label style="font-weight: bold;">Master Patient Index Number : </label></td>
+                    <td>  @Model.PersonMasterPatientNumber</td>
+
+                    <td> <label style="font-weight: bold;"> Nationality :</label></td>
+                    <td>
+                        @Model.PersonNationalityName
+                    </td>
+
+
+
+                </tr>
+
+
+                <tr>
+                    <td><label style="font-weight: bold;">Arabic First Name : </label></td>
+                    <td>  @Model.PersonArabicFirstName</td>
+
+                    <td><label style="font-weight: bold;"> Arabic Last Name :</label></td>
+                    <td> @Model.PersonArabicSecondName</td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label style="font-weight: bold;">Passport pdf: </label>
+
+                    </td>
+                    <td>
+                        @if (@Model.PassportScan != null && @Model.PassportScan != "")
+                        {
+                            <a href="~/Files/PassportPdf/@Model.PassportScan" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+
+                        <br />
+                    </td>
+                    <td>
+                        <label style="font-weight: bold;"> Emirates Pdf: </label>
+
+                    </td>
+                    <td>
+                        @if (@Model.EmiratesIDScan != null && @Model.EmiratesIDScan != "")
+                        {
+                            <a href="~/Files/EmiratePdf/@Model.EmiratesIDScan" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+
+
+                        <br />
+                        <span id="spPersonEmiratesIDScan" style="color: red;"></span>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label style="font-weight: bold;">  Insurance Card Pdf:</label>
+
+                    </td>
+                    <td>
+                        @if (@Model.InsuranceCardScan != null && @Model.EmiratesIDScan != "")
+                        {
+                            <a href="~/Files/InsuranceCardPdf/@Model.InsuranceCardScan" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+
+                        <br />
+                    </td>
+                    <td>
+                        <label style="font-weight: bold;"> Marriage Card pdf:</label>
+                    </td>
+                    <td>
+                        @if (@Model.MarriageCertificate != null && @Model.EmiratesIDScan != "")
+                        {
+                            <a href="~/Files/MarriageCardPdf/@Model.MarriageCertificate" target="_blank">
+                                <img src="~/images/pdf-icon.png" width="50" />
+                            </a>
+                        }
+                        else
+                        {
+                        }
+
+                        <br />
+                    </td>
+
+                </tr>
+
+            </table>
+        </div><!--form end-->
+
+        <div class="clear"></div>
+        <h1 class="title"></h1>
+        <!--form end-->
+    </div><!--white-bg end-->
+
+
+    if (Model.PatientID != 0)
+    {
+        if (Model.EncounterModel != null)
+        {
+            if (Model.EncounterModel.LstEncounter != null)
+            {
+                if (Model.EncounterModel.LstEncounter.Count > 0)
+                {
+                    <div id="encounter">
+                        @Html.Partial("_Encounter", Model.EncounterModel)
+                    </div>
+                }
+            }
+        }
+        if (Model.AuthorizationModel != null)
+        {
+            if (Model.AuthorizationModel.LstAuthorization != null)
+            {
+                if (Model.AuthorizationModel.LstAuthorization.Count > 0)
+                {
+
+                    <div id="authorizationdiv">
+                        @Html.Partial("_Authorization", Model.AuthorizationModel)
+                    </div>
+                }
+            }
+        }
+    }
+
+    <div class="white-bg">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Address & Contacts</a></li>
+                <li><a href="#tabs-2">Insurances </a></li>
+                <li><a href="#tabs-3">Guarantors</a></li>
+                <li><a href="#tabs-4"> Secondary Contacts</a></li>
+                <li><a href="#tabs-5">Coverage Summary</a></li>
+            </ul>
+            <div id="tabs-1">
+                @Html.Partial("_Addresses", Model)
+            </div>
+            <div id="tabs-2">
+                @Html.Partial("_Insurance", Model)
+            </div>
+            <div id="tabs-3">
+                @Html.Partial("_GuarantorTab", Model)
+            </div>
+            <div id="tabs-4">
+                @Html.Partial("_SecondaryContact", Model)
+            </div>
+            <div id="tabs-5">
+                @Html.Partial("_CoverageSummaryTab", Model)
+            </div>
+        </div>
+    </div>
+
+
+    <div class="btn-group">
+
+        @if (@Model.PatientID != 0 && @Model.PatientID != null)
+        {
+        }
+        else
+        {
+        }
+        <br />
+    </div>
+
+    <link href="~/Content/JqueryCalendar.css" rel="stylesheet" />
+    <script src="~/Scripts/jqueryCalendar.js"></script>
+    <link href="~/Content/JqueryStyle.css" rel="stylesheet" />
+
+
+}
+@*   </div>*@
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@Model.ViewDetail' == "True") {
+            jQuery("select").each(function (i) {
+                jQuery(this).attr('disabled', 'disabled');
+            });
+            //jQuery("input[type='text']").each(function (i) {
+            //    jQuery(this).attr('disabled', 'disabled');
+            //});
+            jQuery("input[type='radio']").each(function (i) {
+                jQuery(this).attr('disabled', 'disabled');
+            });
+        }
+        var married = '@Model.MarriedOrNot';
+        var sex = '@Model.MaleOrFemale';
+        if (married == "Married") {
+            $('#Married').attr("checked", "checked");
+        }
+        else {
+            $('#Married').removeAttr("checked");
+            $('#un-married').attr("checked", "checked");
+        }
+        if (sex == "Male") {
+            $('#Male').attr("checked", "checked");
+        }
+        else {
+            $('#male').removeAttr("checked");
+            $('#female').attr("checked", "checked");
+        }
+
+    });
+
+    if ('@Model.PatientID' != "") {
+
+    }
+    else {
+        $("#PersonEmiratesIDExpiration").val("");
+        $("#PersonBirthDate").val("");
+        $("#PersonAge").val("");
+        $("#PersonEmiratesIDNumber").val("");
+        $("#PersonPassportNumber").val("");
+    }
+
+</script>

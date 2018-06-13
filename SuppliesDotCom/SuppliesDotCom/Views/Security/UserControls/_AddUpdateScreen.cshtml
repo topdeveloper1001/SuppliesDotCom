@@ -1,0 +1,85 @@
+﻿@using SuppliesDotCom.Models
+@using SuppliesDotCom.Common
+@model ScreenView
+<style>
+    .btn-group {
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+</style>
+
+<div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="base-color">
+            <div class="form" id="validate">
+
+                <div class="col-sm-3">
+                    <div class="rowTable">
+                        <input type="hidden" value="@Model.CurrentScreen.ScreenId" id="hfScreenID" />
+                        <input type="hidden" value="@Helpers.GetLoggedInUserId()" id="hfLoggedInUserID" />
+                        <label>Title :</label>
+                        @Html.TextBoxFor(m => m.CurrentScreen.ScreenTitle, new { @ID = "txtTitle", @maxlength = "50", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="rowTable">
+                        <label>Screen URL :</label>
+                        @Html.TextBoxFor(m => m.CurrentScreen.ScreenURL, new { @ID = "txtScreenURL", @maxlength = "500", @class = "validate[optional[onlyLetterNumber]]]" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="rowTable">
+                        <label>Tab :</label>
+                        @*@Html.TextBoxFor(m => m.CurrentScreen.TabID, new { @ID = "txtTabID", @maxlength = "4", @class = "validate[required,custom[integer]]" })*@
+                        @Html.DropDownListFor(m => m.CurrentScreen.TabID, new SelectList(Model.TabsList, "TabId", "TabName"), "--Select One--", new { id = "ddltabs", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="rowTable">
+                        <label>Screen Group :</label>
+                        @Html.TextBoxFor(m => m.CurrentScreen.ScreenGroup, new { @ID = "txtScreenGroup", @maxlength = "4", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Default Permission</label>
+                        : @Html.CheckBox("chkDefault", Model.CurrentScreen.DefaultPermission ?? false)
+                    </div>
+                    <div class="form-group">
+                        <label>Is Active :  @Html.CheckBoxFor(m => m.CurrentScreen.IsActive, new { @id = "chkActive" })</label>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    @*"return checkDuplicateUser(@Model.CurrentScreen.UserID);" document.location.href = $('#Url').attr('href');*@
+                    @if (Model.CurrentScreen.ScreenId != 0)
+                    {  <input type="submit" id="buttonUpdate" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return AddScreen();" value="Update" />
+                        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+
+                    }
+                    else
+                    {
+                        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return AddScreen();" />
+                        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+
+                    }
+
+
+                    <br />
+                    <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+                    @if (TempData["Message"] != null)
+                    {
+                        <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+                    }
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

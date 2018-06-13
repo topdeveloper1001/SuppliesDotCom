@@ -1,0 +1,60 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.GlobalCodeView
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add License Type
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="base-color">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_LicenceTypeAddEdit.cshtml", Model.CurrentGlobalCode);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseGlobalCodesList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>License Type List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseGlobalCodesList" class="panel-collapse collapse in tableImg ">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="table-responsive" id="LicenceTypeList">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_LicenceTypeListView.cshtml", Model.CodesList);}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<span class="inactive">
+            View In active records
+            <input id="chkShowInActive" type="checkbox" onchange="ShowInActiveRecordsInVital('#chkShowInActive');" />
+        </span>*@
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/GlobalCode/LicenseType.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

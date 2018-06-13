@@ -1,0 +1,51 @@
+﻿@using SuppliesDotCom.Model
+@model  GlobalCodes
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+
+<div class="form" id="AllergyAddEditFormDiv">
+    <div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hdAllergyId" })
+            @Html.HiddenFor(m => m.GlobalCodeValue, new { @id = "hdGlobalCodeValue" })
+            <div class="rowTable">
+                <label>Category:</label>
+                <select id="ddlAllergyCategories" class="validate[required]" onchange="OnChangeAllergyCategory('#ddlAllergyCategories');"></select>
+                @Html.HiddenFor(m => m.GlobalCodeCategoryValue, new { @id = "hdAllergyCategoryValue" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable">
+                <label>Description on Form:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @maxlength = "500", @ID = "txtAllergryName", @class = "validate[required]" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable">
+                <label>Allergy Detail:</label>
+                @Html.TextAreaFor(m => m.Description, new { @id = "txtDescription", @rows = "3" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable">
+                <label>Active:</label>
+                @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkIsActive" })
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        @if (Model.GlobalCodeID != 0)
+        {
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Update" onclick="AddAlergy();" />
+        }
+        else
+        {
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="AddAlergy();" />
+        }
+        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="ClearAllergyFields();" type="button">Cancel</button>
+    </div>
+</div>

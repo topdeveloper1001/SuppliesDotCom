@@ -1,0 +1,86 @@
+﻿@using Kendo.Mvc.UI
+@using SuppliesDotCom.Model
+@model IEnumerable<EquipmentMaster>
+<style type="text/css">
+    #TreeView .k-group li {
+        width: 45%;
+        float: left;
+    }
+
+    div.k-treeview {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+<h4 class="greenTitle" style="margin: 0;">Equipment List </h4>
+<div id="checkBox_Equipments">
+    @if (Model != null && Model.Any())
+    {
+        <ul class="list-inline" id="ulRoles">
+            @foreach (var item in Model)
+            {
+                <li style="margin: 5px; float: left; width: 260px;">
+                    <input type="checkbox" id="@item.EquipmentMasterId" value="@item.EquipmentMasterId" name="@item.EquipmentName" />&nbsp;@item.EquipmentName
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <span>No Records Found</span>
+    }
+</div>
+
+
+
+
+
+@*@(Html.Kendo().TreeView()
+                  .Name("Equipmentstreeview")
+                      .Checkboxes(checkboxes => checkboxes
+                        .Name("checkedFiles")
+                        .CheckChildren(true)
+                    )
+              .HtmlAttributes(new { })
+                      .HighlightPath(true)
+              .Items(menu =>
+                     {
+                         var list = Model;
+                         foreach (var item in list)
+                         {
+                             var builder = menu.Add().Text(item.EquipmentName).HasChildren(false).Id(item.EquipmentMasterId.ToString())
+                                 .Expanded(false);
+                         }
+                     })
+      )
+@Html.Kendo().DeferredScripts()
+<script type="text/javascript">
+    function checkedNodeIds(nodes, checkedNodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].checked) {
+                checkedNodes.push(nodes[i].id);
+            }
+            if (nodes[i].hasChildren) {
+                checkedNodeIds(nodes[i].children.view(), checkedNodes);
+            }
+        }
+    }
+
+    // show checked node IDs on datasource change
+    function onCheck() {
+        var checkedNodes = [],
+            treeView = $("#Equipmentstreeview").data("kendoTreeView"),
+            message;
+
+        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+        if (checkedNodes.length > 0) {
+            message = "IDs of checked nodes: " + checkedNodes.join(",");
+        } else {
+            message = "No nodes checked.";
+        }
+
+        $("#result").html(message);
+    }
+
+</script>*@

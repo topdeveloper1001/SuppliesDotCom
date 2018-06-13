@@ -1,0 +1,67 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model.CustomModel
+@model PatientLoginDetailCustomModel
+
+@{
+    ViewBag.Title = "Confirm Identity For Patient Portal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .forms li {
+        position: relative;
+    }
+
+    .show-password-link {
+        display: block;
+        position: absolute;
+        z-index: 11;
+    }
+
+    .password-showing {
+        position: absolute;
+        z-index: 10;
+    }
+</style>
+<div id="PatientLoginDetailForm">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.PatientId)
+        @Html.HiddenFor(m => m.CodeValue)
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Facility:</label>
+            @Html.TextBoxFor(m => m.Facility, new { @readonly = "readonly" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Email:</label>
+            @Html.TextBoxFor(m => m.Email, new { @readonly = "readonly" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>8-Digit Code:</label>
+            <input id="txtCodeValue" maxlength="8" class="validate[required]" onchange="CheckIfCodeMatched();" />
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Password:</label>
+            @Html.PasswordFor(m => m.Password, new { @maxlength = "50", @class = "validate[required] passwordmatch emptyTxt" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Confirm Password:</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @maxlength = "50", @class = "validate[required] validate[passwordmatch] emptyTxt" })
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <button id="btnLoginDetailSaveDetails" class="blue-btn btn btn-primary edit-btn marginBtn" style="margin-left: 2px;">Save</button>
+        <button id="btnLoginDetailCancelDetails" class="blue-btn btn btn-primary edit-btn marginBtn">Cancel</button>
+    </div>
+    <div class="clear"></div>
+    <div id='divMessage' style="text-align: center; float: left; display: none;">
+        <span>
+            @ResourceKeyValues.GetKeyValue("patientportalisaccessiblemessage")
+        </span>
+        <span><a href='@Url.Action("UserLogin")'>@ResourceKeyValues.GetKeyValue("gotologin")</a>
+        </span>
+    </div>
+</div>
+<script src="~/Scripts/PatientInfo/PatientLoginDetail.js"></script>
+

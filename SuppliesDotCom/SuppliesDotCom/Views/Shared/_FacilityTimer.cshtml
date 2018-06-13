@@ -1,0 +1,52 @@
+﻿@using SuppliesDotCom.Common.Common
+@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model
+
+@if (Session[SessionNames.SessionClass.ToString()] != null)
+{
+    var objSession = Session[SessionNames.SessionClass.ToString()] as SessionClass;
+    <input type="hidden" id="hdTimeZone" value="@objSession.TimeZone"/>
+    <div class="quick-links pull-right">
+        <div id="clock"></div>
+    </div>
+}
+
+<script type="text/javascript">
+    function addLeadingZero(n) {
+        if (n < 10) {
+            n = "0" + n;
+        }
+        return n;
+    }
+
+    function windTheClock(timeZoneOffset) {
+        // create Date object for current location
+        var d = new Date();
+        // convert to msec
+        // add local time zone offset 
+        // get UTC time in msec
+        var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+        //d.setHours(d.getUTCHours()); // set time zone offset
+        var nd = new Date(utc + (3600000 * timeZoneOffset));
+        var h = nd.getHours();
+        var m = nd.getMinutes();
+        var s = nd.getSeconds();
+        h = addLeadingZero(h);
+        m = addLeadingZero(m);
+        s = addLeadingZero(s);
+        if (document.all["clock"] != null) {
+            document.all["clock"].innerHTML = h + ":" + m + ":" + s;
+            //document.all["clock"].innerHTML = nd.toLocaleTimeString();
+            setTimeout(function () { windTheClock(timeZoneOffset); }, 1000);
+        }
+    }
+
+    window.onload = function () {
+        var timezoneparsed = $('#hdTimeZone').val();
+        var parseValue = 0;
+        if (timezoneparsed != '') {
+            parseValue = parseFloat($('#hdTimeZone').val());
+        }
+        windTheClock(parseValue);
+    }
+</script>

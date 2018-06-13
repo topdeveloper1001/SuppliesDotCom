@@ -1,0 +1,46 @@
+﻿@model SuppliesDotCom.Models.GlobalCodeCategoryView
+
+
+@{
+    ViewBag.Title = "Facility";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .ourcollapse .panel-title {
+        font-weight: normal; font-size: 12px;}
+</style>
+
+<script src="~/Scripts/GlobalCodeCategory/JqueryDictionary.js"></script>
+<script src="~/Scripts/GlobalCodeCategory/GlobalCodeCategory.js"></script>
+
+<div id="divGlobalCodeCategory" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Global Code Category
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @*
+                            Owner: Amit Jain
+                            On: 18092014
+                            Purpose: Render the grid view in partial view to display the filtered data.
+                        *@
+                        @{Html.RenderPartial("~/Views/GlobalCodeCategory/UserControls/_GlobalCodeCategoryAddEdit.cshtml", Model);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   @{Html.RenderPartial("~/Views/GlobalCodeCategory/UserControls/_GlobalCodeCategoryList.cshtml", Model.GlobalCodeCategoryList);}
+    <div class="clear"></div>
+</div>
+
+
+

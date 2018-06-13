@@ -1,0 +1,105 @@
+﻿@using Kendo.Mvc.UI
+@using SuppliesDotCom.Model.CustomModel
+@using SuppliesDotCom.Common
+
+@*@model List<UsersCustomModel>*@
+@model List<UsersCustomModel>
+
+
+<div class="table-responsive">
+    @if (Model != null)
+    {
+        if (Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+            <div id="gridContent">
+                @grid.GetHtml("table table_scroll", "gridHead", "gridFooter", "gridRow", "gridAltRow",
+                        columns: grid.Columns(
+                        grid.Column("CurrentUser.UserName", "User Name"),
+                        grid.Column("RoleName", "Assigned Roles"),
+                        grid.Column("CorporateName", "Corporate", canSort: true),
+                        grid.Column("FacilityNames", "Assigned Facilities"),
+                        grid.Column("CurrentUser.FirstName", "FirstName"),
+                        grid.Column("CurrentUser.LastName", "LastName"),
+                        grid.Column("CurrentUser.Address", "Address"),
+                                  grid.Column("PhoneNumber", "Phone"),
+                                   grid.Column("HomePhoneNumber", "Home phone"),
+                           grid.Column("CurrentUser.AdminUser", "Admin"),
+                            grid.Column("CurrentUser.IsActive", "Active"),
+                        grid.Column(header: "Action", format: @<text>
+                                <a href="#" title="Edit User" onclick="return EditUser('@item.CurrentUser.UserID');" style="float:left; width: 15px; margin-right: 3px;">
+                                    <img src="@Url.Content("~/images/edit.png")" />
+                                </a>
+                                &nbsp;
+                                @if (item.CurrentUser != null && item.CurrentUser.UserID != Helpers.GetLoggedInUserId())
+                                {
+                                    @*<a href="#" title="Delete User" onclick="return DeleteUser('@item.CurrentUser.UserID');" style="float: left; width: 15px;">
+                                        <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                                    <a href="#" title="Delete User" onclick="return OpenConfirmPopup('@item.CurrentUser.UserID','Delete User','',DeleteUserItem,null);" style="float: left; width: 15px;">
+                                        <img src="@Url.Content("~/images/delete.png")" />
+                                    </a>
+                                }
+                        </text>)
+                                                                               ))<h6>* Click on any column heading to sort</h6>
+            </div>
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    }
+    @* @(Html.Kendo().Grid(Model)
+           .Name("gridContent11")
+           .HtmlAttributes(new { style = "height: 460px" })
+           .Columns(columns =>
+           {
+               columns.Bound(p => p.UserID).Title("User ID");
+               columns.Bound(p => p.UserName).Title("UserName");
+               columns.Bound(p => p.FirstName).Title("FirstName");
+               columns.Bound(p => p.LastName).Title("LastName");
+               columns.Bound(p => p.Address).Title("Address");
+               columns.Bound(p => p.Phone).Title("Phone");
+               columns.Bound(p => p.HomePhone).Title("Home Phone");
+               columns.Bound(p => p.AdminUser).Title("Admin User");
+               columns.Bound(p => p.IsActive).Title("Is Active");
+               columns.Command(command =>
+                      {
+                          command.Custom("Edit").Click("EditUser");
+                          command.Custom("Delete").Click("DeleteUser");
+                      }).Title("Actions");
+           })
+           .Groupable()
+           .Scrollable()
+           .Sortable()
+           .Filterable(filterable => filterable
+               .Extra(false)
+               .Operators(operators => operators
+                   .ForString(str => str.Clear()
+                       .StartsWith("Starts with")
+                       .IsEqualTo("Is equal to")
+                       .IsNotEqualTo("Is not equal to")
+                   ))
+               )
+          .Pageable(pageable => pageable
+                   .Refresh(true)
+                   .PageSizes(true)
+                   .ButtonCount(5))
+           .DataSource(dataSource => dataSource
+               .Ajax()
+               .PageSize(10)
+               .ServerOperation(false)
+            )
+        .Resizable(resize => resize.Columns(true))
+              )*@
+</div>
+<script>
+
+    //$('#gridContent').Scrollable();
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortUserListGrid, "#gridContent");
+
+
+    });
+
+</script>

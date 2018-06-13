@@ -1,0 +1,63 @@
+﻿@using SuppliesDotCom.Models
+@model GlobalCodeView
+
+<style>
+    .col4 {
+        width: 8%;
+    }
+    .col5 {
+        width: 5%;
+    }
+    .col3 {
+        width: 40%;
+    }
+</style>
+@if (Model.CodesList != null && Model.CodesList.Count > 0)
+{
+    var grid = new WebGrid(Model.CodesList, ajaxUpdateContainerId: "GenericCodeGridContent", canPage: false);
+    <div id="GenericCodeGridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "GlobalCodeGrid" }, tableStyle: "table table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                grid.Column("GlobalCodes.GlobalCodeName", @Model.GlobalCategoryName, canSort: true, style: "width200"),
+                                        grid.Column("GlobalCodes.Description", "Description", canSort: true, style: "col3"),
+                grid.Column("Active", canSort: true, style: "col4", format: @<text>
+        @if (item.GlobalCodes.IsActive != null)
+        {
+            <span>@Convert.ToBoolean(item.GlobalCodes.IsActive)</span>
+        }
+        else
+        {
+            <span>No</span>
+        }
+        </text>),
+                                        grid.Column(header: "Action", style: "col5", format: @<text>
+        <a href="javascript:void(0);" title="Edit" onclick="EditRecordInGeneric('@item.GlobalCodes.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" />
+        </a>
+    @*<a href="javascript:void(0);" title="Delete" onclick="DeleteRecordInGeneric('@item.GlobalCodes.GlobalCodeID');" style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete @Model.GlobalCategoryName','',DeleteRecordInGeneric,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>
+        </text>)
+))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+@*<script>
+    $(function() {
+        if ($('#GlobalCodeGrid tr').length > 0) {
+            $('#GlobalCodeGrid').Scrollable();
+        }
+    });
+</script>*@
+<script>
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortNoteTypeList, "#GenericCodeGridContent");
+    });
+</script>

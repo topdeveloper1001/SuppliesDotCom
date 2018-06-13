@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE7166D6-F4EA-4FFA-A55C-1A71D3407A4E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuppliesDotCom.Bal</RootNamespace>
+    <AssemblyName>SuppliesDotCom.Bal</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\SuppliesDotCom\Libs\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessAccess\AuditLogBal.cs" />
+    <Compile Include="BusinessAccess\BaseBal.cs" />
+    <Compile Include="BusinessAccess\BillingSystemParametersBal.cs" />
+    <Compile Include="BusinessAccess\CityBal.cs" />
+    <Compile Include="BusinessAccess\CorporateBal.cs" />
+    <Compile Include="BusinessAccess\CountryBal.cs" />
+    <Compile Include="BusinessAccess\DashboardBudgetBal.cs" />
+    <Compile Include="BusinessAccess\DashboardDisplayOrderBal.cs" />
+    <Compile Include="BusinessAccess\DashboardIndicatorDataBal.cs" />
+    <Compile Include="BusinessAccess\DashboardIndicatorsBal.cs" />
+    <Compile Include="BusinessAccess\DashboardParametersBal.cs" />
+    <Compile Include="BusinessAccess\DashboardRemarkBal.cs" />
+    <Compile Include="BusinessAccess\DashboardTargetsBal.cs" />
+    <Compile Include="BusinessAccess\DashboardTransactionCounterBal.cs" />
+    <Compile Include="BusinessAccess\DeptTimmingBal.cs" />
+    <Compile Include="BusinessAccess\EquipmentBal.cs" />
+    <Compile Include="BusinessAccess\FacilityBal.cs" />
+    <Compile Include="BusinessAccess\FacilityDepartmentBal.cs" />
+    <Compile Include="BusinessAccess\FacilityRoleBal.cs" />
+    <Compile Include="BusinessAccess\FacilityStructureBal.cs" />
+    <Compile Include="BusinessAccess\GlobalCodeBal.cs" />
+    <Compile Include="BusinessAccess\GlobalCodeCategoryBal.cs" />
+    <Compile Include="BusinessAccess\GlobalCodeCategoryMasterBal.cs" />
+    <Compile Include="BusinessAccess\LoginTrackingBal.cs" />
+    <Compile Include="BusinessAccess\ModuleAccessBal.cs" />
+    <Compile Include="BusinessAccess\ParametersBal.cs" />
+    <Compile Include="BusinessAccess\ProjectTargetsBal.cs" />
+    <Compile Include="BusinessAccess\RoleBal.cs" />
+    <Compile Include="BusinessAccess\RolePermissionBal.cs" />
+    <Compile Include="BusinessAccess\RoleTabsBal.cs" />
+    <Compile Include="BusinessAccess\StateBal.cs" />
+    <Compile Include="BusinessAccess\SystemConfigurationBal.cs" />
+    <Compile Include="BusinessAccess\TabsBal.cs" />
+    <Compile Include="BusinessAccess\UserRoleBal.cs" />
+    <Compile Include="BusinessAccess\UsersBal.cs" />
+    <Compile Include="CommonMappingProfile.cs" />
+    <Compile Include="Interfaces\IAddressService.cs" />
+    <Compile Include="Interfaces\IService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Mapper\Common.cs" />
+    <Compile Include="Mapper\CommonMapperProfile.cs" />
+    <Compile Include="Mapper\DashboardDisplayOrderMapper.cs" />
+    <Compile Include="Mapper\DashboardIndicatorDataMapper.cs" />
+    <Compile Include="Mapper\DashboardIndicatorsMapper.cs" />
+    <Compile Include="Mapper\DashboardParametersMapper.cs" />
+    <Compile Include="Mapper\DashboardRemarkMapper.cs" />
+    <Compile Include="Mapper\DeptTimmingMapper.cs" />
+    <Compile Include="Mapper\EquipmentMapper.cs" />
+    <Compile Include="Mapper\FacilityDepartmentMapper.cs" />
+    <Compile Include="Mapper\FacilityMapper.cs" />
+    <Compile Include="Mapper\FacilityRoleMapper.cs" />
+    <Compile Include="Mapper\FacilityStructureMapper.cs" />
+    <Compile Include="Mapper\GlobalCodeMapper.cs" />
+    <Compile Include="Mapper\ManualDashboardMapper.cs" />
+    <Compile Include="Mapper\Mapper.cs" />
+    <Compile Include="Mapper\ProjectTargetsMapper.cs" />
+    <Compile Include="Mapper\UsersMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SuppliesDotCom.Common\SuppliesDotCom.Common.csproj">
+      <Project>{b0899df4-cf27-4055-87f6-53072cd72794}</Project>
+      <Name>SuppliesDotCom.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuppliesDotCom.Entity\SuppliesDotCom.Model.csproj">
+      <Project>{97ee2157-2e0c-4ba9-94e7-e778c6524d91}</Project>
+      <Name>SuppliesDotCom.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuppliesDotCom.Repository\SuppliesDotCom.Repository.csproj">
+      <Project>{2537dbca-a818-40d5-8b4e-d13d5e0d6f36}</Project>
+      <Name>SuppliesDotCom.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

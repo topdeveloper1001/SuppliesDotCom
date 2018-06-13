@@ -1,0 +1,100 @@
+﻿@using SuppliesDotCom.Model
+@model DashboardIndicatorData
+@{
+    var btnSaveText = "Save";
+    if (Model != null && Model.ID > 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<style>
+    .formError {
+        z-index: 9999999;
+    }
+</style>
+<div class="form">
+    <div class="col-sm-12">
+        <h3>Add Indicator Data</h3>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            @Html.HiddenFor(m => m.ID)
+            <label><span class="mandatoryStar"></span>Select Indicator:</label>
+            <select id="ddlIndicator" class="validate[required] editdis"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Indicator Number:</label>
+            @Html.TextBoxFor(m => m.IndicatorNumber, new { @maxlength = "50", @id = "txtIndicatorNumber", @class = "validate[required] editdis", @readonly = "readonly" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Department Number:</label>
+            @Html.TextBoxFor(m => m.DepartmentNumber, new { @maxlength = "20", @class = "editdis" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Facility:</label>
+            <select id="ddlFacility" class="validate[required] editdis"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Budget Type:</label>
+            <select id="ddlBudgetType" class="validate[required] editdis"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Statistic Data:</label>
+            @Html.TextBoxFor(m => m.StatisticData, new { @maxlength = "50", @id = "txtStatisticData", @class = "validate[required]" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Month:</label>
+            <select id="ddlMonth" class="validate[required] editdis"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Year:</label>
+            <select id="ddlYear" class="editdis"></select>
+        </div>
+        <div class="rowTable">
+            <label>SubCategory 1:</label>
+            <select id="ddlSubCategory1" class="editdis"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>SubCategory 2:</label>
+            <select id="ddlSubCategory2" class="editdis"></select>
+        </div>
+    </div>
+    @*<div class="col-sm-3">
+      <div class="rowTable">
+        <label>Corporate:</label>
+        @Html.TextBoxFor(m => m.CorporateId, new { @maxlength = "10", @id = "txtCorpoarteId" })
+      </div>
+      <div class="rowTable">
+        <label>CreatedBy:</label>
+        @Html.TextBoxFor(m => m.CreatedBy, new { @maxlength = "10", @id = "txtCreatedBy" })
+      </div>
+      <div class="rowTable">
+        <label>CreatedDate:</label>
+        @Html.TextBoxFor(m => m.CreatedDate,"{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtCreatedDate" })
+      </div>
+      <div class="rowTable">
+        <label>ExternalValue2:</label>
+        @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "50", @id = "txtExternalValue2" })
+      </div>
+     <div class="rowTable">
+        <label>ExternalValue3:</label>
+        @Html.TextBoxFor(m => m.ExternalValue3, new { @maxlength = "50", @id = "txtExternalValue3" })
+      </div>
+   </div>*@
+    <div class="col-sm-3">
+        <div class="clear"></div>
+        <div class="rowTable">
+            <div>
+                <label></label>
+                <input type="submit" id="btnSave" class="btn btn-primary edit-btn" value="@btnSaveText" onclick=" return SaveDashboardIndicatorData();" />
+                <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn" type="button" onclick=" return ClearDashboardIndicatorDataForm(); ">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

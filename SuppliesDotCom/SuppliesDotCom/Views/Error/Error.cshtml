@@ -1,0 +1,44 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+<link rel="stylesheet" href="~/assets/css/pages/page_log_reg_v1.css">
+<link rel="stylesheet" href="~/assets/css/pages/page_faq1.css">
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Opps : Error in processing your request - 500 error</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Error Page</li>
+        </ul>
+    </div>
+</div>
+
+<div class="container content">
+    <div class="row">
+        <div class=" col-sm-8 col-sm-offset-2">
+            <div class="reg-page">
+                <div class="reg-header">
+                    <h2>There is an error in processing your request. Please try later.</h2>
+                </div>
+                <p>This error is been reported to the administrator.</p>
+                @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+                {
+                    <div>
+                        <p>
+                            <b>Exception:</b> @Model.Exception.Message<br />
+                            <b>Controller:</b> @Model.ControllerName<br />
+                            <b>Action:</b> @Model.ActionName
+                        </p>
+                        <div style="overflow: scroll">
+                            <pre>
+@Model.Exception.StackTrace
+                </pre>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!--/row-->
+</div>

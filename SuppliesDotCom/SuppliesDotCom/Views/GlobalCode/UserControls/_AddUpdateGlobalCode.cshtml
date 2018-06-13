@@ -1,0 +1,72 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    @*<input type="hidden" value="@Model.GlobalCodeID" id="" />*@
+    <div>
+        <div class="col-sm-4">
+            @*<div class="rowTable">
+                            
+                             <label class="control-label">Facilty Name :</label>
+                             @Html.DropDownListFor(m => m.FacilityNumber, new SelectList(Model.LstFacility, "FacilityNumber", "FacilityName"), "--Select One--", new { id = "ddlFacility",@onChange = "return GetGlobalCodeCategories(this);"  })
+                  
+                        </div>*@
+
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Global Code Category :</label>
+                @Html.HiddenFor(m => m.GlobalCodeCategoryValue, new { @id = "hdGlobalCodeCategoryValue" })
+                <select id="ddlGlobalCodeCategories" class="validate[required]" onchange="OnChangeGlobalCodeCategory('#ddlGlobalCodeCategories');"></select>
+                @*@Html.DropDownListFor(m => m.GlobalCodeCategoryValue, new SelectList(Model.GlobalCodeCategoryList, "GlobalCodeCategoryValue", "GlobalCodeCategoryName"), "--Select One--", new { id = "ddlGCC", @class = "validate[required]" })*@
+            </div>
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Code Name :</label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = "20", @class = "validate[required]" })
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Global Code Value :</label>
+                @Html.TextBoxFor(m => m.GlobalCodeValue, new { @ID = "txtGlobalCodeValue", @maxlength = "10", @class = "validate[optional[onlyNumberSp]]" })
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Code Description :</label>
+                @Html.TextBoxFor(m => m.Description, new { @ID = "txtDescription", @maxlength = "20", @class = "validate[required]" })
+
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Sort Order:</label>
+                @Html.TextBoxFor(m => m.SortOrder, new { @ID = "txtSortOrder", @maxlength = "10", @class = "validate[optional[onlyNumberSp]]" })
+            </div>
+            <div class="form-group">
+                <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })</label>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+
+        <div class="btn-group">
+            @if (Model.GlobalCodeID != 0)
+            {  
+                <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGlobalCodeNameAlreadyExist();" value="Update" />               
+            }
+            else
+            {
+                <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" value="Save" onclick="return CheckIfGlobalCodeNameAlreadyExist();" />                
+            }
+
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearAllGlobalCodes();">Cancel</button>
+        </div>
+    </div>
+
+
+</div>
+
+

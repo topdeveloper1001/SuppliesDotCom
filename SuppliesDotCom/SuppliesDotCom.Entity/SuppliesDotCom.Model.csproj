@@ -1,0 +1,275 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97EE2157-2E0C-4BA9-94E7-E778C6524D91}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuppliesDotCom.Entity</RootNamespace>
+    <AssemblyName>SuppliesDotCom.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomModel\AuditLogCustomModel.cs" />
+    <Compile Include="CustomModel\BaseModel.cs" />
+    <Compile Include="CustomModel\CityCustomModel.cs" />
+    <Compile Include="CustomModel\CommonModel.cs" />
+    <Compile Include="CustomModel\CorporateCustomModel.cs" />
+    <Compile Include="CustomModel\CountryCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardBudgetCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardDisplayOrderCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardIndicatorDataCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardIndicatorsCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardParametersCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardRemarkCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardTargetsCustomModel.cs" />
+    <Compile Include="CustomModel\DashboardTransactionCounterCustomModel.cs" />
+    <Compile Include="CustomModel\DeptTimmingCustomModel.cs" />
+    <Compile Include="CustomModel\EquipmentCustomModel.cs" />
+    <Compile Include="CustomModel\FacilityCustomModel.cs" />
+    <Compile Include="CustomModel\FacilityDepartmentCustomModel.cs" />
+    <Compile Include="CustomModel\FacilityRoleCustomModel.cs" />
+    <Compile Include="CustomModel\FacilityStructureCustomModel.cs" />
+    <Compile Include="CustomModel\GlobalCodeCategoryCustomModel.cs" />
+    <Compile Include="CustomModel\GlobalCodeCustomModel.cs" />
+    <Compile Include="CustomModel\LoginActivityReportCustomModel.cs" />
+    <Compile Include="CustomModel\LoginTrackingCustomModel.cs" />
+    <Compile Include="CustomModel\ManualDashboardCustomModel.cs" />
+    <Compile Include="CustomModel\ParametersCustomModel.cs" />
+    <Compile Include="CustomModel\ProjectTargetsCustomModel.cs" />
+    <Compile Include="CustomModel\RoleSelectionCustomModel.cs" />
+    <Compile Include="CustomModel\RoleTabsCustomModel.cs" />
+    <Compile Include="CustomModel\StateCustomModel.cs" />
+    <Compile Include="CustomModel\BillingSystemParametersCustomModel.cs" />
+    <Compile Include="CustomModel\TabsCustomModel.cs" />
+    <Compile Include="CustomModel\UsersCustomModel.cs" />
+    <Compile Include="EntityDto\DefaultDataDto.cs" />
+    <Compile Include="EntityDto\PatientDto.cs" />
+    <Compile Include="EntityDto\UserDto.cs" />
+    <Compile Include="Interfaces\ICommonEntity.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IEntityCreatable.cs" />
+    <Compile Include="Interfaces\IEntityUpdatable.cs" />
+    <Compile Include="Interfaces\IHardDelete.cs" />
+    <Compile Include="Interfaces\ISoftDelete.cs" />
+    <Compile Include="Migrations\201806131438278_ChangesInSuppliesDotCom.cs" />
+    <Compile Include="Migrations\201806131438278_ChangesInSuppliesDotCom.Designer.cs">
+      <DependentUpon>201806131438278_ChangesInSuppliesDotCom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131442001_ChangesInSuppliesDotCom2.cs" />
+    <Compile Include="Migrations\201806131442001_ChangesInSuppliesDotCom2.Designer.cs">
+      <DependentUpon>201806131442001_ChangesInSuppliesDotCom2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\ATCCodes.cs" />
+    <Compile Include="Model\AuditLog.cs" />
+    <Compile Include="Model\AuditLogArchived.cs" />
+    <Compile Include="Model\Authorization.cs" />
+    <Compile Include="Model\BaseEntity.cs" />
+    <Compile Include="Model\BillingCodeTableSet.cs" />
+    <Compile Include="Model\BillingEntities.cs" />
+    <Compile Include="Model\DashboardBudget.cs" />
+    <Compile Include="Model\DashboardDisplayOrder.cs" />
+    <Compile Include="Model\DashboardIndicatorData.cs" />
+    <Compile Include="Model\DashBoardIndicatorEffects.cs" />
+    <Compile Include="Model\DashboardIndicators.cs" />
+    <Compile Include="Model\DashboardParameters.cs" />
+    <Compile Include="Model\DashboardRemark.cs" />
+    <Compile Include="Model\DashboardTargets.cs" />
+    <Compile Include="Model\DashboardTransactionCounter.cs" />
+    <Compile Include="Model\DeptTimming.cs" />
+    <Compile Include="Model\EquipmentLog.cs" />
+    <Compile Include="Model\EquipmentMaster.cs" />
+    <Compile Include="Model\IndicatorDataCheckList.cs" />
+    <Compile Include="Model\InsuranceCompany.cs" />
+    <Compile Include="Model\LoginTracking.cs" />
+    <Compile Include="Model\ManualDashboard.cs" />
+    <Compile Include="Model\PatientAddressRelation.cs" />
+    <Compile Include="Model\PatientEvaluationSet.cs" />
+    <Compile Include="Model\PatientInsurance.cs" />
+    <Compile Include="Model\ProjectTargets.cs" />
+    <Compile Include="Model\SuppliesDotComParameters.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\Corporate.cs" />
+    <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\CountryCode.cs" />
+    <Compile Include="Model\CountryHoliday.cs" />
+    <Compile Include="Model\CPTCodes.cs" />
+    <Compile Include="Model\CPTCodeTypes.cs" />
+    <Compile Include="Model\DRGCodes.cs" />
+    <Compile Include="Model\Drug.cs" />
+    <Compile Include="Model\ErrorMaster.cs" />
+    <Compile Include="Model\Facility.cs" />
+    <Compile Include="Model\FacilityDepartment.cs" />
+    <Compile Include="Model\FacilityRole.cs" />
+    <Compile Include="Model\FacilityStructure.cs" />
+    <Compile Include="Model\GlobalCodeCategory.cs" />
+    <Compile Include="Model\GlobalCodes.cs" />
+    <Compile Include="Model\HCPCSCodes.cs" />
+    <Compile Include="Model\ModuleAccess.cs" />
+    <Compile Include="Model\Parameters.cs" />
+    <Compile Include="Model\PatientInfo.cs" />
+    <Compile Include="Model\PatientLoginDetail.cs" />
+    <Compile Include="Model\PatientPhone.cs" />
+    <Compile Include="Model\PDFTemplates.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\RolePermission.cs" />
+    <Compile Include="Model\RoleTabs.cs" />
+    <Compile Include="Model\RuleMaster.cs" />
+    <Compile Include="Model\RuleStep.cs" />
+    <Compile Include="Model\ServiceCode.cs" />
+    <Compile Include="Model\SessionClass.cs" />
+    <Compile Include="Model\State.cs" />
+    <Compile Include="Model\SystemConfiguration.cs" />
+    <Compile Include="Model\Tabs.cs" />
+    <Compile Include="Model\UserDefinedDescriptions.cs" />
+    <Compile Include="Model\UserRole.cs" />
+    <Compile Include="Model\Users.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SuppliesDotCom.Common\SuppliesDotCom.Common.csproj">
+      <Project>{b0899df4-cf27-4055-87f6-53072cd72794}</Project>
+      <Name>SuppliesDotCom.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806131438278_ChangesInSuppliesDotCom.resx">
+      <DependentUpon>201806131438278_ChangesInSuppliesDotCom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131442001_ChangesInSuppliesDotCom2.resx">
+      <DependentUpon>201806131442001_ChangesInSuppliesDotCom2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50723</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50723/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

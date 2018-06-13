@@ -1,0 +1,38 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<ProjectTargetsCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridProjectTargetsContent");
+            <div id="gridProjectTargetsContent">
+                @grid.GetHtml(htmlAttributes: new { id = "ProjectTargetsTable" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridRow", columns: grid.Columns(
+                                grid.Column("Id", "Id"),
+                                grid.Column("ProjectNumber", "Project Number"),
+                                grid.Column("ProjectDate", "Project Date"),
+                                grid.Column("TargetPercentageValueStr", "Value (%)"),
+                                grid.Column("CreatedDate", "CreatedDate"),
+                                grid.Column("IsActive", "IsActive"),
+                grid.Column(header: "Action", format: @<text>
+                <a href="javascript:void(0);" onclick="EditProjectTargets('@item.Id')" style="float: left; margin-right: 7px; width: 15px;">
+                    <img src="@Url.Content("~/images/edit.png")" /></a>
+                    @*<a href="javascript:void(0);" title="Delete" onclick="return DeleteProjectTargets('@item.Id');" style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.Id','Delete Project Targets','',DeleteProjectTargets,null); " style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" />
+                </a>
+                
+
+                                                       </text>)
+                                ))
+            </div>            
+        }
+        else
+        {
+
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>

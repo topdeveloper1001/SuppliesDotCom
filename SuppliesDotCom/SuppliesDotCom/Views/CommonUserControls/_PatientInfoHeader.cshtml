@@ -1,0 +1,116 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model PatientInfoCustomModel
+
+
+@if (Model.PatientInfo != null)
+{
+    var patientInfo = Model.PatientInfo;
+    var encounter = Model.CurrentEncounter;
+
+    <div class="summery-bg">
+        <div class="personal-detail">
+            <div class="col-sm-6 col-lg-3">
+                <div class="rowTable">
+                    <label>Patient Name:</label>
+                    <span>@Model.PatientName</span>
+                </div>
+            </div>
+            @*<div class="col-sm-6 col-lg-3">
+                    <label>Birthdate:</label>
+                    <span>@patientInfo.PersonBirthDate</span>
+                </div>*@
+            <div class="col-sm-6 col-lg-2">
+                <div class="row col-sm-5">
+                    <div class="rowTable">
+                        <label>Age:</label>
+                        @*<span>@Model.PersonAge</span>*@
+                        <span>@Model.PatientInfo.PersonAge</span>
+                    </div>
+                </div>
+                <div class="row col-sm-7">
+                    <div class="rowTable">
+                        <label>Sex:</label>
+                        <span>@patientInfo.PersonGender</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="rowTable">
+                    <label>Medical Record Number:</label>
+                    <span>@patientInfo.PersonMedicalRecordNumber</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="col-sm-10 row">
+                    @if (encounter != null && encounter.EncounterPatientType == 2)
+                    {
+                        <div class="col-sm-6 col-lg-12 row">
+                            <div class="rowTable">
+                                <span class="bold">Bed: </span><span>@Model.FloorName / @Model.Room / @Model.BedName</span>
+                            </div>
+                            <div class="rowTable">
+                                <span class="bold">Department : </span><span>@Model.DepartmentName</span>
+                            </div>
+                            <div class="rowTable">
+                                <span class="bold">Service Code: </span><span>@Model.patientBedService / @Model.BedRateApplicable</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2">
+                    @if (Model != null && Model.PatientInfo != null && Model.PatientInfo.PersonVIP != null)
+                    {
+                        <div class="vip-img rowTable">
+                            <img src="@Url.Content("~/images/vip2.png")" width="30">
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        @if (Model.CurrentEncounter != null)
+        {
+            <div class="personal-detail">
+                <input type="hidden" id="hidEncounterNumber" value="@encounter.EncounterNumber" />
+                <div class="col-sm-6 col-lg-3">
+                    <div class="rowTable">
+                        <label>Encounter Starts at:</label>
+                        @if (encounter.EncounterStartTime != null)
+                        {<span>@encounter.EncounterStartTime.Value.ToString("dd/MM/yyyy HH:mm:ss")</span>}
+
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="rowTable">
+                        <label>Attending Physician:</label>
+                        <span>@Model.PrimaryPhysician</span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="rowTable">
+                        <label>Encounter Ends at:</label>
+                        @if (encounter.EncounterEndTime != null)
+                        {<span>@encounter.EncounterEndTime.Value.ToString("dd/MM/yyyy HH:mm:ss")</span>}
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="col-sm-10 row">
+                        @*<div class="rowTable">*@
+                        <label>Current Encounter Number:</label>
+                        <span>@encounter.EncounterNumber</span>
+                        @*</div>*@
+                    </div>
+                    <div class="col-sm-2">
+                        @if (Model != null && Model.PatientInfo != null && Model.OrdersPendingToAdminister)
+                        {
+                            <div class="vip-img rowTable">
+                                <img src="@Url.Content("~/images/Red_flag.png")" title="Order are pending to be Administer." width="30">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

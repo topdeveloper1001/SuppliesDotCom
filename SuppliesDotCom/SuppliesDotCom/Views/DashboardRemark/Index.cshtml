@@ -1,0 +1,54 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model DashboardRemarkView
+
+@{
+    ViewBag.Title = "DashboardRemark View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentticks = DateTime.Now.Ticks;
+}
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardRemarkAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add Dashboard Remark
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardRemarkAddEdit" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/DashboardRemark/UserControls/_DashboardRemarkAddEdit.cshtml", Model.CurrentDashboardRemark);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardRemarkList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" />
+                </span>Dashboard Remark List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardRemarkList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="DashboardRemarkListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardRemark/UserControls/_DashboardRemarkList.cshtml", Model.DashboardRemarkList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script src="~/Scripts/DashboardRemark/DashboardRemarkScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

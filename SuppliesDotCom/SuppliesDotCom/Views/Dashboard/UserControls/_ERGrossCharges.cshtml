@@ -1,0 +1,340 @@
+﻿@using SuppliesDotCom.Common.Common
+@model List<SuppliesDotCom.Model.CustomModel.DashboardChargesCustomModel>
+
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Any())
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "GridContent", canPage: false);
+            var gridId = "";
+            var gridColumns = new List<WebGridColumn>();
+            if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.EmergencyRoomGrossCharges)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Emergency Room Gross Charges", canSort: false, style: "col1"));
+                gridId = "ERGrossChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.AncillaryGrossCharges)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Ancillary Gross Charges", canSort: false, style: "col1"));
+                gridId = "IPGrossChargesGrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.RoomGrossCharges)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Room Gross Charges", canSort: false, style: "col1"));
+                gridId = "RoomGrossChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.OutpatientGrossCharges)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Outpatient Gross Charges", canSort: false, style: "col1"));
+                gridId = "OPGrossChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.InpatientGrossRevenuePerPatientDay)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Inpatient Gross Revenue Per Day", canSort: false, style: "col1"));
+                gridId = "IPRevenueChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.OutpatientRevenuePerEncounter)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Outpatient Revenue Per Encounter", canSort: false, style: "col1"));
+                gridId = "OPRevenueChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.ERpatientRevenuePerEncounter)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Emergency Revenue Per Encounter", canSort: false, style: "col1"));
+                gridId = "ERRevenueChargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.InpatientEncounters)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Inpatient Encounters", canSort: false, style: "col1"));
+                gridId = "InpatientEncountersgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.OutpatientEncounters)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Outpatient Encounters", canSort: false, style: "col1"));
+                gridId = "OutpatientEncountersgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.EREncounters)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Emergency Room Visits", canSort: false, style: "col1"));
+                gridId = "EREncountersgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.Admissions)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Admissions", canSort: false, style: "col1"));
+                gridId = "Admissionsgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.PatientDays)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Patient Days", canSort: false, style: "col1"));
+                gridId = "PatientDaysGrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.Discharges)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Discharges", canSort: false, style: "col1"));
+                gridId = "Dischargesgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.ALOS)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "ALOS", canSort: false, style: "col1"));
+                gridId = "ALOSgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.InpatientsADC)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Inpatients - ADC", canSort: false, style: "col1"));
+                gridId = "InpatientsADCgrid";
+            }
+
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.DollarAmountofTotalClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Dollar Amount of Total Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedDollargrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalInpatientClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Inpatient Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedIPgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.DollarAmountofTotalInpatientClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Dollar Amount of Total Inpatient Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedIPDollargrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalOutpatientClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Outpatient Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedOPgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.DollarAmountoftotalOutpatientClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Dollar Amount of total Outpatient Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedOPDollargrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalEmergencyRoomClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Emergency Room Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedERgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.DollarAmountoftotalEmergencyRoomClaimsSubmitted)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Dollar Amount of total Emergency Room Claims Submitted", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedERDollargrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.AverageDollarAmountofTotalClaims)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Average Dollar Amount of Total Claims", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedAvggrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.AverageDollarAmountofInpatientClaim)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Average Dollar Amount of Inpatient Claim", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedAvgIPgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.AverageDollarAmountofOutpatientClaim)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Average Dollar Amount of Outpatient Claim", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedAvgOPgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.AverageDollarAmountofEmergencyRoomClaim)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Average Dollar Amount of Emergency Room Claim", canSort: false, style: "col1"));
+                gridId = "TotalClaimSubmittedAvgERgrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalClaimsPaidonRemittance)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Claims Paid on Remittance", canSort: false, style: "col1"));
+                gridId = "NumberofTotalClaimsPaidonRemittancegrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.NumberofTotalClaimsDeniedonRemittance)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Number of Total Claims Denied on Remittance", canSort: false, style: "col1"));
+                gridId = "NumberofTotalClaimsDeniedonRemittancegrid";
+            }
+            else if (Model.FirstOrDefault().BudgetFor == Convert.ToString(Convert.ToInt32(ChargesDashBoard.ClaimsAcceptancePercentageFirstSubmission)))
+            {
+                gridColumns.Add(grid.Column("BudgetDescription", "Claims Acceptance Percentage First Submission", canSort: false, style: "col1"));
+                gridId = "ClaimsAcceptancePercentageFirstSubmissiongrid";
+            }
+
+            gridColumns.Add(grid.Column("M1", header: "January", canSort: false, style: "col2 contentRightIdent", format: @<text>@if (item.M1 != null)
+                                                                                                               {
+                                                                                                                   if (item.M1 == Convert.ToDecimal(0.00))
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }
+                                                                                                                   else
+                                                                                                                   {
+                                                                                                                       @item.M1.ToString("#,##0")
+                                                                                                                   }
+                                                                                                                   
+                                                                                                               }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M2", header: "February", canSort: false, style: "col3 contentRightIdent", format: @<text>@if (item.M2 != null)
+                                                                                                                    {
+                                                                                                                        if (item.M2 == Convert.ToDecimal(0.00))
+                                                                                                                        {
+                                                                                                                            <span>-</span>
+                                                                                                                        }
+                                                                                                                        else
+                                                                                                                        {
+                                                                                                                            @item.M2.ToString("#,##0")
+                                                                                                                        }
+                                                                                                                    }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M3", header: "March", canSort: false, style: "col4 contentRightIdent", format: @<text>@if (item.M3 != null)
+                                                                                                                 {
+                                                                                                                     if (item.M3 == Convert.ToDecimal(0.00))
+                                                                                                                     {
+                                                                                                                         <span>-</span>
+                                                                                                                     }
+                                                                                                                     else
+                                                                                                                     {
+                                                                                                                         @item.M3.ToString("#,##0")
+                                                                                                                     }
+                                                                                                                 }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M4", header: "April", canSort: false, style: "col5 contentRightIdent", format: @<text>@if (item.M4 != null)
+                                                                                                                 {
+                                                                                                                     if (item.M4 == Convert.ToDecimal(0.00))
+                                                                                                                     {
+                                                                                                                         <span>-</span>
+                                                                                                                     }
+                                                                                                                     else
+                                                                                                                     {
+                                                                                                                         @item.M4.ToString("#,##0")
+                                                                                                                     }
+                                                                                                                 }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M5", header: "May", canSort: false, style: "col6 contentRightIdent", format: @<text>@if (item.M5 != null)
+                                                                                                               {
+                                                                                                                   if (item.M5 == Convert.ToDecimal(0.00))
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }
+                                                                                                                   else
+                                                                                                                   {
+                                                                                                                       @item.M5.ToString("#,##0")
+                                                                                                                   }
+                                                                                                               }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M6", header: "June", canSort: false, style: "col7 contentRightIdent", format: @<text>@if (item.M6 != null)
+                                                                                                                {
+                                                                                                                    if (item.M6 == Convert.ToDecimal(0.00))
+                                                                                                                    {
+                                                                                                                        <span>-</span>
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                        @item.M6.ToString("#,##0")
+                                                                                                                    }
+                                                                                                                }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M7", header: "July", canSort: false, style: "col8 contentRightIdent", format: @<text>@if (item.M7 != null)
+                                                                                                                {
+                                                                                                                    if (item.M7 == Convert.ToDecimal(0.00))
+                                                                                                                    {
+                                                                                                                        <span>-</span>
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                        @item.M7.ToString("#,##0")
+                                                                                                                    }
+                                                                                                                }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M8", header: "August", canSort: false, style: "col9 contentRightIdent", format: @<text>@if (item.M8 != null)
+                                                                                                              {
+                                                                                                                  if (item.M8 == Convert.ToDecimal(0.00))
+                                                                                                                  {
+                                                                                                                          <span>-</span>
+                                                                                                                  }
+                                                                                                                  else
+                                                                                                                  {
+                                                                                                                          @item.M8.ToString("#,##0")
+                                                                                                                  }
+                                                                                                              }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M9", header: "September", canSort: false, style: "col10 contentRightIdent", format: @<text>@if (item.M9 != null)
+                                                                                                                  {
+                                                                                                                      if (item.M9 == Convert.ToDecimal(0.00))
+                                                                                                                      {
+                                                                                                                              <span>-</span>
+                                                                                                                      }
+                                                                                                                      else
+                                                                                                                      {
+                                                                                                                              @item.M9.ToString("#,##0")
+                                                                                                                      }
+                                                                                                                  }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M10", header: "October", canSort: false, style: "col11 contentRightIdent", format: @<text>@if (item.M10 != null)
+                                                                                                                 {
+                                                                                                                     if (item.M10 == Convert.ToDecimal(0.00))
+                                                                                                                     {
+                                                                                                                              <span>-</span>
+                                                                                                                     }
+                                                                                                                     else
+                                                                                                                     {
+                                                                                                                              @item.M10.ToString("#,##0")
+                                                                                                                     }
+                                                                                                                 }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M11", header: "November", canSort: false, style: "col12 contentRightIdent", format: @<text>@if (item.M11 != null)
+                                                                                                                  {
+                                                                                                                      if (item.M11 == Convert.ToDecimal(0.00))
+                                                                                                                      {
+                                                                                                                              <span>-</span>
+                                                                                                                      }
+                                                                                                                      else
+                                                                                                                      {
+                                                                                                                              @item.M11.ToString("#,##0")
+                                                                                                                      }
+                                                                                                                  }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            gridColumns.Add(grid.Column("M12", header: "December", canSort: false, style: "col13 contentRightIdent", format: @<text>@if (item.M12 != null)
+                                                                                                                  {
+                                                                                                                      if (item.M12 == Convert.ToDecimal(0.00))
+                                                                                                                      {
+                                                                                                                              <span>-</span>
+                                                                                                                      }
+                                                                                                                      else
+                                                                                                                      {
+                                                                                                                              @item.M12.ToString("#,##0")
+                                                                                                                      }
+                                                                                                                  }else
+                                                                                                                   {
+                                                                                                                       <span>-</span>
+                                                                                                                   }</text>));
+            <div id="GenericCodeGridContent">
+                @grid.GetHtml(htmlAttributes: new { id = gridId }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridRow", columns: grid.Columns(gridColumns.ToArray()))
+            </div>
+            <input type="hidden" value="@gridId" id="hdGridId"/>
+        }
+        </div>
+</div>

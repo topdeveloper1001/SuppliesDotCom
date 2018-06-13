@@ -1,0 +1,62 @@
+﻿@using SuppliesDotCom.Models
+@model PDFTemplatesView
+
+@{
+    ViewBag.Title = "PDF Templates View";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/pdf_style.css" rel="stylesheet" />
+<div class="container">
+    <!---Container------>
+    <div class="frame">
+       
+        @*@{Html.RenderPartial("~/Views/PDFTemplates/UserControls/_OPNurseAssessmentForm.cshtml",new ViewDataDictionary());}*@
+        
+    
+    </div>
+    <!---frame-ends----->
+</div>
+<!---Container-ends----->
+
+
+
+<div id="divNurseAssessmentGrid" style="display:none;" >
+    <div class="popup-coverbg"></div>
+    <div class="popup-frame">
+        <div class="popup-main">
+            <div class="popup-content">
+                <div class="popup-close" onclick=" $('#divDocumentsGrid').hide(); $.validationEngine.closePrompt('.formError', true); ">X</div>
+             @*<iframe src="" style="min-height: 580px; width: 100%" id="DocumentsGridDiv"></iframe>*@
+                        <div id="NurseAssessmentDiv" class="pdf_frame">
+                           
+                          </div>
+                        <input type="button" class="btn btn-sm btn-primary" value="Signature" onclick="OpenSignature();" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="divDocumentsGrid"  >
+    <div class="popup-coverbg"></div>
+    <div class="popup-frame">
+        <div class="popup-main">
+            <div class="popup-content">
+                <div class="popup-close" onclick=" $('#divDocumentsGrid').hide(); $.validationEngine.closePrompt('.formError', true); ">X</div>
+             <div>
+                    <div>
+                        @*<iframe src="" style="min-height: 580px; width: 100%" id="DocumentsGridDiv"></iframe>*@
+                        <div id="DocumentsGridDiv" class="pdf_frame">
+                            
+                            @{Html.RenderPartial("~/Views/PDFTemplates/UserControls/_OPHISUrgentCareTriageForm.cshtml", new ViewDataDictionary());}
+                            <input type="button" class="btn btn-sm btn-primary" value="Signature" onclick="OpenSignature();" />
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

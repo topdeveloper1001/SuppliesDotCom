@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<style>
+    .emailTWrapper {width: 960px; margin: 0 auto; background: #fff; border: solid 1px #ddd; padding: 40px;font-family: 'Roboto', sans-serif;}
+    .title { text-align: center; font-size: 40px; border-bottom: none; text-transform: uppercase; color: #e74c3c;}
+    .patientName {color: #424548;}
+    .emailPara { font-size: 16px; text-align: center;}
+    .greyBg { background: #424648; display: block; padding: 10px; text-align: center; margin: 30px 0;}
+    .activate {text-transform: uppercase; color: #fff; padding: 10px; background: #e64b3c; font-size: 18px; transition: all 300ms ease-in-out;}
+    .activate:hover { text-decoration: none; background: #dddddd; color: #424648;}
+    .marginBottom10 {margin-bottom: 20px;}
+</style>
+</head>
+<body>
+    <div class="emailTWrapper">
+        <h2 class="title">welcome <span class="patientName">{User}</span></h2>
+    
+        <p class="emailPara">Please use below code for verification and accessing the excel upload and other feature of OMNI system .</p>
+    
+		<p class="emailPara marginBottom10">Here's 14-Digit Token Code: <b>{CodeValue}</b>. You have to enter this Code in the Excel or in other services.</p>
+		<p class="emailPara">Token generated on : {TokenGeneratedon} , and will expire on {TokenExpireOn}</p>
+        <p class="emailPara">Thanks,</p>
+        <p class="emailPara">With Best Regards,</p>
+        <p class="emailPara"><span>{Facility-Name}</span> Team</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.GlobalCodeCategoryMasterView
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Global Code Category
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeCategoryInfo">
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @{Html.RenderPartial("~/Views/GlobalCodeCategoryMaster/UserControls/_AddUpdateGlobalCodeCategoryMaster.cshtml", Model);}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="GlobalCodeCategoryList">
+        <div class="panel panel-default collapsecss ourcollapse bordertable">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <h4 class="panel-title collapseTitle">
+                    <span class="glyphicon glyphicon-align-justify"></span>&nbsp;Global Code Category List
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body scroller">
+                    <div class="base-color">
+                        <div class="form">
+                            <div class="table-responsive">
+                                <div class="form">
+                                    @{Html.RenderPartial("~/Views/GlobalCodeCategoryMaster/UserControls/_GlobalCodeCategoryMasterList.cshtml", Model.GlobalCodeGlobalCodeCategoryList);}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script src="~/Scripts/GlobalCodeCategoryMaster/GlobalCodeCategoryMaster.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

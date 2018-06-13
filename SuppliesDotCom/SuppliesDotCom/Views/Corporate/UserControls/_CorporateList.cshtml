@@ -1,0 +1,47 @@
+﻿   @* @using Kendo.Mvc.UI*@
+@model List<SuppliesDotCom.Model.Corporate>
+
+<div class="form">
+    <div class="table-responsive">
+        
+
+        @if (Model != null)
+        {
+            if (Model.Count > 0)
+            {
+                var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+                <div id="gridContent">
+                    @grid.GetHtml(tableStyle: "table table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter", rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                        grid.Column("CorporateName", header: "Name", canSort: true),
+                        grid.Column("CorporateNumber", header: "Corporate Number", canSort: true),
+                        grid.Column("StreetAddress", header: "Address", canSort: true),
+                        grid.Column("Email", header: "Email", canSort: true),
+                        grid.Column("CorporateMainPhone", header: "Phone", canSort: true),
+                        grid.Column(header: "Action", format: @<text>
+                                                                   <a href="javascript:void(0);" onclick="EditCorporate('@item.CorporateID') " style="float: left; margin-right: 7px; width: 15px;"><img src="~/images/edit.png" /></a>
+                                                                   @if (item.CorporateID != 6 && item.CorporateID != 12)
+                                                                   {
+                                                                       @*<a href="javascript:void(0);" title="Delete" onclick="return DeleteCorporate('@item.CorporateID'); " style="float: left; width: 15px;"><img src="~/images/delete.png" /></a>*@
+
+    <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.CorporateID','Delete Corporate','',DeleteCorporate,null); " style="float: left; width: 15px;">
+        <img src="@Url.Content("~/images/delete.png")" />
+    </a>
+                                                                   }
+                                                               </text>)
+                        ))<h6>* Click on any column heading to sort</h6>
+                </div>
+            }
+            else
+            {
+                <h2>No Record found</h2>
+            }
+        }
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortCorporateGrid, "#CorporateListDiv");
+    });
+</script>

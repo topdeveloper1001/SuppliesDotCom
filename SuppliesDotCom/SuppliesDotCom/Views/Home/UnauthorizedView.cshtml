@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Unauthorized Access!!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container content errorWidth">
+    <div class="row">
+
+                <div class="reg-header">
+                    <h1 class="notFoundTag">Unauthorized Access!</h1>
+                    <h4 class="text-center">You are not permitted to access this screen!</h4>
+                </div>
+@*<div class="greyBox clear">
+                
+                <p class="text-center">This error is been reported to the administrator.</p>
+                @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+                {
+                    <div>
+                        <p>
+                            <b>Exception:</b> @Model.Exception.Message<br />
+                            <b>Controller:</b> @Model.ControllerName<br />
+                            <b>Action:</b> @Model.ActionName
+                        </p>
+                        <div style="overflow: scroll">
+                            <pre>
+@Model.Exception.StackTrace
+                </pre>
+                        </div>
+                    </div>
+                }
+
+            </div>*@
+
+
+    </div>
+    <!--/row-->
+</div>
+
+

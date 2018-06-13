@@ -1,0 +1,89 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<GlobalCodeCustomModel>
+<style>
+    .col1{width:40%;}
+</style>
+
+@if (Model != null && Model.Any())
+{
+    var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: false);
+    <div id="gridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "SubCategoryGrid" }, tableStyle: "table table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter",
+                        rowStyle: "gridRow", alternatingRowStyle: "gridRow", columns: grid.Columns(
+                                        grid.Column("GlobalCodes.GlobalCodeName", "Name", canSort: true, style: "col1"),
+                                          grid.Column("CodeType", "Type", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodeCustomValue", "Category", canSort: true, style: "col3"),
+                                        grid.Column("GlobalCodes.ExternalValue2", "Range From", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue3", "Range To", canSort: true, style: "col5"),
+                                        grid.Column(header: "Action", style: "col8", format: @<text>
+                                            <a href="javascript:void(0);" title="Edit Record" onclick="EditRecord('@item.GlobalCodes.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+                                                <img src="@Url.Content("~/images/edit.png")" />
+                                            </a>
+                                            &nbsp;
+                                            @*<a href="javascript:void(0);" title="Delete Record" onclick="return DeleteRecord('@item.GlobalCodes.GlobalCodeID');" style="float: left; width: 15px;">
+                                                <img src="@Url.Content("~/images/delete.png")" />
+                                            </a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete Record','',DeleteRecord,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>                                                                
+        </text>)
+              ))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+<script>
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortOrderTypeSubCategoriesList, "#OrderTypeSubCategoryGrid");
+
+        $("div .fht-tbody").scroll(function (e) {
+            if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight && !noMoreData && !inProgress) {
+                e.preventDefault();
+                inProgress = true;
+                $("#loadingDiv").show();
+                ajaxStartActive = false;
+                setTimeout(function () {
+                    $.post("/GlobalCode/BindOrderTypeCategoriesListOnScroll", { "gcc": $("#ddlOrderTypeCategorySearch").length > 0 && $("#ddlOrderTypeCategorySearch").val() > 0 ? $("#ddlOrderTypeCategorySearch").val() : "", "blockNumber": blockNumber },
+                        function (data) {
+                            blockNumber = blockNumber + 1;
+                            noMoreData = data.NoMoreData;
+                            var list = AppendDataToOrderTypeCategoryGrid(data.list);
+                            $("#SubCategoryGrid tbody").append(list);
+                            $("#loadingDiv").hide();
+                            inProgress = false;
+                            ajaxStartActive = true;
+                        });
+                }, 1000);
+            }
+        });
+    });
+
+    function AppendDataToOrderTypeCategoryGrid(data) {
+        var html = "";
+        if (data.length > 0) {
+            $.each(data, function (i, obj) {
+                html += "<tr class=\"gridRow\">";
+                html += "<td class=\"col1\">" + obj.GlobalCodes.GlobalCodeName + "</td>";
+                html += "<td class=\"col2\">" + (obj.GlobalCodes.ExternalValue1 == null ? "" : obj.GlobalCodes.ExternalValue1) + "</td>";
+                html += "<td class=\"col3\">" + (obj.GlobalCodeCustomValue == null ? "" : obj.GlobalCodeCustomValue) + "</td>";
+                html += "<td class=\"col4\">" + (obj.GlobalCodes.ExternalValue2 == null ? "" : obj.GlobalCodes.ExternalValue2) + "</td>";
+                html += "<td class=\"col5\">" + (obj.GlobalCodes.ExternalValue3 == null ? "" : obj.GlobalCodes.ExternalValue3) + "</td>";
+                html += "<td class=\"col11\">";
+                html += "<a style=\"float: left; margin-right: 7px; width: 15px;\" onclick=\"EditRecord('" + obj.GlobalCodes.GlobalCodeID + "') \" href=\"javascript:;\">";
+                html += "<img src=\"/images/edit.png\">";
+                html += "</a>";
+                //html += "<a style=\"float: left; margin-right: 7px; width: 15px;\" onclick=\"return DeleteRecord('" + obj.GlobalCodes.GlobalCodeID + "'); \" title=\"Delete Record\" href=\"javascript:;\">";
+                html += "<a style=\"float: left; margin-right: 7px; width: 15px;\" onclick=\"return OpenConfirmPopup('"+obj.GlobalCodes.GlobalCodeID+"','Delete Record','',DeleteRecord,null); \" title=\"Delete Record\" href=\"javascript:;\">";
+
+                html += "<img src=\"/images/delete.png\">";
+                html += "</a>";
+                html += "</td>";
+                html += "</tr>";
+            });
+        }
+        return html;
+    }
+</script>

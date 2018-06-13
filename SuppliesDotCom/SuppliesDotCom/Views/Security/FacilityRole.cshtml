@@ -1,0 +1,51 @@
+﻿@model SuppliesDotCom.Models.FacilityRoleView
+
+@{
+    ViewBag.Title = "Facility Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Security/FacilityRole.js"></script>
+<div class="white-bg">
+    <div class="panel panel-default custom_panel ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Facility Role
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body" id="facilityRoleFormDiv">
+                @{Html.RenderPartial("~/Views/Security/UserControls/_FacilityRoleAddEdit.cshtml", Model.CurrentFacilityRole);}
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>Facility Role List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color" id="facilityRoleList">
+                    <div class="table-responsive">
+                        @{Html.RenderPartial("~/Views/Security/UserControls/_FacilityRoleList.cshtml", Model.FacilityRolesList);}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="inactive">
+            View In active records
+            <input id="chkShowInActive" type="checkbox" onchange="ShowActiveInActiveFacilityRole('#chkShowInActive');" />
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>

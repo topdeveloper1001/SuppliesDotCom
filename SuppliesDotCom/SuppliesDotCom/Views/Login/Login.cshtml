@@ -1,0 +1,209 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model SuppliesDotCom.Model.Users
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta content="no-cache" http-equiv="Pragma">
+    <meta http-equiv="Expires" content="-1">
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="~/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/css/login.css">
+    <title>Login</title>
+
+
+
+    <script src="~/Scripts/jquery-1.7.2.js"></script>
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    @*<script src="~/js/jquery-1.10.2.js"></script>*@
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/Scripts/json2.js"></script>
+    <script src="~/Scripts/Main.js"></script>
+    @* <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+    <script src="~/Scripts/jquery.maskedinput-1.2.2.js"></script>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <script type="text/javascript">
+        function ChangePassword() {
+
+            var flag = false;
+            if ($("#txtNewPassword").val() == "") {
+                flag = true;
+                $("#sptxtNewPassword").text("Please Enter New password");
+            }
+            else {
+                flag = false;
+                $("#sptxtNewPassword").text("");
+            }
+
+            if ($("#txtConfirm").val() == "") {
+                flag = true;
+                $("#sptxtConfirm").text("Please enter confirm password");
+            }
+            else {
+                flag = false;
+                $("#sptxtConfirm").text("");
+            }
+
+
+            if (flag == true) {
+                return false;
+            }
+            else {
+
+
+                if ($("#txtNewPassword").val() != $("#txtConfirm").val()) {
+                    $("#spErrorMsg1").text('Password and confirm password should match.');
+                    return false;
+                }
+
+
+                var model = {
+                    Password: $("#txtNewPassword").val()
+                };
+
+                var chek = false;
+                var title = "";
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Home/ChangePassword',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    beforeSend: function () { },
+                    success: function (data) {
+
+                        if (data) {
+                            alert('Password Changed Successfully.');
+                            window.location.href = "/Home/PatientLogin";
+                        }
+                        else {
+                            alert('failed');
+                        }
+
+                    },
+                    error: function (msg) {
+                    }
+                });
+
+
+            }
+        }
+        //$(function() {
+        //    function disableBack() { window.history.forward(); }
+        //    window.onload = disableBack();
+        //    window.onpageshow = function (evt) { if (evt.persisted) disableBack(); }
+        //});
+        function disableBackButton() {
+            window.history.forward();
+        }
+        setTimeout("disableBackButton()", 0);
+    </script>
+</head>
+<body onunload="disableBackButton()" onload="disableBackButton()">
+    <div class="main-wrap">
+        <div class="pull-right">
+            <div class="loginContainer">
+                <div class="loginForm col-sm-12 col-md-12 col-lg-12">
+                    @using (Html.BeginForm("UserLogin", "Home", FormMethod.Post))
+                    {
+                        if (ViewBag.check == null || ViewBag.check == "Failed" || ViewBag.check == "CaptchaFailed")
+                        {
+                        <div>
+                            <div class="rowTable text-center">
+                                <img src="@Url.Content("~/images/logo.png")">
+                            </div>
+                            <h1 class="loginTitle">
+                                @if (ViewBag.check == "Failed")
+                                {
+                                    <span id="spErrorMsg">Please enter correct username and password</span>
+                                }
+                                @if (ViewBag.checkCaptcha == "CaptchaFailed")
+                                {
+                                    <span id="spErrorMsg2">Verification code does not matched.</span>
+                                }
+                            </h1>
+                            <div class="form-group">
+                                @*<input type="text" class="form-control input-lg font12 emailInput" placeholder="User Name" />*@
+
+                                @Html.TextBoxFor(m => m.UserName, new { @maxlength = "25", @class = "form-control input-lg font12 emailInput", @placeholder = "User Name" })
+                                <span style="color: red;" id="spUserName"></span>@Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+                            <div class="form-group">
+                                @*<input type="password" class="form-control input-lg font12 passwordInput" placeholder="Password" />*@
+
+                                @Html.PasswordFor(m => m.Password, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput", @placeholder = "Password" })
+                                <span style="color: red;" id="spPassword"></span>
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <div class="rowTable">
+                                @*<img src="../images/captchaImg.png" alt="">*@
+
+                                @Html.Captcha("Try another", "Enter the text you see above:", 6, "Required", true)
+                            </div>
+                            <div class="btn-group">
+                                @*<input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />*@
+
+                                <input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />
+                            </div>
+                        </div>
+                        }
+                    }
+                    @if (ViewBag.check == "InActive")
+                    {
+                        <div>
+                            <div class="rowTable text-center">
+                                <img src="/images/logo.png">
+                            </div>
+                            <h1 class="loginTitle">Change Password:</h1>
+                            <span style="color: red;" id="spErrorMsg1"></span>
+                            <div class="form-group">
+                                @*<input type="text" class="form-control input-lg font12 emailInput" placeholder="User Name" />*@
+
+                                @Html.Password("txtNewPassword", null, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput" })
+
+                                <span style="color: red;" id="sptxtNewPassword"></span>
+                            </div>
+                            <div class="form-group">
+                                @*<input type="password" class="form-control input-lg font12 passwordInput" placeholder="Password" />*@
+
+                                @Html.Password("txtConfirm", null, new { @maxlength = "25", @class = "form-control input-lg font12 passwordInput" })
+                                <span style="color: red;" id="sptxtConfirm"></span>
+                            </div>
+                            <div class="rowTable">
+                                @*<img src="../images/captchaImg.png" alt="">*@
+
+                                @Html.Captcha("Try another", "Enter the text you see above:", 4, "Required", true)
+                            </div>
+
+                            <div class="btn-group">
+                                @*<input type="submit" id="btnLogin" class="blue-btn btn btn-default" value="Login" />*@
+
+                                <input type="button" id="btnChangePassword" onclick="return ChangePassword();" class="blue-btn btn btn-default" value="Change Password" />
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="provided">
+                <div class="rowTable">
+                    <span><strong>Provided by :</strong></span>
+                    <img src="../images/servicedotcom.png" alt="" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

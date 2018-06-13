@@ -1,0 +1,44 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<GlobalCodeCustomModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    var grid = new WebGrid(Model, ajaxUpdateContainerId: "FrequencyGridContent", canPage: false);
+    <div id="FrequencyGridContent">
+        @grid.GetHtml(htmlAttributes: new { id = "GlobalCodeGrid" }, tableStyle: "table table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter",
+                                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                        grid.Column("GlobalCodes.GlobalCodeValue", "Code", canSort: true, style: "col2"),
+                                        grid.Column("GlobalCodes.GlobalCodeName", "Name", canSort: true, style: "col2"),
+        //grid.Column("GlobalCodes.GlobalCodeValue", "Code Value", canSort: true, style: "col3"),
+                                        grid.Column("GlobalCodes.Description", "Description", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue1", "Time1", canSort: true, style: "col4"),
+                                        grid.Column("GlobalCodes.ExternalValue2", "Time2", canSort: true, style: "col5"),
+                                        grid.Column("GlobalCodes.ExternalValue3", "Time3", canSort: true, style: "col6"),
+                                        grid.Column("GlobalCodes.ExternalValue4", "Time4", canSort: true, style: "col7"),
+                                        grid.Column("GlobalCodes.ExternalValue5", "Time5", canSort: true, style: "col8"),
+                                        grid.Column(header: "Action", style: "col9", format: @<text>
+        <a href="javascript:void(0);" title="Edit Frequency" onclick="EditFrequency('@item.GlobalCodes.GlobalCodeID')" style="float: left; margin-right: 7px; width: 15px;">
+            <img src="@Url.Content("~/images/edit.png")" />
+        </a>
+  @*<a href="javascript:void(0);" title="Delete Frequency" onclick="DeleteFrequency('@item.GlobalCodes.GlobalCodeID');" style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>*@
+        <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete Frequency','',DeleteFrequency,null); " style="float: left; width: 15px;">
+            <img src="@Url.Content("~/images/delete.png")" />
+        </a>
+        </text>)
+))<h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+
+<script>
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+
+        SetGridSorting(SortOrderGrid, "#FrequencyGridContent");
+    });
+</script>

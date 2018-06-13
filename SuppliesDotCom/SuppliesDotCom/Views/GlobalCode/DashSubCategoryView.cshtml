@@ -1,0 +1,271 @@
+﻿@using SuppliesDotCom.Models
+@model GlobalCodeView
+
+@{
+    ViewBag.Title = "Dashboard Sub-Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    const string title = "Sub-Category";
+}
+
+<style type="text/css">
+    .ourcollapse .panel-title {
+        font-weight: normal;
+        font-size: 12px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 0 5px 0 0;
+    }
+
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add @title
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="divSubCategoryForm">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="col-sm-12">
+                            <div class="marginTop">
+                                <label class="control-label">Sub-Category Type: </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="rdSub1" class="rdSub" checked="checked" onchange="ToggleRadioButtonsSubCat('#rdSub1','.rdSub')" />Sub-Category 1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="rdSub2" class="rdSub" onchange="ToggleRadioButtonsSubCat('#rdSub2','.rdSub');" />Sub-Category 2
+                                </label>
+                            </div>
+                        </div>
+                        @if (Model != null && Model.CurrentGlobalCode != null)
+                        {
+                            <form id="form1">
+                                <div class="form patientTable">
+                                    @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeID)
+                                    @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeValue)
+                                    @Html.HiddenFor(m => m.CurrentGlobalCode.GlobalCodeCategoryValue)
+
+                                    <div class="col-sm-4" id="DivSubCategory1" style="display: none;">
+                                        <div class="rowTable">
+                                            <label class="control-label"><span class="mandatoryStar"></span>Sub-Category 1: </label>
+                                            <select id="ddlSubCategory1" class="validate[required]"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label class="control-label"><span class="mandatoryStar"></span>Name :</label>
+                                            @Html.TextBoxFor(m => m.CurrentGlobalCode.GlobalCodeName, new { @maxlength = "50", @class = "validate[required]" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="rowTable">
+                                            <label class="control-label">Description :</label>
+                                            @Html.TextBoxFor(m => m.CurrentGlobalCode.Description, new { @maxlength = "250" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="rowTable">
+                                            <label class="control-label">Sort Order:</label>
+                                            @Html.TextBoxFor(m => m.CurrentGlobalCode.SortOrder, new { @maxlength = "3", @disabled = "disabled", @class = "validate[optional[onlyNumberSp]]" })
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="btn-group">
+                                        <button name="save" id="btnSave" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="CheckDuplicateDashboardSubCategory();" type="button">Save</button>
+                                        <button name="ClientCancel" id="btnCancel" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="ClearDataFields();" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseGlobalCodesList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>@title List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseGlobalCodesList" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color" id="GlobalCodesList">
+                    @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_DashboardSubCategoriesList.cshtml", Model.CodesList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    $(function () {
+        $("#form1").validationEngine();
+        BindGlobalCodesWithValue("#ddlSubCategory1", 4347, "");
+        $("#ddlSubCategory1").change(function () {
+            $.post("/GlobalCode/RebindListBySubCategory1Value", { categoryValue: $('#CurrentGlobalCode_GlobalCodeCategoryValue').val(), selectedValue: $("#ddlSubCategory1").val() }, function (data) {
+                BindList("#GlobalCodesList", data);
+            });
+        });
+    });
+
+    function SaveSubCategory() {
+        var isValid = $("#form1").validationEngine({ returnIsValid: true });
+        if (isValid) {
+            var jsonData = {
+                FacilityNumber: '0', /* It's a generic for all facility*/
+                GlobalCodeID: $('#CurrentGlobalCode_GlobalCodeID').val(),
+                GlobalCodeCategoryValue: $('#CurrentGlobalCode_GlobalCodeCategoryValue').val(),
+                GlobalCodeName: $('#CurrentGlobalCode_GlobalCodeName').val(),
+                GlobalCodeValue: $('#CurrentGlobalCode_GlobalCodeValue').val(),
+                SortOrder: $('#CurrentGlobalCode_GlobalCodeValue').val(),
+                ExternalValue1: $('#CurrentGlobalCode_GlobalCodeCategoryValue').val() == "4351" ? ($("#ddlSubCategory1").val() > 0 ? $("#ddlSubCategory1").val() : "0") : "0",
+                Description: $('#CurrentGlobalCode_Description').val(),
+            };
+
+            $.post("/GlobalCode/SaveSubCategory", jsonData, function (data) {
+                BindList("#GlobalCodesList", data);
+                var msg = "Record Saved successfully !";
+                if ($('#GlobalCodeID').val() > 0)
+                    msg = "Record updated successfully";
+                ClearDataFields();
+
+                BindGlobalCodesWithValue("#ddlSubCategory1", 4347, "");
+                ShowMessage(msg, "Success", "success", true);
+            });
+        }
+    }
+
+    function EditSubCategory(id) {
+        $.post("/GlobalCode/GetSubCategoryDetails", { id: id }, function (data) {
+            BindDetails(data);
+        });
+    }
+
+    function SelectSubCategory2() {
+
+        if ($("#rdSub2").is(':checked')) {
+            $('#CurrentGlobalCode_GlobalCodeCategoryValue').val("4351");
+            $("#DivSubCategory1").show();
+        } else {
+            $('#CurrentGlobalCode_GlobalCodeCategoryValue').val("4347");
+            //$(".ddlSubCategory1formError").remove();
+            //$("#ddlSubCategory1").removeClass("validate[required]");
+            $("#DivSubCategory1").hide();
+        }
+        $.post("/GlobalCode/RebindList", { categoryValue: $('#CurrentGlobalCode_GlobalCodeCategoryValue').val() }, function (data) {
+            BindList("#GlobalCodesList", data);
+            //SetGridPaging('?', '?categoryValue=' + $('#CurrentGlobalCode_GlobalCodeCategoryValue').val() + '&'); /*Comment By Krishna on 02-May-2016*/
+        });
+
+        $.post("/GlobalCode/ChangeSubCategory", { categoryValue: $('#CurrentGlobalCode_GlobalCodeCategoryValue').val() }, function (data) {
+            if (data != null) {
+                $('#CurrentGlobalCode_SortOrder').val(data);
+            }
+        });
+    }
+
+
+    function SortDashboardSubCategory(event) {
+        var url = "/GlobalCode/RebindList";
+        if (event.data != null && (event.data.msg != null || event.data.msg != undefined || event.data.msg != '')) {
+            url += "?categoryValue=" + $('#CurrentGlobalCode_GlobalCodeCategoryValue').val() + "&" + event.data.msg;
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            data: null,
+            success: function (data) {
+                BindList("#GlobalCodesList", data);
+                },
+            error: function (msg) {
+            }
+        });
+    }
+
+    function BindDetails(data) {
+
+        $("#form1").validationEngine();
+        $("#btnSave").text("Update");
+        $("#CurrentGlobalCode_GlobalCodeID").val(data.Id);
+        $("#CurrentGlobalCode_GlobalCodeName").val(data.Name);
+        $("#CurrentGlobalCode_GlobalCodeCategoryValue").val(data.Category);
+        $("#CurrentGlobalCode_GlobalCodeValue").val(data.Value);
+        $("#CurrentGlobalCode_Description").val(data.Description);
+        $("#CurrentGlobalCode_SortOrder").val(data.SortOrder);
+        $("#CurrentGlobalCode_SortOrder").prop("disabled", true);
+
+        if ($("#ddlSubCategory1").length > 0 && data.ExternalValue1 > 0) {
+            $("#ddlSubCategory1").val(data.ExternalValue1);
+        }
+
+        $("#ddlSubCategory1").prop("disabled", true);
+        $('#rdSub1 :first').focus();
+        $('#CurrentGlobalCode_GlobalCodeName').focus();
+    }
+
+    function ClearDataFields() {
+        $("#form1").clearForm();
+        $.validationEngine.closePrompt(".formError", true);
+        $("#form1").validationEngine();
+        $('#btnSave').text('Save');
+        $("#ddlSubCategory1").prop("disabled", false);
+        $("#CurrentGlobalCode_SortOrder").prop("disabled", false);
+        $('#CurrentGlobalCode_GlobalCodeID').val("0");
+        $("#CurrentGlobalCode_Description").val('');
+    }
+
+    function ToggleRadioButtonsSubCat(activeSelector, cssClass) {
+        $(cssClass).attr("checked", false);
+        $(activeSelector).prop("checked", "checked");
+        ClearDataFields();
+        SelectSubCategory2();
+    }
+
+    function CheckDuplicateDashboardSubCategory() {
+        var id = $('#CurrentGlobalCode_GlobalCodeID').val();
+        var gcValue = $('#CurrentGlobalCode_GlobalCodeCategoryValue').val();
+        var name = $('#CurrentGlobalCode_GlobalCodeName').val();
+        //var gccValue = $('#CurrentGlobalCode_GlobalCodeValue').val();
+        var jsonData = JSON.stringify({
+            GlobalCodeName: name,
+            GlobalCodeId: id,
+            GlobalCodeCategoryValue: gcValue
+        });
+        $.ajax({
+            type: "POST",
+            url: "/GlobalCode/CheckDuplicateSubCategory",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: jsonData,
+            success: function (data) {
+                if (data == false) {
+                    SaveSubCategory();
+                } else {
+                    ShowMessage("This Dashboard Sub-Category already exists!", "Warning", "warning", true);
+                }
+            },
+            error: function (msg) {
+            }
+        });
+    }
+</script>

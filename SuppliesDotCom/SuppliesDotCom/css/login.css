@@ -1,0 +1,256 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Armata);
+
+body {
+    
+}
+
+.loginWrapper {
+/*width: 1360px;*/ margin: 0 auto; background: url(../images/loginBg.png) no-repeat 0 0; overflow: hidden;}
+
+.loginContainer {
+/*background: rgba(108,217,215,0.9);*/
+background: #ed0700; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VkMDcwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmNTA3MzYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #ed0700 0%, #f50736 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ed0700), color-stop(100%,#f50736)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ed0700 0%,#f50736 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ed0700 0%,#f50736 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ed0700 0%,#f50736 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ed0700 0%,#f50736 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed0700', endColorstr='#f50736',GradientType=0 ); /* IE6-8 */
+
+box-shadow: 0 1px 5px #333;
+margin-top: 60px; margin-right: 100px; padding: 10px; min-height: 200px;overflow: hidden; width: 400px; float: right; border-radius: 5px; color: #fff !important; font-family: 'Armata', sans-serif;
+}
+
+.provided {
+ float: right;
+    margin-right: 100px;
+    margin-top: 20px;
+    width:400px;}
+
+.provided span{margin-top:17px; margin-left:59px; float:left;}
+
+.companyLogo {
+    padding-top: 20%;
+ }
+
+
+.rowTable {
+ overflow: hidden; margin: 10px 0;}
+
+.rowTable label {
+width: 100%; font-weight: normal; margin-bottom: 10px;}
+
+.rowTable input, .rowTable select, .rowTable textarea {
+    width: 100%;}
+
+input[type="text"], input[type="password"], select, input[type="number"] {
+    background-color: rgb(255,255,255);
+	border: 1px solid rgb( 186, 186, 186 );
+	-webkit-box-shadow: inset 0 1px 2px rgba(6, 169, 239, 0.08);
+	-moz-box-shadow: inset 0 1px 2px rgba(6, 169, 239, 0.08);
+	box-shadow: inset 0 1px 2px rgba(6, 169, 239, 0.08);
+	font-size: 14px;
+	padding: 0px 4px !important;	
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	  transition: all 0.1s linear;
+}
+
+input[type="text"]:active, input[type="text"]:focus, input[type="number"]:active, input[type="number"]:focus, input[type="password"]:active, input[type="password"]:focus {
+border-color: #950404;
+	-webkit-box-shadow: inset 0 1px 1px rgba(149, 4, 4, 0.1), 0 0 2px #950404;
+	-moz-box-shadow: inset 0 1px 1px rgba(149, 4, 4, 0.1), 0 0 2px #950404;
+	box-shadow: inset 0 1px 1px rgba(149, 4, 4, 0.1), 0 0 2px #950404;
+	color: rgb(0,0,0);
+}
+
+.clear {
+ clear: both;}
+
+.loginContainer .emailInput, .loginContainer .passwordInput {
+   padding-left: 40px !important;
+}
+
+.loginContainer input[type="text"] {
+   padding-left: 10px;
+}
+
+.font12 {
+    font-size: 16px !important;
+}
+
+.emailInput {
+ background: url(../images/user.png) no-repeat 4% 50% #f2f5fa !important;}
+
+.passwordInput {
+ background: url(../images/password.png) no-repeat 4% 50% #f2f5fa !important;}
+
+.tryAnother {
+ color: #fff; transition: all 300ms ease-in-out;}
+.tryAnother:hover {
+ text-decoration: none; color: #333;}
+
+.loginTitle {
+text-align: center; font-size: 20px; color: #fff; font-family: 'Armata', sans-serif; margin-bottom: 20px;}
+
+.loginTitle1 {
+text-align: center; font-size: 20px; font-family: 'Armata', sans-serif; margin-bottom: 20px;}
+
+
+#CaptchaImage {
+margin-bottom: 10px;}
+#CaptchaInputText { color: #555;
+    display: block; font-size: 16px !important; border-radius: 6px;
+    height: 46px;
+    line-height: 1.33;
+}
+
+.loginContainer .loginForm .rowTable a {
+ color: #fff !important; font-weight: bold; background: url(../images/tryanother.png) no-repeat; padding: 0 0 0 20px; display: inline; width: 100%;}
+
+    .loginContainer .loginForm .rowTable a:hover {
+    text-decoration: underline;}
+
+.loginContainer input[type="text"] {
+outline: 0;}
+
+
+/*patient portal login css starts here*/
+.Pouter1 { /*background: #fff;border-bottom: solid 1px #dbd8d8;*/padding: 20px 0;}
+.patientLogin { padding: 30px 0;}
+.Plogin1 { /*background: #a5ddea;border-radius: 6px;*/border-right: solid 1px #dbd8d8;margin: 10px;}
+.adv { margin: 0 0 0 18px;padding: 0;}
+.adv li { margin: 8px 0;font-size: 14px;}
+
+
+.Plogin1 input[type="text"]:active, .Plogin1 input[type="text"]:focus, .Plogin1 input[type="number"]:active, .Plogin1 input[type="number"]:focus, .Plogin1 input[type="password"]:active, .Plogin1 input[type="password"]:focus {
+    border-color: initial;box-shadow: none;
+}
+.patientBg { background: rgba(255,255,255,0.9);border: solid 2px #fff;box-shadow: 0px 1px 2px #333;border-radius: 6px;overflow: hidden;margin-top: 100px;}
+.patientLogin { /*border-bottom: solid 1px #dbd8d8;*/margin: 0 15px;}
+#patientPortal {
+
+    background: url("../images/report_slider_bg3.png") repeat 0/100%; 
+}
+#resetpassword{background:#f5fafe url("../images/background_img.jpg") no-repeat right -200px;}
+
+.PatientloginContainer { width: 700px;margin: 0 auto;}
+.overlay {
+    background: #000;
+    opacity: 0.50;
+    z-index: 99;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+.modal { z-index: 999 !important;}
+.modal-content, .close { opacity: 1 !important;}
+.modal-header { background: #428bca  !important;color: #fff; border-radius:5px 5px 0 0;}
+.close { background: url("/images/remove-icon-small.png") no-repeat !important;height: 9px;width: 9px; }
+.overflowHidden { overflow: hidden;}
+
+@media (min-width:1200px) {
+    .modal_custom_width {width:1000px;}
+}
+
+.passwordreset{width:400px;}
+.passwordreset .patientBg{margin-top:50px; background:#ed0700; border:none;}
+.passwordreset .patientLogin{padding:15px 0;}
+.passwordreset button{margin-top:10px;}
+.passwordreset label{color:#fff;}
+.passwordreset .btn-link{color:#fffeb9;}
+
+/*patient portal login css ends here*/
+
+.patPorLog { float: right;color: #fff;text-decoration: none;line-height: 30px;}
+.patPorLog:hover, .patPorLog:active, .patPorLog:focus { color: #fff;text-decoration: underline; }
+
+@media only screen and (min-width: 1171px) and (max-width: 1359px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+    .provided span{margin:14px 0 0;}
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1170px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+    .provided span{margin:14px 0 0;}
+}
+
+@media only screen and (min-width: 980px) and (max-width: 1023px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+    .provided span{margin:14px 0 0;}
+
+}
+
+@media only screen and (min-width: 940px) and (max-width: 979px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+    .provided span{margin:14px 0 0;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 939px) {
+        .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+        .provided span{margin:14px 0 0;}
+
+}
+
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+        .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+        .provided span{margin:14px 0 0;}
+}
+
+@media only screen and (min-width: 540px) and (max-width: 639px) {
+        .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+        .provided span{margin:14px 0 0;}
+}
+
+@media only screen and (min-width: 481px) and (max-width: 539px) {
+    .loginContainer {
+    margin-right: 30px;}
+}
+
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 15px; width: 94%;}
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+    .loginContainer, .provided, .loginWrapper {
+     margin-right: 10px; width: 90%;}
+    .loginLogo img {
+     width: 100%;}
+}
+
+.popup-coverbg{position:fixed; top:0; left:0; background:#000; opacity:0.7; width:100%; height:100%; z-index: 99;}
+.popup-frame{position:fixed; top:0; left:0; width:100%; height:100%; z-index:999;}
+.popup-main{width: 80%; margin:100px auto;}
+
+.popup-content{float:left; width:100%; min-height:360px; background:#fff; border:1px solid #eee; padding:10px; position:relative; border-radius: 3px;}
+.popup-close{position:absolute; top:-14px; right:-13px; background: url(../images/ic_close.png); height: 32px; width: 32px; color:#fff; font-size:10px; cursor:pointer; text-indent: 999px;}
+
+.popup_small{width:300px; margin:220px auto 0;}
+.popup_small .popup-content{min-height:100px;}
+.popup_small h3{margin:0 0 15px; padding-bottom:5px; font-weight:bold; font-size:17px; border-bottom:1px solid #ddd;}
+
+.formError{ z-index: 99999 !important;}
+
+.forgotpassword{float:left; width:100%; margin-top:10px;}
+.forgotpassword a{color:#fff;}
+
+.internal_fields{font-weight:normal; width:auto;}
+.internal_fields input[type=radio]{float:left; margin-right:5px;}
+
+.phoneno span{float:left; margin:8px 2px 0 0; width:60px;}
+.phoneno .phone_field{ margin-left:62px;}

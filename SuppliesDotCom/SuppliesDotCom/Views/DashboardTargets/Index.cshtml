@@ -1,0 +1,66 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model DashboardTargetsView
+
+@{
+    ViewBag.Title = "Targets View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .home {
+        -webkit-box-shadow: 10px 10px 1px 0;
+        margin: 4px 31px 62px 41px;
+        border: 6px solid #E6E6FA;
+        -ms-box-shadow: 10px 10px 1px 0;
+        box-shadow: 10px 10px 1px 0;
+        width: 150px;
+        height: 65px;
+        float: left;
+        text-align: center;
+        background-color: #5c7499;
+    }
+</style>
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardTargetsAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add DashboardTargets
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardTargetsAddEdit" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/DashboardTargets/UserControls/_DashboardTargetsAddEdit.cshtml", Model.CurrentDashboardTargets);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardTargetsList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" /></span>DashboardTargets List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardTargetsList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="DashboardTargetsListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardTargets/UserControls/_DashboardTargetsList.cshtml", Model.DashboardTargetsList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script src="~/Scripts/DashboardTargets/DashboardTargets.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

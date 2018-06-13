@@ -1,0 +1,61 @@
+﻿<div class="col-sm-12">
+    <h3>Import From Excel</h3>
+</div>
+<div class="col-sm-6">
+    <div id="fdocupload">
+        <div class="control-label rowTable">
+            @using (Html.BeginForm("ImportExcelFiles", "DashboardIndicatorData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="validateUploadExcel importBillUpload">
+                    <input type="file" id="file" class="validate[required]" name="file" />
+                    <span class="field-validation-error" id="spanfile"></span>
+                    <input type="submit" id="btnImport" class="btn btn-primary edit-btn marginrightBtn" value="Import Data" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    var flag = false;
+    $(function () {
+        $("#file").change(function () {
+            CheckFile();
+        });
+
+        $("#btnImport").click(function () {
+            return flag;
+        });
+    });
+
+    function CheckFile() {
+        var file = getNameFromPath($("#file").val());
+        if (file != null) {
+            var extension = file.substr((file.lastIndexOf('.') + 1));
+            switch (extension) {
+                case 'xls':
+                case 'xlsx':
+                    flag = true;
+                    break;
+            }
+        }
+        if (!flag) {
+            $("#spanfile").text("You can upload only Excel Files!");
+        } else
+            $("#spanfile").text('');
+
+        return false;
+    }
+
+    function getNameFromPath(strFilepath) {
+        var objRe = new RegExp(/([^\/\\]+)$/);
+        var strName = objRe.exec(strFilepath);
+        if (strName == null || strName == '') {
+            return null;
+        }
+        else {
+            return strName[0];
+        }
+    }
+
+</script>

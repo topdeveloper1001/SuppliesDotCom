@@ -1,0 +1,86 @@
+﻿
+
+/*Log detail page styles*/
+
+.LogDetHeaderMain {
+width: 95%;  border: 1px solid grey; background-color: white;
+    margin: 50px 0px 0px 30px;height:50px;
+}
+.LogDetHead {
+text-transform: uppercase;width:85%;float:left; font-size: 20px; margin: 5px 0 5px 20px;font-weight:bold;
+}
+.LogDetBack {
+    text-transform: uppercase;width:8%;float:right; font-size: 20px; margin: 5px 10px 1px 20px;font-weight:bold;
+}
+.LogDetBackLink {
+text-decoration:None;color:black !important;
+}
+.LogDetMain {
+width: 95%; height: 580px;overflow-y:scroll; border: 1px solid grey; background-color: white;
+    margin: 0px 0px 100px 30px;
+}
+.LodDetDiv {
+margin: 20px 40px 10px 15px;
+}
+
+
+/*Log Detail main page*/ 
+.LogMainHeader {
+width: 95%; border: 1px solid grey; background-color: white;
+    margin: 50px 0px 0px 30px;height:50px;
+}
+.LodMainHead {
+text-transform: uppercase; font-size: 20px; margin: 2px 0px 6px 0px;
+        padding: 5px 0px 0px 10px;
+}
+.LodMain {
+width: 95%; height: auto; border: 1px solid grey; background-color: white;
+    margin: 0px 0px 100px 30px; overflow:auto;
+}
+.LodMainStyles {
+margin: 20px 5px 10px 10px;
+}
+.webGrid
+    {
+        margin: 0px;
+        border-collapse: inherit;
+        width: 100%;
+    }
+    .header
+    {
+        font-weight: bold;
+        color: Black;
+        text-align: left;
+    }
+    .webGrid th, .webGrid td
+    {
+        border-bottom: 1px solid #C0C0C0;
+        padding: 0px;
+    }
+    .gridTable
+    {
+        margin: 5px;
+        padding: 10px;
+        border: 1px #c8c8c8 solid;
+        border-collapse: collapse;
+        min-width: 99%;
+        background-color: #fff;
+        color: #fff;
+        font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+        color: dimGray !important;
+    }
+        .gridTable thead tr th:first-child
+        {
+            display :block
+        }
+
+
+table {
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 5px;
+    border: solid 1px #e8eef4;
+}

@@ -1,0 +1,395 @@
+﻿@model SuppliesDotCom.Models.DashboardView
+@{
+    ViewBag.Title = "Workflow Indicator Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string style = "display:block;";
+}
+<div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseEncounterCharts">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Out-patient Billing Trend
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseEncounterCharts" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div class="bedOccupyBorder" id="OpWorkflowChart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colTotalOutPatientVisits">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            Out-Patient Visits
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="colTotalOutPatientVisits" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div id="TotalOutPatientVisitsMonthWise" style="float: left;">
+                        </div>
+                        <div id="TotalOutPatientVisitsYearWise" style="border-left: 1px solid #dddddd; float: left; padding: 0 2px 0 0;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colInPatientBillingTrend">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            In-Patient Billing Trend
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="colInPatientBillingTrend" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div class="bedOccupyBorder" id="InPatientBillingTrendChart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colInPatientDischarges">
+        <h4 class="panel-title collapseTitle">
+            <span>
+                <img src="@Url.Content("~/images/list.png")">
+            </span>
+            In-Patient Discharges
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="colInPatientDischarges" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="base-color">
+                <div class="form">
+                    <div class="table-responsive">
+                        @* <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            
+                        </div>*@
+                        <div id="InPatientDischargesChartMonthWise" style="float: left;">
+                        </div>
+                        <div id="InPatientDischargesChartYearWise" style="border-left: 1px solid #dddddd; float: left; padding: 0 2px 0 0;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function CreateOutPatientBillingTrendChart() {
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetDBBudgetActualChart", "Dashboard")',
+                    dataType: "json",
+                    data: {
+                        DisplayType: 1,
+                    }
+                }
+            },
+            schema: {
+                data: "Data",
+            },
+        });
+
+        $("#OpWorkflowChart").kendoChart({
+            dataSource: dataSource,
+            title: {
+                text: "Out-Patient Billing Trend",
+            },
+            legend: {
+                visible: true,
+                position: "top"
+            },
+            seriesDefaults: {
+                type: "line"
+            },
+            series: [
+                {
+                    field: "Actuals",
+                    name: "Billed",
+                    color: "orange"
+                }, {
+                    field: "Budgets",
+                    name: "Target",
+                    color: "green"
+                }, {
+                    field: "Projection",
+                    name: "Projections",
+                    color: "blue"
+                }
+            ],
+            categoryAxis: {
+                field: "MonthDescription",
+                labels: {
+                    rotation: -90
+                },
+                crosshair: {
+                    visible: true
+                }
+            },
+            valueAxis: {
+                type: "Budgets",
+                labels: {
+                    format: "N0"
+                },
+                minorGridLines: {
+                    visible: true
+                }
+            },
+            tooltip: {
+                visible: true,
+                shared: true,
+                format: "N0"
+            }
+        });
+    }
+
+    function CreateInPatientBillingTrendChart() {
+        var dataSource1 = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetDBBudgetActualChart", "Dashboard")',
+                    dataType: "json",
+                    data: {
+                        DisplayType: 2,
+                    }
+                }
+            },
+            schema: {
+                data: "Data",
+            },
+        });
+        $("#InPatientBillingTrendChart").kendoChart({
+            dataSource: dataSource1,
+            title: {
+                text: "InPatient Billing Trend",
+            },
+            legend: {
+                visible: true,
+                position: "top"
+            },
+            seriesDefaults: {
+                type: "line"
+            },
+            series: [
+                {
+                    field: "Actuals",
+                    name: "Billed",
+                    color: "orange"
+                }, {
+                    field: "Budgets",
+                    name: "Target",
+                    color: "green"
+                }, {
+                    field: "Projection",
+                    name: "Projections",
+                    color: "blue"
+                }
+            ],
+            categoryAxis: {
+                field: "MonthDescription",
+                labels: {
+                    rotation: -90
+                },
+                crosshair: {
+                    visible: true
+                }
+            },
+            valueAxis: {
+                type: "Budgets",
+                labels: {
+                    format: "N0"
+                },
+                minorGridLines: {
+                    visible: true
+                }
+            },
+            tooltip: {
+                visible: true,
+                shared: true,
+                format: "N0"
+            }
+        });
+    }
+
+    $(BindAllChartsInWorkFlowIndicatorView);
+    $(document).bind("kendo:skinChange", BindAllChartsInWorkFlowIndicatorView);
+
+    function BindAllChartsInWorkFlowIndicatorView() {
+
+        //CreateInPatientBillingTrendChart();
+        //CreateOutPatientBillingTrendChart();
+        EncounterWorkflowChart('1027');
+        EncounterWorkflowChart('1028');
+        GetPatientBillingTrends('1027');
+        GetPatientBillingTrends('1028');
+    }
+
+    function EncounterWorkflowChart(id) {
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetHighchartRegistraionData',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ budgetFor: id }),
+            success: function(data) {
+                if (data != null) {
+                    if (id == '1027') {
+                        ShowIPEncounterWorkflowDashBoard(data);
+                    } else {
+                        ShowOpEncounterWorkflowDashBoard(data);
+                    }
+                }
+            },
+            error: function(msg) {
+            }
+        });
+    }
+
+    function GetPatientBillingTrends(typeid) {
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetBillingTrendData',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ diaplayFor: typeid }),
+            success: function(data) {
+                if (data != null) {
+                    if (typeid == '1027') {
+                        ShowIPBillingTrend(data);
+                    } else {
+                        ShowOPBillingTrend(data);
+                    }
+                }
+            },
+            error: function(msg) {
+            }
+        });
+    }
+
+    function ShowIPBillingTrend(dashboardData) {
+        var roomChargesDataMonthly = new Array();
+        var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var monthsArray = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            monthsArray.push(dashboardData[i].M2);
+            monthsArray.push(dashboardData[i].M3);
+            monthsArray.push(dashboardData[i].M4);
+            monthsArray.push(dashboardData[i].M5);
+            monthsArray.push(dashboardData[i].M6);
+            monthsArray.push(dashboardData[i].M7);
+            monthsArray.push(dashboardData[i].M8);
+            monthsArray.push(dashboardData[i].M9);
+            monthsArray.push(dashboardData[i].M10);
+            monthsArray.push(dashboardData[i].M11);
+            monthsArray.push(dashboardData[i].M12);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('InPatientBillingTrendChart', roomChargesDataMonthly, "line", "IP Billing Trend", "By Month", categories);
+    }
+
+    function ShowOPBillingTrend(dashboardData) {
+        var roomChargesDataMonthly = new Array();
+        var roomChargesDataYearly = new Array();
+        var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var monthsArray = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            monthsArray.push(dashboardData[i].M2);
+            monthsArray.push(dashboardData[i].M3);
+            monthsArray.push(dashboardData[i].M4);
+            monthsArray.push(dashboardData[i].M5);
+            monthsArray.push(dashboardData[i].M6);
+            monthsArray.push(dashboardData[i].M7);
+            monthsArray.push(dashboardData[i].M8);
+            monthsArray.push(dashboardData[i].M9);
+            monthsArray.push(dashboardData[i].M10);
+            monthsArray.push(dashboardData[i].M11);
+            monthsArray.push(dashboardData[i].M12);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('OpWorkflowChart', roomChargesDataMonthly, "line", "OP Billing Trend", "By Month", categories);
+    }
+
+    function ShowIPEncounterWorkflowDashBoard(dashboardData) {
+        var roomChargesDataMonthly = new Array();
+        var roomChargesDataYearly = new Array();
+        var monthsArray = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        for (var j = 2; j < 4; j++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[j].M1);
+            roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('InPatientDischargesChartMonthWise', roomChargesDataMonthly, "bar", "Total In Patient Visits", "By Month", '');
+        ShowTwoBarsChart('InPatientDischargesChartYearWise', roomChargesDataYearly, "bar", "Total In patient Visits", "Year To Date", '');
+    }
+
+    function ShowOpEncounterWorkflowDashBoard(dashboardData) {
+        var roomChargesDataMonthly = new Array();
+        var roomChargesDataYearly = new Array();
+        var monthsArray = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        for (var j = 2; j < 4; j++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[j].M1);
+            roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('TotalOutPatientVisitsMonthWise', roomChargesDataMonthly, "bar", "Total Outpatient Visits", "By Month", '');
+        ShowTwoBarsChart('TotalOutPatientVisitsYearWise', roomChargesDataYearly, "bar", "Total Outpatient Visits", "Year To Date", '');
+    }
+</script>

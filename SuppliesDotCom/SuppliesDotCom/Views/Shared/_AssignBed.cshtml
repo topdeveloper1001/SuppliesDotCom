@@ -1,0 +1,93 @@
+﻿@model DTO.RoomOccupencyDTO
+@{
+    ViewBag.Title = "Bed Assignment List";
+    WebGrid grid = new WebGrid(canPage: false, canSort: true, rowsPerPage: 100);
+    grid.Bind(Model.LstRooms, autoSortAndPage: false, rowCount: 100
+    );
+
+}
+
+<script src="~/Scripts/Encounter.js"></script>
+@*@using (Html.BeginForm("SaveRoomOccupencyInfo", "Home"))
+    {
+
+
+*@<div class="white-bg">
+    <h1 class="title">Assign Bed</h1>
+    <div id="divmsg" style="color: green; font-weight: bold;"></div>
+
+    <label id="selectedBed">
+    </label>
+    <br />
+    <br />
+    @grid.GetHtml(
+    htmlAttributes: new { id = "grid" },
+    tableStyle: "table table-grid",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    fillEmptyRows: false,
+    mode: WebGridPagerModes.All,
+    firstText: "<< First",
+    previousText: "< Prev",
+    nextText: "Next >",
+    lastText: "Last >>",
+    columns: new[] {
+        
+         grid.Column(header: "Assign",format:@<text> <a href="@Url.Action("EditAdmitPatient", "Admin", new { encounterId = item.EncounterId})" title="Edit">Edit</a>
+    <a href="javascript://" id="Update_@item.EncounterID" style="display:none;margin-right:2px;" class="update">Update</a>
+    <a href="javascript://" id="Cancel_@item.EncounterID" style="display:none;margin-right:2px;" class="cancel">Cancel</a>
+
+    grid.Column("FloorNumber", header: "Floor",canSort: true),
+
+    grid.Column("FloorRoomNumber", header: "Room Number", canSort: true),
+
+    grid.Column("FacilityRoomType", header: "Room Type", canSort: true),
+
+    grid.Column("FacilityBedNumber", header: "Bed Number", canSort: true),
+
+    @*grid.Column("Occupied", header: "Occupied", canSort: true),*@
+
+    grid.Column("RoomId", header: "Room Id", canSort: true),
+
+    </text>)
+
+    })
+
+</div>
+@*}*@
+<div id="dialog-message" title="Message" class="recapDialog">
+    <div class="titlebar">Create Encounters</div>
+    <p id="CloseImg" class="dialogclose">
+        <input type="image" src="~/images/close.jpg" onclick="return hideDiv()" class="Inser_Inno_close" />
+    </p>
+    <p class="dialogtext">
+
+        <span id="Messagecontent" style="padding: 5px;">There are two options to create encounters by using "Admin Patient/ Inpatient" Or "OutPatient/ER" forms.<br />
+            So create encounters by click on the corresponding button.  </span>
+    </p>
+    <div class="btnStyles" style="float: left;">
+        <div style="float: left; width: 50%;">
+            <input type="button" value="Admit Patient / Inpatient" id="btnInpatient" class="blue-btn btnokay" style="display: block; width: 120px;" />
+        </div>
+        <div style="float: left; width: 50%;">
+            <input type="button" value="OutPatient/ ER" id="btnOutpatient" class="blue-btn btnokay" style="display: block; width: 120px;" />
+        </div>
+    </div>
+</div>
+<div id="overlay" class="overlayRecap"></div>
+
+
+
+
+
+<script type="text/javascript">
+
+    var test = '@ViewBag.ViewOnly';
+
+    if (test == 'True') {
+        $("#grid thead th:last-child, #grid tbody td:last-child").remove();
+    }
+
+</script>

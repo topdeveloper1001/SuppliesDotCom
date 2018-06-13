@@ -1,0 +1,313 @@
+﻿@using Kendo.Mvc.UI
+@model SuppliesDotCom.Model.CustomModel.GlobalCodeModel
+
+@{
+    var btnSaveText = "Save";
+    if (Model.GlobalCodeID != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    @Html.HiddenFor(m => m.GlobalCodeCategoryValue, new { @id = "hfGlobalCodeCategoryValue" })
+    <div class="form patientTable" id="validate">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Order Set Table Number:</label>
+                @Html.TextBoxFor(m => m.ExternalValue3, new { @ID = "txtOrderSetTableNumber", @maxlength = "20", @class = "validate[required,custom[onlyNumberSp]]" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Order Set Table Name:</label>
+                @Html.TextBoxFor(m => m.ExternalValue4, new { @ID = "txtOrderSetTableName", @maxlength = "20", @class = "validate[required]" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Order Set  Code:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeCategoryValue, new { @ID = "txtGlobalCodeCategoryValue", @maxlength = "20", @class = "validate[required,custom[onlyNumberSp]]", @onchange = "return CheckIfCptCodeExistsInRange('#txtGlobalCodeCategoryValue');" })
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Description:</label>
+                @Html.TextAreaFor(m => m.GlobalCodeCategoryName, new { @ID = "txtGlobalCodeCategoryName", @maxlength = "1000", @class = "validate[required]", @Style = "height:48px; line-height: 20px; overflow-y:scroll;" })
+            </div>
+        </div>
+    </div>
+    <div id="divLabTestOrderCodeValues">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 1:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue1, new { @ID = "txtCodeValue1", @maxlength = "10", @class = "validate[required,custom[integer]] cptCodeValue", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue2');" })
+                </div>
+                @*<div class="col-sm-6">
+                    <label class="control-label"> Time 1:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val1Str, new { @ID = "txtCodeExternal1Val1Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 1 Type:</label>
+                    <select id="ddlOrderedType1" name="ddlOrderedType1" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val1Str, new { @id = "hfCodeExternal2Val1Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 2:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue2, new { @ID = "txtCodeValue2", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue2');" })
+                </div>
+                @* <div class="col-sm-6">
+                    <label class="control-label"> Time 2:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val2Str, new { @ID = "txtCodeExternal1Val2Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 2 Type:</label>
+                    <select id="ddlOrderedType2" name="ddlOrderedType2" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val2Str, new { @id = "hfCodeExternal2Val2Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 3:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue3, new { @ID = "txtCodeValue3", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue3');" })
+                </div>
+                @*  <div class="col-sm-6">
+                    <label class="control-label"> Time 3:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val3Str, new { @ID = "txtCodeExternal1Val3Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 3 Type:</label>
+                    <select id="ddlOrderedType3" name="ddlOrderedType3" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val3Str, new { @id = "hfCodeExternal2Val3Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+
+                    <label class="control-label">
+                        Value 4:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue4, new { @ID = "txtCodeValue4", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue4');" })
+                </div>
+                @* <div class="col-sm-6">
+                <label class="control-label"> Time 4:</label>
+                @Html.TextBoxFor(m => m.CodeExternal1Val4Str, new { @ID = "txtCodeExternal1Val4Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+            </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 4 Type:</label>
+                    <select id="ddlOrderedType4" name="ddlOrderedType4" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val4Str, new { @id = "hfCodeExternal2Val4Str" })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 5:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue5, new { @ID = "txtCodeValue5", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue5');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @*<div class="col-sm-6">
+                    <label class="control-label"> Time 5:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val5Str, new { @ID = "txtCodeExternal1Val5Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 5 Type:</label>
+                    <select id="ddlOrderedType5" name="ddlOrderedType5" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val5Str, new { @id = "hfCodeExternal2Val5Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 6:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue6, new { @ID = "txtCodeValue6", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue6');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @*<div class="col-sm-6">
+                    <label class="control-label"> Time 6:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val6Str, new { @ID = "txtCodeExternal1Val6Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 6 Type:</label>
+                    <select id="ddlOrderedType6" name="ddlOrderedType6" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val6Str, new { @id = "hfCodeExternal2Val6Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 7:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue7, new { @ID = "txtCodeValue7", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue7');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                <div class="col-sm-7">
+                    <label class="control-label">Time 7 Type:</label>
+                    <select id="ddlOrderedType7" name="ddlOrderedType7" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val7Str, new { @id = "hfCodeExternal2Val7Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 8:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue8, new { @ID = "txtCodeValue8", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue8');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                <div class="col-sm-7">
+                    <label class="control-label">Time 8 Type:</label>
+                    <select id="ddlOrderedType8" name="ddlOrderedType8" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val8Str, new { @id = "hfCodeExternal2Val8Str" })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 9:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue9, new { @ID = "txtCodeValue9", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue9');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @*  <div class="col-sm-6">
+                    <label class="control-label"> Time 9:</label>
+                     @Html.TextBoxFor(m => m.CodeExternal1Val9Str, new { @ID = "txtCodeExternal1Val9Str", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 9 Type:</label>
+                    <select id="ddlOrderedType9" name="ddlOrderedType9" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val9Str, new { @id = "hfCodeExternal2Val9Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 10:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue10, new { @ID = "txtCodeValue10", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue10');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @* <div class="col-sm-6">
+                    <label class="control-label"> Time 10:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val10Str, new { @ID = "txtCodeExternal1Val10Str", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 10 Type:</label>
+                    <select id="ddlOrderedType10" name="ddlOrderedType10" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val10Str, new { @id = "hfCodeExternal2Val10Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 11:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue11, new { @ID = "txtCodeValue11", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue11');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @* <div class="col-sm-6">
+                    <label class="control-label"> Time 11:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val11Str, new { @ID = "txtCodeExternal1Val11Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 11 Type:</label>
+                    <select id="ddlOrderedType11" name="ddlOrderedType11" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val11Str, new { @id = "hfCodeExternal2Val11Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 12:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue12, new { @ID = "txtCodeValue12", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue12');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @* <div class="col-sm-6">
+                    <label class="control-label"> Time 12:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val12Str, new { @ID = "txtCodeExternal1Val12Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 12 Type:</label>
+                    <select id="ddlOrderedType12" name="ddlOrderedType12" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val12Str, new { @id = "hfCodeExternal2Val12Str" })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 13:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue13, new { @ID = "txtCodeValue13", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue13');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+
+                @* <div class="col-sm-6">
+                <label class="control-label"> Time 13:</label>
+                @Html.TextBoxFor(m => m.CodeExternal1Val13Str, new { @ID = "txtCodeExternal1Val13Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+            </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 13 Type:</label>
+                    <select id="ddlOrderedType13" name="ddlOrderedType13" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val13Str, new { @id = "hfCodeExternal2Val13Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 14:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue14, new { @ID = "txtCodeValue14", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue14');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @*  <div class="col-sm-6">
+                    <label class="control-label"> Time 14:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val14Str, new { @ID = "txtCodeExternal1Val14Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 14 Type:</label>
+                    <select id="ddlOrderedType14" name="ddlOrderedType14" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val14Str, new { @id = "hfCodeExternal2Val14Str" })
+                </div>
+            </div>
+            <div class="rowTable blueBox1">
+                <div class="col-sm-5">
+                    <label class="control-label">
+                        Value 15:
+                    </label>
+                    @Html.TextBoxFor(m => m.CodeValue15, new { @ID = "txtCodeValue15", @onchange = "return CheckIfCptCodeExistsInRange('#txtCodeValue15');", @maxlength = "10", @class = "validate[optional[integer]] cptCodeValue" })
+                </div>
+                @*  <div class="col-sm-6">
+                    <label class="control-label"> Time 15:</label>
+                    @Html.TextBoxFor(m => m.CodeExternal1Val15Str, new { @ID = "txtCodeExternal1Val15Str", @maxlength = "10", @class = "validate[optional[integer]]" })
+                </div>*@
+                <div class="col-sm-7">
+                    <label class="control-label">Time 15 Type:</label>
+                    <select id="ddlOrderedType15" name="ddlOrderedType15" class="ddlVal"></select>
+                    @Html.HiddenFor(m => m.CodeExternal2Val15Str, new { @id = "hfCodeExternal2Val15Str" })
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="btn-group">
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return SaveLabTestOrderSet();" value="@btnSaveText" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearLabTestCodeForm();">Cancel</button>
+        </div>
+    </div>
+</div>

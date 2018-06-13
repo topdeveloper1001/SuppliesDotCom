@@ -1,0 +1,159 @@
+﻿@model SuppliesDotCom.Model.Corporate
+@using SuppliesDotCom.Model
+@{
+    ViewBag.Title = "Corporate";
+}
+<div class="form" id="CorporateFormDiv">
+    <div class="col-sm-6 col-md-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Name:</label>
+            @Html.TextBoxFor(m => m.CorporateName, new { @maxlength = "30", @id = "txtCorporateName", @class = "validate[required,custom[nameFormat]]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Corporate Number:</label>
+            @Html.TextBoxFor(m => m.CorporateNumber, new { @maxlength = "20", @id = "txtCorporateNumber", @class = "validate[required,custom[integer]]" })
+        </div>
+        <div class="rowTable">
+            <label>Street Address:</label>
+            @Html.TextBoxFor(m => m.StreetAddress, new { @maxlength = "50", @id = "txtCorporateStreetAddress" })
+        </div>
+        <div class="rowTable">
+            <label>Street Address 2:</label>
+            @Html.TextBoxFor(m => m.StreetAddress2, new { @maxlength = "50", @id = "txtCorporateStreetAddress2" })
+        </div>
+
+
+
+    </div>
+    <div class="col-sm-6 col-md-3">
+        @{Html.RenderPartial("~/Views/CommonUserControls/CascadingCountryView.cshtml", new SuppliesDotCom.Models.CommonDataView
+          {
+              CountryList = new List<Country>(),
+              StatesList = new List<State>(),
+              CityList = new List<City>(),
+              CountryId = Convert.ToInt32(Model.CountryID),
+              StateId = Convert.ToInt32(Model.StateID),
+              CityId = Convert.ToInt32(Model.CityID),
+          });}
+
+
+
+        @*<div class="rowTable">
+                <label>Corporate Roles:</label>
+                @Html.CheckBoxListFor(model => model.CheckBoxListName,
+                            model => model.ListOfYourData,
+                            entity => entity.FieldToUseAsCheckBoxValue,
+                            entity => entity.FieldToUseAsCheckBoxName,
+                            model => model.ListOfYourSelectedData)
+
+            </div>*@
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="rowTable">
+            <label>Email Address:</label>
+            @Html.TextBoxFor(m => m.Email, new { @maxlength = "30", @id = "txtCorporateEmailAddress", @class = "validate[optional[email]]" })
+        </div>
+        <div class="rowTable">
+            <label>Corporate Zip Code:</label>
+            @Html.TextBoxFor(m => m.CorporateZipCode, new { @maxlength = "10", @id = "txtCorporateZipCode", @class = "validate[optional[integer]]" })
+        </div>
+        <div class="rowTable">
+            <label>Corporate PO Box:</label>
+            @Html.TextBoxFor(m => m.CorporatePOBox, new { @maxlength = "10", @id = "txtCorporatePOBox", @class = "validate[optional[integer]]" })
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="rowTable">
+            <label>Corporate Main Phone:</label>
+            <select id="ddlMainPhone" class="marginBottomNone telephoneCol1" onchange="return OnCountryDropdownChange('#lblMainPhone', '#ddlMainPhone');"></select>
+            <span id="lblMainPhone" class="marginTopPhoneNo"></span>
+            @Html.HiddenFor(m => m.CorporateMainPhone, new { @id = "hdMainPhone" })
+            @Html.TextBoxFor(m => m.CorporateMainPhone, new { @maxlength = "11", @class = "PhoneMask telephoneCol2 validate[optional[phone]]", @id = "txtCorporateMainPhone" })
+        </div>
+        <div class="rowTable">
+            <label>Corporate Fax:</label>
+            <select id="ddlFax" class="marginBottomNone telephoneCol1" onchange="return OnCountryDropdownChange('#lblFax', '#ddlFax');"></select>
+            <span id="lblFax" class="marginTopPhoneNo"></span>
+            @Html.HiddenFor(m => m.CorporateFax, new { @id = "hdCorporateFax" })
+            @Html.TextBoxFor(m => m.CorporateFax, new { @maxlength = "11", @class = "telephoneCol2 validate[optional[phone]] PhoneMask", @id = "txtCorporateFax" })
+        </div>
+        <div class="rowTable">
+            <label>Corporate Second Phone:</label>
+            <select id="ddlSecondPhone" class="marginBottomNone telephoneCol1" onchange="return OnCountryDropdownChange('#lblSecondPhone', '#ddlSecondPhone');"></select>
+            <span id="lblSecondPhone" class="marginTopPhoneNo"></span>
+            @Html.HiddenFor(m => m.CorporateSecondPhone, new { @id = "hdSecondPhone" })
+            @Html.TextBoxFor(m => m.CorporateSecondPhone, new { @maxlength = "11", @class = "PhoneMask telephoneCol2 validate[optional[phone]]", @id = "txtCorporateSecondPhone" })
+        </div>
+
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="col-lg-12">
+        <h2 class="form_heading">Set Default Table Numbers</h2>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>HCPCS Table Number:</label>
+            <select id="ddlHcpcsTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultHCPCSTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>Drug Table Number:</label>
+            <select id="ddlDrugTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultDRUGTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>DRG Table Number:</label>
+            <select id="ddlDrgTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultDRGTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>Diagnosis Table Number:</label>
+            <select id="ddlDiagnosisTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultDiagnosisTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>CPT Table Number:</label>
+            <select id="ddlCptTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultCPTTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>ServiceCode Table Number:</label>
+            <select id="ddlServiceCodeTablSet"></select>
+            @Html.HiddenFor(m => m.DefaultServiceCodeTableNumber)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="rowTable">
+            <label>Bill Edit Rule Table Number:</label>
+            <select id="ddlBillEditRuleTablSet"></select>
+            @Html.HiddenFor(m => m.BillEditRuleTableNumber)
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <div style="float: left;">
+            @if (Model != null && Model.CorporateID != 0)
+            {  <input type="submit" class="btn btn-primary edit-btn marginBtn" value="Update" onclick="return CheckDuplicateCorporate('@Model.CorporateID    ');" />
+            }
+            else
+            {
+                <input type="submit" onclick="return CheckDuplicateCorporate('@Model.CorporateID    ');" class="btn btn-primary edit-btn marginBtn" value="Save" />
+            }
+            <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearAll();">Cancel</button>
+            <br />
+            <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+        </div>
+    </div>
+</div>

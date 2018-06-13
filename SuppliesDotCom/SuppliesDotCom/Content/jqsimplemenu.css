@@ -1,0 +1,149 @@
+.menu, .menu ul
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+    line-height: 2.5em;
+}
+.menu a
+{
+    text-decoration: none;
+    font-size: 12px !important;
+    cursor: pointer;
+}
+.menu > li
+{
+    /*margin-left: 15px;*/
+}
+.menu > li:first
+{
+    margin-left:0px!important;
+    }
+.menu > li > a
+{
+    padding: 0px 10px;
+    margin: 0;
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+    font-weight: normal;
+}
+div.box
+{
+    position: absolute;
+    z-index: -1;
+    background-color: #75CDD2;
+    left: 0;
+    top: 0;
+    border-radius: 4px 4px 0px 0px;
+    -moz-border-radius: 4px 4px 0px 0px;
+    -webkit-border-radius: 4px 4px 0px 0px;
+}
+li.pull-down
+{
+    padding-right:6px;
+    }
+li.pull-down > a
+{
+    background-image: url('../images/darrow.png');
+    background-position: 92% 55%;
+    background-repeat: no-repeat;
+    padding-right: 20px;
+}
+li.right-menu > a
+{
+    background-image: url('../images/rarrow.png');
+    background-position: 95% 45%;
+    background-repeat: no-repeat;
+}
+.menu a.selected
+{
+    background-color: #75CDD2;
+    border-radius: 0px 4px 4px 4px;
+    -moz-border-radius: 0px 4px 4px 4px;
+    -webkit-border-radius: 0px 4px 4px 4px;
+}
+.menu li
+{
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+    .menu li:hover {
+        background-color: #cfc9c6;
+    }
+
+.menu ul
+{
+    position: absolute;
+    display: none;
+    width: 200px;
+    top: 2.5em; /*padding-right: 10px;*/
+    background-color: #ebebeb; /*-moz-opacity: .50;     filter: alpha(opacity=50);     opacity: .50;*/
+    border-radius: 0px 0px 4px 4px;
+    -moz-border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    z-index: 9;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.menu li ul a
+{
+    display: block;
+    height: auto;
+    color: #000;
+    padding: 4px 10px;
+    line-height: 1.34em;
+    font-weight: normal;
+}
+.menu li ul a:hover, .menu li.selected {
+    /*background-image: none, linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0px, rgba(255, 255, 255, 0) 100%);background-color: #bcb4b0;*/
+    
+}
+.menu-item-selected:hover { background: #fff;}
+.menu-item-selected a:hover{
+    /*background-image: url("../images/rarrow.png");background-repeat: no-repeat;*/
+    color: #000 !important;
+}
+.menu li ul li
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.menu ul ul
+{
+    top: auto;
+}
+
+.menu li ul ul
+{
+    left: 200px; /*margin: 0px 0 0 10px;*/
+    top: 0;
+}
+/*.menu-item-selected > a
+{
+    background-color: #FFFEFD;
+    -moz-opacity: .50;
+    filter: alpha(opacity=50);
+    opacity: .50;
+}*/
+.menu-item-selected > a:hover
+{
+   /*  color: #2e2e2e !important;
+   
+      background:#d3cecb url('../images/rarrow.png') 95% 45% no-repeat;
+    background: -webkit-linear-gradient(#d3cecb, #bfb7b3); 
+  background: -o-linear-gradient(#d3cecb, #bfb7b3); 
+  background: -moz-linear-gradient(#d3cecb, #bfb7b3); 
+  background: linear-gradient(#d3cecb, #bfb7b3);*/ 
+}
+.tab-selected{ background: #fff;}
+.page-selected{ background: #f35800;color: #fff;}
+.page-selected a{ color: #fff !important;font-weight: bold !important;}
+.page-selected a:hover{ color: #000;}
+
+.text_bold{ font-weight: bold !important;}
+
+.selected_menu{ background: #fff;}

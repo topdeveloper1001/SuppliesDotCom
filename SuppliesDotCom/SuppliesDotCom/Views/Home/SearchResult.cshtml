@@ -1,0 +1,53 @@
+﻿@using SuppliesDotCom.Common
+@model DTO.Registration 
+@{
+    ViewBag.Title = "Search Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="white-bg">
+
+    <h1 class="title">Patient List</h1>
+    <div class="form">
+        @if (Model != null)
+        {
+            if (Model.LstPatientInfo.Count > 0)
+            {
+
+                WebGrid grid = new WebGrid(Model.LstPatientInfo, ajaxUpdateContainerId: "gridContent");
+            @grid.GetHtml(tableStyle: "table table-grid",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+
+    grid.Column("PersonFirstName", header: "First Name", canSort: true),
+     grid.Column("PersonLastName", header: "Last Name", canSort: true),
+    grid.Column("BirthDate", header: "Birth Date", format: (item) => string.Format("{0:dd/MM/yyyy}", item.BirthDate), canSort: true),
+     grid.Column("PersonPassportNumber", header: "Passport Number", canSort: true),
+    grid.Column("PersonFinancialNumber", header: "Financial Number", canSort: true),
+     grid.Column("PersonMedicalRecordNumber", header: "Medical Record Number", canSort: true),
+    grid.Column("PersonNatlHealthInsNumber", header: "National Health Number", canSort: true),
+
+             grid.Column("ContactMobilePhone", header: "Contact Number", canSort: true),
+     grid.Column("PersonMasterPatientNumber", header: "Master Patient Number", canSort: true),
+    grid.Column("PersonEmiratesIDNumber", header: ResourceKeyValues.GetKeyValue("socialsecuritynumber"), canSort: true),
+
+
+ grid.Column(header: "Action", format: @<text><a href="@Url.Action("EditPatient", "Home", new { Id = item.PatientID })" >Edit</a>
+             &nbsp;  <a href="@Url.Action("ViewDetail", "Home", new { Id = item.PatientID })" title="View" >View</a>
+            </text>)
+                                                           ));
+                    }
+                    else
+                    { 
+                
+            <h2>No Record found</h2>
+                    }
+                }
+    </div>
+    <div class="clear"></div>
+   
+   
+</div>

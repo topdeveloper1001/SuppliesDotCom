@@ -1,0 +1,121 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<DashboardIndicatorsCustomModel>
+
+<style>
+    .grid {
+        height: 300px;
+        width: 100%;
+    }
+
+    .grid-canvas {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .header-wrapper {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .row-wrapper {
+        position: absolute;
+        top: 0;
+        height: 89%;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: auto;
+        margin-top: 34px;
+    }
+
+    th, td {
+        width: 104px;
+        min-width: 104px;
+        max-width: 104px;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+
+    .gridHead th a {
+        font-size: 11px;
+    }
+
+    #table100P a {
+        cursor: pointer;
+    }
+</style>
+
+
+        @if (Model != null && Model.Count > 0)
+        {
+            
+                    
+                        <table class="table table_scroll" id="ManualDashboardGridDiv" data-swhgajax="true" data-swhgcontainer="gridContent" data-swhgcallback="">
+                            <thead>
+                                <tr class="gridHead">
+                                    <th scope="col">Action</th>
+                                    <th scope="col"><a id="ankIndicatorNumber" onclick="BindGridByOrder('IndicatorNumber','DESC',this.id);" data-swhglnk="true">Indicator Number</a>            </th>
+                                    <th scope="col"><a id="ankDashboard" onclick="BindGridByOrder('Dashboard','DESC',this.id);" data-swhglnk="true">Name</a></th>
+                                    <th scope="col"><a id="ankDescription" onclick="BindGridByOrder('Description','DESC',this.id);" data-swhglnk="true">Description</a></th>
+                                    <th scope="col"><a id="ankDefination" onclick="BindGridByOrder('Defination','DESC',this.id);" data-swhglnk="true">Definition</a></th>
+                                    <th scope="col"><a id="ankSubCategoryFirst" onclick="BindGridByOrder('SubCategoryFirst','DESC',this.id);" data-swhglnk="true">SubCategory 1</a>            </th>
+                                    <th scope="col"><a id="ankSubCategorySecond" onclick="BindGridByOrder('SubCategorySecond','DESC',this.id);" data-swhglnk="true">SubCategory 2</a>            </th>
+                                    <th scope="col"><a id="ankFormatTypeStr" onclick="BindGridByOrder('FormatTypeStr','DESC',this.id);" data-swhglnk="true">Format Type</a>            </th>
+                                    <th scope="col"><a id="ankDecimalNumbers" onclick="BindGridByOrder('DecimalNumbers','DESC',this.id);" data-swhglnk="true">Decimal Numbers</a>            </th>
+                                    <th scope="col"><a id="ankFerquencyTypeStr" onclick="BindGridByOrder('FerquencyTypeStr','DESC',this.id);" data-swhglnk="true">Ferquency Type</a>            </th>
+                                    <th scope="col"><a id="ankOwnerShip" onclick="BindGridByOrder('OwnerShip','DESC',this.id);" data-swhglnk="true">OwnerShip</a></th>
+                                    <th scope="col"><a id="ankSortOrder" onclick="BindGridByOrder('SortOrder','DESC',this.id);" data-swhglnk="true">Sort Order</a></th>
+                                    <th scope="col"><a id="ankExternalValue3" title="Type of Data for Color Codes" onclick="BindGridByOrder('ExternalValue3','DESC',this.id);" data-swhglnk="true">Type Of Data</a></th>
+                                    @*<th scope="col" ><a id="ankFacilityNameStr" onclick="BindGridByOrder('FacilityNameStr','DESC',this.id);" data-swhglnk="true">Facility</a>            </th>*@
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="gridRow">
+                                        <td>
+                                            <a style="float: left; margin-right: 7px; width: 15px;" onclick="EditDashboardIndicators('@item.IndicatorID') " href="#">
+                                                <img src="/images/edit.png"></a>
+                                            @*<a style="float: left; width: 15px;" onclick="return DeleteDashboardIndicators('@item.IndicatorID'); " title="Delete" href="#">
+                                                <img src="/images/delete.png"></a>*@
+                                            
+                                            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.IndicatorID','Delete Dashboard Indicators','',DeleteDashboardIndicators,null); " style="float: left; width: 15px;">
+                                                <img src="@Url.Content("~/images/delete.png")" />
+                                            </a>
+                                        </td>
+                                        <td>@item.IndicatorNumber</td>
+                                        <td>@item.Dashboard</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Defination</td>
+                                        <td>@item.SubCategoryFirst</td>
+                                        <td>@item.SubCategorySecond</td>
+                                        <td>@item.FormatTypeStr</td>
+                                        <td>@item.DecimalNumbers</td>
+                                        <td>@item.FerquencyTypeStr</td>
+                                        <td>@item.OwnerShip</td>
+                                        <td>@item.SortOrder</td>
+                                        <td>@item.TypeOfData</td>
+                                        @*<td >@item.FacilityNameStr</td>*@
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    
+               
+        }
+        else
+        {
+            <h2>No Record found</h2>
+        }
+    
+<script>
+    $(function () {
+
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+    });
+</script>

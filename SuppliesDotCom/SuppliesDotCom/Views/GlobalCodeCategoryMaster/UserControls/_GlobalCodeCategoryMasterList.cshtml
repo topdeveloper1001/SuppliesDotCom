@@ -1,0 +1,33 @@
+﻿@using Kendo.Mvc.UI
+@model List<SuppliesDotCom.Model.GlobalCodeCategory>
+
+
+<div class="table-responsive">
+    @if (Model != null && Model.Count > 0)
+    {
+        var grid = new WebGrid(Model, ajaxUpdateContainerId: "LabtestRangeGrid", canPage: false);
+        <div id="LabtestRangeGrid">
+            @grid.GetHtml(tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter", rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                    grid.Column("GlobalCodeCategoryID", header: "GlobalCodeCategory ID", canSort: true),
+                    grid.Column("FacilityNumber", header: "Facility Number", canSort: true),
+                    grid.Column("GlobalCodeCategoryValue", header: "GlobalCodeCategory Value", canSort: true),
+                    grid.Column("GlobalCodeCategoryName", header: "Name", canSort: true),
+                    grid.Column("IsActive", header: "Active", canSort: true),
+                    grid.Column(header: "Action", format: @<text>
+            <a href="javascript:void(0);" onclick="EditGlobalCodeCategory('@item.GlobalCodeCategoryID');" style="float: left; margin-right: 7px; width: 15px;">
+                <img src="~/images/edit.png" /></a>
+            &nbsp;@*<a href="javascript:void(0);" title="Delete" onclick="return DeleteGlobalCodeCategory('@item.LabTestResultId');" style="float: left; width: 15px;"><img src="~/images/delete.png" /></a>*@
+            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.LabTestResultId','Delete Global Code Category','',DeleteGlobalCodeCategory,null); " style="float: left; width: 15px;">
+                <img src="@Url.Content("~/images/delete.png")" />
+            </a>
+
+                                                           </text>)
+                    ))
+        </div>
+    }
+    else
+    {
+
+        <h2>No Record found</h2>
+    }
+</div>

@@ -1,0 +1,122 @@
+﻿@using SuppliesDotCom.Model
+@model DashboardBudget
+
+<style>
+    .btn-group {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+    select {
+    margin-bottom: 10px;}
+</style>
+<div class="form" id="DashboardBudgetFormDiv">
+   <div class="col-sm-3">
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>Budget Type:</label>
+           <select id="ddlBudgetType" class="validate[required] emptyddl"></select>
+           @Html.HiddenFor(m => m.BudgetType, new {  @id = "hdBudgetType" })
+           @*@Html.TextBoxFor(m => m.BudgetType, new { @maxlength = "10", @id = "txtBudgetType" })*@
+       </div>
+       <div class="rowTable">
+          <label><span class="mandatoryStar"></span>Budget For:</label>
+          <select id="ddlBudgetFor" class="validate[required] emptyddl"></select>
+          @Html.HiddenFor(m => m.BudgetFor, new {  @id = "hdBudgetFor" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>Budget Description:</label>
+        @Html.TextBoxFor(m => m.BudgetDescription, new { @maxlength = "60", @id = "txtBudgetDescription" ,@class="emptytxt validate[required]" })
+      </div>
+       <div class="rowTable">
+           <label>Department Number:</label>
+           @Html.TextBoxFor(m => m.DepartmentNumber, new { @maxlength = "10", @id = "txtDepartmentNumber",@class="emptytxt" })
+       </div>
+       @* <div class="rowTable">
+        <label>Department Name:</label>
+        @Html.TextBoxFor(m => m.DepartmentNumber, new { @maxlength = "10", @id = "txtDepartmentNumber" })
+      </div>*@
+      <div class="rowTable">
+          <label><span class="mandatoryStar"></span>Fiscal Year:</label>
+          <select id="ddlFiscalYear" class="validate[required] emptyddl"></select>
+          @Html.HiddenFor(m => m.FiscalYear, new {  @id = "hdFiscalYear" })
+      </div>
+   </div>
+   <div class="col-sm-3">
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>January Budget:</label>
+        @Html.TextBoxFor(m => m.JanuaryBudget, new { @maxlength = "10", @id = "txtJanuaryBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>February Budget:</label>
+        @Html.TextBoxFor(m => m.FebruaryBudget, new { @maxlength = "10", @id = "txtFebruaryBudget" ,@class="validate[required, custom[number]] emptytxt"})
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>March Budget:</label>
+        @Html.TextBoxFor(m => m.MarchBudget, new { @maxlength = "10", @id = "txtMarchBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>April Budget:</label>
+        @Html.TextBoxFor(m => m.AprilBudget, new { @maxlength = "10", @id = "txtAprilBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>May Budget:</label>
+        @Html.TextBoxFor(m => m.MayBudget, new { @maxlength = "10", @id = "txtMayBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+   </div>
+   <div class="col-sm-3">
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>June Budget:</label>
+        @Html.TextBoxFor(m => m.JuneBudget, new { @maxlength = "10", @id = "txtJuneBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>July Budget:</label>
+        @Html.TextBoxFor(m => m.JulyBudget, new { @maxlength = "10", @id = "txtJulyBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>August Budget:</label>
+        @Html.TextBoxFor(m => m.AugustBudget, new { @maxlength = "10", @id = "txtAugustBudget" ,@class="validate[required, custom[number]] emptytxt"})
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>September Budget:</label>
+        @Html.TextBoxFor(m => m.SeptemberBudget, new { @maxlength = "10", @id = "txtSeptemberBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>October Budget:</label>
+        @Html.TextBoxFor(m => m.OctoberBudget, new { @maxlength = "10", @id = "txtOctoberBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+   </div>
+   <div class="col-sm-3">
+      <div class="rowTable">
+        <label><span class="mandatoryStar"></span>November Budget:</label>
+        @Html.TextBoxFor(m => m.NovemberBudget, new { @maxlength = "10", @id = "txtNovemberBudget",@class="validate[required, custom[number]] emptytxt" })
+      </div>
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>December Budget:</label>
+           @Html.TextBoxFor(m => m.DecemberBudget, new { @maxlength = "10", @id = "txtDecemberBudget",@class="validate[required, custom[number]] emptytxt" })
+       </div>
+       <div class="rowTable">
+           @if (Model.IsActive == null)
+           {
+               Model.IsActive = true;
+           }       
+           <label>Is Active :  @Html.CheckBoxFor(m => m.IsActive.Value, new { @id = "chkActive" })</label>
+       </div>
+   </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <div style="float: left;">
+            @if (Model.BudgetId != 0)
+            {  
+                <input type="submit" class="btn btn-primary edit-btn marginBtn" value="Update" id="btnUpdate" onclick="return SaveDashboardBudget('@Model.BudgetId');" />                
+            }
+            else
+            {
+                <input type="submit" onclick="return SaveDashboardBudget('0');" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="Save" />                
+            }
+            <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearAll();">Cancel</button>            
+        </div>
+    </div>
+       </div>

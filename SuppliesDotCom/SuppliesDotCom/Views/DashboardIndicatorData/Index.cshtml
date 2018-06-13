@@ -1,0 +1,68 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model
+@using SuppliesDotCom.Models
+@model DashboardIndicatorDataView
+
+@{
+    ViewBag.Title = "Dashboard Indicator Data View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool importStatus = false;
+}
+<style>
+    .popup-frame {z-index: 99 !important;}
+</style>
+
+<div class="white-bg">
+    <div class="indicatorDataTitle">
+        @if (ViewBag.ImportStatus != null && bool.TryParse(ViewBag.ImportStatus, out importStatus))
+        {
+            @Html.Hidden("ImportStatus", importStatus)
+        }
+        <span><a href="#" onclick="EditDashboardIndicatorData(0, 1);" class="btn btn-primary edit-btn">Add Indicator Data</a>
+            @*<a href="#" onclick="EditDashboardIndicatorData(0, 0);" class="btn btn-primary edit-btn">Import From Excel</a>*@
+        </span>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardIndicatorDataList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" /></span> Dashboard Indicator Data List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardIndicatorDataList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="DashboardIndicatorDataListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardIndicatorData/UserControls/_DashboardIndicatorDataList.cshtml", Model.DashboardIndicatorDataList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="divhidepopup1" class="hidePopUp" style="display: none;">
+        <div class="popup-coverbg"></div>
+        <div class="popup-frame">
+            <div class="popup-main" style="margin: 50px auto">
+                <div class="popup-content indicatorDataTitleMinHeight">
+                    <div class="popup-close" onclick="ClosePopup();">X</div>
+                    <div>
+                        <div id="DashboardIndicatorDataFormDiv">
+                            @*<div id="divLoading" style="margin: 0; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001; opacity: .8; filter: alpha(opacity=70); display: none">
+                                <p style="position: absolute; top: 30%; left: 45%; color: White;">
+                                    <img src="@Url.Content("~/images/ajax-loading.gif")">
+                                </p>
+                            </div>*@
+                            @{Html.RenderPartial("~/Views/DashboardIndicatorData/UserControls/_DashboardIndicatorDataAddEdit.cshtml", new DashboardIndicatorData { IsActive = true, ID = 0 });}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/DashboardIndicatorData/DashboardIndicatorDataScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

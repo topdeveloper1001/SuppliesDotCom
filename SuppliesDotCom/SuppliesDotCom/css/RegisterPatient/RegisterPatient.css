@@ -1,0 +1,196 @@
+﻿body {
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+ background: #fff !important; box-shadow: none !important; border-top: solid 4px #1aaf90  !important;}
+    .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #5e6369 !important;}
+
+.ui-state-default .ui-corner-top .ui-state-hover {
+background: #edf0f1 !important; }
+
+.ui-state-default {
+background: #fafbfb !important; color: #97a0a9;}
+
+.ui-state-default a{
+font-weight: normal !important;}
+.ui-tabs .ui-tabs-panel {
+border: none;}
+
+.ui-tabs .ui-tabs-nav li:first-child, .ui-tabs .ui-tabs-nav li:last-child {
+ border-radius: 0;}
+.ui-tabs .ui-tabs-nav li {
+ border-left: none;}
+
+.ui-state-active a {
+ }
+.patientInfoBg {
+    background: #f4f5f7;
+}
+.patientTable .form-inline {
+ background: #f4f5f7; }
+
+.patientTable .form-inline .form-group {
+ padding: 0 0 10px 0;}
+
+.patientTable .form-inline .form-group label{
+ width: 100%; padding: 0 0 5px 0;}
+
+    .patientTable .form-inline .form-group .smallLabel {
+    float: right; margin-left: 10px;}
+.patientTable .form-inline .form-group .smallLabel label{
+ width: auto; margin-right: 5px;}
+
+.patientTable .form-inline .form-group input{
+ margin-top: 0;}
+
+.base-color .form-inline:hover, .base-color .form-inline.grey:hover {
+ background: #f4f5f7;}
+
+.ui-datepicker-title {
+ color: #333; font-size: 12px; text-shadow: none;}
+
+.ui-datepicker-title select {
+text-shadow: none;}
+
+.ui-widget-content {
+ border: none;}
+
+input[type="text"], select {
+ text-shadow: none;}
+
+.rowTable {
+ overflow: hidden; margin: 10px 0;}
+
+.rowTable label {
+width: 100%; font-weight: normal; margin-bottom: 10px;}
+
+.rowTable input, .rowTable select {
+    width: 100%;}
+
+    
+.rowTable.smallLabel label {
+width: auto; float: left; }
+
+.rowTable.smallLabel div {
+float: left;}
+.rowTable.smallLabel input {
+width: auto; float: left; margin: 0 5px;}
+
+.profilePic {
+margin: 0 0 10px 0 !important; font-size: 14px; font-weight: normal;}
+#PersonPhoto {
+margin: 10px 0;}
+#PersonVIP {
+ width: 100% !important;}
+
+.user-img {
+background: #fff;}
+
+.userPicDiv {
+width: 210px; position: relative; /*height: 300px; margin: 30px;*/padding: 0 30px 0 0;}
+
+    .userPicDiv img {
+    width: 100%; height: 100%;}
+
+.userPicDiv #imageProcessBar {
+     background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
+    height: 90%;
+    position: absolute;
+    width: 96%;
+}
+
+    .userPicDiv #imageProcessBar img {
+    position: relative; top: 40%; left: 40%;}
+
+   .userPicDiv #imageProcessBar img {
+height: 32px !important; width: 32px !important;}
+
+    .address {
+    background: red;
+    clear: both;
+}
+
+.address div {
+    float: left;
+    margin: 3px 2px;
+    width: 150px;
+}
+
+.address div label {
+ text-transform: capitalize;}
+
+.address h6 {
+margin: 0; font-weight: bold; text-transform: uppercase; background: #317cb3; padding: 5px; color: #fff;}
+
+.address div input {
+clear: both; display: block; width: 100%;}
+
+.spouse label, .spouse h1{
+display: none;}
+
+
+.guarantors label, .guarantors h1 {
+display: none;}
+
+.rowTable1 {
+ overflow: hidden; margin: 10px 0;}
+
+.rowTable1 label {
+width: 30%; float: left; font-weight: normal; margin-bottom: 10px; text-transform: capitalize;}
+
+.rowTable1 input, .rowTable1 select {
+    width: 60%; float: left;}
+
+.browseDiv {
+    /*border: medium solid;
+    bottom: -10px;
+    height: 180px;
+    opacity: 0;
+    position: absolute;
+    width: 180px !important;*/}
+
+#divIsVIP {
+min-height: 56px;}
+
+.generateMedical a, .generateMedical input[type="text"]{
+ float: left;}
+
+.generateMedical input[type="text"] {
+ width: 80%;}
+
+.generateMedical a {
+cursor: pointer;}
+
+
+.ui-widget-header {
+        border: none !important;
+        background: #f4f5f7 !important;
+        color: #444444 !important;
+        font-weight: bold;
+        color: #fff !important;
+        font-size: 15px !important;
+        font-family: helvetica, arial;
+    }
+
+    .ui-dialog .ui-dialog-titlebar-close span {
+        background-image: none !important;
+    }
+
+    .ui-datepicker-title {
+        color: #333;
+        font-size: 12px;
+        text-shadow: none;
+    }
+
+        .ui-datepicker-title select {
+            text-shadow: none;
+        }
+
+    .clear {
+        clear: both;
+    }
+
+     .btn-group {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }

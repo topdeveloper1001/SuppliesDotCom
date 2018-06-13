@@ -1,0 +1,43 @@
+﻿@model List<SuppliesDotCom.Model.Role>
+
+                        @if (Model != null)
+                        {
+                            if (Model.Count > 0)
+                            {
+
+                                WebGrid grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent12", canPage: false);
+                                <div id="gridContent12">
+                                @grid.GetHtml(tableStyle: "table table-grid",
+                        headerStyle: "gridHead",
+                        footerStyle: "gridFooter",
+                        rowStyle: "gridRow",
+                        alternatingRowStyle: "gridAltRow",
+                        columns: grid.Columns(
+
+                        grid.Column("RoleName", header: "Role Name", canSort: true),
+
+                            grid.Column("IsActive", header: "Status", canSort: true),
+
+
+                        grid.Column(header: "Action", format: @<text>
+                                  @*<a href="@Url.Action("EditUser", "Security", new { userid = item.UserID })" style="float:left; width: 40%;"><img src="../images/edit.png" /></a>*@
+                                <a href="#" title="Edit User" onclick="return EditRole('@item.RoleID');" style="float: left; width: 15px; margin-right: 7px;">
+                                    <img src="../images/edit.png" />
+                                </a>
+                                                                   &nbsp;
+                  @*<a href="#" title="Delete User" onclick="return DeleteRole('@item.RoleID');" style="float:left; width: 15px;"><img src="../images/delete.png" /></a>*@
+                                    <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.RoleID','Delete Role','',DeleteRole,null); " style="float: left; width: 15px;">
+                                        <img src="@Url.Content("~/images/delete.png")" />
+                                    </a>
+                        </text>)
+))<h6>* Click on any column heading to sort</h6></div>
+                            }
+                            else
+                            {
+
+                                <h2>No Record found</h2>
+                            }
+                        }
+                         
+
+                 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Claim.Submission xmlns:tns="http://www.eclaimlink.ae/DataDictionary/CommonTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.eclaimlink.ae/DataDictionary/CommonTypes/ClaimSubmission.xsd">
+<Header>
+<SenderID>DHA-F-0046466</SenderID>
+<ReceiverID>INS005</ReceiverID>
+<TransactionDate>22/12/2016 18:18</TransactionDate>
+<RecordCount>1</RecordCount>
+<DispositionFlag>PRODUCTION</DispositionFlag>
+</Header>
+<Claim>
+<ID>PCR201636958</ID>
+<MemberID>WI14982</MemberID>
+<PayerID>INS005</PayerID>
+<ProviderID>DHA-F-0046466</ProviderID>
+<EmiratesIDNumber>111-1111-2222222-1</EmiratesIDNumber>
+<Gross>1242.87</Gross>
+<PatientShare>124.28</PatientShare>
+<Net>1118.59 </Net>
+<Encounter>
+<FacilityID>DHA-F-0046466</FacilityID>
+<Type>1</Type>
+<PatientID>117850</PatientID>
+<Start>15/11/2016 19:11</Start>
+<StartType>1</StartType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>I10</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K21.9</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>Z76.0</Code>
+</Diagnosis>
+<Activity>
+<ID>1</ID>
+<Start>15/11/2016 19:11</Start>
+<Type>5</Type>
+<Code>0042-220701-1171</Code>
+<Quantity>56</Quantity>
+<Net>174.6</Net>
+<Clinician>DHA-P-0240747</Clinician>
+<PriorAuthorizationID>JK-151116-22</PriorAuthorizationID>
+</Activity><Activity>
+<ID>2</ID>
+<Start>15/11/2016 19:11</Start>
+<Type>5</Type>
+<Code>1614-530501-0612</Code>
+<Quantity>28</Quantity>
+<Net>219.49</Net>
+<Clinician>DHA-P-0240747</Clinician>
+<PriorAuthorizationID>JK-151116-22</PriorAuthorizationID>
+</Activity><Activity>
+<ID>3</ID>
+<Start>15/11/2016 19:11</Start>
+<Type>5</Type>
+<Code>2105-573801-2891</Code>
+<Quantity>40</Quantity>
+<Net>216</Net>
+<Clinician>DHA-P-0240747</Clinician>
+<PriorAuthorizationID>JK-151116-22</PriorAuthorizationID>
+</Activity><Activity>
+<ID>4</ID>
+<Start>15/11/2016 19:11</Start>
+<Type>5</Type>
+<Code>0006-199803-1172</Code>
+<Quantity>12</Quantity>
+<Net>472.5</Net>
+<Clinician>DHA-P-0240747</Clinician>
+<PriorAuthorizationID>JK-151116-22</PriorAuthorizationID>
+</Activity><Activity>
+<ID>5</ID>
+<Start>15/11/2016 19:11</Start>
+<Type>5</Type>
+<Code>0321-100604-1171</Code>
+<Quantity>40</Quantity>
+<Net>36</Net>
+<Clinician>DHA-P-0240747</Clinician>
+<PriorAuthorizationID>JK-151116-22</PriorAuthorizationID>
+</Activity></Claim>
+</Claim.Submission>

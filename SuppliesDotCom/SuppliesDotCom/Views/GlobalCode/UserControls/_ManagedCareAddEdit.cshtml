@@ -1,0 +1,111 @@
+﻿@using SuppliesDotCom.Model
+@using Kendo.Mvc.UI
+
+@model GlobalCodes
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    <div>
+        <div class="col-sm-3" id="divCategoryDropdown" style="display: none;">
+            <div class="rowTable">
+                <label class="control-label">
+                    <span class="mandatoryStar"></span>
+                    Search Order Set Code / Description 
+                </label>
+                @(Html.Kendo().AutoComplete()
+                            .Name("txtGlobalCodeCategoryName")
+                            .DataTextField("Name")
+                            .Placeholder("Search Code Value / Description...")
+                            .Filter("contains")
+                            .MinLength(3)
+                            .Events(e => e.Select("OnGCodeCategorySelection"))
+                            .HtmlAttributes(new
+                            {
+                                id = "txtGlobalCodeCategoryName",
+                                onfocus = "ajaxStartActive = false;",
+                                onblur = "ajaxStartActive = true;",
+                                style = "width:100%",
+                                maxlength = "250",
+                            })
+                            .DataSource(source => source.Read(read => read.Action("SearchGlobalCodeCategories", "GlobalCode")
+                                .Data("SelectGCodeCategory"))
+                                .ServerFiltering(true))
+                            )
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="rowTable">
+                <label class="control-label">
+                    <span class="mandatoryStar"></span>
+                    <span class="genericExternalTitle"></span>
+                </label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtGlobalCodeName", @maxlength = "250", @class = "validate[required]" })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="rowTable">
+                <label class="control-label"><span class="mandatoryStar"></span>Code Value:</label>
+                @Html.TextBoxFor(m => m.GlobalCodeValue, new { @ID = "txtGlobalCodeValue", @maxlength = "10", @class = "validate[required]" })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="rowTable">
+                <label class="control-label">Description:</label>
+                @Html.TextAreaFor(m => m.Description, new { @ID = "txtDescription", @maxlength = "240", @style = "height:60px; overflow-y:scroll;" })
+            </div>
+        </div>
+        <div class="clear greyBox" id="divExternalValues" style="overflow: hidden;">
+            <div class="col-sm-2">
+
+                <div class="rowTable">
+                    <label class="control-label">External Value1:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue1, new { @ID = "txtExternalValue1", @maxlength = "240" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="rowTable">
+                    <label class="control-label">External Value2:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtExternalValue2", @maxlength = "240" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="rowTable">
+                    <label class="control-label">External Value3:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue3, new { @ID = "txtExternalValue3", @maxlength = "240" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="rowTable">
+                    <label class="control-label">External Value4:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue4, new { @ID = "txtExternalValue4", @maxlength = "240" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="rowTable">
+                    <label class="control-label">External Value5:</label>
+                    @Html.TextBoxFor(m => m.ExternalValue5, new { @ID = "txtExternalValue5", @maxlength = "240" })
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="btn-group">
+            @{
+                var btnSaveText = "Save";
+                if (Model.GlobalCodeID != 0)
+                {
+                    btnSaveText = "Update";
+                }
+            }
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfGenericCodeExists();" value="@btnSaveText" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearGenericForm('@Model.GlobalCodeCategoryValue');">Cancel</button>
+        </div>
+    </div>
+</div>
+
+

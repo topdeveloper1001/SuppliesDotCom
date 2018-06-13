@@ -1,0 +1,131 @@
+﻿@*
+    Owner: Jagjeet Kaur
+    On: 09102014
+    Purpose: To Add Edit Equipmenmt details
+*@
+
+@using SuppliesDotCom.Common
+@model SuppliesDotCom.Model.EquipmentMaster
+@{
+    ViewBag.Title = "Equipments View";
+    var btnSaveText = "Save";
+    if (Model != null && Model.EquipmentMasterId != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+
+
+
+<div class="form" id="EquipmentDiv">
+    @if (@ViewBag.ViewOnly == null || !@ViewBag.ViewOnly)
+    {
+        <div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                @Html.HiddenFor(m => m.EquipmentMasterId)
+                @*<div class="rowTable">
+                        <label>Facility Number:</label>
+
+                        @Html.TextBoxFor(m => m.FacilityId, new { @ID = "txtFacilityNumber", @class = "validate[required,custom[onlyNumberSp]]" })
+                    </div>*@
+                @Html.HiddenFor(m => m.EquipmentDisabledDate, new { @Id = "hdDisableDate" })
+                @Html.HiddenFor(m => m.EquipmentEnableDate, new { @Id = "hdEnableDate" })
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Select Corporate:</label>
+                    <select id="ddlCorporate" onchange="BindFacilityDropdownFilterInEquipment($('#ddlCorporate').val())" class="validate[required]"></select>
+                    <input type="hidden" id="hfCorporateId" value="@Helpers.GetSysAdminCorporateID()" />
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Select Facility:</label>
+                    <select id="ddlFacilityFilter" class="validate[required]" onchange="BindRoomsInEquipments()"></select>
+                    <input type="hidden" id="hfFacilityId" value="@Helpers.GetDefaultFacilityId()" />
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Equipment Model:</label>
+                    @Html.TextBoxFor(m => m.EquipmentModel, new { @maxlength = "50", @ID = "txtEquipmentModel", @class = "validate[required]" })
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Turn Around Time(In Minutes):</label>
+                    @Html.TextBoxFor(m => m.TurnAroundTime, new { @maxlength = "3", @ID = "txtTrunAroundTime", @class = "validate[required,custom[onlyNumberSp]]" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Equipment Name:</label>
+                    @Html.TextBoxFor(m => m.EquipmentName, new { @maxlength = "200", @ID = "txtEquipmentName", @class = "validate[required]" })
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Department:</label>
+                    <label id="lblDepartment" class="text_bold"></label>
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Select Room:</label>
+                    <select id="ddlRooms" class="validate[required]" onchange="GetDepartmentOnRoomSelection(this.value);"></select>
+                </div>
+                @*<div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Turn Around Time(In Minutes):</label>
+                    @Html.TextBoxFor(m => m.TurnAroundTime, new { @maxlength = "3", @ID = "txtTrunAroundTime", @class = "validate[required,custom[onlyNumberSp]]" })
+                </div>*@
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="rowTable">
+                            <label title="This will be checked in case the Equipment is not fixed at one location">
+                                Is Mobile:
+                                <input type="checkbox" id="rdBaseLocation" onchange="ShowBaseLocation(this);" value="" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="rowTable" id="txtBaseLocation">
+                            <label>Facility Department:</label>
+                            <select id="txtEquipmentBaseLocation"></select>
+                            @Html.HiddenFor(m => m.BaseLocation, new { @Id = "hdFacultyDepartment" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Serial Number:</label>
+                    @Html.TextBoxFor(m => m.EquipmentSerialNumber, new { @maxlength = "20", @ID = "txtEquipmentSerialNumber", @class = "validate[required]" })
+                </div>
+                <div class="rowTable">
+                    <label><span class="mandatoryStar"></span>Acquisition Date:</label>
+                    @Html.TextBoxFor(m => m.EquipmentAquistionDate, "{0:MM/dd/yyyy}", new { @maxlength = "100", @ID = "txtEquipmentAquistionDate", @class = "dtGeneral validate[required]" })
+                </div>
+
+                @*<div class="rowTable">
+                        <label title="Enter Date if Equipment is disabled">Disabled Date:</label>
+                        @Html.TextBoxFor(m => m.EquipmentDisabledDate, "{0:MM/dd/yyyy}", new { @maxlength = "100", @ID = "txtEquipmentDisabledDate", @class = "dtGeneral" })
+                    </div>*@
+                <div class="form-group">
+                    <label style="width: auto;">Is Disabled: @Html.CheckBoxFor(m => m.EquipmentDisabled, new { @ID = "ChkEquipmentDisabled", @checked = true })</label>
+                </div>
+                <div class="form-group">
+                    <label style="width: auto;">Is Insured: @Html.CheckBox("ChkEquipmentIsInsured", Model.EquipmentIsInsured ?? false)</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="btn-group">
+            @*@if (Model.EquipmentMasterId != 0)
+                {
+                    <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Update" onclick="SaveEquipment(@Model.EquipmentMasterId);" />
+                }
+                else
+                {
+                    <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="SaveEquipment(@Model.EquipmentMasterId);" />
+                }*@
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick="SaveEquipment();" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="ClearForm();" type="button">Cancel</button>
+        </div>
+
+    }
+
+</div>

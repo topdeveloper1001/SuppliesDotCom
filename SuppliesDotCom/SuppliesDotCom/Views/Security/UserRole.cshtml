@@ -1,0 +1,18 @@
+﻿@model SuppliesDotCom.Models.UserRoleView
+@{
+    ViewBag.Title = "Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Security/UserRole.js"></script>
+<div class="white-bg">
+   
+    <div id="UserRolesList">
+         @{Html.RenderPartial("~/Views/Security/UserControls/_PartialUserRoles.cshtml", Model);}
+    </div>
+    <div class="clear"></div>
+ 
+            </div>
+
+           
+
+

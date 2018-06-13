@@ -1,0 +1,39 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<DashboardDisplayOrderCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            WebGrid grid = new WebGrid(Model, ajaxUpdateContainerId: "gridDashboardDisplayOrderContent");
+            <div id="gridDashboardDisplayOrderContent">
+                @grid.GetHtml(htmlAttributes: new { id = "DashboardDisplayOrderTable" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                    rowStyle: "gridRow", alternatingRowStyle: "gridRow", columns: grid.Columns(
+                                grid.Column("DashboardTypeStr", header: "Dashboard Type", canSort: true),
+                                grid.Column("DashboardSectionStr", header: "Dashboard Section", canSort: true),
+                                grid.Column("IndicatorStr", header: "Indicator Number", canSort: true),
+                                grid.Column("SubCategory1Str", header: "SubCategory1", canSort: true),
+                                grid.Column("SubCategory2Str", header: "SubCategory2", canSort: true),
+                                grid.Column("FacilityStr", header: "FacilityId", canSort: true),
+                                grid.Column("SortOrder", header: "SortOrder", canSort: true),
+                grid.Column(header: "Action", format: @<text>
+                <a href="javascript:void(0);" onclick="EditDashboardDisplayOrder('@item.Id')" style="float: left; margin-right: 7px; width: 15px;">
+                    <img src="@Url.Content("~/images/edit.png")" /></a>
+                                                           @*<a href="javascript:void(0);" title="Delete" onclick="return DeleteDashboardDisplayOrder('@item.Id');" style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                
+                <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.Id','Delete Dashboard Display Order','',DeleteDashboardDisplayOrder,null); " style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" />
+                </a>
+                                                       
+                                                       </text>)
+                                ))
+            </div>            
+        }
+        else
+        {
+
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>

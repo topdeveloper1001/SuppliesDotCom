@@ -1,0 +1,195 @@
+﻿@using BillingSystem.Model
+@model BillingSystemParameters
+
+<style>
+    .btn-group {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+
+    /*label {
+        min-height: 35px;
+    }*/
+</style>
+
+<form id="bspForm1" name="bspForm1">
+    <div class="form" id="BillingSystemParametersFormDiv">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.CorporateId)
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label>Corporate:</label>
+                <select id="ddlCorporate" class="validate[required]"></select>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Facility:</label>
+                <select id="ddlFacility" class="validate[required]"></select>
+                @Html.HiddenFor(m => m.FacilityNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Receivable General Ledger Account">Receivable GL Account:</label>
+                @Html.TextBoxFor(m => m.ARGLacct, new { @maxlength = "15", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Bad Debt General Ledger Account">Bad Debt GL Account:</label>
+                @Html.TextBoxFor(m => m.BadDebtGLacct, new { @maxlength = "15", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Small Balance Write-off Amount">Write-off Amount:</label>
+                @Html.TextBoxFor(m => m.SmallBalanceAmount, new { @maxlength = "15", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Time Each Day to Close all Outpatient Encounters">O/P Encounter Closing Time:</label>
+                @Html.TextBoxFor(m => m.OupatientCloseBillsTime, "{0:MM/dd/yyyy}", new { @maxlength = "5", @class = "dtGeneralTimeOnly" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label>Effective Date:</label>
+                @Html.TextBoxFor(m => m.EffectiveDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @class = "dtGeneral" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Bill Hold Days:</label>
+                <select id="ddlBillHoldDays" class="validate[required]"></select>
+                @Html.HiddenFor(m => m.BillHoldDays)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Managed Care General Ledger Account">Managed Care GL Account:</label>
+                @Html.TextBoxFor(m => m.MgdCareGLacct, new { @maxlength = "15", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Small Balance Writeoff General Ledger Account">Writeoff GL Account:</label>
+                @Html.TextBoxFor(m => m.SmallBalanceGLacct, new { @maxlength = "15", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Auto Write-off Days">Auto Write-off Days:</label>
+                <select id="ddlSmallBalanceWriteoffDays"></select>
+                @Html.HiddenFor(m => m.SmallBalanceWriteoffDays)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Number of hours to elapse to close Emergency Room Encounter">Hrs to close E/R Encounters:</label>
+                <select id="ddlERCloseBillsHours"></select>
+                @Html.HiddenFor(m => m.ERCloseBillsHours)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label>End Date:</label>
+                @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @class = "dtGeneral" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label style="min-height: 12px;">IsActive: @Html.CheckBoxFor(m => m.IsActive)</label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Outpatient Conversion Factor">O/P Conversion Factor:</label>
+                @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "1", @class = "validate[optional[number]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Receiver ID:</label>
+                @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "10", @class = "validate[custom[onlyLetterNumber]]" })
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Default Country:</label>
+                <select id="ddlCountry" onchange="SetTableNumber('#ddlCountry', '#DefaultCountry');"></select>
+                @Html.HiddenFor(m => m.DefaultCountry)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="col-lg-12"><h2 class="form_heading">Set Default Table Numbers</h2></div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="HCPCS Table Number for Billing Codes">HCPCS Table Number:</label>
+                <select id="ddlHcpcsTablSet" onchange="SetTableNumber('#ddlHcpcsTablSet', '#HCPCSTableNumber');"></select>
+                @Html.HiddenFor(m => m.HCPCSTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Drug Table Number for Billing Codes">Drug Table Number:</label>
+                <select id="ddlDrugTablSet" onchange="SetTableNumber('#ddlDrugTablSet', '#DrugTableNumber');"></select>
+                @Html.HiddenFor(m => m.DrugTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="DRG Table Number for Billing Codes">DRG Table Number:</label>
+                <select id="ddlDrgTablSet" onchange="SetTableNumber('#ddlDrgTablSet', '#DRGTableNumber');"></select>
+                @Html.HiddenFor(m => m.DRGTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Diagnosis Table Number for Billing Codes">Diagnosis Table Number:</label>
+                <select id="ddlDiagnosisTablSet" onchange="SetTableNumber('#ddlDiagnosisTablSet', '#DiagnosisTableNumber');"></select>
+                @Html.HiddenFor(m => m.DiagnosisTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="CPT Table Number for Billing Codes">CPT Table Number:</label>
+                <select id="ddlCptTablSet" onchange="SetTableNumber('#ddlCptTablSet', '#CPTTableNumber');"></select>
+                @Html.HiddenFor(m => m.CPTTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="ServiceCode Table Number for Billing Codes">ServiceCode Table Number:</label>
+                <select id="ddlServiceCodeTablSet" onchange="SetTableNumber('#ddlServiceCodeTablSet', '#ServiceCodeTableNumber');"></select>
+                @Html.HiddenFor(m => m.ServiceCodeTableNumber)
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="rowTable">
+                <label title="Bill Edit Rule Table Number for Rules in the Bill Scrubber">Bill Edit Rule Table Number:</label>
+                <select id="ddlBillEditRuleTablSet" onchange="SetTableNumber('#ddlBillEditRuleTablSet', '#BillEditRuleTableNumber');"></select>
+                @Html.HiddenFor(m => m.BillEditRuleTableNumber)
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="col-sm-3">
+            <div class="btn-group">
+                <div style="float: left;">
+                    <button id="btnSave" class="btn btn-primary edit-btn" onclick="SaveBillingSystemParameters(); return false;">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

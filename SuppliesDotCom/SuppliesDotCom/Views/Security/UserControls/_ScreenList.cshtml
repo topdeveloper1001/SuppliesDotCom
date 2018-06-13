@@ -1,0 +1,101 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<SuppliesDotCom.Model.Screen>
+<div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-align-justify"></span>&nbsp;Screen List
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                    @*        @if (Model != null)
+                            {
+                                if (Model.Count > 0)
+                                {
+
+                                    WebGrid grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent", canPage: true);
+                                    @grid.GetHtml(tableStyle: "table table-grid",
+                        headerStyle: "gridHead",
+                        footerStyle: "gridFooter",
+                        rowStyle: "gridRow",
+                        alternatingRowStyle: "gridAltRow",
+                        columns: grid.Columns(
+
+                        grid.Column("ScreenTitle", header: "Title", canSort: true),
+                        grid.Column("ScreenURL", header: "Url", canSort: true),
+                          grid.Column("ScreenGroup", header: "Group", canSort: true),
+                        grid.Column("IsActive", header: "Active", canSort: true),
+                        grid.Column("TabID", header: "TabID", canSort: true),
+                         grid.Column("DefaultPermission", header: "Default Permission", canSort: true),
+
+
+
+                        grid.Column(header: "Action", format: @<text>
+                         
+                            <a href="#" title="Edit User" onclick="return EditScreen('@item.ScreenID');" style="float: left; width: 15px; margin-right: 7px;"><img src="../images/edit.png" /></a>
+                            &nbsp;<a href="#" title="Delete User" onclick="return DeleteScreen('@item.ScreenID');" style="float:left; width: 15px;"><img src="../images/delete.png" /></a>
+                        </text>)
+));
+                                }
+                                else
+                                {
+
+                                    <h2>No Record found</h2>
+                                }
+                            }
+                            *@
+                              @(Html.Kendo().Grid(Model)
+    .Name("gridContent32")
+    .HtmlAttributes(new { style = "height: 460px" })
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ScreenId).Title("ScreenId");
+        columns.Bound(p => p.ScreenTitle).Title("Screen Title");
+        columns.Bound(p => p.ScreenURL).Title("ScreenURL");
+       
+        columns.Bound(p => p.ScreenGroup).Title("ScreenGroupe");
+
+        columns.Bound(p => p.IsActive).Title("Active");
+        columns.Bound(p => p.TabID).Title("Tab ID");
+        columns.Bound(p => p.DefaultPermission).Title("Default Permission");
+        columns.Bound(p => p.ScreenGroup).Title("Screen Group");
+        columns.Command(command =>
+               {
+                   command.Custom("Edit").Click("EditScreen");
+                   command.Custom("Delete").Click("DeleteScreen");
+               }).Title("Actions");
+    })
+    .Groupable()
+    .Scrollable()
+    .Sortable()
+    .Filterable(filterable => filterable
+        .Extra(false)
+        .Operators(operators => operators
+            .ForString(str => str.Clear()
+                .StartsWith("Starts with")
+                .IsEqualTo("Is equal to")
+                .IsNotEqualTo("Is not equal to")
+            ))
+        )   
+   .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .ServerOperation(false)
+     )
+ .Resizable(resize => resize.Columns(true))
+       )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

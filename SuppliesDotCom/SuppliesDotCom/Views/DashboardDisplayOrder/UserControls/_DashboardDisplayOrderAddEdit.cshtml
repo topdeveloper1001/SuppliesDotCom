@@ -1,0 +1,89 @@
+﻿@using SuppliesDotCom.Model
+@model DashboardDisplayOrder
+
+<style>
+    .btn-group {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+
+@{
+    var btnSaveText = "Save";
+    if (Model.Id != null && Model.Id != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<div class="form" id="DashboardDisplayOrderFormDiv">
+    @*// BBCOLUMNSHERE*@
+    <div class="col-sm-3">
+        @*<div class="rowTable">
+            <label>Id:</label>
+            @Html.TextBoxFor(m => m.Id, new { @maxlength = "10", @id = "txtId" })
+        </div>*@
+        @Html.HiddenFor(m => m.Id, new { @id = "hfId" })
+        <div class="rowTable">
+            <label>Facility:</label>
+            <select id="ddlFacility" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Dashboard Type:</label>
+             <select id="ddlDashboardType" class="validate[required]"></select>
+        </div>
+        
+        </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Dashboard Section:</label>
+            <select id="ddlDashboardSection" class="validate[required]"></select>
+        </div>
+        </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Indicator Number:</label>
+            <select id="ddlIndicatorFilter" class="validate[required]" ></select>
+        </div>
+        
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Sub-Category1:</label>
+            <select id="ddlSubCategory1" class="validate[required]"></select>
+        </div>
+        </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label>Sub-Category2:</label>
+            <select id="ddlSubCategory2" class="validate[required]"></select>
+        </div>
+        
+    </div>
+    <div class="col-sm-3">
+        @*<div class="rowTable">
+            <label>CorporateId:</label>
+            @Html.TextBoxFor(m => m.CorporateId, new { @maxlength = "10", @id = "txtCorporateId" })
+        </div>*@
+        <div class="rowTable">
+            <label>Sort Order:</label>
+            @Html.TextBoxFor(m => m.SortOrder, new { @maxlength = "10", @id = "txtSortOrder", @class="validate[required]"})
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+        <label class="col-sm-12">&nbsp;</label>
+        <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick="return SaveDashboardDisplayOrder();" />
+        <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearDashboardDisplayOrderForm();">Cancel</button>
+           </div> 
+    </div>
+</div>

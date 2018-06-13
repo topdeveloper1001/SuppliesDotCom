@@ -1,0 +1,60 @@
+﻿@*
+    Owner: Amit Jain
+    On: 17092014
+    Purpose: To Add Edit Global Code Category details
+*@
+
+@model SuppliesDotCom.Models.GlobalCodeCategoryView
+
+@{
+    ViewBag.Title = "Global Code Category";
+}
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+</style>
+
+<div class="form" id="GlobalCodeCategoryDiv">
+    @if (@ViewBag.ViewOnly == null)
+    {
+        <div class="col-xs-12 col-sm-5">
+            <div class="rowTable">
+                <label>Facility:</label>
+                @Html.DropDownListFor(m => m.FacilityList, new SelectList(Model.FacilityList, "FacilityNumber", "FacilityName"), "--Select One--", new { FacilityNumber = "FacilityNumber", @onChange = "return OnChangeFacility(this);", id = "ddlFacilityNumber" })
+            </div>
+            <div class="rowTable">
+                <label>Select Global Code Categories:</label>
+                <div id="lstGlobalCodeCategoriesLeft">
+                    @Html.ListBoxFor(x => x.SelectedSourceGlobalCodeCategoryOptions, new MultiSelectList(Model.GlobalCodeCategoryList, "GlobalCodeCategoryValue", "GlobalCodeCategoryName"), new { id = "SelectLeft", Multiple = "multiple", Size = 15, style = "width: 100%;" })
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-2" style="text-align: center; margin-top: 20px;">
+            <input id="MoveRight" type="button" class="blue-btn btn btn-primary edit-btn marginBtn" value=" >> " />
+            <input id="MoveLeft" type="button" class="blue-btn btn btn-primary edit-btn marginBtn" value=" << " />
+        </div>
+        <div class="col-xs-12 col-sm-5">
+            <div class="rowTable"></div>
+            <div class="rowTable">
+                <label>Selected Global Code Categories:</label>
+                <div id="lstGlobalCodeCategoriesRight">
+                    @Html.ListBoxFor(m => m.SelectedGlobalCodeCategoryOptions, new MultiSelectList(Model.SelectedSourceGlobalCodeCategoryOptions), new { id = "SelectRight", Multiple = "multiple", Size = 15, style = "min-height: 320px; " })
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="btn-group">
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return SaveGlobalCodeCategory();" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="return CancelSave();">Cancel</button>
+            <br />
+            <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+            @if (TempData["Message"] != null)
+            {
+                <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+            }
+        </div>
+         
+    }
+</div>
+

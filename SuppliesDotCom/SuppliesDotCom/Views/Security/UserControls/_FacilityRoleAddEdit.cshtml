@@ -1,0 +1,116 @@
+﻿@model SuppliesDotCom.Model.CustomModel.FacilityRoleCustomModel
+@{
+
+    var btnSaveText = "Save";
+    var btnSaveUpdateText = "Save And Return";
+    if (Model != null && Model.FacilityRoleId != 0)
+    {
+        btnSaveText = "Update";
+        btnSaveUpdateText = "Update And Return";
+    }
+}
+<style>
+    .btn-group {
+        margin-left: 15px;
+    }
+
+        .btn-group .marginBtn {
+            margin: 5px 10px;
+        }
+</style>
+
+<div class="row" >
+    <div class="col-sm-3">
+        @Html.HiddenFor(m => m.FacilityRoleId, new { @id = "hdFacilityRoleId" })
+        <div class="form-group">
+            <label><span class="mandatoryStar"></span>Corporate :</label>
+            <select id="ddlCorporates" class="validate[required] form-control" onchange="OnChangeCorporatesDropdown('');"></select>
+            @Html.HiddenFor(m => m.CorporateId, new { @id = "hdCorporateId" })
+            <input type="hidden" id="hdIsRefresh" />
+        </div>
+
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label><span class="mandatoryStar"></span>Facility:</label>
+            <select id="ddlFacilities" class="validate[required] form-control" onchange="OnChangeFacilityDropdown(''); BindFacilityRoleCustomList();"></select>
+            @Html.HiddenFor(m => m.FacilityId, new { @id = "hdFacilityId" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div id="divRoleSlection" class="form-group">
+            <label>Role Type:</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="radiobutton">
+                        @Html.RadioButton("RoleSelect", "newrole", new { id = "NewRole" })
+                        @Html.Label("New Role", "New Role")
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="radiobutton">
+                        @Html.RadioButton("RoleSelect", "previousrole", new { id = "OldRole", @checked = "checked" })
+                        @Html.Label("Previous Role", "Previous Role")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group" id="divPreviousRole">
+            <label><span class="mandatoryStar"></span>Role:</label>
+            <select id="ddlRoles" class="validate[required] form-control" onchange="BindFacilityRoleCustomList();"></select>
+            @Html.HiddenFor(m => m.RoleId, new { @id = "hdRoleId" })
+        </div>
+        <div class="form-group" id="divNewRole" style="display: none">
+            <label>Role:</label>
+            @Html.TextBoxFor(m => m.RoleName, new { @ID = "txtRoleName", @maxlength = "30", @class = "form-control" })
+        </div>
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="col-sm-3">
+        <div class="form-group facilityrole">
+            <label>
+                Scheduling Applied :
+                @Html.CheckBoxFor(m => m.SchedulingApplied)
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label>
+                Care Plan Accessible :
+                @Html.CheckBoxFor(m => m.CarePlanAccessible)
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="row facilityrole">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>
+                        IsActive :
+                        @Html.CheckBox("chkStatus", @Model.FacilityRoleId == 0 || @Model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>
+                        Add to All Facilities :
+                        @Html.CheckBoxFor(m => m.AddToAll)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="col-sm-12">
+        <input type="submit" onclick="AddUpdateFacilityRoleRefresh();" class="blue-btn btn btn-primary edit-btn" id="buttonUpdate" value="@btnSaveText" />
+        <input type="submit" onclick="AddUpdateFacilityRole();" class="blue-btn btn btn-primary edit-btn" id="btnSaveAndUpdate" value="@btnSaveUpdateText" />
+        <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn" type="button" onclick="ClearFields();">Cancel</button>
+    </div>
+</div>
+

@@ -1,0 +1,235 @@
+﻿@model DTO.UserDTO
+    
+@{
+    ViewBag.Title = "UserRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="white-bg">
+    
+
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add User
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form">
+
+                            <table class="table">
+                                <tr>
+                                    <td style="width: 17%;"></td>
+                                    <td style="width: 15%;"></td>
+                                    <td style="width: 15%;"></td>
+                                    <td style="width: 17%;"></td>
+                                    <td style="width: 15%;"></td>
+                                    <td style="width: 15%;"></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.UserName) :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserName, new { @maxlength = "20" }) </td>
+                                    <td><span style="color:red;" id="spUserId"></span> @Html.ValidationMessageFor(m => m.UserName)</td>
+
+                                    <td>Primary EntityType :</td>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.UserPrimaryEntityType, new SelectList(Model.LstEntityTypes, "Id", "Value"), "--Select One--", new { id = "UserPrimaryEntityType", @style = "width: 212px" })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(m => m.UserPrimaryEntityType)
+                                        @Html.HiddenFor(m => m.Id)
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Password :</td>
+                                    <td>@Html.PasswordFor(m => m.UserCurrentPassword, new { @maxlength = "20" }) </td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserCurrentPassword)</td>
+                                    <td>Confirm Password :</td>
+                                    <td>@Html.PasswordFor(m => m.ConfirmPassword, new { @maxlength = "20" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.ConfirmPassword)</td>
+                                </tr>
+                                <tr>
+                                    <td> Primary Function :</td>
+                                    <td>@Html.DropDownListFor(m => m.UserPrimaryFunction, new SelectList(Model.LstPrimaryFunctions, "Id", "Value"), "--Select One--", new { id = "UserPrimaryFunction", @style = "width: 212px" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserPrimaryFunction)</td>
+
+                                    <td>Facility Number:</td>
+                                    <td>@Html.TextBoxFor(m => m.FacilityNumber, new { @maxlength = "12" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.FacilityNumber)</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Menu Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserMenuAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserMenuAccess)</td>
+
+
+                                    <td>Scheduling Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserSchedulingAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserSchedulingAccess)</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>ADT Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserADTAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserADTAccess)</td>
+
+                                    <td>Charges Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserChargesAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserChargesAccess)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Scrubber Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserScrubberAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserScrubberAccess)</td>
+
+                                    <td>Billing Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserBillingAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserBillingAccess)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Collections Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserCollectionsAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserCollectionsAccess)</td>
+
+                                    <td>MGD Care Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserMGDCareAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserMGDCareAccess)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Reports Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserReportsAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserReportsAccess)</td>
+
+                                    <td>Dashboard Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserDashboardAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserDashboardAccess)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Admin Access :</td>
+                                    <td>@Html.TextBoxFor(m => m.UserAdminAccess, new { @maxlength = "1" })</td>
+                                    <td>@Html.ValidationMessageFor(m => m.UserAdminAccess)</td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="btn-group">
+
+                                            @if (Model.Id != 0)
+                                            {  <input type="submit" class="blue-btn" onclick="return checkDuplicateUser(@Model.Id);" value="Update" />
+                                                <button name="ClientCancel" class="blue-btn" type="button" onclick=" document.location.href = $('#Url').attr('href');">Cancel</button>
+
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" class="blue-btn" value="Save" onclick="return checkDuplicateUser(0);" />
+                                                <button name="ClientCancel" class="blue-btn" type="button">Cancel</button>
+
+                                            }
+
+                                            <a id="Url" href="@Html.AttributeEncode(Url.Action("User", "Admin"))" style="display:none;"></a>
+                                            <br />
+                                            <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+                                            @if (TempData["Message"] != null)
+                                            {
+                                                <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-align-justify"></span>&nbsp;User List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @if (Model != null)
+                        {
+                            if (Model.LstUsers.Count > 0)
+                            {
+
+                                WebGrid grid = new WebGrid(Model.LstUsers, ajaxUpdateContainerId: "gridContent");
+                                @grid.GetHtml(tableStyle: "table table-grid",
+                        headerStyle: "gridHead",
+                        footerStyle: "gridFooter",
+                        rowStyle: "gridRow",
+                        alternatingRowStyle: "gridAltRow",
+                        columns: grid.Columns(
+
+                        grid.Column("UserName", header: "User Name", canSort: true),
+                        grid.Column("UserCurrentPasswordDate", header: "Created Date", canSort: true),
+                        grid.Column("UserPrimaryEntityType", header: "Primary EntityType", canSort: true),
+                        grid.Column("FacilityNumber", header: "Facility Number", canSort: true),
+                        grid.Column("UserMenuAccess", header: "Menu Access", canSort: true),
+                        grid.Column("UserSchedulingAccess", header: "Scheduling Access", canSort: true),
+
+                        grid.Column("UserADTAccess", header: "ADT Access", canSort: true),
+                        grid.Column("UserChargesAccess", header: "Charges Access", canSort: true),
+                        grid.Column("UserScrubberAccess", header: "Scrubber Access", canSort: true),
+
+                        grid.Column("UserBillingAccess", header: "Billing Access", canSort: true),
+                        grid.Column("UserCollectionsAccess", header: "Collections Access", canSort: true),
+                        grid.Column("UserReportsAccess", header: "Reports Access", canSort: true),
+
+
+                        grid.Column(header: "Action", format: @<text>
+                            <a href="@Url.Action(" edituser", "Admin" , new { userid=item.Id })" style="float:left; width: 40%;"><img src="../images/edit.png" /></a>
+                            &nbsp;  <a href="#" title="Delete User" onclick="return DeleteUser('@item.Id');" style="float:right; width: 40%;"><img src="../images/delete.png" /></a>
+                        </text>)
+));
+                            }
+                            else
+                            {
+
+                                <h2>No Record found</h2>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

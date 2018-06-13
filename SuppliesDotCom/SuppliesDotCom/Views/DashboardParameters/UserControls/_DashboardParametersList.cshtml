@@ -1,0 +1,56 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@model List<DashboardParametersCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, ajaxUpdateContainerId: "gridContent",canPage:false);
+            <div id="gridContent">
+                @grid.GetHtml(tableStyle: "table table_scroll", headerStyle: "gridHead", footerStyle: "gridFooter", rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+                                //grid.Column("ParameterId", header: "Parameter Id" , canSort: true),
+                                grid.Column("DashboardTypeStr", header: "Dashboard Type" , canSort: true),
+                                grid.Column("IndicatorCategoryStr", header: "Type Of Data" , canSort: true),
+                                grid.Column("DataFieldStr", header: "Data Field" , canSort: true),
+                                grid.Column("ValueTypeStr", header: "Value Type" , canSort: true),
+                                grid.Column("ArgumentStr", header: "Argument" , canSort: true),
+                                grid.Column("RangeFrom", header: "Range From" , canSort: true),
+                                grid.Column("RangeTo", header: "Range To" , canSort: true),
+                                grid.Column("ColorCodeStr", header: "Color Code" , canSort: true),
+                                grid.Column("ExternalDashboardTypeStr", header: "External Dashboard Type" , canSort: true),
+                                //grid.Column("ExternalValue2", header: "ExternalValue2" , canSort: true),
+                                //grid.Column("ExternalValue3", header: "ExternalValue3" , canSort: true),
+                                //grid.Column("ExternalValue4", header: "ExternalValue4" , canSort: true),
+                                //grid.Column("ExternalValue5", header: "ExternalValue5" , canSort: true),
+                                //grid.Column("CreatedBy", header: "Created By" , canSort: true),
+                                //grid.Column("CreatedDate", header: "Created Date" , canSort: true),
+                                //grid.Column("ModifiedBy", header: "Modified By" , canSort: true),
+                                //grid.Column("ModifiedDate", header: "Modified Date" , canSort: true),
+                                //grid.Column("IsActive", header: "IsActive" , canSort: true),
+
+                grid.Column(header: "Action", format: @<text>
+                <a href="#" onclick="EditDashboardParameters('@item.ParameterId')" style="float: left; margin-right: 7px; width: 15px;">
+                    <img src="@Url.Content("~/images/edit.png")" /></a>
+                                                           @*<a href="#" title="Delete" onclick="return DeleteDashboardParameters('@item.ParameterId');" style="float: left; width: 15px;">
+                                                               <img src="@Url.Content("~/images/delete.png")" /></a>*@
+                
+                <a href="javascript:void(0);" title="Delete Dashboard Paramiter" onclick="return OpenConfirmPopup('@item.ParameterId','Delete Dashboard Paramiter','',DeleteDashboardParameters,null); " style="float: left; width: 15px;">
+                    <img src="@Url.Content("~/images/delete.png")" />
+                </a>
+                                                       </text>)
+                                ))
+            </div>            
+        }
+        else
+        {
+
+            <h2>No Record found</h2>
+        }
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+        SetGridSorting(SortDashboardParamiter, "#gridContent");
+    });
+</script>

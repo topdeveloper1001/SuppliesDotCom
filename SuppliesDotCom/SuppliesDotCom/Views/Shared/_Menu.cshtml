@@ -1,0 +1,86 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Common.Common
+@using Kendo.Mvc.UI
+@using Kendo.Mvc.UI.Fluent
+@using Tabs = SuppliesDotCom.Model.Tabs
+@using SuppliesDotCom.Model
+
+@functions{
+
+    private void addChildren(MenuItemBuilder builder, Tabs item, IEnumerable<Tabs>
+        items)
+    {
+        var children = items.Where(m => m.ParentTabId == item.TabId);
+        builder.Items(menuItems =>
+                      {
+                          foreach (var child in children)
+                          {
+
+                              var routeValues = MenuHelpers.BuildValueDictionary(child.RouteValues);
+                              if (routeValues == null)
+                              {
+                                  var menuItem = menuItems.Add().Visible(child.IsVisible).Enabled(child.IsActive).Text(child.TabName)
+                                      .Action(child.Action, child.Controller).LinkHtmlAttributes(new { target = child.TabImageUrl });
+                                  addChildren(menuItem, child, items);
+                              }
+                              else
+                              {
+                                  var menuItem = menuItems.Add().Visible(child.IsVisible).Enabled(child.IsActive).Text(child.TabName)
+                                      .Action(child.Action, child.Controller, routeValues).LinkHtmlAttributes(new { target = child.TabImageUrl });
+
+                                  addChildren(menuItem, child, items);
+                              }
+                          }
+                      });
+    }
+
+    }
+@{
+    var moduleAccessParentIDs = new List<int>();
+    if (Session[SessionNames.SessoionModuleAccess.ToString()] != null)
+    {
+        var moduleAccess = Session[SessionNames.SessoionModuleAccess.ToString()] as List<SuppliesDotCom.Model.ModuleAccess>;
+        if (moduleAccess != null)
+        {
+            moduleAccessParentIDs.AddRange(moduleAccess.Select(item => Convert.ToInt32(item.TabID)));
+        }
+    }
+    
+}
+
+@(Html.Kendo().Menu()
+              .Name("MainMenu")
+              .HtmlAttributes(new { }) /*style = "margin-right: 220px; width: 1200px;"*/
+                      .HighlightPath(true)
+                      .HoverDelay(400)
+              .Items(menu =>
+                     {
+                         if (Session[SessionNames.SessionClass.ToString()] != null)
+                         {
+                             var tabsList = (Session[SessionNames.SessionClass.ToString()] as SessionClass).MenuSessionList;
+                             if (tabsList != null)
+                             {
+                                 foreach (var item in tabsList.Where(m => m.ParentTabId == 0 && moduleAccessParentIDs.Contains(m.TabId)))
+                                 {
+                                     var routeValues = MenuHelpers.BuildValueDictionary(item.RouteValues);
+                                     if (routeValues == null)
+                                     {
+                                         var builder = menu.Add().Visible(item.IsVisible).Enabled(item.IsActive).Text(item.TabName)
+                                         .Action(item.Action, item.Controller).ImageUrl(item.TabImageUrl);
+
+                                         addChildren(builder, item, tabsList);
+                                     }
+                                     else
+                                     {
+                                         var builder = menu.Add().Visible(item.IsVisible).Enabled(item.IsActive).Text(item.TabName)
+                                             .Action(item.Action, item.Controller, routeValues).ImageUrl(item.TabImageUrl);
+
+                                         addChildren(builder, item, tabsList);
+                                     }
+                                 }
+                             }
+                         }
+                     })
+              .Orientation(MenuOrientation.Horizontal))
+
+

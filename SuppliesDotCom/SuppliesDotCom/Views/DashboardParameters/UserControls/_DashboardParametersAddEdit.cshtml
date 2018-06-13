@@ -1,0 +1,127 @@
+﻿@using SuppliesDotCom.Model
+@model DashboardParameters
+
+<style>
+    .btn-group {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+</style>
+@{
+    var btnSaveText = "Save";
+    if (Model.ParameterId != null && Model.ParameterId != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<div class="form" id="DashboardParametersFormDiv">
+    @*// BBCOLUMNSHERE*@
+    <div class="col-sm-3">
+        @*<div class="rowTable">
+            <label>ParameterId:</label>
+            @Html.TextBoxFor(m => m.ParameterId, new { @maxlength = "10", @id = "txtParameterId" })
+        </div>*@
+        <div class="rowTable">
+            <input id="hfDashboardParameterId" type="hidden" value="0"/>
+            <label><span class="mandatoryStar"></span>Dashboard Type:</label>
+            <select id="ddlDashboardType" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>External Dashboard Type:</label>
+            <select id="ddlExternalDashboardType" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Type of Data:</label>
+            <select id="ddlIndicatorCategory" class="validate[required]"></select>
+        </div>
+    </div>
+     <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Data Field:</label>
+            <select id="ddlDataField" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Value Type:</label>
+            <select id="ddlValueType" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Argument:</label>
+            <select id="ddlArgument" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Color Code:</label>
+            <select id="ddlColorCode" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+         <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Range From:</label>
+            @Html.TextBoxFor(m => m.RangeFrom, new { @maxlength = "20", @id = "txtRangeFrom", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label>Range To:</label>
+            @Html.TextBoxFor(m => m.RangeTo, new { @maxlength = "20", @id = "txtRangeTo"})
+        </div>
+        @*<div class="rowTable">
+            <label>ExternalValue1:</label>
+            @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "50", @id = "txtExternalValue1" })
+        </div>*@
+    </div>
+    @*<div class="col-sm-3">
+        <div class="rowTable">
+            <label>ExternalValue2:</label>
+            @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "50", @id = "txtExternalValue2" })
+        </div>
+        <div class="rowTable">
+            <label>ExternalValue3:</label>
+            @Html.TextBoxFor(m => m.ExternalValue3, new { @maxlength = "50", @id = "txtExternalValue3" })
+        </div>
+        <div class="rowTable">
+            <label>ExternalValue4:</label>
+            @Html.TextBoxFor(m => m.ExternalValue4, new { @maxlength = "50", @id = "txtExternalValue4" })
+        </div>
+        <div class="rowTable">
+            <label>ExternalValue5:</label>
+            @Html.TextBoxFor(m => m.ExternalValue5, new { @maxlength = "50", @id = "txtExternalValue5" })
+        </div>
+        <div class="rowTable">
+            <label>CreatedBy:</label>
+            @Html.TextBoxFor(m => m.CreatedBy, new { @maxlength = "10", @id = "txtCreatedBy" })
+        </div>
+    </div>*@
+    <div class="col-sm-3">
+        @*<div class="rowTable">
+            <label>CreatedDate:</label>
+            @Html.TextBoxFor(m => m.CreatedDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtCreatedDate" })
+        </div>
+        <div class="rowTable">
+            <label>ModifiedBy:</label>
+            @Html.TextBoxFor(m => m.ModifiedBy, new { @maxlength = "10", @id = "txtModifiedBy" })
+        </div>
+        <div class="rowTable">
+            <label>ModifiedDate:</label>
+            @Html.TextBoxFor(m => m.ModifiedDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtModifiedDate" })
+        </div>
+        <div class="rowTable">
+            <label>IsActive:</label>
+            @Html.TextBoxFor(m => m.IsActive, new { @maxlength = "10", @id = "txtIsActive" })
+        </div>*@
+        <div class="clear"></div>
+        <div class="btn-group">
+            <div style="float: left;">
+                <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick="return SaveDashboardParameters();" />
+                <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearDashboardParametersForm();">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

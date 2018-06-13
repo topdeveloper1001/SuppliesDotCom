@@ -1,0 +1,117 @@
+﻿
+@model SuppliesDotCom.Model.CustomModel.ParametersCustomModel
+
+@{
+    ViewBag.Title = "Parameters";
+}
+<style>
+    select {
+    margin-bottom: 10px;}
+</style>
+<div class="form" id="ParametersFormDiv">
+@*// BBCOLUMNSHERE*@
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>Parameter For:</label>
+           <select id="ddlParamLevel" name="ddlParamLevel" class="validate[required]" onchange="BindSystemCodes()"></select>
+           @Html.HiddenFor(m => m.ParamLevel, new { @id = "hdParamLevel" })
+       </div>
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>Parameter Code:</label>
+           <select id="ddlSystemCode" name="ddlSystemCode"></select>
+           @Html.HiddenFor(m => m.SystemCode, new { @id = "hdSystemCode" })
+       </div>
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>Name:</label>
+           @Html.TextBoxFor(m => m.ParamName, new { @maxlength = "100", @id = "txtParamName" })
+       </div>
+       <div class="rowTable">
+           <label>Description:</label>
+           @Html.TextAreaFor(m => m.ParamDescription, new { @maxlength = "500", @id = "txtParamDescription" })
+       </div>
+       <div class="rowTable">
+           <label><span class="mandatoryStar"></span>Parameter Type:</label>
+           <select id="ddlParamType" name="ddlParamType" onchange="ShowParameters(); $('.txtbox').val('');">
+               <option value="0">Single Value</option>
+               <option value="1">Range</option>
+           </select>
+           @Html.HiddenFor(m => m.ParamType, new { @id = "hdParamType" })
+       </div>
+   </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Parameter Data Type:</label>
+            <select id="ddlParamDataType" name="ddlParamDataType" class="validate[required]" onchange="ShowParameters(); $('.txtbox').val('');"></select>
+            @Html.HiddenFor(m => m.ParamDataType, new { @id = "hdParamDataType" })
+        </div>
+        @* Range Parmaters *@
+        <div id="divRangeParam" style="display: none;">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Value 1:</label>
+                @Html.TextBoxFor(m => m.Value1, new { @maxlength = "10", @id = "txtValue1", @class = "txtbox txtRange" })
+            </div>
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Value 2:</label>
+                @Html.TextBoxFor(m => m.Value2, new { @maxlength = "10", @id = "txtValue2", @class = "txtbox txtRange" })
+            </div>
+        </div>
+        @* Single Parmaters *@
+        <div id="divSingleParam" style="display: none;">
+            <div class="rowTable" id="divOtherSingleParams">
+                <label><span class="mandatoryStar"></span>Value:</label>
+                @Html.TextBoxFor(m => m.Value1, new { @maxlength = "10", @id = "txtValue3", @class = "txtbox txtSingle" })
+            </div>
+            <div class="rowTable" id="divBitValue" style="display:none;">
+                <label><span class="mandatoryStar"></span>Bit Value:</label>
+                <select id="ddlBitVal" name="ddlBitVal">
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+                </select>
+                @Html.HiddenFor(m => m.BitValue, new { @id = "hdBitValue" })
+            </div>
+        </div>
+       
+        @*<div id="divBitParam" style="display: none;">
+            <div class="rowTable">
+                <label><span class="mandatoryStar"></span>Bit Value:</label>
+                <select id="ddlBitVal" name="ddlBitVal">
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+                </select>
+                @Html.HiddenFor(m => m.BitValue, new { @id = "hdBitValue" })
+            </div>
+        </div>*@
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <div class="rowTable">
+            <label>Effective Start Date:</label>
+            @Html.TextBoxFor(m => m.EffectiveStartDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtEffectiveStartDate", @class = "dtGeneral validate[custom[dateFormat]]" })
+        </div>
+        <div class="rowTable">
+            <label>Effective End Date:</label>
+            @Html.TextBoxFor(m => m.EffectiveEndDate, "{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtEffectiveEndDate", @class = "dtGeneral validate[custom[dateFormat]]" })
+        </div>
+
+        <div class="rowTable">
+            <label>Is Active:</label>
+            @Html.CheckBox("chkStatus", @Model.ParametersID == 0 || @Model.IsActive == true)
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="btn-group">
+        <div style="float: left;">
+            @if (Model.ParametersID != 0)
+            {  <input type="submit" class="btn btn-primary edit-btn marginBtn" value="Update" onclick="return SaveParameters('@Model.ParametersID');" />
+                <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearAll();">Cancel</button>
+            }
+            else
+            {
+                <input type="submit" onclick="return SaveParameters('@Model.ParametersID');" class="btn btn-primary edit-btn marginBtn" value="Save" />
+                <button name="ClientCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick="return ClearAll();">Cancel</button>
+            }
+            <br />
+            <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+        </div>
+    </div>
+</div>

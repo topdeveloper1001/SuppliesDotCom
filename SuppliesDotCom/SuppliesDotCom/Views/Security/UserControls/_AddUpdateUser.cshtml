@@ -1,0 +1,135 @@
+﻿@model SuppliesDotCom.Model.CustomModel.UsersCustomModel
+@using SuppliesDotCom.Model
+
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+<div id="collapseOne" class="panel-collapse collapse collpase2">
+    <div class="panel-body">
+        <div class="base-color">
+            <div class="form patientTable" id="validate">
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label><span class="mandatoryStar"></span>Corporate:</label>
+                        <select id="ddlCorporate" class="validate[required] ddlempty" onchange="BindFacilityDropdownByCorporateId()"></select>
+                        @Html.HiddenFor(m => m.CurrentUser.CorporateId, new { @id = "hdCorporateId", @class = "ddlempty" })
+                    </div>
+                    <div class="rowTable">
+                        <label><span class="mandatoryStar"></span>Facility:</label>
+                        <select id="ddlFacility" class="validate[required] ddlempty" onchange="BindCorporateFacilityRoles()">
+                            <option value="">--Select--</option>
+                        </select>
+                        @Html.HiddenFor(m => m.CurrentUser.FacilityId, new { @id = "hdFacilityId", @class = "ddlempty" })
+                    </div>
+                    <div class="rowTable">
+                        <input type="hidden" value="@Model.CurrentUser.UserID" id="hfUserID" />
+                        <label class="control-label"><span class="mandatoryStar"></span>Username :</label>
+                        @Html.TextBoxFor(m => m.CurrentUser.UserName, new { @ID = "txtUN", @maxlength = "20", @class = "validate[required] emptyTxt", @onchange = "trimSpace(this)" })
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Email :</label>
+                        @Html.TextBoxFor(m => m.CurrentUser.Email, new { @ID = "txtEmail", @maxlength = "99", @class = "validate[required,custom[email]] emptyTxt", @ClientIDMode = "Static" })@*,custom[email]*@
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Password:</label>
+                        @*@Html.TextBoxFor(m => m.Password, new { @ID = "txtPassword", @maxlength = "14", @class = "validate[required]", @name = "password" })*@
+                        <input type="password" value="@Model.CurrentUser.Password" class="validate[required] passwordmatch emptyTxt" maxlength="14" id="txtPassword" />
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Confirm Password:</label>
+                        @*@Html.TextBoxFor(m => m.Password, new { @ID = "txtConfirmPassword", @maxlength = "14", @class = "validate[required]" })*@
+                        <input type="password" value="@Model.CurrentUser.Password" class="validate[required] validate[passwordmatch] emptyTxt" maxlength="14" id="txtConfirmPassword" />
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>First Name :</label>
+                        @Html.TextBoxFor(m => m.CurrentUser.FirstName, new { @ID = "txtFN", @maxlength = "20", @class = "validate[required, custom[nameFormat]] emptyTxt", @onchange = "return capitaliseFirstLetter(this);", @onblur = "return capitaliseFirstLetter(this);" })
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Last Name :</label>
+                        @Html.TextBoxFor(m => m.CurrentUser.LastName, new { @ID = "txtLN", @maxlength = "20", @class = "validate[required, custom[nameFormat]] emptyTxt", @onchange = "return capitaliseFirstLetter(this);", @onblur = "return capitaliseFirstLetter(this);" })
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Mobile Phone: @*<span id="PhoneCode"></span>*@</label>
+                        <select id="ddlPhone" class="marginBottomNone telephoneCol1" onchange="return OnCountryDropdownChange('#lblPhone', '#ddlPhone');"></select>
+                        <span id="lblPhone" class="marginTopPhoneNo"></span>
+                        @Html.HiddenFor(m => m.CurrentUser.Phone, new { @id = "hdPhone", @class = "ddlempty" })
+                        @Html.TextBoxFor(m => m.CurrentUser.Phone, new { @ID = "txtPhone", @maxlength = "9", @class = "PhoneMask telephoneCol2 validate[required]" })
+                    </div>
+                    <div class="rowTable">
+                        <label class="control-label">Office Phone: @*<span id="HomePhoneCode"></span>*@</label>
+                        <select id="ddlHomePhone" class="marginBottomNone telephoneCol1" onchange="return OnCountryDropdownChange('#lblHomePhone', '#ddlHomePhone');"></select>
+                        <span id="lblHomePhone" class="marginTopPhoneNo"></span>
+                        @Html.HiddenFor(m => m.CurrentUser.HomePhone, new { @id = "hdHomePhone", @class = "ddlempty" })
+                        @Html.TextBoxFor(m => m.CurrentUser.HomePhone, new { @ID = "txtHomePhone", @maxlength = "9", @class = "PhoneMask telephoneCol2 emptyTxt" })
+                    </div>
+                    <div class="rowTable">
+                        <label><span class="mandatoryStar"></span>User Role:</label>@*<span class="mandatoryStar"></span>*@
+                        <select id="ddlRoles" class="validate[required] ddlempty"></select>
+                        @Html.HiddenFor(m => m.RoleId, new { @id = "hdRoleID", @class = "ddlempty" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            Is Active :
+                            @Html.CheckBox("chkActive", @Model.CurrentUser.UserID == 0 || @Model.CurrentUser.IsActive)
+                        </label>
+                    </div>
+                    @*<div class="rowTable">
+                            <label><span class="mandatoryStar"></span>User Type:</label>
+                            <select id="ddlUserType" class="validate[required] ddlempty"></select>
+                            @Html.HiddenFor(m => m.CurrentUser.UserType, new { @id = "hdUserType", @class = "ddlempty" })
+                        </div>*@
+                </div>
+                <div class="col-sm-4">
+                    @{
+                        Html.RenderPartial("~/Views/CommonUserControls/CascadingCountryView.cshtml", new SuppliesDotCom.Models.CommonDataView
+                        {
+                            CountryList = new List<Country>(),
+                            StatesList = new List<State>(),
+                            CityList = new List<City>(),
+                            CountryId = Convert.ToInt32(Model.CurrentUser.CountryID),
+                            StateId = Convert.ToInt32(Model.CurrentUser.StateID),
+                            CityId = Convert.ToInt32(Model.CurrentUser.CityID),
+                        });
+                    }
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>Address :</label>
+                        @Html.TextAreaFor(m => m.CurrentUser.Address, new
+                        {
+                            @ID = "txtAddress",
+                            @maxlength = "500",
+                            @class = "validate[required] emptyTxt",
+                            @onkeyup = "TextAreaValid(this,100);",
+                            @TextMode = "MultiLine",
+                        })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Is Admin : @Html.CheckBox("chkAdmin", Model.CurrentUser.AdminUser ?? false)</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="btn-group">
+            @*"return checkDuplicateUser(@Model.UserID);" document.location.href = $('#Url').attr('href');*@
+            @if (Model.CurrentUser.UserID != 0)
+            {
+                <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return CheckDuplicateUser();" value="Update" />
+            }
+            else
+            {
+                <input type="submit" id="btnSave" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return CheckDuplicateUser();" />
+            }
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearUserForm();">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+

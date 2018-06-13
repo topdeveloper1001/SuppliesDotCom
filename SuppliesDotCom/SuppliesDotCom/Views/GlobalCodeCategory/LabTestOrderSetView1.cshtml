@@ -1,0 +1,118 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.LabTestOrderSetView
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    const string categoryName = "Lab Test Order Set";
+    var addViewTitle = string.Format("Add {0}", categoryName);
+    var listViewTitle = string.Format("{0} List", categoryName);
+
+    const string subCategoryName = "Lab Test Code";
+    var addSubViewTitle = string.Format("Add {0}", subCategoryName);
+    var listSubViewTitle = string.Format("{0} List", subCategoryName);
+}
+
+
+
+<div class="white-bg" style="overflow: hidden;">
+    @Html.HiddenFor(m => m.CategoryValue, new { id = "hdExternalValue1" })
+
+    <div class="col-sm-6">
+        <div class="panel panel-default collapsecss ourcollapse bordertable boxShadow">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;@addViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeCategoryInfo">
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body grayBg">
+                    @{Html.RenderPartial("~/Views/GlobalCodeCategory/UserControls/_AddUpdateLabTestOrderSet1.cshtml", Model.CurrentGlobalCodeCategory1);}
+                </div>
+                <div class="scroller margin15 greyBorder">
+                <div class="form">
+                        <div class="table-responsive" id="DivLabTestOrderSetList">
+                            @{Html.RenderPartial("~/Views/GlobalCodeCategory/UserControls/_LabTestOrderSetList1.cshtml", Model.GCCategoryList1);}
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+            
+    </div>
+    @*<div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colLabTestOrderSetList">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-align-justify"></span>&nbsp;@listViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="colLabTestOrderSetList" class="panel-collapse collapse in">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    </div>
+
+    
+    <div class="col-sm-6">
+    <div class="panel panel-default collapsecss ourcollapse bordertable boxShadow">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseLabTestCodesAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;@addSubViewTitle
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseLabTestCodesAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body grayBg">
+                    @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_LabTestCodesAddEdit.cshtml", Model.CurrentLabOrderCode);}
+                </div>
+                <div class="scroller margin15 greyBorder">
+                <div class="form">
+                        <div class="table-responsive" id="DivLabTestCodesList">
+                            @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_LabTestCodesListView.cshtml", Model.LabOrderCodesList);}
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#colLabTestCodesList">
+            <h4 class="panel-title collapseTitle">
+                <span id="generalHeading">
+                    <img src="@Url.Content("~/images/list.png")" />&nbsp; @listSubViewTitle </span>
+               
+                <span id="HeadingWithselectedHeader" style="display: none;">
+                    <img src="@Url.Content("~/images/list.png")" />&nbsp; Lab Test Code List (Order Set:
+                    <label id="lblOrderSet"></label>
+                    ) </span>
+                <a class="btn btn-default btn-sm pull-right collapse-btn"><span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="colLabTestCodesList" class="panel-collapse collapse in">
+            <div class="panel-body scroller">
+                <div class="base-color">
+                    
+                </div>
+            </div>
+        </div>
+    </div>*@
+        </div>
+</div>
+<script src="~/Scripts/GlobalCodeCategory/LabTestOrderSet1.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

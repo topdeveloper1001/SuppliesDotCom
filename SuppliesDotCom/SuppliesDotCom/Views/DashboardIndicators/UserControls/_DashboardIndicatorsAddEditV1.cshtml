@@ -1,0 +1,231 @@
+﻿@using System.Data.SqlClient
+@model SuppliesDotCom.Model.DashboardIndicators
+
+@{
+    var btnSaveText = "Save";
+    if (Model.IndicatorID != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+
+<style>
+    .settingBtns2 {
+        padding: 10px 0;
+        display: inline-block;
+    }
+
+    .overlay {
+        background: #000 none repeat scroll 0 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 9999;
+    }
+</style>
+<div class="form" id="DashboardIndicatorsFormDiv">
+    @Html.HiddenFor(m => m.IndicatorID)
+    @Html.HiddenFor(m => m.IndicatorNumber)
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Indicator Number:</label>
+            @Html.TextBoxFor(m => m.IndicatorNumber, new { @maxlength = "50", @id = "txtIndicatorNumber", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Name:</label>
+            @Html.TextBoxFor(m => m.Dashboard, new { @maxlength = "500", @id = "txtDashboard", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Description:</label>
+            @Html.TextAreaFor(m => m.Description, new { @maxlength = "500", @id = "txtDescription", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Definition:</label>
+            @Html.TextBoxFor(m => m.Defination, new { @maxlength = "100", @id = "txtDefination", @class = "validate[required]" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Format Type:</label>
+            <select id="ddlFormatType" class="validate[required]"></select>
+            @*@Html.HiddenFor(m => m.FormatType, new { @id = "hfFormatType" })*@
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Show Up To Decimal Places:</label>
+            @Html.TextBoxFor(m => m.DecimalNumbers, new { @maxlength = "10", @id = "txtDecimalNumbers", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label>Sub-Category 1:</label>
+            <select id="ddlSubCategory1"></select>
+            @*@Html.TextBoxFor(m => m.SubCategory1, new { @maxlength = "50", @id = "txtSubCategory1" })*@
+        </div>
+        <div class="rowTable">
+            <label>Sub-Category 2:</label>
+            <select id="ddlSubCategory2"></select>
+            @*@Html.TextBoxFor(m => m.SubCategory2, new { @maxlength = "50", @id = "txtSubCategory2" })*@
+        </div>
+        <div class="rowTable">
+            <label>
+                <span class="mandatoryStar"></span>Type of Data:
+            </label>
+            <select id="ddlTypeOfData" class="validate[required]"></select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Frequency Type:</label>
+            <select id="ddlFerquencyType" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>OwnerShip User:</label>
+            @Html.TextBoxFor(m => m.OwnerShip, new { @maxlength = "50", @id = "txtOwnerShip", @class = "validate[required]" })
+        </div>
+        <div class="rowTable">
+            <label><span class="mandatoryStar"></span>Select Facility:</label>
+            <select id="ddlFacility"></select>
+        </div>
+        <div class="rowTable">
+            <label>
+                Select Department:
+            </label>
+            <select id="ddlDepartment"></select>
+        </div>
+        <div class="rowTable">
+            <label title="If Checked, summing up of Indicator values will not applied to Year to Date Case.">
+                Special Case:
+            @Html.CheckBox("chkSpecialCase", Model.SpecialCase == 1)</label>
+        </div>
+        @*<div class="rowTable">
+        <label>CorporateId:</label>
+        @Html.TextBoxFor(m => m.CorporateId, new { @maxlength = "10", @id = "txtCorporateId" })
+      </div>
+      <div class="rowTable">
+        <label>CraetedBy:</label>
+        @Html.TextBoxFor(m => m.CraetedBy, new { @maxlength = "10", @id = "txtCraetedBy" })
+      </div>*@
+    </div>
+    <div class="col-sm-3">
+        @* <div class="rowTable">
+        <label>CreatedDate:</label>
+        @Html.TextBoxFor(m => m.CreatedDate,"{0:MM/dd/yyyy}", new { @maxlength = "10", @id = "dtCreatedDate" })
+      </div>
+      <div class="rowTable">
+        <label>IsActive:</label>
+        @Html.TextBoxFor(m => m.IsActive, new { @maxlength = "10", @id = "txtIsActive" })
+      </div>
+      <div class="rowTable">
+        <label>ExternalValue1:</label>
+        @Html.TextBoxFor(m => m.ExternalValue1, new { @maxlength = "50", @id = "txtExternalValue1" })
+      </div>
+      <div class="rowTable">
+        <label>ExternalValue2:</label>
+        @Html.TextBoxFor(m => m.ExternalValue2, new { @maxlength = "50", @id = "txtExternalValue2" })
+      </div>*@
+        <div class="rowTable">
+            <label>
+                <span class="mandatoryStar"></span>Sort Order:
+            </label>
+            @Html.TextBoxFor(m => m.SortOrder, new { @maxlength = "4", @class = "validate[optional[integer]]" })
+        </div>
+        <div class="rowTable">
+            <label>
+                <span class="mandatoryStar"></span>Data Type:
+            </label>
+            <select id="ddlDataType" class="validate[required]"></select>
+        </div>
+        <div class="rowTable">
+            <label>
+                Static Budget/Target:
+            
+            @Html.CheckBox("chkSameBudget", Model.ExternalValue4 == "1")</label>
+        </div>
+        <div class="rowTable" style="display: none;" id="divBaseValue">
+            <label>
+                Base Value:
+            @Html.TextBoxFor(m => m.ExternalValue5, new { @maxlength = "50", @id = "txtExternalValue5" })</label>
+      </div>
+      <div class="rowTable">
+            <label>
+                IsActive:
+            @Html.CheckBox("chkStatus", Model.IsActive == null || Model.IsActive == 1)</label>
+        </div>
+        <div class="rowTable" id="divExpressionText" style="display: none;">
+            <label>Evaluated Expressions: <a href="#" class="btn-link" id="aChangeFormula" onclick="ShowExpressionSection();">Change</a></label>
+            <div class="gridHead" style="padding: 10px; line-height: 16px;" id="divFormulaSection">No Expression</div>
+      </div>
+
+        <input type="hidden" id="hdExpression" value="" />
+        <input type="hidden" id="hfReferencedIndicators" value="" />
+   </div>
+    <div class="clear"></div>
+    <div class="btn-group">
+        <div style="float: left;">
+            <input type="submit" id="btnSave" class="btn btn-primary edit-btn marginBtn" value="@btnSaveText" onclick=" return CheckIsIndicatorunique(); " />
+            <button name="ClientCancel" id="btnCancel" class="btn btn-primary edit-btn marginBtn" type="button" onclick=" return ClearDashboardIndicatorsForm(0); ">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="divExpression" style="display: none; z-index: 99999;" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="opacity: 1;">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Expression</h4>
+            </div>
+            <div class="modal-body">
+                <div class="rowTable">
+                    <label>Expression:</label>
+                    <textarea id="txtExpression" style="height:100px; display: none;"></textarea>
+                    <label class="readonly_label" id="lblExpression" style="height:100px;"></label>
+                </div>
+                <div class="popupStuff">
+                    <div class="settingBtns">
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('+');" value="+" />
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('-');" value="-" />
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('*');" value="*" />
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('/');" value="/" />
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('(');" value="(" />
+                        <input type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox(')');" value=")" />
+    </div>
+                    <div class="settingBtns2">
+                        @*<input id="btnBackspace" type="button" class="btn btn-success edit-btn" onclick="return SetValueInTextBox('backspace');"
+                            value="Backspace" />*@
+                        <input id="btnUndo" type="button" class="btn btn-success edit-btn" onclick="return SetValueInTextBox('undo');"
+                            value="Undo" />
+                        <input id="btnCleartext" type="button" class="btn btn-default edit-btn" onclick="return SetValueInTextBox('clear');"
+                            value="Clear" />
+</div>
+                    @*<div class="propertyType">
+                    <asp:label id="lblExpressionType" runat="server" text="<%$ Resources:Resource,expressionType%>"></asp:label>
+                    <asp:dropdownlist id="ddlExpressionType" onchange="return OnExpressionTypeChange();"
+                        runat="server">
+                                        </asp:dropdownlist>
+                </div>*@
+                    <div class="propertyType">
+                        <label>Indicator:</label>
+                        <select id="ddlIndicatorFilter" class="col-sm-12"></select>
+                    </div>
+                    <div class="settingBtns2">
+                        <input type="button" class="btn btn-success btn-sm edit-btn" onclick="return SetValueInTextBox('Add');" value="Add" />
+                        <input id="btnSaveExpression" class="btn btn-primary btn-sm edit-btn" onclick="return SetValueInTextBox('done');" type="button"
+                            value="Save" />
+                        <input id="btnCancelExpression" class="btn btn-default btn-sm edit-btn" onclick="return SetValueInTextBox('cancel');" type="button"
+                            value="Cancel" />
+                        @*<input id="btnSpace" onclick="return SetValueInTextBox('space');" type="button" value="Space" />*@
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="overlay" style="display: none"></div>

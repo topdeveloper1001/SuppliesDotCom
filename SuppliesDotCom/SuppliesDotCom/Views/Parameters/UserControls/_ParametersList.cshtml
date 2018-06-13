@@ -1,0 +1,49 @@
+﻿@model List<SuppliesDotCom.Model.CustomModel.ParametersCustomModel>
+
+<div class="form">
+    <div class="table-responsive">
+        @if (Model != null)
+        {
+            if (Model.Count > 0)
+            {
+                var grid = new WebGrid(Model, ajaxUpdateContainerId: "ParametersGridContent");
+                <div id="ParametersGridContent">
+                    @grid.GetHtml(htmlAttributes: new { id = "Parametersgrid" }, tableStyle: "table table-grid", headerStyle: "gridHead", footerStyle: "gridFooter",
+                        rowStyle: "gridRow", alternatingRowStyle: "gridAltRow", columns: grid.Columns(grid.Column("ParamLevelName", "Param Level"),
+                        grid.Column("ParamName", "Param Name"),
+                        grid.Column("ParamDescription", "Param Description"),
+                        grid.Column("ParamTypeName", "Param Type"),
+                        grid.Column("ParamDataTypeName", "Param Data Type"),
+                        grid.Column("Value1", "Value 1"),
+                        grid.Column("Value2", "Value 2"),
+                        grid.Column("EffectiveStartDate", "Effective Start Date", canSort: true, format: @<text>@item.EffectiveStartDate.ToString("dd/MM/yyyy")</text>),
+                        grid.Column("EffectiveEndDate", "Effective End Date", canSort: true, format: @<text>@item.EffectiveEndDate.ToString("dd/MM/yyyy")</text>),
+                        grid.Column(header: "Action", format: @<text>
+                                                                   <a href="javascript:void(0);" onclick="EditParameters('@item.ParametersId')" title="Edit Parameter" style="float: left; margin-right: 7px; width: 15px;">
+                                                                       <img src="@Url.Content("~/images/edit.png")" /></a>
+                                                                   &nbsp;
+                                                                   @*<a href="javascript:void(0);" title="Delete Parameter" onclick="return DeleteParameters('@item.ParametersId');" style="float: left; width: 15px;">
+                         <img src="@Url.Content("~/images/delete.png")" />
+                                                                         </a>*@
+                    
+                    <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.ParametersId','Delete Parameters','',DeleteParameters,null); " style="float: left; width: 15px;">
+                        <img src="@Url.Content("~/images/delete.png")" />
+                    </a>
+                                                               </text>)
+                        ))
+
+                </div>
+            }
+            else
+            {
+
+            <h2>No Record found</h2>
+            }
+        }
+    </div>
+</div>
+<script>
+    $(function() {
+        $('#Parametersgrid').Scrollable();
+    });
+</script>

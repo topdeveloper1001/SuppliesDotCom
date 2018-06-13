@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="accountnotactivated" xml:space="preserve">
+    <value>Your account is not activated yet. Please try again later!</value>
+  </data>
+  <data name="action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="addcurrentmedication" xml:space="preserve">
+    <value>Add Current Medication</value>
+  </data>
+  <data name="administer" xml:space="preserve">
+    <value>Administer</value>
+  </data>
+  <data name="administerorderacitivities" xml:space="preserve">
+    <value>Administer Order Activities</value>
+  </data>
+  <data name="allergieshistoryform" xml:space="preserve">
+    <value>Allergies/History Form</value>
+  </data>
+  <data name="armasteraccount" xml:space="preserve">
+    <value>A/R Master Account</value>
+  </data>
+  <data name="birthdate" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cancelorderactivity" xml:space="preserve">
+    <value>Cancel Order Activity</value>
+  </data>
+  <data name="cancelselectedorderactivity" xml:space="preserve">
+    <value>Do you want to cancel the selected order activity?</value>
+  </data>
+  <data name="code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="contactmobilephone" xml:space="preserve">
+    <value>Contact Mobile Phone</value>
+  </data>
+  <data name="currentorders" xml:space="preserve">
+    <value>Current Orders</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="encounterend" xml:space="preserve">
+    <value>Encounter End</value>
+  </data>
+  <data name="encounterid" xml:space="preserve">
+    <value>Encounter Id</value>
+  </data>
+  <data name="encounternumber" xml:space="preserve">
+    <value>Encounter Number</value>
+  </data>
+  <data name="encounterstart" xml:space="preserve">
+    <value>Encounter Start</value>
+  </data>
+  <data name="enddate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="errsametimeslot" xml:space="preserve">
+    <value>You are trying to assign same time and they are already booked. Try different times!</value>
+  </data>
+  <data name="firstname" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="forgotpwd" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="frequency" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="fromschedulartopatientonnewbookingsub" xml:space="preserve">
+    <value>Appointment of the patient</value>
+  </data>
+  <data name="fromschedulartopatientonnewbookingsubject" xml:space="preserve">
+    <value>From Schedular To Patienton New Booking</value>
+  </data>
+  <data name="gotologin" xml:space="preserve">
+    <value>Go to Login</value>
+  </data>
+  <data name="invaldcredentialsmsg" xml:space="preserve">
+    <value>Please enter correct username and password</value>
+  </data>
+  <data name="invalidemailid" xml:space="preserve">
+    <value>Invalid Email Id!</value>
+  </data>
+  <data name="invalidverificationtokenid" xml:space="preserve">
+    <value>Invalid Request / Verification Token Expired!</value>
+  </data>
+  <data name="isactive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="isfirst" xml:space="preserve">
+    <value>Is First</value>
+  </data>
+  <data name="isvip" xml:space="preserve">
+    <value>Is VIP</value>
+  </data>
+  <data name="lastname" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="lblcurrentmedications" xml:space="preserve">
+    <value>Current Medications</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="loginblockedmsg" xml:space="preserve">
+    <value>Login is blocked temporarily for 3 failed attempts</value>
+  </data>
+  <data name="medicationlist" xml:space="preserve">
+    <value>Medication List</value>
+  </data>
+  <data name="msgrecordsnotsaved" xml:space="preserve">
+    <value>Something went wrong while saving / updating the Records. Please try again later!</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="newpasswordemailfailure" xml:space="preserve">
+    <value>Unable To Send New Password Details!</value>
+  </data>
+  <data name="newpasswordemailsubject" xml:space="preserve">
+    <value>Patient Portal New Password!</value>
+  </data>
+  <data name="newpasswordemailsuccess" xml:space="preserve">
+    <value>New Password Mailed Successfully!</value>
+  </data>
+  <data name="orderacitivities" xml:space="preserve">
+    <value>Order Activities</value>
+  </data>
+  <data name="orderactivityid" xml:space="preserve">
+    <value>OrderActivityId</value>
+  </data>
+  <data name="ordercategory" xml:space="preserve">
+    <value>Order Category</value>
+  </data>
+  <data name="ordercategorycode" xml:space="preserve">
+    <value>Order Category Code</value>
+  </data>
+  <data name="ordercategoryId" xml:space="preserve">
+    <value>OrderCategoryId</value>
+  </data>
+  <data name="ordercategoryname" xml:space="preserve">
+    <value>Order Category Name</value>
+  </data>
+  <data name="ordercode" xml:space="preserve">
+    <value>Order Code</value>
+  </data>
+  <data name="orderdescription" xml:space="preserve">
+    <value>Order Description</value>
+  </data>
+  <data name="orderid" xml:space="preserve">
+    <value>Order Id</value>
+  </data>
+  <data name="ordersubcategory" xml:space="preserve">
+    <value>Order Sub-Category</value>
+  </data>
+  <data name="ordertypecategorylist" xml:space="preserve">
+    <value>OrderType Category List</value>
+  </data>
+  <data name="passportnumber" xml:space="preserve">
+    <value>Person Passport Number</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="patienlogintempblockedmsg" xml:space="preserve">
+    <value>Login is Blocked. kindly try after 30 minutes</value>
+  </data>
+  <data name="patientinformation" xml:space="preserve">
+    <value>Patient Information</value>
+  </data>
+  <data name="patientloginaccountdeleted" xml:space="preserve">
+    <value>Your account is disabled. Please contact System Administrator!</value>
+  </data>
+  <data name="patientportalisaccessiblemessage" xml:space="preserve">
+    <value>Success. You can login into the Patient Portal System. </value>
+  </data>
+  <data name="patientportallogin" xml:space="preserve">
+    <value>Patient Portal Login</value>
+  </data>
+  <data name="patientsearchmandatorytext" xml:space="preserve">
+    <value>By entering more than one piece of information, you will receive a more accurate search result:</value>
+  </data>
+  <data name="patienttype" xml:space="preserve">
+    <value>Patient Type</value>
+  </data>
+  <data name="personbirthdate" xml:space="preserve">
+    <value>Person Birth Date</value>
+  </data>
+  <data name="personemiratesid" xml:space="preserve">
+    <value>Person Emirates ID Number</value>
+  </data>
+  <data name="personlastname" xml:space="preserve">
+    <value>Person Last Name</value>
+  </data>
+  <data name="placeofservice" xml:space="preserve">
+    <value>Place of Service</value>
+  </data>
+  <data name="pleasecheckwhichapply" xml:space="preserve">
+    <value>Please check which apply.</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="resetemailfailuremessage" xml:space="preserve">
+    <value>There is some problem in the Email Sent!</value>
+  </data>
+  <data name="resetemailsuccess" xml:space="preserve">
+    <value>Reset Password Mail Sent Successfully!</value>
+  </data>
+  <data name="resetpasswordemailfailure" xml:space="preserve">
+    <value>Unable To Send Reset Password Mail.</value>
+  </data>
+  <data name="resetpasswordemailsubject" xml:space="preserve">
+    <value>OMNI Reset Password for Patient Portal</value>
+  </data>
+  <data name="resetpasswordemailsuccess" xml:space="preserve">
+    <value>Reset Password Mail Sent Successfully!</value>
+  </data>
+  <data name="resetpasswordsubject" xml:space="preserve">
+    <value>OMNI Reset Password</value>
+  </data>
+  <data name="revenuegeneralledger" xml:space="preserve">
+    <value>Revenue General Ledger Number</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="scheduledon" xml:space="preserve">
+    <value>Scheduled On</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="searchresult" xml:space="preserve">
+    <value>Search Result</value>
+  </data>
+  <data name="showeditaction" xml:space="preserve">
+    <value>Show Edit Action</value>
+  </data>
+  <data name="socialsecuritynumber" xml:space="preserve">
+    <value>Social Security Number</value>
+  </data>
+  <data name="startdate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="typeofoperation" xml:space="preserve">
+    <value>Type Of Operation</value>
+  </data>
+  <data name="unknownerror" xml:space="preserve">
+    <value>Something went wrong. Please try again later!</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="usernotfoundincorporate" xml:space="preserve">
+    <value>User does not belong to selected corporate</value>
+  </data>
+  <data name="usertokenemailsubject" xml:space="preserve">
+    <value>Validation Token for Excel Template</value>
+  </data>
+  <data name="verficationemaildisplayname" xml:space="preserve">
+    <value>OMNI Account Settings Service</value>
+  </data>
+  <data name="verificationemailfailuremessage" xml:space="preserve">
+    <value>Records Saved Successfully but there is some error in the Email Sent!</value>
+  </data>
+  <data name="verificationemailsubject" xml:space="preserve">
+    <value>Click and Verifiy the link to access the Patient Portal</value>
+  </data>
+  <data name="verificationemailsuccess" xml:space="preserve">
+    <value>Verification Mail Sent Successfully!</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AppointmentApprovedByPhysician" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\AppointmentApprovedByPhysician.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AppointmentCancelByPhysician" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\AppointmentCancelByPhysician.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AppointmentTypesSubTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\AppointmentTypesHtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="BarcodeView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\BarcodeView.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="fromschedulartopatientonnewbooking" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\EmailTemplate1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="patientreminderbefore3days" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\EmailTemplate2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="patientreminderbefore1day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\EmailTemplate3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="patientReminderbeforeonappointmentday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\EmailTemplate4.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="everymorningnotificationtophysician" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\EmailTemplate5.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ForgotPasswordTemplate_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\ForgotPasswordTemplate_en_US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="NewPasswordEmailTemplate_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\NewPasswordEmailTemplate_en_US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PatientForgotPasswordTemplate_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\PatientForgotPasswordTemplate-en-US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PatientPortalEmailVerification_ar_AR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\PatientPortalEmailVerification-ar-AR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PatientPortalEmailVerification_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\PatientPortalEmailVerification_en_US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PatinetForgotPasswordTemplate_ar_AR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\PatinetForgotPasswordTemplate-ar-AR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PhysicianApporovelEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\PhysicianApporovelEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ResetPasswordTemplate_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\ResetPasswordTemplate_en_US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="UserTokenTemplate_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\HTML\UserTokenTemplate_en_US.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>

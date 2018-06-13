@@ -1,0 +1,35 @@
+﻿@using SuppliesDotCom.Model
+@model IEnumerable<AppointmentTypes>
+<style type="text/css">
+    #TreeView .k-group li {
+        width: 45%;
+        float: left;
+    }
+
+    div.k-treeview {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+<h4>Appointments List </h4>
+<div id="checkBox_AppointmentTypes" class="list_body">
+    @if (Model != null && Model.Any())
+    {
+        <ul id="ulRoles">
+            @foreach (var item in Model)
+            {
+                <li class="col-sm-3 inline_fields">
+                    <input type="checkbox" id="@item.Id" value="@item.Id" name="@item.Name" />&nbsp;<div class="inline_fieldtxt">@item.Name</div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <span>No Records Found</span>
+    }
+</div>
+
+<script>
+    
+</script>

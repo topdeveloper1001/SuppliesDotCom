@@ -1,0 +1,2983 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Claim.Submission xmlns:tns="http://www.haad.ae/DataDictionary/CommonTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.haad.ae/DataDictionary/CommonTypes/DataDictionary.xsd">
+<Header>
+<SenderID>MF1311</SenderID>
+<ReceiverID>A001</ReceiverID>
+<TransactionDate>08/02/2017 17:53</TransactionDate>
+<RecordCount>20</RecordCount>
+<DispositionFlag>PRODUCTION</DispositionFlag>
+</Header>
+<Claim>
+<ID>IPCR10450</ID>
+<MemberID>06520456</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>15873.3</Gross>
+<PatientShare>0</PatientShare>
+<Net>15873.3 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96693</PatientID>
+<Start>04/01/2017 10:55</Start>
+<End>04/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>I83.891</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>I87.2</Code>
+</Diagnosis>
+<Activity>
+<ID>1</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>3</Type>
+<Code>36471</Code>
+<Quantity>1</Quantity>
+<Net>651.1</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>2</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>3</Type>
+<Code>36478</Code>
+<Quantity>1</Quantity>
+<Net>3430.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>3</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>3</Type>
+<Code>37700</Code>
+<Quantity>1</Quantity>
+<Net>1615</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>4</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>3</Type>
+<Code>37765</Code>
+<Quantity>1</Quantity>
+<Net>2886.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>5</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>3</Type>
+<Code>01250</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>6</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>7</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>8</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>9</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>10</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>4400</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24551557</PriorAuthorizationID>
+</Activity><Activity>
+<ID>11</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>2671</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>12</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>13</ID>
+<Start>04/01/2017 10:55</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10456</ID>
+<MemberID>04927049</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>7981.5</Gross>
+<PatientShare>0</PatientShare>
+<Net>7981.5 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>95905       </PatientID>
+<Start>08/01/2017 08:20</Start>
+<End>08/01/2017 17:35</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>J34.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>J34.3</Code>
+</Diagnosis>
+<Activity>
+<ID>14</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>3</Type>
+<Code>30520</Code>
+<Quantity>1</Quantity>
+<Net>3903.2</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24661122</PriorAuthorizationID>
+</Activity><Activity>
+<ID>15</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>3</Type>
+<Code>30802</Code>
+<Quantity>1</Quantity>
+<Net>1188.3</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24661122</PriorAuthorizationID>
+</Activity><Activity>
+<ID>16</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>3</Type>
+<Code>00160</Code>
+<Quantity>10</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>17</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24661122</PriorAuthorizationID>
+</Activity><Activity>
+<ID>18</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>19</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>20</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>21</ID>
+<Start>08/01/2017 08:20</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1307</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10458</ID>
+<MemberID>07992947</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>4564.5</Gross>
+<PatientShare>0</PatientShare>
+<Net>4564.5 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96575       </PatientID>
+<Start>09/01/2017 08:15</Start>
+<End>09/01/2017 14:30</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>N84.0</Code>
+</Diagnosis>
+<Activity>
+<ID>22</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>58558</Code>
+<Quantity>1</Quantity>
+<Net>1674.5</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<PriorAuthorizationID>24593697</PriorAuthorizationID>
+</Activity><Activity>
+<ID>23</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>00952</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>24</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<PriorAuthorizationID>24593697</PriorAuthorizationID>
+</Activity><Activity>
+<ID>25</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>26</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>27</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>28</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1120</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>29</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>30</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1489-2990-007</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>31</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1421-4554-013</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>32</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>33</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>34</ID>
+<Start>09/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10460</ID>
+<MemberID>06833188</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>12490.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>12490.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96390       </PatientID>
+<Start>10/01/2017 08:15</Start>
+<End>10/01/2017 15:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.8</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Activity>
+<ID>35</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24578739</PriorAuthorizationID>
+</Activity><Activity>
+<ID>36</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24578739</PriorAuthorizationID>
+</Activity><Activity>
+<ID>37</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>38</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>39</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>40</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24578739</PriorAuthorizationID>
+</Activity><Activity>
+<ID>41</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>42</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>43</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>44</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>5500</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24578739</PriorAuthorizationID>
+</Activity><Activity>
+<ID>45</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3079</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>46</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>47</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>48</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>49</ID>
+<Start>10/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10463</ID>
+<MemberID>07006165</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>8216.25</Gross>
+<PatientShare>0</PatientShare>
+<Net>8216.25 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96154       </PatientID>
+<Start>11/01/2017 08:10</Start>
+<End>11/01/2017 17:30</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>J34.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>J34.3</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>M95.0</Code>
+</Diagnosis>
+<Activity>
+<ID>50</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>30520</Code>
+<Quantity>1</Quantity>
+<Net>4018</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>23862437</PriorAuthorizationID>
+</Activity><Activity>
+<ID>51</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>30802</Code>
+<Quantity>1</Quantity>
+<Net>1223.25</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>23862437</PriorAuthorizationID>
+</Activity><Activity>
+<ID>52</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>00160</Code>
+<Quantity>8</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>53</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2975</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>23862437</PriorAuthorizationID>
+</Activity><Activity>
+<ID>54</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>55</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>56</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>57</ID>
+<Start>11/01/2017 08:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1309</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10462</ID>
+<MemberID>06520848</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>8927.7</Gross>
+<PatientShare>0</PatientShare>
+<Net>8927.7 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96820       </PatientID>
+<Start>11/01/2017 10:15</Start>
+<End>11/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>I83.812</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>I83.811</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>I87.2</Code>
+</Diagnosis>
+<Activity>
+<ID>58</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>3</Type>
+<Code>37765</Code>
+<Quantity>1</Quantity>
+<Net>2886.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683826</PriorAuthorizationID>
+</Activity><Activity>
+<ID>59</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>3</Type>
+<Code>36471</Code>
+<Quantity>1</Quantity>
+<Net>651.1</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683826</PriorAuthorizationID>
+</Activity><Activity>
+<ID>60</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>3</Type>
+<Code>01250</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>61</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683826</PriorAuthorizationID>
+</Activity><Activity>
+<ID>62</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>63</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>64</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>65</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>2500</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683826</PriorAuthorizationID>
+</Activity><Activity>
+<ID>66</ID>
+<Start>11/01/2017 10:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1873</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10467</ID>
+<MemberID>05083996</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>14241.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>14241.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96843</PatientID>
+<Start>12/01/2017 09:00</Start>
+<End>13/01/2017 08:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.3</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.5</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K60.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K59.00</Code>
+</Diagnosis>
+<Activity>
+<ID>67</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683564</PriorAuthorizationID>
+</Activity><Activity>
+<ID>68</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683564</PriorAuthorizationID>
+</Activity><Activity>
+<ID>69</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>3</Type>
+<Code>46200</Code>
+<Quantity>1</Quantity>
+<Net>1955</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683564</PriorAuthorizationID>
+</Activity><Activity>
+<ID>70</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>71</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>72</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683564</PriorAuthorizationID>
+</Activity><Activity>
+<ID>73</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>74</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>75</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>76</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>5500</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24683564</PriorAuthorizationID>
+</Activity><Activity>
+<ID>77</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>2852</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>78</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>3</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>79</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>5</Type>
+<Code>1840-4739-007</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>80</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>5</Type>
+<Code>1379-5317-011</Code>
+<Quantity>2</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>81</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>82</ID>
+<Start>12/01/2017 09:00</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>83</ID>
+<Start>13/01/2017 06:00</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>2</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10466</ID>
+<MemberID>00387319</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>12490.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>12490.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96767       </PatientID>
+<Start>12/01/2017 10:50</Start>
+<End>12/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Activity>
+<ID>84</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24697107</PriorAuthorizationID>
+</Activity><Activity>
+<ID>85</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24697107</PriorAuthorizationID>
+</Activity><Activity>
+<ID>86</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>87</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>88</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>89</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24697107</PriorAuthorizationID>
+</Activity><Activity>
+<ID>90</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>91</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>92</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>93</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>5500</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24697107</PriorAuthorizationID>
+</Activity><Activity>
+<ID>94</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3064</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>95</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>96</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>97</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>98</ID>
+<Start>12/01/2017 10:50</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10474</ID>
+<MemberID>01807183</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>7870.5</Gross>
+<PatientShare>0</PatientShare>
+<Net>7870.5 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>89926       </PatientID>
+<Start>16/01/2017 09:10</Start>
+<End>16/01/2017 16:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.5</Code>
+</Diagnosis>
+<Activity>
+<ID>99</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24669079</PriorAuthorizationID>
+</Activity><Activity>
+<ID>100</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>101</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>102</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24669079</PriorAuthorizationID>
+</Activity><Activity>
+<ID>103</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>104</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>105</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>106</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>3000</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24669079</PriorAuthorizationID>
+</Activity><Activity>
+<ID>107</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1322</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>108</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>109</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>110</ID>
+<Start>16/01/2017 09:10</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10472</ID>
+<MemberID>06035792</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>6885</Gross>
+<PatientShare>0</PatientShare>
+<Net>6885 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>90869       </PatientID>
+<Start>16/01/2017 10:30</Start>
+<End>16/01/2017 18:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>N63</Code>
+</Diagnosis>
+<Activity>
+<ID>111</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>3</Type>
+<Code>19301</Code>
+<Quantity>1</Quantity>
+<Net>3995</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+<PriorAuthorizationID>24668863</PriorAuthorizationID>
+</Activity><Activity>
+<ID>112</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>3</Type>
+<Code>00300</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>113</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+<PriorAuthorizationID>24668863</PriorAuthorizationID>
+</Activity><Activity>
+<ID>114</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>115</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>116</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>117</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1352</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>118</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>5</Type>
+<Code>1631-1758-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>119</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>120</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity><Activity>
+<ID>121</ID>
+<Start>16/01/2017 10:30</Start>
+<Type>5</Type>
+<Code>1421-4554-013</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD18563</OrderingClinician>
+<Clinician>GD18563</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10476</ID>
+<MemberID>01761923</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>2208.3</Gross>
+<PatientShare>0</PatientShare>
+<Net>2208.3 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>50569       </PatientID>
+<Start>17/01/2017 09:10</Start>
+<End>17/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>H60.42</Code>
+</Diagnosis>
+<Activity>
+<ID>122</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>69145</Code>
+<Quantity>1</Quantity>
+<Net>1570.8</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+<PriorAuthorizationID>24551843</PriorAuthorizationID>
+</Activity><Activity>
+<ID>123</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>24</Code>
+<Quantity>1</Quantity>
+<Net>637.5</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+<PriorAuthorizationID>24551843</PriorAuthorizationID>
+</Activity><Activity>
+<ID>124</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+</Activity><Activity>
+<ID>125</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-24</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+</Activity><Activity>
+<ID>126</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+</Activity><Activity>
+<ID>127</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD6415</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>169</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>128</ID>
+<Start>17/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>00120</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD6415</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10477</ID>
+<MemberID>07762541</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>1963.5</Gross>
+<PatientShare>0</PatientShare>
+<Net>1963.5 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96365       </PatientID>
+<Start>18/01/2017 08:35</Start>
+<End>18/01/2017 14:30</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>J35.2</Code>
+</Diagnosis>
+<Activity>
+<ID>129</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>3</Type>
+<Code>42830</Code>
+<Quantity>1</Quantity>
+<Net>1326</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24130803</PriorAuthorizationID>
+</Activity><Activity>
+<ID>130</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>8</Type>
+<Code>24</Code>
+<Quantity>1</Quantity>
+<Net>637.5</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24130803</PriorAuthorizationID>
+</Activity><Activity>
+<ID>131</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>132</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>8</Type>
+<Code>17-24</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>133</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>134</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>738</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>135</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>5</Type>
+<Code>1250-2922-002</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>136</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>5</Type>
+<Code>1566-1911-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>137</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>138</ID>
+<Start>18/01/2017 08:35</Start>
+<Type>3</Type>
+<Code>00170</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10482</ID>
+<MemberID>00160182</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>13641.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>13641.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>77556</PatientID>
+<Start>21/01/2017 08:10</Start>
+<End>21/01/2017 16:30</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K60.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Activity>
+<ID>139</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>46200</Code>
+<Quantity>1</Quantity>
+<Net>1955</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24890395</PriorAuthorizationID>
+</Activity><Activity>
+<ID>140</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>141</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24890395</PriorAuthorizationID>
+</Activity><Activity>
+<ID>142</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24890395</PriorAuthorizationID>
+</Activity><Activity>
+<ID>143</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>144</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24890395</PriorAuthorizationID>
+</Activity><Activity>
+<ID>145</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>146</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>147</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>148</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>4900</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24890395</PriorAuthorizationID>
+</Activity><Activity>
+<ID>149</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>4675</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>150</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>151</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>152</ID>
+<Start>21/01/2017 08:10</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10486</ID>
+<MemberID>07986838</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>14445.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>14445.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>85619       </PatientID>
+<Start>23/01/2017 08:05</Start>
+<End>23/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K60.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.1</Code>
+</Diagnosis>
+<Activity>
+<ID>153</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>46200</Code>
+<Quantity>1</Quantity>
+<Net>1955</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24668555</PriorAuthorizationID>
+</Activity><Activity>
+<ID>154</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24668555</PriorAuthorizationID>
+</Activity><Activity>
+<ID>155</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24668555</PriorAuthorizationID>
+</Activity><Activity>
+<ID>156</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>157</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>158</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>159</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24668555</PriorAuthorizationID>
+</Activity><Activity>
+<ID>160</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>161</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>162</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>163</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>5500</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24668555</PriorAuthorizationID>
+</Activity><Activity>
+<ID>164</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3626</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>165</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>166</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>167</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>168</ID>
+<Start>23/01/2017 08:05</Start>
+<Type>5</Type>
+<Code>1421-4554-013</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10487</ID>
+<MemberID>06518186</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>11686.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>11686.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>97070       </PatientID>
+<Start>23/01/2017 11:00</Start>
+<End>23/01/2017 18:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.3</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.1</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.5</Code>
+</Diagnosis>
+<Activity>
+<ID>169</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24974191</PriorAuthorizationID>
+</Activity><Activity>
+<ID>170</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24974191</PriorAuthorizationID>
+</Activity><Activity>
+<ID>171</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>172</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>6</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>173</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24974191</PriorAuthorizationID>
+</Activity><Activity>
+<ID>174</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>175</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>176</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>177</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>4900</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<PriorAuthorizationID>24974191</PriorAuthorizationID>
+</Activity><Activity>
+<ID>178</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3206</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>179</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity><Activity>
+<ID>180</ID>
+<Start>23/01/2017 11:00</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD17340</OrderingClinician>
+<Clinician>GD17340</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10490</ID>
+<MemberID>06858274</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>11890.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>11890.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96985       </PatientID>
+<Start>24/01/2017 08:15</Start>
+<End>24/01/2017 16:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.3</Code>
+</Diagnosis>
+<Activity>
+<ID>181</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25011343</PriorAuthorizationID>
+</Activity><Activity>
+<ID>182</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25011343</PriorAuthorizationID>
+</Activity><Activity>
+<ID>183</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>184</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>185</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>186</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25011343</PriorAuthorizationID>
+</Activity><Activity>
+<ID>187</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>188</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>189</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>190</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>4900</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25011343</PriorAuthorizationID>
+</Activity><Activity>
+<ID>191</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3928</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>192</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>193</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>194</ID>
+<Start>24/01/2017 08:15</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10492</ID>
+<MemberID>05193197</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>7981.5</Gross>
+<PatientShare>0</PatientShare>
+<Net>7981.5 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96720       </PatientID>
+<Start>24/01/2017 09:10</Start>
+<End>24/01/2017 17:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>J34.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>J34.3</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>S02.2XXA</Code>
+</Diagnosis>
+<Activity>
+<ID>195</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>30520</Code>
+<Quantity>1</Quantity>
+<Net>3903.2</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24871547</PriorAuthorizationID>
+</Activity><Activity>
+<ID>196</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>30802</Code>
+<Quantity>1</Quantity>
+<Net>1188.3</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24871547</PriorAuthorizationID>
+</Activity><Activity>
+<ID>197</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>3</Type>
+<Code>00160</Code>
+<Quantity>13</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>198</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<PriorAuthorizationID>24871547</PriorAuthorizationID>
+</Activity><Activity>
+<ID>199</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>200</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>201</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+</Activity><Activity>
+<ID>202</ID>
+<Start>24/01/2017 09:10</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD11388</OrderingClinician>
+<Clinician>GD11388</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1370</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10498</ID>
+<MemberID>08185333</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>1137.3</Gross>
+<PatientShare>0</PatientShare>
+<Net>1137.3 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>35302       </PatientID>
+<Start>26/01/2017 10:40</Start>
+<End>26/01/2017 16:40</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>N84.1</Code>
+</Diagnosis>
+<Activity>
+<ID>203</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>3</Type>
+<Code>57500</Code>
+<Quantity>1</Quantity>
+<Net>499.8</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<PriorAuthorizationID>24975677</PriorAuthorizationID>
+</Activity><Activity>
+<ID>204</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>3</Type>
+<Code>00940</Code>
+<Quantity>5</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD18830</Clinician>
+</Activity><Activity>
+<ID>205</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>8</Type>
+<Code>24</Code>
+<Quantity>1</Quantity>
+<Net>637.5</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<PriorAuthorizationID>24975677</PriorAuthorizationID>
+</Activity><Activity>
+<ID>206</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>207</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>8</Type>
+<Code>17-24</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>208</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>209</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>1297</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>210</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>5</Type>
+<Code>1489-2990-007</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>211</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>5</Type>
+<Code>1250-3895-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity><Activity>
+<ID>212</ID>
+<Start>26/01/2017 10:40</Start>
+<Type>5</Type>
+<Code>1840-3991-034</Code>
+<Quantity>2</Quantity>
+<Net>0</Net>
+<OrderingClinician>GD10191</OrderingClinician>
+<Clinician>GD10191</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10500</ID>
+<MemberID>08286589</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>11890.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>11890.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>93872       </PatientID>
+<Start>31/01/2017 09:20</Start>
+<End>31/01/2017 21:00</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.2</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.3</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Activity>
+<ID>213</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25072257</PriorAuthorizationID>
+</Activity><Activity>
+<ID>214</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25072257</PriorAuthorizationID>
+</Activity><Activity>
+<ID>215</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>216</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>217</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>8</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>218</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25072257</PriorAuthorizationID>
+</Activity><Activity>
+<ID>219</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>220</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>221</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>222</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>4900</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>25072257</PriorAuthorizationID>
+</Activity><Activity>
+<ID>223</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3677</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>224</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>225</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>5</Type>
+<Code>1489-2990-007</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>226</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>227</ID>
+<Start>31/01/2017 09:20</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+<Claim>
+<ID>IPCR10449</ID>
+<MemberID>06573857</MemberID>
+<PayerID>A001</PayerID>
+<ProviderID>MF1311</ProviderID>
+<EmiratesIDNumber>111-1111-1111111-1</EmiratesIDNumber>
+<Gross>12490.4</Gross>
+<PatientShare>0</PatientShare>
+<Net>12490.4 </Net>
+<Encounter>
+<FacilityID>MF1311</FacilityID>
+<Type>5</Type>
+<PatientID>96559       </PatientID>
+<Start>03/01/2017 11:05</Start>
+<End>03/01/2017 17:30</End>
+<StartType>1</StartType>
+<EndType>1</EndType>
+</Encounter>
+<Diagnosis>
+<Type>Principal</Type>
+<Code>K64.4</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K64.8</Code>
+</Diagnosis>
+<Diagnosis>
+<Type>Secondary</Type>
+<Code>K62.89</Code>
+</Diagnosis>
+<Activity>
+<ID>228</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>3</Type>
+<Code>46250</Code>
+<Quantity>1</Quantity>
+<Net>1915.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24551424</PriorAuthorizationID>
+</Activity><Activity>
+<ID>229</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>3</Type>
+<Code>46946</Code>
+<Quantity>1</Quantity>
+<Net>1354.9</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24551424</PriorAuthorizationID>
+</Activity><Activity>
+<ID>230</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>3</Type>
+<Code>46604</Code>
+<Quantity>1</Quantity>
+<Net>625.6</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>231</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>3</Type>
+<Code>76998</Code>
+<Quantity>1</Quantity>
+<Net>204</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>232</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>3</Type>
+<Code>00902</Code>
+<Quantity>7</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>GD12334</Clinician>
+</Activity><Activity>
+<ID>233</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>8</Type>
+<Code>25-02</Code>
+<Quantity>1</Quantity>
+<Net>2890</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24551424</PriorAuthorizationID>
+</Activity><Activity>
+<ID>234</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>8</Type>
+<Code>17-23</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>235</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>8</Type>
+<Code>17-25</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>236</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>8</Type>
+<Code>20</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>237</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>2</Quantity>
+<Net>5500</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<PriorAuthorizationID>24551424</PriorAuthorizationID>
+</Activity><Activity>
+<ID>238</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>4</Type>
+<Code>A4649</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+<Observation><Type>Text</Type>
+<Code>Gross Amount</Code>
+<Value>3109</Value>
+<ValueType>AED</ValueType>
+</Observation>
+</Activity><Activity>
+<ID>239</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>5</Type>
+<Code>2239-1299-004</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>240</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>5</Type>
+<Code>1361-1865-003</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>241</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>5</Type>
+<Code>1472-3605-005</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity><Activity>
+<ID>242</ID>
+<Start>03/01/2017 11:05</Start>
+<Type>5</Type>
+<Code>1556-4476-009</Code>
+<Quantity>1</Quantity>
+<Net>0</Net>
+<OrderingClinician>D3569</OrderingClinician>
+<Clinician>D3569</Clinician>
+</Activity></Claim>
+</Claim.Submission>

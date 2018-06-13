@@ -1,0 +1,62 @@
+﻿@using SuppliesDotCom.Model
+
+@model GlobalCodes
+
+@{
+    var btnSaveText = "Save";
+    if (Model.GlobalCodeID != 0)
+    {
+        btnSaveText = "Update";
+    }
+}
+<style>
+    .btn-group {
+        padding: 10px;
+    }
+</style>
+
+<div class="form patientTable" id="globalCodeForm">
+    @Html.HiddenFor(m => m.GlobalCodeID, new { @id = "hfGlobalCodeID" })
+    @Html.HiddenFor(m => m.GlobalCodeCategoryValue, new { @id = "hfGlobalCodeCategoryValue" })
+    <div>
+        <div class="col-sm-6">
+            <div class="rowTable">
+                <label class="control-label">
+                    <span class="mandatoryStar"></span>Lab Test Order Set Code
+                </label>
+                @Html.TextBoxFor(m => m.GlobalCodeName, new { @ID = "txtLabTestCodeName", @maxlength = "10", @class = "validate[required,custom[integer]]" })
+                @Html.HiddenFor(m => m.GlobalCodeValue, new { @ID = "hdGlobalCodeValue" })
+            </div>
+
+            <div class="rowTable">
+                <label class="control-label">
+                    Code Time
+                </label>
+                @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtCodeTime", @maxlength = "10", @class = "validate[optional[integer]]" })
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="rowTable">
+                <label class="control-label">
+                    <span class="mandatoryStar"></span>Code Time Type
+                </label>
+                <select id="ddlTimeType" class="validate[required]">
+                    <option value="0">--Code TimeType--</option>
+                    <option value="1" selected="selected">Hour</option>
+                    <option value="2">Day</option>
+                </select>
+            </div>
+            <div class="rowTable">
+                <label class="control-label">Description:</label>
+                @Html.TextAreaFor(m => m.Description, new { @ID = "txtLabTestCodeDescription", @maxlength = "240", @style = "height:48px; line-height: 20px; overflow-y:scroll;" })
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="btn-group">
+            <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn btnGlobalCodeSave" onclick="return CheckIfLabTestCodeExists();" value="@btnSaveText" />
+            <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearLabTestCodeForm();">Cancel</button>
+        </div>
+    </div>
+</div>
+
+

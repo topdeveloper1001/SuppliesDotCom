@@ -1,0 +1,131 @@
+﻿@using SuppliesDotCom.Model.CustomModel
+@using Kendo.Mvc.UI
+@using Kendo.Mvc.UI.Fluent
+@model IEnumerable<TabsCustomModel>
+
+<style type="text/css">
+    #TreeView .k-group li {
+        float: left;
+        width: 45%;
+    }
+
+    div.k-treeview {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+
+@functions{
+
+    private void addChildren(TreeViewItemBuilder builder, TabsCustomModel item, IEnumerable<TabsCustomModel>
+        items)
+    {
+        IEnumerable<TabsCustomModel> children = items.Where(m => m.CurrentTab.ParentTabId == item.CurrentTab.TabId).ToList();
+        if (children.Any())
+        {
+            builder.Items(menuItems =>
+            {
+                foreach (var child in children)
+                {
+                    var menuItem = menuItems.Add().Text(child.CurrentTab.TabName).HasChildren(item.HasChilds).Id(child.CurrentTab.TabId.ToString())
+                        .Expanded(false);
+                    addChildren(menuItem, child, items);
+                }
+            });
+        }
+    }
+
+}
+@(Html.Kendo().TreeView()
+            .Name("treeview")
+            .Checkboxes(checkboxes => checkboxes
+                .CheckChildren(true)
+                ).Events(iten => iten.Check("OnCheckItem")
+                    //.DataBound("updateTree")
+                    )
+                .CheckboxTemplate("<input type='checkbox' name='checkedNodes' value='#= item.id #' #if(item.checked) { # checked # } if(item.indeterminate) { # data-indeterminate # } #/>")
+      .Items(menu =>
+      {
+          var list = Model.ToList();
+          foreach (var item in list.Where(m => m.CurrentTab.ParentTabId == 0))
+          {
+              var builder = menu.Add().Text(item.CurrentTab.TabName).HasChildren(item.HasChilds).Id(item.CurrentTab.TabId.ToString())
+                  .Expanded(false);
+              addChildren(builder, item, list);
+          }
+      })
+        //.Events(events => events.DataBound("onTreeViewBound").Select("onSelect"))
+)
+
+@Html.Kendo().DeferredScripts()
+
+<script type="text/javascript">
+    //function checkedNodeIds(nodes, checkedNodes) {
+    //    for (var i = 0; i < nodes.length; i++) {
+    //        if (nodes[i].checked) {
+    //            checkedNodes.push(nodes[i].id);
+    //        }
+    //        if (nodes[i].hasChildren) {
+    //            checkedNodeIds(nodes[i].children.view(), checkedNodes);
+    //        }
+    //    }
+    //}
+
+    //// show checked node IDs on datasource change
+    //function onCheck() {
+    //    var checkedNodes = [],
+    //        treeView = $("#treeview").data("kendoTreeView"),
+    //        message;
+    //    checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+    //    if (checkedNodes.length > 0) {
+    //        message = "IDs of checked nodes: " + checkedNodes.join(",");
+    //    } else {
+    //        message = "No nodes checked.";
+    //    }
+    //    $("#result").html(message);
+    //}
+
+    function OnCheckItem(e) {
+        var dataItem = e.sender.dataItem(e.node);
+        if (dataItem.hasChildren) {
+            var children = dataItem.children.data();
+            for (var i = 0; i < children.length; i++) {
+                var chkboxId = children[i].id;
+                $("[name='checkedNodes'][value=" + chkboxId + "]").attr('checked', dataItem.checked);
+                children[i].checked = dataItem.checked;
+            }
+        }
+    }
+
+    function onTreeViewBound(e) {
+        $("input:checkbox[name=checkedNodes]").on('click', function () {
+            var checkedStatus = $(this).is(':checked');
+            $(this).closest(".k-item").find(".k-group .k-item input:checkbox[name=checkedNodes]").each(function () {
+                $(this).attr('checked', checkedStatus);
+                $(this).prop('checked', checkedStatus);
+            });
+        });
+    }
+
+    function updateTree(e) {
+        var count = 0;
+        var dataItem = e.sender.dataItem(e.node);
+        if (dataItem.hasChildren) {
+            var children = dataItem.children.data();
+            for (var i = 0; i < children.length; i++) {
+                var chkboxId = children[i].id;
+                var state = $("[name='checkedNodes'][value=" + chkboxId + "]").attr('checked');
+                if (state)
+                    count++;
+            }
+            if (count > 0) {
+                  dataItem.indeterminate = true;
+                  $(dataItem.id).prop("indeterminate", true);
+              }
+
+        }
+        //$('input:checkbox[data-indeterminate]').each(function () {
+        //    $(this)[0].indeterminate = true;
+        //});
+    };
+</script>

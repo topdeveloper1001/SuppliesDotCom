@@ -1,0 +1,305 @@
+﻿@using SuppliesDotCom.Models
+
+@model DashboardView
+
+@{
+    ViewBag.Title = "Registration Productivity View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    const string style = "display:block;";
+}
+
+<div id="divRegProductivityDashboardView" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts1">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" alt=" " >
+                </span>
+                Gross Room Charges
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseRegistrationProductivityCharts1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" id="myDashboardGrossRoomChargesMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="myDashboardGrossRoomChargesYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" id="divAncilliaryRoomChargesMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="divAncilliaryRoomChargesYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" id="divOPRoomChargesMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="divOPRoomChargesYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" id="divERRoomChargesMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="divERRoomChargesYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-4" id="divIPChargesPerPatientDay" style="float: left;">
+                            </div>
+                            <div class="col-sm-4" id="divOPChargesPerEncounter" style="float: left;">
+                            </div>
+                            <div class="col-sm-4" id="divERChargesPerEncounter" style="float: left;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <script>
+        $(function () {
+            GrossRoomChargesChart();
+            AncilliaryRoomChargesChart();
+            OPChargesChart();
+            ERChargesChart();
+        });
+
+        function GrossRoomChargesChart() {
+            $.ajax({
+                type: "POST",
+                url: '/Dashboard/GetChargesDashboardData',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ budgetFor: '10' }),
+                success: function (data) {
+                    ShowDashboard(data);
+                },
+                error: function (msg) {
+                }
+            });
+        }
+        function AncilliaryRoomChargesChart() {
+            $.ajax({
+                type: "POST",
+                url: '/Dashboard/GetChargesDashboardData',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ budgetFor: '11' }),
+                success: function (data) {
+                    ShowDashboardAncilliaryRoomCharges(data);
+                },
+                error: function (msg) {
+                }
+            });
+        }
+
+        function OPChargesChart() {
+            $.ajax({
+                type: "POST",
+                url: '/Dashboard/GetChargesDashboardData',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ budgetFor: '12' }),
+                success: function (data) {
+                    ShowDashboardOPCharges(data);
+                },
+                error: function (msg) {
+                }
+            });
+        }
+
+        function ERChargesChart() {
+            $.ajax({
+                type: "POST",
+                url: '/Dashboard/GetChargesDashboardData',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ budgetFor: '13' }),
+                success: function (data) {
+                    ShowDashboardERCharges(data);
+                },
+                error: function (msg) {
+                }
+            });
+        }
+
+        function ShowDashboard(dashboardData) {
+            var roomChargesDataMonthly = new Array();
+            var roomChargesDataYearly = new Array();
+            var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var monthsArray = new Array();
+            for (var i = 0; i < 2; i++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[i].M1);
+                monthsArray.push(dashboardData[i].M2);
+                monthsArray.push(dashboardData[i].M3);
+                monthsArray.push(dashboardData[i].M4);
+                monthsArray.push(dashboardData[i].M5);
+                monthsArray.push(dashboardData[i].M6);
+                monthsArray.push(dashboardData[i].M7);
+                monthsArray.push(dashboardData[i].M8);
+                monthsArray.push(dashboardData[i].M9);
+                monthsArray.push(dashboardData[i].M10);
+                monthsArray.push(dashboardData[i].M11);
+                monthsArray.push(dashboardData[i].M12);
+                roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+            }
+
+            for (var j = 3; j < 5; j++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[j].M1);
+                monthsArray.push(dashboardData[j].M2);
+                monthsArray.push(dashboardData[j].M3);
+                monthsArray.push(dashboardData[j].M4);
+                monthsArray.push(dashboardData[j].M5);
+                monthsArray.push(dashboardData[j].M6);
+                monthsArray.push(dashboardData[j].M7);
+                monthsArray.push(dashboardData[j].M8);
+                monthsArray.push(dashboardData[j].M9);
+                monthsArray.push(dashboardData[j].M10);
+                monthsArray.push(dashboardData[j].M11);
+                monthsArray.push(dashboardData[j].M12);
+                roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+            }
+            ShowTwoBarsChart('myDashboardGrossRoomChargesMonthly', roomChargesDataMonthly, "column", "Gross Room Charges", "Month wise", categories);
+            ShowTwoBarsChart('myDashboardGrossRoomChargesYearly', roomChargesDataYearly, "column", "Gross Room Charges", "Year To Date", categories);
+        }
+
+        function ShowDashboardAncilliaryRoomCharges(dashboardData) {
+            var roomChargesDataMonthly = new Array();
+            var roomChargesDataYearly = new Array();
+            var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var monthsArray = new Array();
+            for (var i = 0; i < 2; i++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[i].M1);
+                monthsArray.push(dashboardData[i].M2);
+                monthsArray.push(dashboardData[i].M3);
+                monthsArray.push(dashboardData[i].M4);
+                monthsArray.push(dashboardData[i].M5);
+                monthsArray.push(dashboardData[i].M6);
+                monthsArray.push(dashboardData[i].M7);
+                monthsArray.push(dashboardData[i].M8);
+                monthsArray.push(dashboardData[i].M9);
+                monthsArray.push(dashboardData[i].M10);
+                monthsArray.push(dashboardData[i].M11);
+                monthsArray.push(dashboardData[i].M12);
+                roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+            }
+
+            for (var j = 3; j < 5; j++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[j].M1);
+                monthsArray.push(dashboardData[j].M2);
+                monthsArray.push(dashboardData[j].M3);
+                monthsArray.push(dashboardData[j].M4);
+                monthsArray.push(dashboardData[j].M5);
+                monthsArray.push(dashboardData[j].M6);
+                monthsArray.push(dashboardData[j].M7);
+                monthsArray.push(dashboardData[j].M8);
+                monthsArray.push(dashboardData[j].M9);
+                monthsArray.push(dashboardData[j].M10);
+                monthsArray.push(dashboardData[j].M11);
+                monthsArray.push(dashboardData[j].M12);
+                roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+            }
+            ShowTwoBarsChart('divAncilliaryRoomChargesMonthly', roomChargesDataMonthly, "column", "Ancillary Gross Charges", "Month wise", categories);
+            ShowTwoBarsChart('divAncilliaryRoomChargesYearly', roomChargesDataYearly, "column", "Ancillary Gross Charges", "Year To Date", categories);
+        }
+
+        function ShowDashboardOPCharges(dashboardData) {
+            var roomChargesDataMonthly = new Array();
+            var roomChargesDataYearly = new Array();
+            var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var monthsArray = new Array();
+            for (var i = 0; i < 2; i++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[i].M1);
+                monthsArray.push(dashboardData[i].M2);
+                monthsArray.push(dashboardData[i].M3);
+                monthsArray.push(dashboardData[i].M4);
+                monthsArray.push(dashboardData[i].M5);
+                monthsArray.push(dashboardData[i].M6);
+                monthsArray.push(dashboardData[i].M7);
+                monthsArray.push(dashboardData[i].M8);
+                monthsArray.push(dashboardData[i].M9);
+                monthsArray.push(dashboardData[i].M10);
+                monthsArray.push(dashboardData[i].M11);
+                monthsArray.push(dashboardData[i].M12);
+                roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+            }
+
+            for (var j = 3; j < 5; j++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[j].M1);
+                monthsArray.push(dashboardData[j].M2);
+                monthsArray.push(dashboardData[j].M3);
+                monthsArray.push(dashboardData[j].M4);
+                monthsArray.push(dashboardData[j].M5);
+                monthsArray.push(dashboardData[j].M6);
+                monthsArray.push(dashboardData[j].M7);
+                monthsArray.push(dashboardData[j].M8);
+                monthsArray.push(dashboardData[j].M9);
+                monthsArray.push(dashboardData[j].M10);
+                monthsArray.push(dashboardData[j].M11);
+                monthsArray.push(dashboardData[j].M12);
+                roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+            }
+            ShowTwoBarsChart('divOPRoomChargesMonthly', roomChargesDataMonthly, "column", "Outpatient Gross Charges", "Month wise", categories);
+            ShowTwoBarsChart('divOPRoomChargesYearly', roomChargesDataYearly, "column", "Outpatient Gross Charges", "Year To Date", categories);
+        }
+
+        function ShowDashboardERCharges(dashboardData) {
+            var roomChargesDataMonthly = new Array();
+            var roomChargesDataYearly = new Array();
+            var categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var monthsArray = new Array();
+            for (var i = 0; i < 2; i++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[i].M1);
+                monthsArray.push(dashboardData[i].M2);
+                monthsArray.push(dashboardData[i].M3);
+                monthsArray.push(dashboardData[i].M4);
+                monthsArray.push(dashboardData[i].M5);
+                monthsArray.push(dashboardData[i].M6);
+                monthsArray.push(dashboardData[i].M7);
+                monthsArray.push(dashboardData[i].M8);
+                monthsArray.push(dashboardData[i].M9);
+                monthsArray.push(dashboardData[i].M10);
+                monthsArray.push(dashboardData[i].M11);
+                monthsArray.push(dashboardData[i].M12);
+                roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+            }
+
+            for (var j = 3; j < 5; j++) {
+                monthsArray = new Array();
+                monthsArray.push(dashboardData[j].M1);
+                monthsArray.push(dashboardData[j].M2);
+                monthsArray.push(dashboardData[j].M3);
+                monthsArray.push(dashboardData[j].M4);
+                monthsArray.push(dashboardData[j].M5);
+                monthsArray.push(dashboardData[j].M6);
+                monthsArray.push(dashboardData[j].M7);
+                monthsArray.push(dashboardData[j].M8);
+                monthsArray.push(dashboardData[j].M9);
+                monthsArray.push(dashboardData[j].M10);
+                monthsArray.push(dashboardData[j].M11);
+                monthsArray.push(dashboardData[j].M12);
+                roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+            }
+            ShowTwoBarsChart('divERRoomChargesMonthly', roomChargesDataMonthly, "column", "Emergency Room Gross Charges", "Month wise", categories);
+            ShowTwoBarsChart('divERRoomChargesYearly', roomChargesDataYearly, "column", "Emergency Room Gross Charges", "Year To Date", categories);
+        }
+    </script>
+</div>

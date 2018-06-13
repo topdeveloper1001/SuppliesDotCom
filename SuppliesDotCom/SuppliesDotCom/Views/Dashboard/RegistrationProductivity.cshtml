@@ -1,0 +1,227 @@
+﻿@model SuppliesDotCom.Models.DashboardView
+
+@{
+    ViewBag.Title = "Registration Productivity View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    const string style = "display:block;";
+}
+
+
+
+@*<div id="divRegProductivityDashboardView" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts1">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" alt=" " >
+                </span>
+                Registration Productivity 3D
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseRegistrationProductivityCharts1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+
+                        <div class="col-sm-12">
+                            <ul id="myDashboard" style="float: left;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")" alt=" " >
+                </span>
+                Registration Productivity
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseRegistrationProductivityCharts" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="table-responsive">
+                            <div id="RegistrationProductivityChart" style="float: left;">
+                            </div>
+                            <div id="RegistrationProductivityChartYear" style="float: left; padding: 0 2px 0 0; border-left: 1px solid #dddddd;">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>*@
+
+<div id="divRegProductivityDashboardView1" class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseRegistrationProductivityCharts">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Registration Productivity - Graph Section
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseRegistrationProductivityCharts" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="col-sm-12 white-bg">
+                            <div class="col-sm-6" id="myDashboardIPEncountersMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="myDashboardIPEncountersYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel panel-default collapsecss ourcollapse bordertable" style="@style">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseBillingProductivityCharts11">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>
+                Billing Productivity - Graph Section
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseBillingProductivityCharts11" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        <div class="col-sm-12 white-bg">
+                            <div class="col-sm-6" id="myDashboardBillingMonthly" style="float: left;">
+                            </div>
+                            <div class="col-sm-6" id="myDashboardBillingYearly" style="float: left;">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        RegistrationProductivity();
+        BiilingProductivity();
+    });
+
+
+    function RegistrationProductivity() {
+        /// <summary>
+        /// Registrations the productivity.
+        /// </summary>
+        /// <returns></returns>
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetHighchartProductivityData',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ budgetFor: '1013', budgetType: '2' }),
+            success: function(data) {
+                if (data != null) {
+                    ShowRegisrationDashBoard(data);
+                }
+            },
+            error: function(msg) {
+            }
+        });
+    }
+
+    function BiilingProductivity() {
+        /// <summary>
+        /// Biilings the productivity.
+        /// </summary>
+        /// <returns></returns>
+        $.ajax({
+            type: "POST",
+            url: '/Dashboard/GetHighchartProductivityData',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ budgetFor: '1027',budgetType:'3' }),
+            success: function (data) {
+                if (data != null) {
+                    ShowBillingProductivityDashBoard(data);
+                }
+            },
+            error: function (msg) {
+            }
+        });
+    }
+
+
+    function ShowRegisrationDashBoard(dashboardData) {
+        /// <summary>
+        /// Shows the regisration dash board.
+        /// </summary>
+        /// <param name="dashboardData">The dashboard data.</param>
+        /// <returns></returns>
+        var roomChargesDataMonthly = new Array();
+        var roomChargesDataYearly = new Array();
+        var monthsArray = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        for (var j = 2; j < 4; j++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[j].M1);
+            roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('myDashboardIPEncountersMonthly', roomChargesDataMonthly, "bar", "Registration Productivity", "By Month", '');
+        ShowTwoBarsChart('myDashboardIPEncountersYearly', roomChargesDataYearly, "bar", "Registration Productivity", "Year To Date", '');
+    }
+
+    function ShowBillingProductivityDashBoard(dashboardData) {
+        /// <summary>
+        /// Shows the billing productivity dash board.
+        /// </summary>
+        /// <param name="dashboardData">The dashboard data.</param>
+        /// <returns></returns>
+        var roomChargesDataMonthly = new Array();
+        var monthsArray = new Array();
+        var roomChargesDataYearly = new Array();
+        for (var i = 0; i < 2; i++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[i].M1);
+            roomChargesDataMonthly.push({ 'name': dashboardData[i].BudgetDescription, 'data': monthsArray });
+        }
+        for (var j = 2; j < 4; j++) {
+            monthsArray = new Array();
+            monthsArray.push(dashboardData[j].M1);
+            roomChargesDataYearly.push({ 'name': dashboardData[j].BudgetDescription, 'data': monthsArray });
+        }
+        ShowTwoBarsChart('myDashboardBillingMonthly', roomChargesDataMonthly, "bar", "Billing Productivity", "By Month", '');
+        ShowTwoBarsChart('myDashboardBillingYearly', roomChargesDataYearly, "bar", "Billing Productivity", "Year To Date", '');
+    }
+    
+</script>

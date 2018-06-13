@@ -1,0 +1,65 @@
+﻿@model SuppliesDotCom.Models.GlobalCodeView
+
+@if (Model != null && Model.CodesList != null && Model.CodesList.Count > 0)
+{
+    var grid = new WebGrid(Model.CodesList, ajaxUpdateContainerId: "GenericCodeGridContent", canPage: false);
+    var gridColumns = new List<WebGridColumn>
+    {
+        grid.Column("GlobalCodes.GlobalCodeName", @Model.ExternalValueLabelsList[0], canSort: true, style: "col1")
+    };
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[1]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.GlobalCodeValue", @Model.ExternalValueLabelsList[1], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[2]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.Description", @Model.ExternalValueLabelsList[2], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[3]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.ExternalValue1", @Model.ExternalValueLabelsList[3], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[4]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.ExternalValue2", @Model.ExternalValueLabelsList[4], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[5]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.ExternalValue3", @Model.ExternalValueLabelsList[5], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[6]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.ExternalValue4", @Model.ExternalValueLabelsList[6], canSort: true, style: "col4"));
+    }
+    if (!string.IsNullOrEmpty(Model.ExternalValueLabelsList[7]))
+    {
+        gridColumns.Add(grid.Column("GlobalCodes.ExternalValue5", @Model.ExternalValueLabelsList[7], canSort: true, style: "col4"));
+    }
+    gridColumns.Add(grid.Column(header: "Action", style: "col5", format: @<text>
+    <a href="javascript:void(0);" title="Edit" onclick="EditRecordInGeneric('@item.GlobalCodes.GlobalCodeID') " style="float: left; margin-right: 7px; width: 15px;">
+        <img src="@Url.Content("~/images/edit.png")" />
+    </a>
+          @*<a href="javascript:void(0);" title="Delete" onclick="DeleteRecordInGeneric('@item.GlobalCodes.GlobalCodeID'); " style="float: left; width: 15px;">
+        <img src="@Url.Content("~/images/delete.png")" />
+    </a>*@
+
+<a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.GlobalCodes.GlobalCodeID','Delete Generic External','',DeleteRecordInGeneric,null); " style="float: left; width: 15px;">
+    <img src="@Url.Content("~/images/delete.png")" />
+</a>
+                                                                          </text>));
+    <div id="GenericCodeGridContent">
+        @grid.GetHtml("table table-grid", "gridHead", "gridFooter", "gridRow", "gridAltRow", columns: grid.Columns(gridColumns.ToArray()), htmlAttributes: new { id = "GenericCodeGridContent" })
+        <h6>* Click on any column heading to sort</h6>
+    </div>
+}
+else
+{
+    <h2>No Record found</h2>
+}
+
+<script>
+    $(function () {
+        $('#GenericCodeGridContent').Scrollable();
+        SetGridSorting(SortDepartmenType, "#GenericCodeGridContent");
+    });
+</script>

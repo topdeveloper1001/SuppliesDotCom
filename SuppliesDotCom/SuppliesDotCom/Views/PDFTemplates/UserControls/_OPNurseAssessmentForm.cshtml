@@ -1,0 +1,1721 @@
+﻿@using Gma.QrCodeNet.Encoding.DataEncodation
+@model SuppliesDotCom.Models.PDFTemplatesView
+<link href="~/css/pdf_style.css" rel="stylesheet" />
+<style>
+    input[type="checkbox"] {
+        margin: -3px 0 0;
+    }
+
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border: 1px solid #acacac;
+    }
+</style>
+<div class="row">
+    <!-----main-header------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-2">
+                <img src="../images/omni.png" class="img-responsive" alt="">
+            </div>
+            <div class="col-sm-8">
+                <div class="form-outer">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-4"><span>Form No:</span><span>NSF27</span></div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="" id="txtFormNumber" value="@Model.FormNumber" readonly="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <h1 class="outpatient-heading">OUTPATIENT NURSING ASSESSMENT FORM - Adult</h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-5">Encounter ID</label>
+                                <div class="col-sm-7">
+                                    <input type="text" value="@Model.EncounterId" name="FromAddress1" maxlength="30" id="txtEncounterId" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-5">
+                                    <label>Patient Last Name</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" value="@Model.PatientLastName" id="txtPatientLastName" name="FromAddress1" maxlength="30" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-5">
+                                    <label>Date of Admission</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" value="@DateTime.Now.ToString()" maxlength="30" id="txtAdmissionDate" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-5">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" value="@Model.PatientFirstName" name="" maxlength="30" id="FromAddress1" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-5">
+                                    <label>DOB</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" value="@Model.DateOfBirth" name="FromAddress1" maxlength="30" id="txtDateOfBirth" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-5">
+                                    <label>Age</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" value="@Model.PersonAge" name="FromAddress1" maxlength="30" id="txtPatientAge" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-----main-header-ends------->
+<div class="row">
+    <!-----appointment-section------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Date/Time</label>
+                            @if (Model.VisitDetailList.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.VisitDetailList[0].Value, new { @ID = "txtCurrentDate", @Class = "form-control dtGenera" })
+                            
+                            }
+                            else
+                            {
+                                <input type="text" placeholder="" class="form-control dtGeneral" id="txtCurrentDate">
+                            }
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Reason For Visit</label>
+                            @if (Model.VisitDetailList.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.VisitDetailList[1].Value, new { @ID = "txtReasonOfVisit", @Class = "form-control", @maxlength = "100" })
+
+                            }
+                            else
+                            {
+                                <input type="text" placeholder="" class="form-control" id="txtReasonOfVisit" maxlength="100">
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label><strong>Appointment ?</strong></label>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+
+                        <div class="col-sm-2">
+                            @*<input type="checkbox" value="" class="checkbox-mt" id="chkAppointmentNo">*@
+                            @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkAppointmentNo", Model.VisitDetailList[2].Value == "1", new { @Class = "myCheckboxAppointment", @onclick = "UncheckNewPatientCheckBox();" }) : Html.CheckBox("chkAppointmentNo", false, new { @Class = "myCheckboxAppointment", @onclick = "UncheckNewPatientCheckBox();" }))
+                            <label>No</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @*<input type="checkbox" value="" class="checkbox-mt" id="chkAppointmentYes">*@
+                            @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkAppointmentYes", Model.VisitDetailList[3].Value == "1", new { @Class = "myCheckboxAppointment" }) : Html.CheckBox("chkAppointmentYes", false, new { @Class = "myCheckboxAppointment"}))
+                            <label>Yes:Full Outpatient Assessement Required?</label>
+                        </div>
+                        <div class="col-sm-2">
+                            @*<input type="checkbox" value="" class="checkbox-mt" id="chkAssessementNo">*@
+                            @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkAssessementNo", Model.VisitDetailList[4].Value == "1", new { @Class = "appointmentRequired", @onclick = "UncheckNewPatientCheckBox();" }) : Html.CheckBox("chkAssessementNo", false, new { @Class = "appointmentRequired", @onclick = "UncheckNewPatientCheckBox();" }))
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group grayBackground">
+                    <div class="col-sm-12">
+                        @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkAssessementYes", Model.VisitDetailList[5].Value == "1", new { @Class = "appointmentRequired" }) : Html.CheckBox("chkAssessementYes", false, new { @Class = "appointmentRequired" }))
+                        <label>IF Yes:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        @*<input type="checkbox" value="" id="chkNewPatient">*@
+                        @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkNewPatient", Model.VisitDetailList[6].Value == "1", new { @Class = "myCheckPainBoxNewPatient" }) : Html.CheckBox("chkNewPatient", false, new { @Class = "myCheckPainBoxNewPatient" }))
+                        <label>New patient</label>
+                    </div>
+                    <div class="col-sm-4">
+                        @*<input type="checkbox" value="" id="chkCondition">*@
+                        @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkCondition", Model.VisitDetailList[7].Value == "1", new { @Class = "myCheckPainBoxNewPatient" }) : Html.CheckBox("chkCondition", false, new { @Class = "myCheckPainBoxNewPatient" }))
+                        <label>Change in Condition</label>
+                    </div>
+                    <div class="col-sm-5">
+                        @*<input type="checkbox" value="" id="chkLastVisit">*@
+                        @(Model.VisitDetailList.Count > 0 ? Html.CheckBox("chkLastVisit", Model.VisitDetailList[8].Value == "1", new { @Class = "myCheckPainBoxNewPatient" }) : Html.CheckBox("chkLastVisit", false, new { @Class = "myCheckPainBoxNewPatient" }))
+                        <label>Last visit more than 12 months</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----appointment-section-ends------>
+<div class="">
+    <div class="form_panel">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>TEMP</th>
+                            <th>PULPSE</th>
+                            <th>BP</th>
+                            <th>RESP</th>
+                            <th>SPO<sub>2</sub></th>
+                            <th>WEIGHT</th>
+                            <th>HEIGHT</th>
+                            <th>BMI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[0].Value, new { @ID = "txtTemp", @Class = "form-control", @maxlength = "10" })
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTemp" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[1].Value, new { @ID = "txtPluse", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtPluse" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[2].Value, new { @ID = "txtBp", @Class = "form-control", maxlength = "10" })
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtBp" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[3].Value, new { @ID = "txtResp", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtResp" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[4].Value, new { @ID = "txtSpo", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtSpo" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[5].Value, new { @ID = "txtWeightData", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtWeightData" class="form-control" maxlength="10" />
+                                }
+
+
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[6].Value, new { @ID = "txtHeight", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtHeight" class="form-control" maxlength="10" />
+                                }
+                            </td>
+                            <td>
+
+                                @if (Model.MeasurementsList.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.MeasurementsList[7].Value, new { @ID = "txtBmi", @Class = "form-control", @maxlength = "10" })
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtBmi" class="form-control" maxlength="10" />
+                                }
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----table-section------->
+<div class="row">
+    <!-----Allergy-section------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <label><strong>ALLERGY:</strong></label>
+                    </div>
+                    <div class="col-sm-1">
+                        @*<input type="checkbox" value="" id="chkNka">*@
+                        @(Model.AllergyList.Count > 0 ? Html.CheckBox("chkNka", Model.AllergyList[0].Value == "1", new { @Class = "myCheckboxAllergy" }) : Html.CheckBox("chkNka", false, new { @Class = "myCheckboxAllergy" }))
+
+
+                        <label>NKA</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="col-sm-2">
+                            @*<input type="checkbox" value="" id="chkAllergyYes">*@
+                            @(Model.AllergyList.Count > 0 ? Html.CheckBox("chkAllergyYes", Model.AllergyList[1].Value == "1", new { @Class = "myCheckboxAllergy" }) : Html.CheckBox("chkAllergyYes", false, new { @Class = "myCheckboxAllergy" }))
+
+
+                            <label>Yes</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @if (Model.AllergyList.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.AllergyList[2].Value, new { @ID = "txtAllergySpecification", @Class = "form-control", @maxlength = "50" })
+                                
+                            }
+                            else
+                            {
+                                <div class="inline_field">
+                               <label>Please Specify:</label>                                
+                               <input type="text" placeholder="" class="form-control" id="txtAllergySpecification" maxlength="50">
+                                    </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----Allergy-section------->
+<div class="row">
+    <!----Pain-Assessment-section------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+
+            <div class="col-sm-12">
+                <h1 class="head">Pain Assessment:</h1>
+                <div class="row">
+                    <div class="col-sm-3"  style="display:none;">
+                        <div class="row pain_slider">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label class="strong">Enter pain assessment</label>
+
+                                    <div id="slider-range-min" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    @if (Model.PainAssessmentList.Count > 0)
+                                    {
+                                        @Html.TextBoxFor(m => m.PainAssessmentList[0].Value, new { @ID = "amount", @Class = "form-control", @maxlength = "2" })
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="amount" class="form-control" maxlength="2">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pain_assessment">
+                            <img src="@Url.Content("~/images/faces.jpg")" class="img-responsive">
+                            <div class="face face1" face="yes" id="face1"></div>
+                            <div class="face face2" face="yes" id="face2"></div>
+                            <div class="face face3" face="yes" id="face3"></div>
+                            <div class="face face4" face="yes" id="face4"></div>
+                            <div class="face face5" face="yes" id="face5"></div>
+                            <div class="face face6" face="yes" id="face6"></div>
+                
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel1", Model.PainAssessmentLevels[0].Value == "1", new { @class = "myCheckPainAssessment level0"}) : Html.CheckBox("chkLevel1", false, new { @class = "myCheckPainAssessment level0" , onclick="return chqchecked(this,'face1');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel2", Model.PainAssessmentLevels[1].Value == "1", new { @class = "myCheckPainAssessment level1"}) : Html.CheckBox("chkLevel2", false, new { @class = "myCheckPainAssessment level1", onclick="return chqchecked(this,'face1');"}))
+
+
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel3", Model.PainAssessmentLevels[2].Value == "1", new { @class = "myCheckPainAssessment level2" }) : Html.CheckBox("chkLevel3", false, new { @class = "myCheckPainAssessment level2", onclick="return chqchecked(this,'face2');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel4", Model.PainAssessmentLevels[3].Value == "1", new { @class = "myCheckPainAssessment level3" }) : Html.CheckBox("chkLevel4", false, new { @class = "myCheckPainAssessment level3", onclick="return chqchecked(this,'face2');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel5", Model.PainAssessmentLevels[4].Value == "1", new { @class = "myCheckPainAssessment level4" }) : Html.CheckBox("chkLevel5", false, new { @class = "myCheckPainAssessment level4", onclick="return chqchecked(this,'face3');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel6", Model.PainAssessmentLevels[5].Value == "1", new { @class = "myCheckPainAssessment level5" }) : Html.CheckBox("chkLevel6", false, new { @class = "myCheckPainAssessment level5", onclick="return chqchecked(this,'face3');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel7", Model.PainAssessmentLevels[6].Value == "1", new { @class = "myCheckPainAssessment level6" }) : Html.CheckBox("chkLevel7", false, new { @class = "myCheckPainAssessment level6", onclick="return chqchecked(this,'face4');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel8", Model.PainAssessmentLevels[7].Value == "1", new { @class = "myCheckPainAssessment level7" }) : Html.CheckBox("chkLevel8", false, new { @class = "myCheckPainAssessment level7", onclick="return chqchecked(this,'face4');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel9", Model.PainAssessmentLevels[8].Value == "1", new { @class = "myCheckPainAssessment level8" }) : Html.CheckBox("chkLevel9", false, new { @class = "myCheckPainAssessment level8", onclick="return chqchecked(this,'face5');"}))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel10", Model.PainAssessmentLevels[9].Value == "1", new { @class = "myCheckPainAssessment level9" }) : Html.CheckBox("chkLevel10", false, new { @class = "myCheckPainAssessment level9", onclick="return chqchecked(this,'face5');"} ))
+                            @(Model.PainAssessmentLevels.Count > 0 ? Html.CheckBox("chkLevel11", Model.PainAssessmentLevels[10].Value == "1", new { @class = "myCheckPainAssessment level10" }) : Html.CheckBox("chkLevel11", false, new { @class = "myCheckPainAssessment level10", onclick="return chqchecked(this,'face6');"} ))
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-12">
+                        <p>(If Pain identified (1 or more) complete below information. If pain score is more than 4-fill NSF35)</p>
+                    </div>
+                    <div class="inner_block">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label><strong>Location:</strong></label>
+                                </div>
+                                <div class="col-sm-7">
+                                    @if (Model.PainAssessmentList.Count > 0)
+                                    {
+                                        @Html.TextBoxFor(m => m.PainAssessmentList[1].Value, new { @ID = "textLocation", @Class = "form-control", @maxlength = "50" })
+                                    
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-control" id="textLocation" maxlength="50" name="" value="">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label><strong>Check Character Codes Below:</strong></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class=" col-sm-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <label><strong>Frequency</strong>(how often do you experience pain?)</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    @if (Model.PainAssessmentList.Count > 0)
+                                    {
+                                        @Html.TextBoxFor(m => m.PainAssessmentList[2].Value, new { @ID = "textFrequency", @Class = "form-control", @maxlength = "30" })
+                                    
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-control" id="textFrequency" maxlength="30" name="FromAddress1" value="">
+                                    
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><strong>Pattern:</strong></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @*<input type="checkbox" value="" id="chkConstant">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkConstant", Model.PainAssessmentList[4].Value == "1", new { @Class = "myCheckboxPattern" }) : Html.CheckBox("chkConstant", false, new { @Class = "myCheckboxPattern" }))
+
+
+                                    <label>Constant</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @*<input type="checkbox" value="" id="chkIntermittent">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkIntermittent", Model.PainAssessmentList[5].Value == "1", new { @Class = "myCheckboxPattern" }) : Html.CheckBox("chkIntermittent", false, new { @Class = "myCheckboxPattern" }))
+                                    <label>Intermittent</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class=" col-sm-8">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label><strong>Duration</strong>(how long do you had this pain?)</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @if (Model.PainAssessmentList.Count > 0)
+                                    {
+                                        @Html.TextBoxFor(m => m.PainAssessmentList[3].Value, new { @ID = "textPainDuration", @Class = "form-control", @maxlength = "30" })
+                                    
+                                    }
+                                    else
+                                    {
+                                        <input type="text" value="" name="FromAddress1" maxlength="30" id="textPainDuration" class="form-control">
+                                    
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4 row">
+                                    <label class="col-sm-6"><strong>Radiation:</strong></label>
+                                    @*<input type="checkbox" value="" id="chkRadiationNo">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkRadiationNo", Model.PainAssessmentList[6].Value == "1", new { @Class = "myCheckboxRadiation" }) : Html.CheckBox("chkRadiationNo", false, new { @Class = "myCheckboxRadiation" }))
+
+
+                                    <label>NO</label>
+                                    &nbsp;
+                                     @*<input type="checkbox" value="" id="chkRadiationYes">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkRadiationYes", Model.PainAssessmentList[7].Value == "1", new { @Class = "myCheckboxRadiation" }) : Html.CheckBox("chkRadiationYes", false, new { @Class = "myCheckboxRadiation" }))
+
+
+                                    <label>Yes: Specify Where</label>
+                                </div>
+
+                                <div class="col-sm-2">
+
+                                    <div class="">
+                                        @if (Model.PainAssessmentList.Count > 0)
+                                        {
+                                            @Html.TextBoxFor(m => m.PainAssessmentList[8].Value, new { @ID = "textRadiationDescription", @Class = "form-control", maxlength = "50" })
+
+                                        }
+                                        else
+                                        {
+                                            <input type="text" class="form-control" placeholder="" id="textRadiationDescription" maxlength="50">
+
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>Reassessment of pain based on triangle level,document reassessement in Triage Notes</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="inner_block">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><strong>Character Codes:</strong></label>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkSharp">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkSharp", Model.PainAssessmentList[9].Value == "1") : Html.CheckBox("chkSharp", false))
+                                    <label>Sharp</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkDull">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkDull", Model.PainAssessmentList[10].Value == "1") : Html.CheckBox("chkDull", false))
+                                    <label>Dull</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkStabbing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkStabbing", Model.PainAssessmentList[11].Value == "1") : Html.CheckBox("chkStabbing", false))
+                                    <label>Stabbing</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkBurning">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkBurning", Model.PainAssessmentList[12].Value == "1") : Html.CheckBox("chkBurning", false))
+                                    <label>Burning</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkCrushing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkCrushing", Model.PainAssessmentList[13].Value == "1") : Html.CheckBox("chkCrushing", false))
+                                    <label>Crushing</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkDeep">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkDeep", Model.PainAssessmentList[14].Value == "1") : Html.CheckBox("chkDeep", false))
+                                    <label>Deep</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkSore">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkSore", Model.PainAssessmentList[15].Value == "1") : Html.CheckBox("chkSore", false))
+                                    <label>Sore</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkAching">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkAching", Model.PainAssessmentList[16].Value == "1") : Html.CheckBox("chkAching", false))
+                                    <label>Aching</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkColing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkColing", Model.PainAssessmentList[17].Value == "1") : Html.CheckBox("chkColing", false))
+                                    <label>Coling</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkThrobbing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkThrobbing", Model.PainAssessmentList[18].Value == "1") : Html.CheckBox("chkThrobbing", false))
+                                    <label>Throbbing</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkNumb">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkNumb", Model.PainAssessmentList[19].Value == "1") : Html.CheckBox("chkNumb", false))
+                                    <label>Numb</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkShooting">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkShooting", Model.PainAssessmentList[20].Value == "1") : Html.CheckBox("chkShooting", false))
+                                    <label>Shooting</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkPressing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkPressing", Model.PainAssessmentList[21].Value == "1") : Html.CheckBox("chkPressing", false))
+                                    <label>Pressing</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkTight">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkTight", Model.PainAssessmentList[22].Value == "1") : Html.CheckBox("chkTight", false))
+                                    <label>Tight</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkPulling">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkPulling", Model.PainAssessmentList[23].Value == "1") : Html.CheckBox("chkPulling", false))
+                                    <label>Pulling</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    @*<input type="checkbox" value="" id="chkSqueezing">*@
+                                    @(Model.PainAssessmentList.Count > 0 ? Html.CheckBox("chkSqueezing", Model.PainAssessmentList[24].Value == "1") : Html.CheckBox("chkSqueezing", false))
+                                    <label>Squeezing</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----Pain-Assessment-section-ends------>
+<div class="row">
+    <!---Caharcter-code------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>
+                                <strong>ESI Level:</strong>
+                            </label>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                            <div class="col-sm-1">
+                                @*<input type="checkbox" value="" id="chkEsiLevel1">*@
+                                @(Model.ESILevel.Count > 0 ? Html.CheckBox("chkEsiLevel1", Model.ESILevel[0].Value == "1", new { @Class = "myCheckboxEsiLevel" }) : Html.CheckBox("chkEsiLevel1", false, new { @Class = "myCheckboxEsiLevel" }))
+                                <label>1</label>
+                            </div>
+                            <div class="col-sm-1">
+                                @*<input type="checkbox" value="" id="chkEsiLevel2">*@
+                                @(Model.ESILevel.Count > 0 ? Html.CheckBox("chkEsiLevel2", Model.ESILevel[1].Value == "1", new { @Class = "myCheckboxEsiLevel" }) : Html.CheckBox("chkEsiLevel2", false, new { @Class = "myCheckboxEsiLevel" }))
+                                <label>2</label>
+                            </div>
+                            <div class="col-sm-1">
+                                @*<input type="checkbox" value="" id="chkEsiLevel3" />*@
+                                @(Model.ESILevel.Count > 0 ? Html.CheckBox("chkEsiLevel3", Model.ESILevel[2].Value == "1", new { @Class = "myCheckboxEsiLevel" }) : Html.CheckBox("chkEsiLevel3", false, new { @Class = "myCheckboxEsiLevel" }))
+                                <label>3</label>
+                            </div>
+                            <div class="col-sm-1">
+                                @*<input type="checkbox" value="" id="chkEsiLevel4">*@
+                                @(Model.ESILevel.Count > 0 ? Html.CheckBox("chkEsiLevel4", Model.ESILevel[3].Value == "1", new { @Class = "myCheckboxEsiLevel" }) : Html.CheckBox("chkEsiLevel4", false, new { @Class = "myCheckboxEsiLevel" }))
+                                <label>4</label>
+                            </div>
+                            <div class="col-sm-5">
+                                @*<input type="checkbox" value="" id="chkEsiLevel5">*@
+                                @(Model.ESILevel.Count > 0 ? Html.CheckBox("chkEsiLevel5", Model.ESILevel[4].Value == "1", new { @Class = "myCheckboxEsiLevel" }) : Html.CheckBox("chkEsiLevel5", false, new { @Class = "myCheckboxEsiLevel" }))
+                                <label>5(not required for oppointment patients)</label>
+                            </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label><strong>Nurse Initial/Badge Number</strong></label>
+                        </div>
+                        <div class="col-sm-4">
+                            @if (Model.ESILevel.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.ESILevel[5].Value, new { @ID = "txtBadgeNumber", @Class = "form-control", @maxlength = "30" })
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="txtBadgeNumber" maxlength="30" name="FromAddress1" value="" />
+                            
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Caharcter-code-ends------>
+<div class="row">
+    <!---Illness-section------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+
+            <div class="col-sm-12">
+                <h1 class="head">Screening for Influenza-like Illness</h1>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label><strong>Do you sneeze/cough/have shortness of breath?</strong></label>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="col-sm-2">
+                                @*<input type="checkbox" value="" id="chkSneezNo">*@
+                                @(Model.IllnessList.Count > 0 ? Html.CheckBox("chkSneezNo", Model.IllnessList[0].Value == "1", new { @Class = "myCheckboxScreening" }) : Html.CheckBox("chkSneezNo", false, new { @Class = "myCheckboxScreening" }))
+                                <label>NO</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @*<input type="checkbox" value="" id="chkSneezYes">*@
+                                @(Model.IllnessList.Count > 0 ? Html.CheckBox("chkSneezYes", Model.IllnessList[1].Value == "1", new { @Class = "myCheckboxScreening" }) : Html.CheckBox("chkSneezYes", false, new { @Class = "myCheckboxScreening" }))
+                                <label>YES(require patient to use hand sanitizer and wear mask)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label><strong>Do you have a fever or have you been feeling feverish in the last 24 hours?</strong></label>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="col-sm-2">
+                                @*<input type="checkbox" value="" id="chkfeverNo">*@
+                                @(Model.IllnessList.Count > 0 ? Html.CheckBox("chkfeverNo", Model.IllnessList[2].Value == "1", new { @Class = "myCheckScreening" }) : Html.CheckBox("chkfeverNo", false, new { @Class = "myCheckScreening" }))
+                                <label>NO</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @*<input type="checkbox" value="" id="chkFeverYes">*@
+                                @(Model.IllnessList.Count > 0 ? Html.CheckBox("chkFeverYes", Model.IllnessList[3].Value == "1", new { @Class = "myCheckScreening" }) : Html.CheckBox("chkFeverYes", false, new { @Class = "myCheckScreening" }))
+                                <label>YES(yes,or temp above 38<sup>o</sup>C)(require patient to use hand sanitizer &amp; wear mask)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---illness-ends------>
+<div class="row">
+    <!---Nursing-Notes------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nursing Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if (Model.NurseNotes.Count > 0)
+                                    {
+                                        @Html.TextAreaFor(m => m.NurseNotes[1].Value, new { @ID = "txtNurseNotes1", @Class = "form-control", @maxlength = "500" })
+                                    }
+                                    else
+                                    {
+                                        <textarea class="form-control" id="txtNurseNotes1" maxlength="500"></textarea>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Nursing-Notes-ends------>
+<div class="row">
+    <!---out-patient------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <h1 class="head">FULL OUTPATIENT NURSING ASSESSEMENT</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Language:</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkArabic">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkArabic", Model.NursingAssessmentList[0].Value == "1") : Html.CheckBox("chkArabic", false))
+                                            <label>Arabic</label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkEnglish">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkEnglish", Model.NursingAssessmentList[1].Value == "1") : Html.CheckBox("chkEnglish", false))
+                                            <label>English</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    @*<input type="checkbox" value="" id="chkOtherAssessment">*@
+                                                    @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkOtherAssessment", Model.NursingAssessmentList[2].Value == "1") : Html.CheckBox("chkOtherAssessment", false))
+                                                    <label>Others</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @if (Model.NursingAssessmentList.Count > 0)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.NursingAssessmentList[3].Value, new { @ID = "txtOtherDetail", @Class = "form-control", @maxlength = "30" })
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" placeholder="" class="form-control" id="txtOtherDetail" maxlength="30">
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Accompanied by:</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkFamiliy">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkFamiliy", Model.NursingAssessmentList[4].Value == "1") : Html.CheckBox("chkFamiliy", false))
+                                            <label>Family</label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkFriends">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkFriends", Model.NursingAssessmentList[5].Value == "1") : Html.CheckBox("chkFriends", false))
+                                            <label>Friends</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    @*<input type="checkbox" value="" id="chkOther">*@
+                                                    @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkOther", Model.NursingAssessmentList[6].Value == "1") : Html.CheckBox("chkOther", false))
+                                                    <label>Others</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @if (Model.NursingAssessmentList.Count > 0)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.NursingAssessmentList[7].Value, new { @ID = "txtOtherValue", @Class = "form-control", @maxlength = "30" })
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" placeholder="" class="form-control" id="txtOtherValue" maxlength="30">
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </td>
+
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Arrival:</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkWalk">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkWalk", Model.NursingAssessmentList[8].Value == "1") : Html.CheckBox("chkWalk", false))
+                                            <label>Walk </label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkCarried">*@
+                                            @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkCarried", Model.NursingAssessmentList[9].Value == "1") : Html.CheckBox("chkCarried", false))
+                                            <label>Carried </label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    @*<input type="checkbox" value="" id="chkOtherArrival">*@
+                                                    @(Model.NursingAssessmentList.Count > 0 ? Html.CheckBox("chkOtherArrival", Model.NursingAssessmentList[10].Value == "1") : Html.CheckBox("chkOtherArrival", false))
+                                                    <label>Others</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @if (Model.NursingAssessmentList.Count > 0)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.NursingAssessmentList[11].Value, new { @ID = "txtOtherArrivalDetail", @Class = "form-control", @maxlength = "50" })
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" placeholder="" class="form-control" id="txtOtherArrivalDetail" maxlength="50">
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!---out-patientends------->
+<div class="row">
+    <!---Psychosocial Economical------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <h1 class="head">Psychosocial Economical History</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                    <ul>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkCooperative">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkCooperative", Model.EconomicalHistory[0].Value == "1") : Html.CheckBox("chkCooperative", false))
+                                        <label>Cooperative</label>
+                                        </li>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkAnxious">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkAnxious", Model.EconomicalHistory[1].Value == "1") : Html.CheckBox("chkAnxious", false))
+                                        <label>Anxious</label>
+                                        </li>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkDepressed">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkDepressed", Model.EconomicalHistory[2].Value == "1") : Html.CheckBox("chkDepressed", false))
+                                        <label>Depressed</label>
+                                        </li>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkUncooperative">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkUncooperative", Model.EconomicalHistory[3].Value == "1") : Html.CheckBox("chkUncooperative", false))
+                                        <label>Uncooperative</label>
+                                        </li>
+
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkAngry">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkAngry", Model.EconomicalHistory[4].Value == "1") : Html.CheckBox("chkAngry", false))
+                                        <label>Angry</label>
+                                        </li>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkAgitated">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkAgitated", Model.EconomicalHistory[5].Value == "1") : Html.CheckBox("chkAgitated", false))
+                                        <label>Agitated</label>
+                                        </li>
+                                        <li>
+                                        @*<input type="checkbox" value="" id="chkCombative">*@
+                                        @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkCombative", Model.EconomicalHistory[6].Value == "1") : Html.CheckBox("chkCombative", false))
+                                        <label>Combative</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                            @*<input type="checkbox" value="" id="chkOthersEconomicalHistory">*@
+                                            @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkOthersEconomicalHistory", Model.EconomicalHistory[7].Value == "1") : Html.CheckBox("chkOthersEconomicalHistory", false))
+                                            <label>Others</label>
+                                        </div>
+                                                <div class="col-sm-8">
+                                            @if (Model.MeasurementsList.Count > 0)
+                                            {
+                                                @Html.TextBoxFor(m => m.EconomicalHistory[8].Value, new { @ID = "txtOthersEconomicalHistoryDetail", @Class = "form-control", @maxlength = "50" })
+
+                                            }
+                                            else
+                                            {
+                                                <input type="text" placeholder="" class="form-control" id="txtOthersEconomicalHistoryDetail" maxlength="50">
+                                            }
+
+                                        </div>
+                                    </div>
+                                        </li>
+                                    </ul>
+                            </td>
+
+                            <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Smoking:</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkNaverUsed">*@
+                                            @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkNaverUsed", Model.EconomicalHistory[9].Value == "1", new { @Class = "myCheckbox" }) : Html.CheckBox("chkNaverUsed", false, new { @Class = "myCheckbox" }))
+                                            <label>Never Used</label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkCurrentUsed">*@
+                                            @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkCurrentUsed", Model.EconomicalHistory[10].Value == "1", new { @Class = "myCheckbox" }) : Html.CheckBox("chkCurrentUsed", false, new { @Class = "myCheckbox" }))
+                                            <label>Current User</label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkPastUser">*@
+                                            @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkPastUser", Model.EconomicalHistory[11].Value == "1", new { @Class = "myCheckbox" }) : Html.CheckBox("chkPastUser", false, new { @Class = "myCheckbox" }))
+                                            <label>Past User</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                @*<input type="checkbox" value="" id="chkStickConsumedDay>*@
+                                                @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkStickConsumedDay", Model.EconomicalHistory[12].Value == "1", new { @Class = "myCheckbox" }) : Html.CheckBox("chkStickConsumedDay", false, new { @Class = "myCheckbox" }))
+                                                <label>Stick Consumed/Day</label>
+                                            </div>
+                                                <div class="col-sm-6">
+                                                @if (Model.EconomicalHistory.Count > 0)
+                                                {
+                                                    @Html.TextBoxFor(m => m.EconomicalHistory[13].Value, new { @ID = "txtConsumedDay", @Class = "form-control", @maxlength = "50" })
+
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" placeholder="" class="form-control" id="txtConsumedDay" maxlength="50">
+                                                }
+
+                                            </div>
+                                        </div>
+                                        </li>
+                                    </ul>
+
+                            </td>
+
+                            <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Alcohol:</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkNaverAlcohol">*@
+                                                @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkNaverAlcohol", Model.EconomicalHistory[14].Value == "1", new { @Class = "alcohol" }) : Html.CheckBox("chkNaverAlcohol", false, new { @Class = "alcohol" }))
+                                            <label>Never</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    @*@(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkYesAlcohol", Model.EconomicalHistory[15].Value == "1") : Html.CheckBox("chkYesAlcohol", false))*@
+                                                @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkYesAlcohol", Model.EconomicalHistory[15].Value == "1", new { @Class = "alcohol" }) : Html.CheckBox("chkYesAlcohol", false, new { @Class = "alcohol" }))
+                                                @*<input type="checkbox" value="" id="chkYesAlcohol">*@
+                                                <label>Yes</label>
+                                            </div>
+                                                <div class="col-sm-5">
+                                                <label>Number Of Glasses/Day</label>
+
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                @if (Model.EconomicalHistory.Count > 0)
+                                                {
+                                                    @Html.TextBoxFor(m => m.EconomicalHistory[16].Value, new { @ID = "txtGlassesDay", @Class = "form-control" ,@maxlength="2" })
+                            
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" class="form-control" placeholder="" id="txtGlassesDay" maxlength="2">
+                                                }
+                                            </div>
+                                        </div>
+                                        </li>
+                                    </ul>
+
+                            </td>
+
+                            <td>
+                                    <ul>
+                                        <li>
+                                            <label><strong>Living Situation</strong></label>
+                                        </li>
+                                        <li>
+                                            @*<input type="checkbox" value="" id="chkLivingWithFamiliy">*@
+                                            @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkLivingWithFamiliy", Model.EconomicalHistory[17].Value == "1", new { @Class = "livingWith" }) : Html.CheckBox("chkLivingWithFamiliy", false, new { @Class = "livingWith" }))
+                                            <label>Family</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                @*<input type="checkbox" value="" id="chkLivingWithOther">*@
+                                                @(Model.EconomicalHistory.Count > 0 ? Html.CheckBox("chkLivingWithOther", Model.EconomicalHistory[18].Value == "1", new { @Class = "livingWith" }) : Html.CheckBox("chkLivingWithOther", false, new { @Class = "livingWith" }))
+                                                <label>Other</label>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                @if (Model.EconomicalHistory.Count > 0)
+                                                {
+                                                    @Html.TextBoxFor(m => m.EconomicalHistory[19].Value, new { @ID = "txtLivingDescription", @Class = "form-control" })
+                            
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" class="form-control" placeholder="" id="txtLivingDescription">
+                                                }
+
+                                            </div>
+                                        </div>
+                                        </li>
+                                    </ul>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            
+
+
+
+        </div>
+    </div>
+</div>
+<!---Psychosocial Economical-ends------>
+<div class="row">
+    <!---Vacination History------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+
+            <div class=" col-sm-12">
+                <h1 class="head">Vacination History</h1>
+            </div>
+            <div class=" col-sm-12 rows-margin">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label><strong>Tetanus diphtheria</strong></label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkTetanusUnknown">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkTetanusUnknown", Model.VaccinationHistory[0].Value == "1", new { @Class = "myCheckboxTetanus" }) : Html.CheckBox("chkTetanusUnknown", false, new { @Class = "myCheckboxTetanus" }))
+                        <label>Unknown</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkTetanusNo">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkTetanusNo", Model.VaccinationHistory[1].Value == "1", new { @Class = "myCheckboxTetanus" }) : Html.CheckBox("chkTetanusNo", false, new { @Class = "myCheckboxTetanus" }))
+                        <label>No</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkTetanusYes">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkTetanusYes", Model.VaccinationHistory[2].Value == "1", new { @Class = "myCheckboxTetanus" }) : Html.CheckBox("chkTetanusYes", false, new { @Class = "myCheckboxTetanus" }))
+                        <label>Yes</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-5">
+                            @*<input type="checkbox" value="" id="chkTetanusDate">*@
+                            @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkTetanusDate", Model.VaccinationHistory[3].Value == "1") : Html.CheckBox("chkTetanusDate", false))
+                            <label>Date</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @if (Model.VaccinationHistory.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.VaccinationHistory[4].Value, new { @ID = "txtTetanusDateDetail", @Class = "form-control dtGeneral" })
+
+                            }
+                            else
+                            {
+                                <input type="text" placeholder="" class="form-control dtGeneral" id="txtTetanusDateDetail">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-12 rows-margin">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label><strong>Influenza Vaccine</strong></label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkInfluenzaUnknown">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkInfluenzaUnknown", Model.VaccinationHistory[5].Value == "1", new { @Class = "myCheckboxInfluenza" }) : Html.CheckBox("chkInfluenzaUnknown", false, new { @Class = "myCheckboxInfluenza" }))
+                        <label>Unknown</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkInfluenzaNo">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkInfluenzaNo", Model.VaccinationHistory[6].Value == "1", new { @Class = "myCheckboxInfluenza" }) : Html.CheckBox("chkInfluenzaNo", false, new { @Class = "myCheckboxInfluenza" }))
+                        <label>No</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkInfluenzaYes">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkInfluenzaYes", Model.VaccinationHistory[7].Value == "1", new { @Class = "myCheckboxInfluenza" }) : Html.CheckBox("chkInfluenzaYes", false, new { @Class = "myCheckboxInfluenza" }))
+                        <label>Yes</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-5">
+                            @*<input type="checkbox" value="" id="chkInfluenzaDate">*@
+                            @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkInfluenzaDate", Model.VaccinationHistory[8].Value == "1") : Html.CheckBox("chkInfluenzaDate", false))
+                            <label>Date</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @if (Model.VaccinationHistory.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.VaccinationHistory[9].Value, new { @ID = "txtInfluenzaDatedetail", @Class = "form-control dtGeneral" })
+
+                            }
+                            else
+                            {
+                                <input type="text" placeholder="" class="form-control dtGeneral" id="txtInfluenzaDatedetail">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 rows-margin">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label><strong>Pneumococcal Vaccine</strong></label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkPneumococcalUnknown">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkPneumococcalUnknown", Model.VaccinationHistory[10].Value == "1", new { @Class = "myCheckboxPneumococcal" }) : Html.CheckBox("chkPneumococcalUnknown", false, new { @Class = "myCheckboxPneumococcal" }))
+                        <label>Unknown</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkPneumococcalNo">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkPneumococcalNo", Model.VaccinationHistory[11].Value == "1", new { @Class = "myCheckboxPneumococcal" }) : Html.CheckBox("chkPneumococcalNo", false, new { @Class = "myCheckboxPneumococcal" }))
+                        <label>No</label>
+                    </div>
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkPneumococcalYes">*@
+                        @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkPneumococcalYes", Model.VaccinationHistory[12].Value == "1", new { @Class = "myCheckboxPneumococcal" }) : Html.CheckBox("chkPneumococcalYes", false, new { @Class = "myCheckboxPneumococcal" }))
+                        <label>Yes</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-5">
+                            @*<input type="checkbox" value="" id="chkPneumococcalDate">*@
+                            @(Model.VaccinationHistory.Count > 0 ? Html.CheckBox("chkPneumococcalDate", Model.VaccinationHistory[13].Value == "1") : Html.CheckBox("chkPneumococcalDate", false))
+                            <label>Date</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @if (Model.VaccinationHistory.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.VaccinationHistory[14].Value, new { @ID = "txtPneumococcalDateDetail", @Class = "form-control dtGeneral" })
+
+                            }
+                            else
+                            {
+                                <input type="text" placeholder="" class="form-control dtGeneral" id="txtPneumococcalDateDetail">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 rows-margin">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label><strong>Other Immunizations:</strong></label>
+                    </div>
+                    <div class="col-sm-7">
+                        @if (Model.VaccinationHistory.Count > 0)
+                        {
+                            @Html.TextBoxFor(m => m.VaccinationHistory[15].Value, new { @ID = "txtOtherPneumococcal", @Class = "form-control" })
+                        
+                        }
+                        else
+                        {
+                            <input type="text" placeholder="" class="form-control" id="txtOtherPneumococcal">
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Vacination History-ends------>
+<div class="row">
+    <!---Nutritional Screening------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+
+            <div class=" col-sm-12">
+                <h1 class="head">Nutritional Screening<small>(Notify Physician if patient is on a special diet)</small></h1>
+                <div class="row">
+                    <div class="col-sm-2">
+                        @*<input type="checkbox" value="" id="chkNormalDiet">*@
+                        @(Model.NutritionalScreening.Count > 0 ? Html.CheckBox("chkNormalDiet", Model.NutritionalScreening[0].Value == "1", new { @Class = "diet" }) : Html.CheckBox("chkNormalDiet", false, new { @Class = "diet" }))
+                        <label>Normal Diet</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-5">
+                            @*<input type="checkbox" value="" id="chkSpecialDiet">*@
+                            @(Model.NutritionalScreening.Count > 0 ? Html.CheckBox("chkSpecialDiet", Model.NutritionalScreening[1].Value == "1", new { @Class = "diet" }) : Html.CheckBox("chkSpecialDiet", false, new { @Class = "diet" }))
+                            <label>Special Diet</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @if (Model.NutritionalScreening.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.NutritionalScreening[2].Value, new { @ID = "txtNutritionalScreeningDetail", @Class = "form-control" })
+                            
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" placeholder="" id="txtNutritionalScreeningDetail">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Nutritional Screening-ends------>
+<div class="row">
+    <!---Functional- Screening------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <h1 class="head">Functional Screening<small>(If any deficit identified nurse will notify the physician)</small></h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li>
+                                <label><strong>Self Care</strong></label>
+                                        </li>
+                                        <li>
+                                @*<input type="checkbox" class="checkbox-mt" value="" id="chkNoneRequired">*@
+                                @(Model.FunctionalScreening.Count > 0 ? Html.CheckBox("chkNoneRequired", Model.FunctionalScreening[0].Value == "1") : Html.CheckBox("chkNoneRequired", false))
+                                <label>None Required</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                            <div class="col-sm-2">
+                                <label>Yes</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @if (Model.FunctionalScreening.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.FunctionalScreening[1].Value, new { @ID = "txtSelfCareDetail", @Class = "form-control" })
+                        
+                                }
+                                else
+                                {
+                                    <input type="text" placeholder="" class="form-control" id="txtSelfCareDetail">
+                                }
+
+                            </div>
+                        </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                <label><strong>Use of Assisting Equipment</strong></label>
+                                        </li>
+                                        <li>
+                                @*<input type="checkbox" class="checkbox-mt" value="" id="chkAssistingEquipmentNotUsed">*@
+                                @(Model.FunctionalScreening.Count > 0 ? Html.CheckBox("chkAssistingEquipmentNotUsed", Model.FunctionalScreening[2].Value == "1") : Html.CheckBox("chkAssistingEquipmentNotUsed", false))
+                                <label>None Used</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                            <div class="col-sm-2">
+                                <label>Yes</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @if (Model.FunctionalScreening.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.FunctionalScreening[3].Value, new { @ID = "txtAssistingEquipmentDetail", @Class = "form-control" })
+                        
+                                }
+                                else
+                                {
+                                    <input type="text" placeholder="" class="form-control" id="txtAssistingEquipmentDetail">
+                                }
+
+                            </div>
+                        </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                <label><strong>Musculoskeletal</strong></label>
+                                        </li>
+                                        <li>
+                                @*<input type="checkbox" class="checkbox-mt" value="" id="chkNoProblemIdentified">*@
+                                @(Model.FunctionalScreening.Count > 0 ? Html.CheckBox("chkNoProblemIdentified", Model.FunctionalScreening[4].Value == "1") : Html.CheckBox("chkNoProblemIdentified", false))
+                                <label>No Problem identified</label>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                            <div class="col-sm-5">
+                                <label>Functional Deficit</label>
+                            </div>
+                            <div class="col-sm-7">
+                                @if (Model.FunctionalScreening.Count > 0)
+                                {
+                                    @Html.TextBoxFor(m => m.FunctionalScreening[5].Value, new { @ID = "txtFunctionalDeficitDetail", @Class = "form-control" })
+                        
+                                }
+                                else
+                                {
+                                    <input type="text" placeholder="" class="form-control" id="txtFunctionalDeficitDetail">
+                                }
+
+                            </div>
+                        </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+
+                                <ul>
+                                    <li>
+                                        <label><strong>Fall Risk If Risk is more than 4,identify intervations</strong></label></li>
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkPediatricPatient">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkPediatricPatient", Model.RiskList[0].Value == "1") : Html.CheckBox("chkPediatricPatient", false))
+                                    <label>Pediatric Patient</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkAgeOver65Years">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkAgeOver65Years", Model.RiskList[1].Value == "1") : Html.CheckBox("chkAgeOver65Years", false))
+                                    <label>Age over 65 years</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkConfusion">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkConfusion", Model.RiskList[2].Value == "1") : Html.CheckBox("chkConfusion", false))
+                                    <label>Confusion,Disorientation</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkImpairedJudgment">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkImpairedJudgment", Model.RiskList[3].Value == "1") : Html.CheckBox("chkImpairedJudgment", false))
+                                    <label>Non-Compliant/Impaired Judgment</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkDecreased">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkDecreased", Model.RiskList[4].Value == "1") : Html.CheckBox("chkDecreased", false))
+                                    <label>Decreased Mobility/Strenth</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkImpaired">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkImpaired", Model.RiskList[5].Value == "1") : Html.CheckBox("chkImpaired", false))
+                                    <label>Impaired circulation/decreased sensation to limbs</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkSeizures">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkSeizures", Model.RiskList[6].Value == "1") : Html.CheckBox("chkSeizures", false))
+                                    <label>Seizures/syncope</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkhypnotics">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkhypnotics", Model.RiskList[7].Value == "1") : Html.CheckBox("chkhypnotics", false))
+                                    <label>Receiving sedatives/hypnotics</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkUnderInfluence">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkUnderInfluence", Model.RiskList[8].Value == "1") : Html.CheckBox("chkUnderInfluence", false))
+                                    <label>Under influence of alcohol</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">2</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkImpairedVision">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkImpairedVision", Model.RiskList[9].Value == "1") : Html.CheckBox("chkImpairedVision", false))
+                                    <label>Impaired vision/hearing/understanding</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">1</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkNocturia">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkNocturia", Model.RiskList[10].Value == "1") : Html.CheckBox("chkNocturia", false))
+                                    <label>Nocturia</label>
+                                    </li>
+
+                                    <li>
+                                    <label class="margin-right">0</label>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkNoRisk">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkNoRisk", Model.RiskList[11].Value == "1") : Html.CheckBox("chkNoRisk", false))
+                                    <label>No Risk</label>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+
+                                <ul>
+                                    <li>
+                                        <label><strong>Fall Interventions</strong></label></li>
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkAssistPatient">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkAssistPatient", Model.RiskList[12].Value == "1") : Html.CheckBox("chkAssistPatient", false))
+                                    <label>Assist patient during mobility activity</label>
+                                    </li>
+
+
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkUseOfWheelchair">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkUseOfWheelchair", Model.RiskList[13].Value == "1") : Html.CheckBox("chkUseOfWheelchair", false))
+                                    <label>Use of wheelchair</label>
+                                    </li>
+
+
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkEncourage">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkEncourage", Model.RiskList[14].Value == "1") : Html.CheckBox("chkEncourage", false))
+                                    <label>Encourage family memberss to remain with patient</label>
+                                    </li>
+
+
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkOrientate">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkOrientate", Model.RiskList[15].Value == "1") : Html.CheckBox("chkOrientate", false))
+                                    <label>Orientate patient to nurse call system and keep telephone within reach</label>
+                                    </li>
+
+
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkBedInLowest">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkBedInLowest", Model.RiskList[16].Value == "1") : Html.CheckBox("chkBedInLowest", false))
+                                    <label>Bed in lowest position with wheels locked and side rail up</label>
+                                    </li>
+
+
+                                    <li>
+                                    @*<input type="checkbox" value="" class="checkbox-mt" id="chkIdentify">*@
+                                    @(Model.RiskList.Count > 0 ? Html.CheckBox("chkIdentify", Model.RiskList[17].Value == "1") : Html.CheckBox("chkIdentify", false))
+                                    <label>Identify patient with star sticker on the file, door and white board </label>
+                                    </li>
+                                </ul>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Functional- Screening-ends------>
+<div class="row">
+    <!---Education Needs------>
+    <div class="col-sm-12">
+        <div class="form_panel">
+
+            <div class="col-sm-12">
+                <h1 class="head">
+                    Education Needs
+                @*<input type="checkbox" value="" id="chkNoNeedIdentified">*@
+                    @(Model.EducationNeeds.Count > 0 ? Html.CheckBox("chkNoNeedIdentified", Model.EducationNeeds[0].Value == "1") : Html.CheckBox("chkNoNeedIdentified", false))
+                    <small>no need identified</small></h1>
+                <ul class="inline_list">
+                    <li>
+                        @*<input type="checkbox" value="" id="chkUseOfMedication">*@
+                        @(Model.EducationNeeds.Count > 0 ? Html.CheckBox("chkUseOfMedication", Model.EducationNeeds[1].Value == "1") : Html.CheckBox("chkUseOfMedication", false))
+                        <label>Use of Medication</label>
+                    </li>
+                    <li>
+                        @*<input type="checkbox" value="" id="chkUseOfMedicalEquipment">*@
+                        @(Model.EducationNeeds.Count > 0 ? Html.CheckBox("chkUseOfMedicalEquipment", Model.EducationNeeds[2].Value == "1") : Html.CheckBox("chkUseOfMedicalEquipment", false))
+                        <label>Use of Medical equipment</label>
+                    </li>
+                    <li>
+                        @*<input type="checkbox" value="" id="chkDietAndNutrician">*@
+                        @(Model.EducationNeeds.Count > 0 ? Html.CheckBox("chkDietAndNutrician", Model.EducationNeeds[3].Value == "1") : Html.CheckBox("chkDietAndNutrician", false))
+                        <label>Diet and Nutrician</label>
+                    </li>
+                    <li>
+                        @*<input type="checkbox" value="" id="chkSymptomsManagement">*@
+                        @(Model.EducationNeeds.Count > 0 ? Html.CheckBox("chkSymptomsManagement", Model.EducationNeeds[4].Value == "1") : Html.CheckBox("chkSymptomsManagement", false))
+                        <label>Pain and other symptoms management</label>
+                    </li>
+                    <li>
+                        <div class="row">
+                        <div class="col-sm-4">
+                            <input type="checkbox" value="">
+                            <label>Others</label>
+                        </div>
+                        <div class="col-sm-8">
+                            @if (Model.EducationNeeds.Count > 0)
+                            {
+                                @Html.TextBoxFor(m => m.EducationNeeds[5].Value, new { @ID = "txtOtherSpecification", @Class = "form-control" })
+                            
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" placeholder="" id="txtOtherSpecification"> 
+                            }
+
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Education Needs-ends----->
+
+<div class="row">
+    <!---Nursing-Notes------->
+    <div class="col-sm-12">
+        <div class="form_panel">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nursing Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if (Model.NurseNotes.Count > 0)
+                                    {
+                                        @Html.TextAreaFor(m => m.NurseNotes[0].Value, new { @ID = "txtNurseNotes", @Class = "form-control", @maxlength = "500" })
+                                    }
+                                    else
+                                    {
+                                        <textarea class="form-control" id="txtNurseNotes" maxlength="500"></textarea>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!---Nursing Notes-2------>
+    <div class="col-sm-12">
+        <div class="signature-outer">
+
+            <div class=" pull-right  col-sm-4">
+                <div class="col-sm-5 ">
+                    <label>Nurse Signature:</label>
+                </div>
+                <div class="signature-box">
+                    <img id="signautureImage"  width="100" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="btn_group">
+    <input type="button" value="Save" class="btn btn-sm btn-primary pull-right" onclick="SaveOutPatientNusringForm('1','@Model.SetId');" />
+</div>
+<script src="/Scripts/PDFTemplates/PDFTemplates.js"></script>

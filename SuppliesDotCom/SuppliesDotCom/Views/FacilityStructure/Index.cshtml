@@ -1,0 +1,95 @@
+﻿@using System.Web.Optimization
+@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.FacilityStructureView
+
+@{
+    ViewBag.Title = "FacilityStructure";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .width20 {
+        width: 20px !important;
+    }
+
+    .width50 {
+        width: 60px !important;
+    }
+
+    .width100 {
+        width: 100px !important;
+    }
+</style>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#FacilityStructureDiv">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Facility Structure
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <input id="hidUpdateFlag" type="hidden" value="0" />
+        <div id="FacilityStructureDiv" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">
+                        @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_FacilityStructureAddEdit.cshtml", Model.CurrentFacilityStructure);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"  href="#FacilityStructureListingDiv">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="~/images/list.png" />
+                </span>&nbsp;Facility Structure List
+
+
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+
+            </h4>
+
+        </div>
+        <div id="FacilityStructureListingDiv" class="panel-collapse collapse in tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="FacilityStructureListDiv">
+                    @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_FacilityStructureList.cshtml", Model.FacilityStructureList);}
+                </div>
+            </div>
+        </div>
+        <span class="inactive">
+            View In active records
+            <input id="chkShowInActive" type="checkbox" />
+        </span>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" onclick="showTreeviewData();">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="~/images/list.png" />
+                </span>&nbsp;Current Facility Overview <span id="spnFacilityName"></span>
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="FacilityStructureTreeDiv" class="panel-collapse collapse tableImg">
+            <div class="panel-body">
+                <div class="base-color" id="FacilityStructureTreeViewDiv">
+                    @{Html.RenderPartial("~/Views/FacilityStructure/UserControls/_FacilityStructureTreeView.cshtml", Model.FacilityStructureList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/FacilityStructure/FacilityStructureScript.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

@@ -1,0 +1,34 @@
+﻿@model SuppliesDotCom.Models.TabView
+@{
+    ViewBag.Title = "Screen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Security/Tab.js"></script>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Tab
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            </h4>
+        </div>
+            <div class="Jqvalidate" id="TabInfo">
+           @{Html.RenderPartial("~/Views/Security/UserControls/_AddUpdateTabs.cshtml", Model);}
+                </div>
+            </div>
+
+    <div id="TabList">
+    @{Html.RenderPartial("~/Views/Security/UserControls/_TabsList.cshtml", Model.TabsList);}
+    </div>
+
+    <div class="clear"></div>
+ 
+            </div>
+
+           
+
+
+

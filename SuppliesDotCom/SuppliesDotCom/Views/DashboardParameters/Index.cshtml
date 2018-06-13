@@ -1,0 +1,49 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Models
+@model DashboardParametersView
+
+@{
+    ViewBag.Title = "DashboardParameters View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/DashboardParameters/DashboardParameters.js?@DateTime.Now.Ticks"></script>
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardParametersAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add Dashboard Parameters
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardParametersAddEdit" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="base-color">
+                    <div class="form">                        
+                        @{Html.RenderPartial("~/Views/DashboardParameters/UserControls/_DashboardParametersAddEdit.cshtml", Model.CurrentDashboardParameters);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseDashboardParametersList">
+            <h4 class="panel-title collapseTitle">
+                <span><img src="../images/list.png" /></span> Dashboard Parameters List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseDashboardParametersList" class="panel-collapse collapse in tableImg">
+            <div class="panel-body scroller" >
+                <div class="base-color" id="DashboardParametersListDiv">
+                    @{Html.RenderPartial("~/Views/DashboardParameters/UserControls/_DashboardParametersList.cshtml", Model.DashboardParametersList);}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

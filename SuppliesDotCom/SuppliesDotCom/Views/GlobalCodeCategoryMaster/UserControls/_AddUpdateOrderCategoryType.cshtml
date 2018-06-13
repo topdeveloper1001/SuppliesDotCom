@@ -1,0 +1,115 @@
+﻿@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model
+@model GlobalCodeCategory
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://silviomoreto.github.io/bootstrap-select/dist/css/bootstrap-select.min.css" type="text/css">
+
+<style>
+    .bootstrap-select {
+        z-index: 999 !important;
+    }
+
+    .btn-group {
+        padding: 10px;
+    }
+
+    .open {
+        background: transparent;
+    }
+
+    .rowTable {
+        overflow: visible;
+    }
+
+    .btn-group {
+        padding: 0px;
+    }
+
+    .dropdown-menu > li > a {
+        color: #000;
+        padding: 6px 13px;
+    }
+
+    .dropdown-menu {
+        font-size: 12px;
+        background: #fff;
+        padding: 0;
+    }
+
+    .bootstrap-select {
+        width: 100% !important;
+    }
+
+        .bootstrap-select > button {
+            background-image: none;
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+</style>
+<div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="base-color" style="height: 250px;">
+            <div class="form patientTable" id="validate">
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <input type="hidden" value="@Model.GlobalCodeCategoryID" id="hfGlobalCodeCategoryID" />
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>@ResourceKeyValues.GetKeyValue("ordercategorycode"):</label>
+                        @Html.TextBoxFor(m => m.GlobalCodeCategoryValue, new { @ID = "GlobalCodeCategoryValue", @maxlength = "20", @class = "validate[required,custom[onlyNumberSp]]" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <div class="rowTable">
+                        <label class="control-label"><span class="mandatoryStar"></span>@ResourceKeyValues.GetKeyValue("ordercategoryname"):</label>
+                        @Html.TextBoxFor(m => m.GlobalCodeCategoryName, new { @ID = "GlobalCodeCategoryName", @maxlength = "50", @class = "validate[required]" })
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <div class="rowTable">
+                        <label class="control-label">@ResourceKeyValues.GetKeyValue("revenuegeneralledger"):</label>
+                        @Html.TextBoxFor(m => m.ExternalValue1, new { @ID = "txtRevenueGeneralLedgerNumber", @maxlength = "30" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <div class="rowTable">
+                        <label class="control-label">@ResourceKeyValues.GetKeyValue("armasteraccount"):</label>
+                        @Html.TextBoxFor(m => m.ExternalValue2, new { @ID = "txtARMasterAccount", @maxlength = "30" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-lg-3" style="position: relative;">
+                    <div class="rowTable">
+                        <input type="hidden" id="hdnOperationTypes" />
+                        <label>@ResourceKeyValues.GetKeyValue("typeofoperation"):</label>
+                        <select id="ddlOperationTypes" class="selectpicker"  multiple data-live-search="true" data-size="3"></select>
+                        <div class="both"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <div class="rowTable">
+                        <label>@ResourceKeyValues.GetKeyValue("isactive"):</label>
+                        @Html.CheckBoxFor(m => m.IsActive, new { @id = "chkActive" })
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="button-block">
+                        @{
+                            var btnSaveText = ResourceKeyValues.GetKeyValue("save");
+                            if (Model.GlobalCodeCategoryID != 0)
+                            {
+                                btnSaveText = ResourceKeyValues.GetKeyValue("update");
+                            }
+                        }
+                        <button id="btnSave" class="blue-btn btn btn-primary edit-btn marginrightBtn">@btnSaveText</button>
+                        <button id="btnCancel" name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginrightBtn" type="button">@ResourceKeyValues.GetKeyValue("cancel")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://silviomoreto.github.io/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+

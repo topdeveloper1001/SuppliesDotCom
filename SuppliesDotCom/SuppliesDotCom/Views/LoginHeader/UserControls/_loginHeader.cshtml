@@ -1,0 +1,27 @@
+﻿@using SuppliesDotCom.Common.Common
+@using SuppliesDotCom.Common
+@using SuppliesDotCom.Model
+
+<p>
+
+    @if (Session[SessionNames.SessionClass.ToString()] != null)
+    {
+        var objSession = Session[SessionNames.SessionClass.ToString()] as SessionClass; 
+          
+        @Html.Raw("Welcome, You are logged in as") <span>
+            <label id="lblUserName">@objSession.UserName</label>
+            @Html.Raw("|") <label id="lblRoleId">@objSession.RoleName</label>
+            @Html.Raw("|") <label id="lblFacilityId">@objSession.FacilityName</label>
+            @Html.Raw("|") <a href="javascript:void(0);" onclick="ShowResetPopupWindowGlobal();">Change Password</a>
+            @Html.Raw("|") <a href="/Home/LogOff">Log Out</a>
+        </span>
+    }
+    else
+    {
+        <a href="/Home/UserLogin" title="Login">Login</a>
+        @Html.Raw("|") 
+        <a href="/Home/Register">Sign up</a> 
+    }
+    @Html.Raw("|") <a href="#">Help</a>
+   
+</p>

@@ -1,0 +1,53 @@
+﻿@model SuppliesDotCom.Models.ChargesDashboardView
+
+<div class="form">
+    <div>
+        <div class="table-responsive" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.RoomChargesCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="AncillaryGrossCharges" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.IPChargesCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="OPGrossCharges" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.OPChargesCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="ERGrossCharges" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ERChargesCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="IPRevenueGrossCharges" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.IPRevenueCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="OPRevenueGrossCharges" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.OPRevenueCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+    <div>
+        <div class="table-responsive" id="ERGrossRevenueEncounter" style="font-size: smaller !important;">
+            @{ Html.RenderPartial("~/Views/Dashboard/UserControls/_ERGrossCharges.cshtml", Model.ERRevenueCustomModel); }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+</div>

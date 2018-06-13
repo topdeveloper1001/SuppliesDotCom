@@ -1,0 +1,88 @@
+﻿@using System.Web.Optimization
+@model SuppliesDotCom.Models.RoleTabsView
+@{
+    ViewBag.Title = "Assign Menus To Facility Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-group {
+        margin-left: 15px;
+        margin-top: 5px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 0 5px 0 0;
+    }
+
+    div.k-treeview {
+        height: 231px !important;
+        overflow-y: auto !important;
+    }
+</style>
+@Scripts.Render("~/bundles/kendo")
+@Styles.Render("~/Content/kendo/css")
+@Styles.Render("~/Content/bootstrap/css")
+<div class="white-bg">
+    <div id="TabsRoleList">
+        <div class="panel panel-default collapsecss ourcollapse bordertable">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                <h4 class="panel-title collapseTitle">
+                    <span class="glyphicon glyphicon-align-justify"></span>&nbsp;Role Tabs
+                    <a class="btn btn-default btn-sm pull-right collapse-btn">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        <div class="form" id="validateTabsRole">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="rowTable">
+                                    <label><span class="mandatoryStar"></span>Corporate:</label>
+                                    <select id="ddlCorporate" onchange="BindFacilityDropdownDataInTabRole();" class="validate[required]"></select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="rowTable">
+                                    <label><span class="mandatoryStar"></span>Facility:</label>
+                                    <select id="ddlFacility" onchange="OnFacilityChangeInTabRole(); getTreeviewData = false;" class="validate[required]"></select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="rowTable">
+                                    <label><span class="mandatoryStar"></span>Role:</label>
+                                    <select id="ddlRoles" onchange="GetTabsRoleByUserID(this);" class="validate[required]"></select>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">
+                                        @* <input id="CheckAll" type="checkbox" onclick="toggleChecked(this.checked)">Select All*@
+                                    </h1>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="checkBox_TabsRole">
+                                        @{Html.RenderPartial("~/Views/Security/UserControls/_TabsTreeView.cshtml", Model.TabList);}
+                                    </div>
+                                </div>
+
+                                <div class="btn-group">
+                                    <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return AddTabsRole();" value="Save" />
+                                    <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/Scripts/Security/TabsRole.js"></script>
+
+
+

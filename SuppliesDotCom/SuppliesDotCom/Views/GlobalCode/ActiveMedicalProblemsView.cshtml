@@ -1,0 +1,65 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.GlobalCodeView
+@{
+    ViewBag.Title = "Active Medical Problems";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseGlobalCodeAddEdit">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Active Medical Problems
+            <a class="btn btn-default btn-sm pull-right collapse-btn">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="GlobalCodeInfo">
+            <div id="collapseGlobalCodeAddEdit" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="base-color">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_ActiveMedicalProblemsAddEdit.cshtml", Model.CurrentGlobalCode);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" href="#collapseGlobalCodesList">
+            <h4 class="panel-title collapseTitle">
+                <span>
+                    <img src="@Url.Content("~/images/list.png")">
+                </span>Active Medical Problems
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseGlobalCodesList" class="panel-collapse tableImg collapse in">
+            <div class="panel-body">
+                <div class="base-color" id="GlobalCodesList">
+                    <div class="table-responsive">
+                        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_ActiveMedicalProblemsListView.cshtml", Model.CodesList);}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div id="GlobalCodeList">
+        @{Html.RenderPartial("~/Views/GlobalCode/UserControls/_GlobalCodesList.cshtml", Model.GlobalCodesList);}
+    </div>*@
+
+    <div class="clear"></div>
+
+</div>
+
+
+
+<script src="~/Scripts/GlobalCode/ActiveMedicalProblems.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

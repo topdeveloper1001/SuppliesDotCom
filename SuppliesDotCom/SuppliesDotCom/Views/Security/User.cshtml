@@ -1,0 +1,67 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.UsersView
+
+
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="white-bg">
+    <div class="panel panel-default collapsecss ourcollapse">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add User
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+        <div class="Jqvalidate" id="UserInfo">
+            @{Html.RenderPartial("~/Views/Security/UserControls/_AddUpdateUser.cshtml", Model.CurrentUser);}
+        </div>
+    </div>
+    <div class="panel panel-default collapsecss ourcollapse bordertable">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title collapseTitle">
+                <span class="glyphicon glyphicon-align-justify"></span>&nbsp;User List
+                <a class="btn btn-default btn-sm pull-right collapse-btn">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </h4>
+        </div>
+
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label><span class="mandatoryStar"></span>Corporate:</label>
+                        <select id="ddlCorporateFilter" class="validate[required] ddlempty" onchange="BindFacilityDropdownFilter($('#ddlCorporateFilter').val())"></select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label><span class="mandatoryStar"></span>Facility:</label>
+                        <select id="ddlFacilityFilter" class="validate[required] ddlempty"></select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label class="col-lg-12">&nbsp;</label>
+                        <input type="submit" onclick="ReBindGrid();" class="blue-btn btn btn-primary edit-btn marginBtn" value="Search" />
+                    </div>
+                </div>
+                <div class="base-color">
+                    <div class="form">
+                        <div id="UserList">
+                            @{Html.RenderPartial("~/Views/Security/UserControls/_UsersList.cshtml", Model.UsersList);}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Security/Users.js?@Helpers.CurrentAssemblyTicks"></script>
+<script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>

@@ -1,0 +1,113 @@
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,800|Open+Sans+Condensed:300,700);*/
+*{margin:0; padding:0;}
+body{background:#f5f5f5; color:#676767; /*font-family: 'Open Sans', sans-serif;*/ font-family:Arial, Helvetica, sans-serif;}
+h1, h2, h3, h4, h5, h6{font-family:Arial, Helvetica, sans-serif;}
+label{/*font-family: 'Open Sans Condensed', sans-serif;*/font-family:Arial, Helvetica, sans-serif; font-size:12px;}
+p{font-size:15px; color:#3a3a3a; line-height:25px; text-align:justify; font-size:12px;  }
+table th{font-family:Arial, Helvetica, sans-serif;/* background: #d9edf7;*/ color:#434343;}
+table thead tr{background:#317cb3;}
+.table > tbody > tr > td{height:50px;}
+.strong{font-weight:bold;}
+ul{list-style:none;}
+header{background:#fafafa;}
+.navbar-brand{padding:0; height:auto; width:231px; margin-top:19px;}
+.pdf_frame{ height: 550px;overflow: auto;overflow-x: hidden;}
+
+.assessment-box{background: #e1e1e1;float: right;height: 29px;width: 361px;}
+
+.frame {
+    
+    padding-bottom: 20px;
+}
+.form_panel {
+    background: #f7f7f7;
+    border: 1px solid #acacac;
+    float: left;
+    margin: 10px 0 0;
+    width: 100%;
+	padding: 15px 0;
+}
+.form-control{height: 25px;}
+/*.form_panel img{padding-top:38px;}*/
+.form-group {
+    margin-bottom: 5px;
+}
+label {
+   font-size: 12px;
+    font-weight:normal;
+    /*line-height: 31px;*/
+}
+.faces-img{float: left;margin-left: 24px;}
+.table{margin-bottom:0px !important;}
+.appointment-margin{margin-top:50px;}
+.form-group{float:left; width:100%;}
+.form-outer{margin-top:20px; float:left; width:100%;}
+.form-outer span{font-size:18px; color:#ff0033;margin-left: 10px;}
+.outpatient-heading{margin: 0 0 16px 10px; font-size:18px;color:#ff0033; }
+.remove-img-padding{padding-top:0px !important;}
+.info-text{float: left;margin-left: 108px;margin-bottom: 30px;}
+.notes-para{margin: 0 15px 15px;}
+
+.inner_block{border-top: 1px solid #ccc;float: left; padding: 10px 0 0; width:100%;}
+
+.screening-heading{margin: 0 26px 5px 25px;
+    padding: 0 0 10px; color:#317cb3;font-size:18px; border-bottom:solid 1px #ccc;}
+	
+	.heading{margin: 16px 26px 19px 25px; padding: 0 0 10px; color:#317cb3;font-size:18px; border-bottom:solid 1px #ccc; float:left; width:91%;}
+.form-padding{padding:0px !important; border:none;}
+.form-padding .table > thead >tr >th{border: medium none; float: left;margin-left: 22px;}
+.rows-margin{margin-top:15px;}
+.signature-box{width:200px; height:50px; background:#f4f8e7; float:right;}
+.signature-outer{ border:solid 1px #acacac; border-top:none; float:left; width:100%;padding: 30px 0;}
+
+.scroll{height: 206px;
+    overflow: auto;}
+	.style-outer{border-top:solid 1px #ccc; padding:10px 0px; float:left; width:100%;}
+
+.pain_assessment{position:relative;}
+.pain_assessment .level0{position:absolute; bottom:30px; left:42px;}
+.pain_assessment .level1{position:absolute; bottom:30px; left:76px;}
+.pain_assessment .level2{position:absolute; bottom:30px; left:117px;}
+.pain_assessment .level3{position:absolute; bottom:30px; left:155px;}
+.pain_assessment .level4{position:absolute; bottom:30px; left:196px;}
+.pain_assessment .level5{position:absolute; bottom:30px; left:231px;}
+.pain_assessment .level6{position:absolute; bottom:30px; left:273px;}
+.pain_assessment .level7{position:absolute; bottom:30px; left:306px;}
+.pain_assessment .level8{position:absolute; bottom:30px; left:347px;}
+.pain_assessment .level9{position:absolute; bottom:30px; left:386px;}
+.pain_assessment .level10{position:absolute; bottom:30px; left:426px;}
+
+.pain_assessment .face{width:71px; height:57px; position:absolute; top:24px;}
+.pain_assessment .face1{left:12px; background:url(../images/face1.png) 0 0 no-repeat;}
+.pain_assessment .face1_active{left:12px; background:url(../images/face1_active.png) 0 0 no-repeat;}
+.pain_assessment .face2{left:87px; background:url(../images/face2.png) 0 0 no-repeat;}
+.pain_assessment .face2_active{left:87px; background:url(../images/face2_active.png) 0 0 no-repeat;}
+.pain_assessment .face3{left:164px; top:26px; background:url(../images/face3.png) 0 0 no-repeat;}
+.pain_assessment .face3_active{left:164px; top:26px; background:url(../images/face3_active.png) 0 0 no-repeat;}
+.pain_assessment .face4{left:240px; top:26px; background:url(../images/face4.png) 0 0 no-repeat;}
+.pain_assessment .face4_active{left:240px; top:26px; background:url(../images/face4_active.png) 0 0 no-repeat;}
+.pain_assessment .face5{left:317px; top:26px; background:url(../images/face5.png) 0 0 no-repeat;}
+.pain_assessment .face5_active{left:317px; top:26px; background:url(../images/face5_active.png) 0 0 no-repeat;}
+.pain_assessment .face6{left:393px; top:26px; background:url(../images/face6.png) 0 0 no-repeat;}
+.pain_assessment .face6_active{left:393px; top:26px; background:url(../images/face6_active.png) 0 0 no-repeat;}
+
+.pdf_popup .popup-main{width:95%; margin:20px auto;}
+
+	
+.row_fields{border-bottom:1px solid #ddd; padding-bottom:15px; margin-bottom:15px;}
+.row_fields .form-control{display:inline-block;}
+
+.head{margin: 0 0 15px 0; padding: 0 0 10px; color:#317cb3;font-size:18px; border-bottom:solid 1px #acacac;}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{padding:5px;}
+
+.bordered_panel{border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:5px 0; margin:10px 0;}
+
+.pain_slider{margin-top:63px;}
+
+.grayBackground { background: #ededed;border: solid 1px #ccc; padding: 15px 0;margin: 0 15px;}
+.margin-right { margin-right: 5px;}
+
+.inline_list li{float:left; margin-right:20px;}
+
+.inline_field .form-control{display:inline-block; width:auto;}

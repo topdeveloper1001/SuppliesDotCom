@@ -1,0 +1,67 @@
+﻿@using SuppliesDotCom.Common
+@model SuppliesDotCom.Models.TabView
+<style>
+    .btn-group {
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+</style>
+<div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="base-color">
+            <div class="form" id="validate">
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <input type="hidden" value="@Model.CurrentTab.TabId" id="hfTabID" />
+                        <input type="hidden" value="@Helpers.GetLoggedInUserId()" id="hfLoggedInUserID" />
+                        <label>Tab Name :</label>
+                        @Html.TextBoxFor(m => m.CurrentTab.TabName, new { @ID = "txtTitle", @maxlength = "50", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label>Parent tab :</label>
+                        @Html.DropDownListFor(m => m.CurrentTab.ParentTabId, new SelectList(Model.TabsList, "TabId", "TabName"), "--Select One--", new { id = "ddltabs", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="rowTable">
+                        <label>Screen :</label>
+                        @Html.DropDownListFor(m => m.CurrentTab.ScreenID, new SelectList(Model.ScreenList, "ScreenId", "ScreenTitle"), "--Select One--", new { id = "ddlscreens", @class = "validate[required]" })
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Is Active : @Html.CheckBoxFor(m => m.CurrentTab.IsActive, new { @id="chkActive"})</label>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="btn-group">
+                    @*"return checkDuplicateUser(@Model.CurrentScreen.UserID);" document.location.href = $('#Url').attr('href');*@
+                    @if (Model.CurrentTab.TabId != 0)
+                    {  <input type="submit" id="buttonUpdate" class="blue-btn btn btn-primary edit-btn marginBtn" onclick="return AddTab();" value="Update" />   
+
+                    }
+                    else
+                    {
+                        <input type="submit" class="blue-btn btn btn-primary edit-btn marginBtn" value="Save" onclick="return AddTab();" />   
+
+                    }
+                    <button name="ClientCancel" class="blue-btn btn btn-primary edit-btn marginBtn" type="button" onclick="ClearFields();">Cancel</button>
+
+                    <br />
+                    <span id="lblMessage" style="display: none; font-weight: bold; margin-top: 5px;">Fields marked with <span style="color: red;">* </span>are mendatory.</span>
+                    @if (TempData["Message"] != null)
+                    {
+                        <div style="margin: 5px 5px 5px 12px; color: green; font-size: 12px;">@TempData["Message"]</div>
+
+                    }
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
