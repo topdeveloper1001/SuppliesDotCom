@@ -109,7 +109,6 @@
     <Compile Include="BusinessAccess\TabsBal.cs" />
     <Compile Include="BusinessAccess\UserRoleBal.cs" />
     <Compile Include="BusinessAccess\UsersBal.cs" />
-    <Compile Include="CommonMappingProfile.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
