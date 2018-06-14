@@ -2340,6 +2340,7 @@
     <Content Include="Documents\PDFTemplates\NurseAssessmentForm.pdf" />
     <Content Include="Scripts\Setup\Setup.js" />
     <Content Include="SQL Scripts\Release 1.0\1 - Update Proc SPROC_DefaultCorporateItems 14 June 2018.sql" />
+    <Content Include="SQL Scripts\Release 1.0\2 - Update Proc SPROC_DefaultFacilityItems 14 June 2018.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
