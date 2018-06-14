@@ -43,10 +43,10 @@
         <div id="collapseTwo" class="panel-collapse collapse in tableImg">
             <div class="panel-body">
                 <div class="base-color copDiv" id="CorporateListDiv">
-                    @*@{Html.RenderPartial("~/Views/Corporate/UserControls/_CorporateList.cshtml", Model.CorporateList);}*@
                     <table id="tbCorporate" class="display table table_scroll" cellspacing="0">
                         <thead class="gridHead">
                             <tr class="gridRow">
+                                <th scope="col">CorporateId</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Corporate Number</th>
                                 <th scope="col">Address</th>
@@ -55,27 +55,6 @@
                                 <th class="center" scope="col">Action</th>
                             </tr>
                         </thead>
-                        @*<tbody>
-                            @foreach (var item in Model.CorporateList)
-                            {
-                                <tr>
-                                    <td>@item.CorporateName</td>
-                                    <td>@item.CorporateNumber</td>
-                                    <td>@item.StreetAddress</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.CorporateMainPhone</td>
-                                    <td>
-                                        <a href="javascript:void(0);" onclick="EditCorporate('@item.CorporateID') " style="float: left; margin-right: 7px; width: 15px;"><img src="~/images/edit.png" /></a>
-                                        @if (item.CorporateID != 6 && item.CorporateID != 12)
-                                        {
-                                            <a href="javascript:void(0);" title="Delete" onclick="return OpenConfirmPopup('@item.CorporateID','Delete Corporate','',DeleteCorporate,null); " style="float: left; width: 15px;">
-                                                <img src="@Url.Content("~/images/delete.png")" />
-                                            </a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>*@
                     </table>
                 </div>
             </div>
@@ -100,9 +79,3 @@
 </div>
 <script src="~/Scripts/Corporate/CorporateScript.js?@Helpers.CurrentAssemblyTicks"></script>
 <script src="~/Scripts/Common/confirmEvents.js?@Helpers.CurrentAssemblyTicks"></script>
-
-@*<script>
-    $(document).ready(function () {
-        $("#tbCorporate").dataTable();
-    });
-</script>*@

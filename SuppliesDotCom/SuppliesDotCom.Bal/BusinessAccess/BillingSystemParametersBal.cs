@@ -74,7 +74,7 @@ namespace SuppliesDotCom.Bal.BusinessAccess
         /// <returns></returns>
         public int SaveSuppliesDotComParameters(BillingSystemParameters model)
         {
-            using (var rep = UnitOfWork.SuppliesDotComParametersRepository)
+            using (var rep = UnitOfWork.BillingSystemParametersRepository)
             {
                 if (model.Id > 0)
                 {
@@ -121,7 +121,7 @@ namespace SuppliesDotCom.Bal.BusinessAccess
         /// <returns></returns>
         public BillingSystemParameters GetDetailsByCorporateAndFacility(int corporateId, string facilityNumber)
         {
-            using (var rep = UnitOfWork.SuppliesDotComParametersRepository)
+            using (var rep = UnitOfWork.BillingSystemParametersRepository)
             {
                 var item =
                     rep.Where(b => b.IsActive && b.CorporateId == corporateId && b.FacilityNumber.Equals(facilityNumber))
@@ -132,7 +132,7 @@ namespace SuppliesDotCom.Bal.BusinessAccess
 
         public BillingSystemParameters GetDetailsByBillingParameterId(int billingParameterId)
         {
-            using (var rep = UnitOfWork.SuppliesDotComParametersRepository)
+            using (var rep = UnitOfWork.BillingSystemParametersRepository)
             {
                 var item =
                     rep.GetDetailsBySuppliesDotComParametersId(billingParameterId);

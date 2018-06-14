@@ -49,8 +49,7 @@
 
         private TabsRepository _TabsRepository;
 
-
-        private BillingSystemParametersRepository _SuppliesDotComParametersRepository;
+        private BillingSystemParametersRepository _BillingSystemParametersRepository;
 
         private CityRepository _cityRepository;
 
@@ -115,12 +114,12 @@
             }
         }
 
-        public BillingSystemParametersRepository SuppliesDotComParametersRepository
+        public BillingSystemParametersRepository BillingSystemParametersRepository
         {
             get
             {
-                return _SuppliesDotComParametersRepository
-                       ?? (_SuppliesDotComParametersRepository =
+                return _BillingSystemParametersRepository
+                       ?? (_BillingSystemParametersRepository =
                            new BillingSystemParametersRepository(_context));
             }
         }

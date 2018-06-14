@@ -52,7 +52,7 @@ namespace SuppliesDotCom.Bal.BusinessAccess
                     if (string.IsNullOrEmpty(role.RoleKey))
                     {
                         var newRoleKey = roleRep.Where(a => a.FacilityId == role.FacilityId && a.IsActive == true && a.IsDeleted == false).Max(a => a.RoleID);
-                        role.RoleKey = Convert.ToString(newRoleKey + 1); 
+                        role.RoleKey = Convert.ToString(newRoleKey + 1);
                     }
                     roleRep.Create(role);
                 }
@@ -160,9 +160,7 @@ namespace SuppliesDotCom.Bal.BusinessAccess
             {
                 var roles =
                     rRep.Where(r => r.CorporateId == corporateId && r.FacilityId == facilityId && !r.IsDeleted).ToList();
-                list.AddRange(
-                    roles.Select(
-                        item => new Role { RoleID = item.RoleId, RoleName = GetRoleNameById(item.RoleId) }));
+                list.AddRange(roles.Select(item => new Role { RoleID = item.RoleId, RoleName = GetRoleNameById(item.RoleId) }));
                 return list;
             }
         }

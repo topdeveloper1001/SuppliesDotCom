@@ -12,22 +12,23 @@
                         //grid.Column("SchedulingApplied","Scheduling Applied"),
                         grid.Column("IsActive", "Active"),
                         grid.Column(header: "Action", format: @<text>
-        <a href="javascript:void(0);" title="Edit Facility Role" onclick="return EditFacilityRole('@item.FacilityRoleId');" style="float:left; width: 15px; margin-right: 7px;">
-            <img src="@Url.Content("~/images/edit.png")" />
-        </a>
-        </text>)
-))<h6>* Click on any column heading to sort</h6>
+                                <a href="javascript:void(0);" title="Edit Facility Role" onclick="return EditFacilityRole('@item.FacilityRoleId');" style="float:left; width: 15px; margin-right: 7px;">
+                                    <img src="@Url.Content("~/images/edit.png")" />
+                                </a>
+                        </text>)
+         ))<h6>* Click on any column heading to sort</h6>
     </div>
-    
+
 }
 else
 {
     <h2>No Record found</h2>
 }
-<script>
-    $(function () {
-        $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
-        SetGridSorting(SortFacilityRoleGrid, "#gridContent");
 
-    });
-</script>
+@*<script>
+        $(function () {
+            $('.table_scroll').fixedHeaderTable({ cloneHeadToFoot: true, altClass: 'odd', autoShow: true });
+            SetGridSorting(SortFacilityRoleGrid, "#gridContent");
+
+        });
+    </script>*@

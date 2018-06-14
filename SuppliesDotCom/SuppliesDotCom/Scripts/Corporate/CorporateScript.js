@@ -28,21 +28,51 @@ function JsCalls() {
     $(".collapseTitle").bind("click", function () {
         $.validationEngine.closePrompt(".formError", true);
     });
+    BindCorporateList();
+}
+var BindCorporateList = function () {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "/Corporate/GetCorporates",
+        data: {},
+        dataType: "json",
+        beforeSend: function () { },
+        success: function (data) {
+            BindCorporateDatatable(data.aaData);
+        },
+        error: function (msg) {
 
-    table = $("#tbCorporate").dataTable({
-        "bJQueryUI": true,
-        "bServerSide": true,
-        "sAjaxSource": "/Corporate/GetCorporates",
-        "bProcessing": true,
-        "fnServerData": function (sSource, aoData, fnCallback) {
-            //aoData.push({ "name": "CompanyID", "value": MasterRecordID });
-            $.getJSON(sSource, null, function (json) {
-                fnCallback(json)
-            });
         }
     });
 }
 
+function BindCorporateDatatable(data) {
+    var cColumns = [{ "targets": 0, "visible": false },
+    {
+        "targets": 6,
+        "mRender": function (data, type, full) {
+            var CorporateID = full[0];
+            var editCorporate = "EditCorporate('" + CorporateID + "') ";
+            var delCorporate = "return OpenConfirmPopup('" + CorporateID + "','Delete Corporate','',DeleteCorporate,null); ";
+            var anchortags = "<div style='display:flex'>";
+            anchortags += ' <a href="javascript:void(0);" onclick="' + editCorporate + '" style="float: left; margin-right: 7px; width: 15px;"><img src="../images/edit.png" /></a>';
+            if (CorporateID != 6 && CorporateID != 12) {
+                anchortags += '<a href="javascript:void(0);" title="Delete" onclick="' + delCorporate + '" style="float: left; width: 15px;"><img src="../images/delete.png" /></a>';
+            }
+            return anchortags + "</div>";
+        }
+    }];
+    $('#tbCorporate').dataTable({
+        destroy: true,
+        aaData: data,
+        scrollY: "200px",
+        scrollCollapse: true,
+        bProcessing: true,
+        paging: true,
+        aoColumnDefs: cColumns
+    });
+}
 function CheckDuplicateCorporate(id) {
 
     /// <summary>
@@ -67,7 +97,7 @@ function CheckDuplicateCorporate(id) {
             cache: false,
             success: function (data) {
                 //Append Data to grid
-                
+
                 if (data != 'False') {
                     //$('#loader_event').hide();
                     ShowMessage("Corporate already exist with same name!", "Alert", "info", true);
@@ -208,8 +238,6 @@ function SaveCorporateAfterDuplicateCheck(id) {
         data: jsonData,
         success: function (data) {
             if (data == "1") {
-                //$('#loader_event').hide();
-
                 ShowMessage("Corporate Number Already Exist", "Warning", "warning", true);
                 UnblockSelectedClassObj('main-wrap');
                 return;
@@ -221,7 +249,6 @@ function SaveCorporateAfterDuplicateCheck(id) {
 
             ShowMessage(msg, "Success", "success", true);
             UnblockSelectedClassObj('main-wrap');
-            //ajaxStartActive = true;
         },
         error: function (msg) {
             UnblockSelectedClassObj('main-wrap');
@@ -455,7 +482,7 @@ function SortCorporateGrid(event) {
         dataType: "html",
         data: null,
         success: function (data) {
-            
+
             $("#CorporateListDiv").empty();
             $("#CorporateListDiv").html(data);
 

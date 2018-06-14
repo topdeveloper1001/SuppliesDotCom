@@ -7,6 +7,7 @@ using SuppliesDotCom.Bal.BusinessAccess;
 using Hangfire;
 using SuppliesDotCom.Model;
 using SuppliesDotCom.Model.CustomModel;
+using System.Linq;
 
 namespace SuppliesDotCom.Controllers
 {
@@ -63,17 +64,19 @@ namespace SuppliesDotCom.Controllers
         public ActionResult GetCorporates()
         {
             //Initialize the Corporate BAL object
-            using (var corporateBal = new CorporateBal())
+            using (var bal = new CorporateBal())
             {
                 //Get the corporate list
                 var corporatId = Helpers.GetDefaultCorporateId();
-                var corporateList = corporateBal.GetCorporate(corporatId);
+                var corporateList = bal.GetCorporate(corporatId);
 
                 //Pass the ActionResult with List of CorporateViewModel object to Partial View CorporateList
-                return Json(new {
+                return Json(new
+                {
                     iTotalRecords = corporateList.Count,
                     iTotalDisplayRecords = corporateList.Count,
-                    aaData = corporateList }, JsonRequestBehavior.AllowGet);
+                    aaData = corporateList.Select(x => new[] { x.CorporateID.ToString(), x.CorporateName, x.CorporateNumber, x.StreetAddress, x.Email, x.CorporateMainPhone })
+                }, JsonRequestBehavior.AllowGet);
             }
         }
 

@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SuppliesDotCom</RootNamespace>
     <AssemblyName>SuppliesDotCom</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -63,8 +63,8 @@
     <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
       <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
     </Reference>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -196,9 +196,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -241,6 +241,30 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.0.3.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.2.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.3.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.3.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net47\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -251,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\DashboardBudgetController.cs" />
     <Compile Include="Controllers\DashboardDisplayOrderController.cs" />
     <Compile Include="Controllers\DashboardIndicatorDataController.cs" />
@@ -1845,8 +1870,6 @@
     <Content Include="Plugins\ValidationEngine\js\languages\jquery.validationEngine-vi.js" />
     <Content Include="Plugins\ValidationEngine\js\languages\jquery.validationEngine-zh_CN.js" />
     <Content Include="Plugins\ValidationEngine\js\languages\jquery.validationEngine-zh_TW.js" />
-    <Content Include="Scripts\ATCCodes\ATCCodesScript.js" />
-    <Content Include="Scripts\Authorization\AuthorizationScript.js" />
     <Content Include="Plugins\ValidationEngine\css\screenshot.png" />
     <Content Include="Plugins\ValidationEngine\css\template.css" />
     <Content Include="Plugins\ValidationEngine\css\validationEngine.jquery.css" />
@@ -2144,7 +2167,6 @@
     <Content Include="Scripts\Dashboard\images\team-plannedtime-thumbnail.png" />
     <Content Include="Scripts\Dashboard\images\user_droparrow.png" />
     <Content Include="Scripts\Dashboard\PatientVolumeDashboardScript.js" />
-    <Content Include="Scripts\ErrorMaster\ErrorMasterScript.js" />
     <Content Include="Scripts\examples.js" />
     <Content Include="Scripts\ExternalDashboard\CaseMgmtDefault.js" />
     <Content Include="Scripts\ExternalDashboard\CaseManagementDashboard.js" />
@@ -2183,8 +2205,6 @@
     <Content Include="Scripts\GlobalCodeCategory\LabTestOrderSet.js" />
     <Content Include="Scripts\GlobalCodeCategoryMaster\OrderCategory.js" />
     <Content Include="Scripts\Corporate\CorporateScript.js" />
-    <Content Include="Scripts\CPTCodes\CPTCodes.js" />
-    <Content Include="Scripts\DRGCodes\DRGCodes.js" />
     <Content Include="Scripts\Equipment\Equipment.js" />
     <Content Include="Scripts\FacilityStructure\FacilityStructureScript.js" />
     <Content Include="Scripts\GlobalCodeCategoryMaster\GlobalCodeCategoryMaster.js" />
@@ -2211,7 +2231,6 @@
     <Content Include="Scripts\GlobalCode\CorrectionCodes.js" />
     <Content Include="Scripts\GlobalCode\OrderSubCategory.js" />
     <Content Include="Scripts\grid.js" />
-    <Content Include="Scripts\HCPCSCodes\HCPCSCodes.js" />
     <Content Include="Scripts\HighCharts-Editor\dependencies\data.js" />
     <Content Include="Scripts\HighCharts-Editor\dependencies\exporting.js" />
     <Content Include="Scripts\HighCharts-Editor\dependencies\funnel.js" />
@@ -2237,7 +2256,6 @@
     <Content Include="Scripts\HighCharts\solid-gauge.js" />
     <Content Include="Scripts\Home\Welcome.js" />
     <Content Include="Scripts\html2canvas.min.js" />
-    <Content Include="Scripts\InsuranceCompany\InsuranceCompany.js" />
     <Content Include="Content\dataviz\dashboards\stock-data-2007.json" />
     <Content Include="Content\dataviz\dashboards\stock-data-2008.json" />
     <Content Include="Content\dataviz\dashboards\stock-data-2009.json" />
@@ -2309,9 +2327,6 @@
     <Content Include="Content\web\datasource\top250movies.json" />
     <Content Include="Content\web\images\kendoui.ttf" />
     <Content Include="Content\web\images\kendoui.woff" />
-    <Content Include="Scripts\InsurancePlans\InsurancePlans.js" />
-    <Content Include="Scripts\InsurancePolices\common.js" />
-    <Content Include="Scripts\InsurancePolices\InsurancePolices.js" />
     <Content Include="Scripts\JavaScript1.js" />
     <Content Include="Scripts\JavaScript2.js" />
     <Content Include="Documents\ImportExcelTemplates\ManualDashboardTemplate.xlsm" />
@@ -2944,28 +2959,11 @@
     <Content Include="Scripts\Kendo\theme-chooser.js" />
     <Content Include="Scripts\Kendo\web-examples.js" />
     <Content Include="Scripts\Kendo\webmail.js" />
-    <Content Include="Scripts\ManualDashboard\ManualDashboardScript.js" />
-    <Content Include="Scripts\ManualDashboard\ManualDashboardScriptV1.js" />
     <Content Include="Scripts\ModuleAccess\ModuleAccess.js" />
     <Content Include="Scripts\ModuleAccess\ModuleAccessScript.js" />
     <Content Include="Scripts\Parameters\ParametersScript.js" />
-    <Content Include="Scripts\PatientInfo\PatientLogin.js" />
-    <Content Include="Scripts\PatientInfo\ImageUpload.js" />
-    <Content Include="Scripts\PatientInfo\PatientAddress.js" />
-    <Content Include="Scripts\PatientInfo\PatientDocuments.js" />
-    <Content Include="Scripts\PatientInfo\PatientEncounter.js" />
-    <Content Include="Scripts\PatientInfo\PatientInfo.js" />
-    <Content Include="Scripts\PatientInfo\PatientInsuranceCoverage.js" />
-    <Content Include="Scripts\PatientInfo\PatientLoginDetail.js" />
-    <Content Include="Scripts\PatientInfo\PatientPhone.js" />
-    <Content Include="Scripts\PatientInfo\ResetPassword.js" />
-    <Content Include="Scripts\PatientPortal\PatientPortal.js" />
-    <Content Include="Scripts\PDFTemplates\PDFTemplates.js" />
     <Content Include="Scripts\ProjectTargets\ProjectTargets.js" />
     <Content Include="Scripts\RoleSelection\RoleSelection.js" />
-    <Content Include="Scripts\RoomEquipment\Main.js" />
-    <Content Include="Scripts\RuleMaster\RuleMasterScript.js" />
-    <Content Include="Scripts\RuleStep\RuleStepScript.js" />
     <Content Include="Scripts\ScrollableGridPlug.js" />
     <Content Include="Scripts\Security\TabsRole.js" />
     <Content Include="Scripts\Security\FacilityRole.js" />
@@ -2997,7 +2995,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Registration.js" />
     <Content Include="Scripts\Security\Users.js" />
-    <Content Include="Scripts\ServiceCode\ServiceCode.js" />
     <Content Include="Scripts\SignUp.js" />
     <Content Include="Scripts\Tabs\TabsScript.js" />
     <Content Include="Scripts\timepicker.css" />

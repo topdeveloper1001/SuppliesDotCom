@@ -41,7 +41,7 @@ namespace SuppliesDotCom.Model
 
         public DbSet<AuditLog> AuditLog { get; set; }
         public DbSet<BillingCodeTableSet> BillingCodeTableSet { get; set; }
-        public DbSet<BillingSystemParameters> SuppliesDotComParameters { get; set; }
+        public DbSet<BillingSystemParameters> BillingSystemParameters { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Corporate> Corporate { get; set; }
         public DbSet<Country> Country { get; set; }

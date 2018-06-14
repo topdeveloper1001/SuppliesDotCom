@@ -914,35 +914,7 @@ namespace SuppliesDotCom.Controllers
             }
         }
 
-        /// <summary>
-        /// Gets the facility roles custom list.
-        /// </summary>
-        /// <param name="corpId">The corp identifier.</param>
-        /// <param name="facilityId">The facility identifier.</param>
-        /// <param name="roleId">The role identifier.</param>
-        /// <returns></returns>
         public ActionResult GetFacilityRolesCustomList(string corpId, string facilityId, string roleId)
-        {
-            using (var bal = new FacilityRoleBal())
-            {
-                var selectedFacilitid = facilityId;
-                facilityId =
-                    //Helpers.GetLoggedInUserIsAdmin()? "0":
-                    ((string.IsNullOrEmpty(facilityId) || facilityId.Equals("0"))
-                        ? Convert.ToString(Helpers.GetDefaultFacilityId())
-                        : facilityId);
-
-                //var list = bal.GetFacilityRoleListCustom(Convert.ToInt32(corpId), Convert.ToInt32(facilityId),
-                //    Convert.ToInt32(roleId));
-                var list = bal.GetFacilityRoleListByFacility(Convert.ToInt32(corpId), Convert.ToInt32(facilityId),
-                  Convert.ToInt32(roleId));
-                list = list.OrderBy(x => x.RoleName).ToList();
-                return PartialView(PartialViews.FacilityRoleList, list);
-            }
-        }
-
-
-        public ActionResult GetFacilityRolesCustomList1(string corpId, string facilityId, string roleId)
         {
             using (var bal = new FacilityRoleBal())
             {
@@ -988,7 +960,6 @@ namespace SuppliesDotCom.Controllers
                 return Json(isExists);
             }
         }
-
 
         public ActionResult GetActiveInActiveFacilityRoleList(bool showInActive, string facilityId, string corporateId)
         {

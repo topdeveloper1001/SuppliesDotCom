@@ -1,5 +1,0 @@
-﻿$(function() {
-    $("#BtnLogin").click(function() {
-
-    });
-});

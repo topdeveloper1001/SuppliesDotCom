@@ -508,13 +508,12 @@ function BindFacilityRoleCustomList() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "/Security/GetFacilityRolesCustomList1",
+        url: "/Security/GetFacilityRolesCustomList",
         data: jsonData,
         dataType: "html",
         success: function (data) {
             $("#facilityRoleList").empty();
             $("#facilityRoleList").html(data);
-            //SetGridPaging('GetFacilityRolesCustomList', 'FacilityRole');
             SetGridPaging('?', '?corpId=' + corporateId + '&facilityId=' + facilityId + '&roleId=' + roleId + '&');
         },
         error: function (msg) {
@@ -522,71 +521,6 @@ function BindFacilityRoleCustomList() {
         }
     });
 }
-
-
-//function EditFacilityRole(facilityRoleId) {
-//    var jsonData = JSON.stringify({
-//        facilityRoleId: facilityRoleId
-//    });
-
-//    $.ajax({
-//        type: "POST",
-//        url: '/Security/GetFacilityRole',
-//        async: false,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        data: jsonData,
-//        success: function (data) {
-//            if (data != null) {
-//                BindFacilityRole(data);
-//               }
-//        },
-//        error: function (msg) {
-//        }
-//    });
-//}
-
-
-//function BindFacilityRole(data) {
-//    
-//    $("#ddlCorporates").val(data.CorporateId);
-//    $("#ddlFacilities").val(data.FacilityId);
-//    $("#ddlRoles").val(data.FacilityRoleId);
-//    $('#SchedulingApplied').prop('checked', data.SchedulingApplied);
-//   $('input:radio[name=RoleSelect]').attr("disabled", "disabled");
-//    $('#collapseOne').addClass('in');
-//}
-
-
-//function BindFacilityRoleByfacility() {
-//    var facilityId = $("#ddlFacilities").val() == null ? 0 : $("#ddlFacilities").val();
-//    var roleId = $("#ddlRoles").val() == null ? 0 : $("#ddlRoles").val();
-//    var corporateId = $("#ddlCorporates").val();
-//    if (corporateId == 0 || corporateId == null) {
-//        corporateId = $("#hdCorporateId").val() != "0" ? $("#hdCorporateId").val() : corporateId;
-//    }
-//    var jsonData = JSON.stringify({
-//        corpId: corporateId,
-//        facilityId: facilityId,
-//        roleId: roleId
-//    });
-//    $.ajax({
-//        type: "POST",
-//        contentType: "application/json; charset=utf-8",
-//        url: "/Security/GetFacilityRolesCustomList",
-//        data: jsonData,
-//        dataType: "html",
-//        success: function (data) {
-//            $("#facilityRoleList").empty();
-//            $("#facilityRoleList").html(data);
-//            //SetGridPaging('GetFacilityRolesCustomList', 'FacilityRole');
-//            //SetGridPaging('?', '?corpId=' + corporateId + '&facilityId=' + facilityId + '&roleId=' + roleId + '&');
-//        },
-//        error: function (msg) {
-
-//        }
-//    });
-//}
 
 
 function BindFacilityRoleByfacility() {
@@ -614,8 +548,6 @@ function BindFacilityRoleByfacility() {
         success: function (data) {
             $("#facilityRoleList").empty();
             $("#facilityRoleList").html(data);
-            //SetGridPaging('GetFacilityRolesCustomList', 'FacilityRole');
-            //SetGridPaging('?', '?corpId=' + corporateId + '&facilityId=' + facilityId + '&roleId=' + roleId + '&');
         },
         error: function (msg) {
 
